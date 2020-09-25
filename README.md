@@ -1,6 +1,13 @@
-# CS 319 Project: RISK
+# CS 319 Project: RISK 101
+Players | Playing Time | Ages
+-------- | ----------- | ----
+2-6 | 120 min | 10+
 ## Description
-A digital adaptation of Risk, the popular war game.
+A digital adaptation of Risk, the popular war game.  
+
+RISK 101 is an offline turn based multiplayer adaptation of Risk for 2-6 players. The players will take turns playing the game. The game is controlled with a mouse.   
+
+You can access the instructions [here.](https://www.hasbro.com/common/instruct/risk.pdf)
 ### Modifications
 - The game map is the map of Bilkent
 - Each player chooses a character to represent themselves.
