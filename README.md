@@ -5,11 +5,11 @@ Players | Playing Time | Ages
 ## Description
 A digital adaptation of Risk, the popular war game.  
 
-Risk is a strategy game in which you use your diplomatic skills to reach world domination. It is played on a board which consists of a political map of the world. As the game progresses, players try to conquer other territorries and defend their own in battles.The winner of these battles are determined by dice rolls. Although the main goal is to eliminate the other players, to achieve that goal players may form alliances throughout the game.
+Risk is a strategy game in which you will need diplomatic and strategic skills, as well as a healthy dose of luck, to defeat your enemies and reach world domination. It is played on a board which consists of a political map of the world. As the game progresses players take turns placing and moving around their troops, in order to try and conquer other territorries while defending their own in battles. The winner of these battles are determined by dice rolls. Although the main goal is to eliminate the other players, to achieve that goal players may have to form alliances throughout the game.
 
-RISK 101 is an offline turn based multiplayer adaptation of Risk for 2-6 players. The players will take turns playing the game. The game is controlled with a mouse.   
+RISK 101 is an offline turn based multiplayer adaptation of Risk, with some modifications to make the game more thematic and more fun to play. The players will take turns playing the game. The game is controlled with a mouse.   
 
-You can access the instructions [here.](https://www.hasbro.com/common/instruct/risk.pdf)
+You can access the rulebook for the classic board game [here.](https://www.hasbro.com/common/instruct/risk.pdf)
 ### Modifications
 - The game map is the map of Bilkent
 - Each player chooses a character to represent themselves.
