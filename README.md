@@ -19,7 +19,7 @@ You can access the rulebook for the classic board game [here.](https://www.hasbr
 - The missions are changed to be more diverse and adapted to Bilkent.
 - Some areas give additional bonuses when they are held by a player for a specified amount of time.
 - Unit appereances are changed depending on their departments.
-## Group Members
+## Group Members (Group 3B)
 - Aleyna Sütbaş - 21803174
 - Baykam Say - 21802030
 - Berk Takıt - 21803147
