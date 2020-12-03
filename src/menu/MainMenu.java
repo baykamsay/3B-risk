@@ -18,6 +18,11 @@ public class MainMenu extends Application implements MenuState {
     private ImageView logo;
     Scene scene;
     private int width, height;
+    private GameMenuManager mgr;
+
+    //Change this when moving to stylesheets
+    private String backgroundPath;
+
     //TO-DO: Move the styles to a stylesheet
     final String style_base = "{" +
             "    -fx-background-color: " +
@@ -48,23 +53,6 @@ public class MainMenu extends Application implements MenuState {
     public MainMenu(int width, int height){
         this.width = width;
         this.height = height;
-        init();
-    }
-
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void terminating() {
-
     }
 
     @Override
@@ -74,6 +62,9 @@ public class MainMenu extends Application implements MenuState {
 
     @Override
     public Scene createScene(GameMenuManager mgr) {
+        init(mgr.getMaximized());
+        this.mgr = mgr;
+
         for( Button b : options){
             b.setOnAction(mgr);
         }
@@ -85,12 +76,13 @@ public class MainMenu extends Application implements MenuState {
 
     }
 
-    public void init(){
+    public void init(boolean maximized){
+
+        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
         //initialize buttons
         String buttonLabel;
         for(int i = 0; i < NO_OF_OPTIONS; i++){
             buttonLabel = i < NO_OF_OPTIONS ? BUTTON_NAMES[i] : "";
-            System.out.println(buttonLabel);
             options[i] = new Button(buttonLabel);
             // TO-DO: make buttons BEAUTIFUL
             if(i < 2){
@@ -130,7 +122,7 @@ public class MainMenu extends Application implements MenuState {
         menu.setAlignment(Pos.CENTER);
         menu.setFillWidth(true);
 
-        menu.setStyle("-fx-background-image: url(\"bg_bilkent.png\");");
+        menu.setStyle(backgroundPath);
         scene = new Scene(menu,width,height);
     }
 }

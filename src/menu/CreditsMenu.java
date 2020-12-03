@@ -21,6 +21,10 @@ public class CreditsMenu extends Application implements MenuState{
     private Button back;
     private Scene scene;
     private int width, height;
+    private GameMenuManager mgr;
+
+    //Change this when moving to stylesheets
+    private String backgroundPath;
 
     final String style_back = " -fx-background-color: " +
             "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
@@ -32,26 +36,10 @@ public class CreditsMenu extends Application implements MenuState{
     public CreditsMenu(int width, int height){
         this.width = width;
         this.height = height;
-        init();
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void terminating() {
 
     }
 
@@ -62,11 +50,14 @@ public class CreditsMenu extends Application implements MenuState{
 
     @Override
     public Scene createScene(GameMenuManager mgr) {
+        init(mgr.getMaximized());
+        this.mgr = mgr;
         back.setOnAction(mgr);
         return scene;
     }
 
-    public void init(){
+    public void init(boolean maximized){
+        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
         title = new Label("Team Members");
         title.setFont(new Font("Helvetica", 40));
         title.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(5), Insets.EMPTY)));
@@ -92,7 +83,7 @@ public class CreditsMenu extends Application implements MenuState{
         bottom.setSpacing(20);
         root.getChildren().addAll(top,bottom);
         root.setSpacing(20);
-        root.setStyle("-fx-background-image: url(\"bg_bilkent.png\");");
+        root.setStyle(backgroundPath);
         scene = new Scene(root,width,height);
     }
 }

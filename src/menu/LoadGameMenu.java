@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -54,30 +53,17 @@ public class LoadGameMenu extends Application implements MenuState{
     private Button back;
     private int width, height;
     private Scene scene;
+    private GameMenuManager mgr;
+
+    //Change this when moving to stylesheets
+    private String backgroundPath;
 
     public LoadGameMenu(int width, int height) throws Exception {
         this.width = width;
         this.height = height;
-        checkForSaves();
-        init();
     }
     @Override
     public void start(Stage stage) throws Exception {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void terminating() {
 
     }
 
@@ -88,7 +74,14 @@ public class LoadGameMenu extends Application implements MenuState{
 
     @Override
     public Scene createScene(GameMenuManager mgr) {
-        back.setOnAction(mgr);
+        try {
+            checkForSaves();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.mgr = mgr;
+        init(mgr.getMaximized());
         return scene;
     }
 
@@ -110,7 +103,8 @@ public class LoadGameMenu extends Application implements MenuState{
         }
     }
 
-    public void init(){
+    public void init(boolean maximized){
+        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
         title = new Label("Load Game");
         title.setFont(new Font("Helvetica", 30));
         title.setStyle("-fx-font-weight: bold");
@@ -118,10 +112,10 @@ public class LoadGameMenu extends Application implements MenuState{
         back.setStyle(style_back);
 
         HBox top = new HBox(back);
-        top.setAlignment(Pos.TOP_LEFT);
+        top.setAlignment(Pos.CENTER_LEFT);
 
         VBox root = new VBox();
-        root.setAlignment(Pos.CENTER);
+        root.setAlignment(Pos.TOP_CENTER);
         root.setSpacing(8);
 
         VBox pane = new VBox();
@@ -139,8 +133,13 @@ public class LoadGameMenu extends Application implements MenuState{
             pane.getChildren().add(slots[i]);
         }
 
+        back.setOnAction(mgr);
+        for( Button b : slots){
+            b.setOnAction(mgr);
+        }
+
         root.getChildren().addAll(top,title,pane);
-        root.setStyle("-fx-background-image: url(\"bg_bilkent.png\");");
+        root.setStyle(backgroundPath);
         scene = new Scene(root,width,height);
     }
 }

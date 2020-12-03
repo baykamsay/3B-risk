@@ -1,7 +1,6 @@
 package menu;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -14,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class NewGameMenu extends Application implements MenuState, EventHandler<ActionEvent> {
@@ -72,30 +73,17 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
     private int width, height;
     private Scene scene;
     int chosenSlot;
+    private GameMenuManager mgr;
+
+    //Change this when moving to stylesheets
+    private String backgroundPath;
 
     public NewGameMenu(int width, int height) throws Exception {
         this.width = width;
         this.height = height;
-        checkForSaves();
-        init();
     }
     @Override
     public void start(Stage stage) throws Exception {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void terminating() {
 
     }
 
@@ -106,6 +94,14 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
 
     @Override
     public Scene createScene(GameMenuManager mgr) {
+        try {
+            checkForSaves();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        init(mgr.getMaximized());
+        this.mgr = mgr;
         back.setOnAction(mgr);
         return scene;
     }
@@ -120,16 +116,26 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            int saveNo = Integer.parseInt(fScan.nextLine());
-            if(saveNo > NO_OF_SLOTS){
-                throw new Exception("Corrupted/Tampered save file.");
+            int saveNo = -1;
+            try{
+                saveNo = Integer.parseInt(fScan.nextLine());
+            }catch(NumberFormatException e){
+                System.out.println("Corrupted save file detected, deleting.");
+                fScan.close();
+                f.delete();
             }
-            occupied[saveNo] = true;
-            fScan.close();
+            if(saveNo != -1) {
+                if (saveNo > NO_OF_SLOTS) {
+                    System.out.println("Invalid save file.");
+                }
+                occupied[saveNo] = true;
+                fScan.close();
+            }
         }
     }
 
-    public void init(){
+    public void init(boolean maximized){
+        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
         title = new Label("New Game");
         title.setFont(new Font("Helvetica", 30));
         title.setStyle("-fx-font-weight: bold");
@@ -140,7 +146,7 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
         top.setAlignment(Pos.TOP_LEFT);
 
         VBox root = new VBox();
-        root.setAlignment(Pos.CENTER);
+        root.setAlignment(Pos.TOP_CENTER);
         root.setSpacing(8);
 
         VBox pane = new VBox();
@@ -162,19 +168,26 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
         }
 
         root.getChildren().addAll(top,title,pane);
-        root.setStyle("-fx-background-image: url(\"bg_bilkent.png\");");
+        root.setStyle(backgroundPath);
         scene = new Scene(root,width,height);
     }
 
     @Override
-    public void handle(ActionEvent actionEvent) {
-        Button b = (Button) actionEvent.getSource();
+    public void handle(ActionEvent e) {
+        if(e.getSource() instanceof Button){
+            mgr.playButtonSound();
+        }
+        Button b = (Button) e.getSource();
         String s = b.getText();
         chosenSlot = Integer.parseInt(s.substring(s.length() - 1, s.length())) - 1;
-        if(occupied[chosenSlot]){
+        if(occupied[chosenSlot]) {
             overWrite();
         }
+        else{
+            createSave(chosenSlot);
+        }
         //TO-DO: Call mgr to get to faculty selection screen
+        mgr.startGame();
     }
 
     public void overWrite(){
@@ -187,6 +200,19 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
             File file = new File("C:\\Users\\Personal\\AppData\\Local\\Risk101" + "\\save" + chosenSlot + ".txt");
             file.delete();
             //TO-DO: Call mgr to get to faculty selection screen
+        }
+    }
+
+    public void createSave(int slot){
+        File file = new File("C:\\Users\\Personal\\AppData\\Local\\Risk101" + "\\save" + slot + ".txt");
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            writer.write(Integer.toString(slot));
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Couldn't create save file!");
+            e.printStackTrace();
         }
     }
 }

@@ -29,6 +29,9 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
     private GameMenuManager mgr;
     Scene scene;
 
+    //Change this when moving to stylesheets
+    private String backgroundPath;
+
     private final int NO_OF_PAGES = 3;
     final String traversalStyle = "";
 
@@ -66,10 +69,10 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
         helpPage = new ImageView();
         this.width = width;
         this.height = height;
-        this.init();
     }
 
-    public void init(){
+    public void init(boolean maximized){
+        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
         //initialize components
         Image img = new Image("help_icon.png");
         helpIcon = new ImageView(img);
@@ -111,23 +114,8 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
         BorderPane.setMargin(nav, new Insets(10,10,10,10));
         root.getChildren().addAll(top,menu);
         GridPane.setHalignment(menu,HPos.CENTER);
-        root.setStyle("-fx-background-image: url(\"bg_bilkent.png\");");
+        root.setStyle(backgroundPath);
         scene = new Scene(root,width,height);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void terminating() {
-
     }
 
     @Override
@@ -138,6 +126,7 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
 
     @Override
     public Scene createScene(GameMenuManager mgr) {
+        this.init(mgr.getMaximized());
         this.mgr = mgr;
         initButtons();
         return scene;
@@ -162,7 +151,6 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
         }
 
         this.update();
-        mgr.changeScene(this.scene);
     }
 
     public void initButtons(){
