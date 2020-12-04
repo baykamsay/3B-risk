@@ -72,12 +72,12 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
     }
 
     public void init(boolean maximized){
-        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
+        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
         //initialize components
-        Image img = new Image("help_icon.png");
+        Image img = new Image("img\\help_icon.png");
         helpIcon = new ImageView(img);
 
-        Image img2 = new Image("help1.png");
+        Image img2 = new Image("img\\help1.png");
         helpPage.setImage(img2);
 
         backButton = new Button("Back");
@@ -120,7 +120,7 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
 
     @Override
     public void update() {
-        Image img2 = new Image("help" + pageNo + ".png");
+        Image img2 = new Image("img\\help" + pageNo + ".png");
         helpPage.setImage(img2);
     }
 

@@ -115,12 +115,12 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
 
     @Override
     public void update() {
-        String displayImgPath = maximized ? "maximized_icon.png" : "windowed_icon.png";
+        String displayImgPath = maximized ? "img\\maximized_icon.png" : "img\\windowed_icon.png";
         Image displayImg = new Image(displayImgPath);
         displayIcon.setImage(displayImg);
 
-        String musicImgPath = musicMuted ? "sound_icon_muted.png" : "sound_icon.png";
-        String soundFXImgPath = soundFXMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        String musicImgPath = musicMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
+        String soundFXImgPath = soundFXMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
         Image musicImg = new Image(musicImgPath);
         Image soundFXImg = new Image(soundFXImgPath);
         musicIcon.setImage(musicImg);
@@ -141,7 +141,7 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         this.musicValue = mgr.getMusicValue();
         this.soundFXValue = mgr.getSoundFXValue();
         this.maximized = isMaximized;
-        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
+        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
 
         // trivial initialization
         displayIcon = new ImageView();
@@ -212,15 +212,15 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         });
 
         // initialize display icon
-        String imgPath = maximized ? "maximized_icon.png" : "windowed_icon.png";
+        String imgPath = maximized ? "img\\maximized_icon.png" : "img\\windowed_icon.png";
         Image img = new Image(imgPath);
         displayIcon.setImage(img);
         displayIcon.setPreserveRatio(true);
         displayIcon.setFitHeight(120);
 
         // set graphics for sound mute buttons
-        String musicImgPath = musicMuted ? "sound_icon_muted.png" : "sound_icon.png";
-        String soundFXImgPath = soundFXMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        String musicImgPath = musicMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
+        String soundFXImgPath = soundFXMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
         Image musicImg = new Image(musicImgPath);
         Image soundFXImg = new Image(soundFXImgPath);
         soundFXIcon = new ImageView();

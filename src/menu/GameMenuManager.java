@@ -50,7 +50,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         musicValue = 15.0;
         soundFXValue = 100.0;
 
-        soundEngine = new MediaPlayer(new Media(new File("src\\menu_music.mp3").toURI().toString()));
+        soundEngine = new MediaPlayer(new Media(new File("src\\sound\\menu_music.mp3").toURI().toString()));
         soundEngine.setMute(musicMuted);
         soundEngine.setVolume(musicValue / 100.0);
         soundEngine.setOnEndOfMedia(new Runnable() {
@@ -62,7 +62,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         });
         soundEngine.play();
 
-        buttonSound = new AudioClip(new File("src\\button_click.wav").toURI().toString());
+        buttonSound = new AudioClip(new File("src\\sound\\button_click.wav").toURI().toString());
         buttonSound.setVolume(soundFXValue / 100.0);
 
         try {
@@ -74,7 +74,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         window = primaryStage;
         window.setResizable(false);
         window.setTitle("RISK 101");
-        window.getIcons().add(new Image("logo.png"));
+        window.getIcons().add(new Image("img\\logo.png"));
 
 
         menuState = new MainMenu(width, height);

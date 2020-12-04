@@ -57,7 +57,7 @@ public class CreditsMenu extends Application implements MenuState{
     }
 
     public void init(boolean maximized){
-        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
+        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
         title = new Label("Team Members");
         title.setFont(new Font("Helvetica", 40));
         title.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(5), Insets.EMPTY)));
@@ -68,7 +68,7 @@ public class CreditsMenu extends Application implements MenuState{
                 "Yiğit Erkal");
         members.setFont(new Font("Helvetica", 28));
         members.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(5), Insets.EMPTY)));
-        Image img = new Image("bilkent_logo.png");
+        Image img = new Image("img\\bilkent_logo.png");
         logo = new ImageView(img);
         back = new Button("Back");
         back.setStyle(style_back);

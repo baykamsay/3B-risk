@@ -78,7 +78,7 @@ public class MainMenu extends Application implements MenuState {
 
     public void init(boolean maximized){
 
-        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
+        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
         //initialize buttons
         String buttonLabel;
         for(int i = 0; i < NO_OF_OPTIONS; i++){
@@ -94,7 +94,7 @@ public class MainMenu extends Application implements MenuState {
         }
         //main menu logo
         try {
-            Image img = new Image("logo.png");
+            Image img = new Image("img\\logo.png");
             logo = new ImageView(img);
         } catch (Exception e) {
             e.printStackTrace();

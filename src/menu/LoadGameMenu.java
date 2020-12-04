@@ -104,7 +104,7 @@ public class LoadGameMenu extends Application implements MenuState{
     }
 
     public void init(boolean maximized){
-        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
+        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
         title = new Label("Load Game");
         title.setFont(new Font("Helvetica", 30));
         title.setStyle("-fx-font-weight: bold");

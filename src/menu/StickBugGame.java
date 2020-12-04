@@ -60,7 +60,7 @@ public class StickBugGame extends Application implements MenuState{
     }
 
     public void init(boolean maximized){
-        Media video = new Media(new File("src\\stickbug.mp4").toURI().toString());
+        Media video = new Media(new File("src\\video\\stickbug.mp4").toURI().toString());
         mp = new MediaPlayer(video);
         mp.setOnEndOfMedia(new Runnable() {
             @Override

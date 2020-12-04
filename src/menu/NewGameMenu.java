@@ -135,7 +135,7 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
     }
 
     public void init(boolean maximized){
-        backgroundPath = maximized ? "-fx-background-image: url(\"bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"bg_bilkent.png\");";
+        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
         title = new Label("New Game");
         title.setFont(new Font("Helvetica", 30));
         title.setStyle("-fx-font-weight: bold");
