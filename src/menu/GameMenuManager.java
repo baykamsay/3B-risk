@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -73,14 +74,11 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         window = primaryStage;
         window.setResizable(false);
         window.setTitle("RISK 101");
+        window.getIcons().add(new Image("logo.png"));
 
 
         menuState = new MainMenu(width, height);
         scene = menuState.createScene(this);
-        window.setMinHeight(height);
-        window.setMaxHeight(height);
-        window.setMinWidth(width);
-        window.setMaxWidth(width);
         this.changeScene(scene);
     }
 
@@ -165,6 +163,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public void back(){
+        System.out.println("w: " + window.getWidth() + " height: " + window.getHeight());
         menuState = new MainMenu(width, height);
         scene = menuState.createScene(this);
         this.changeScene(scene);
@@ -209,9 +208,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
             height = WINDOWED_HEIGHT;
         }
         window.setMinHeight(height);
-        window.setMaxHeight(height);
         window.setMinWidth(width);
-        window.setMaxWidth(width);
         this.window.setMaximized(isMaximized);
     }
 
@@ -246,7 +243,6 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     public void setSoundFXMuted(boolean mute){
         this.soundFXMuted = mute;
-        buttonSound.setVolume(0.0);
     }
 
     public void setSoundFXValue(double value){
@@ -260,7 +256,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public void playButtonSound(){
-        buttonSound.play();
+        if(!soundFXMuted){ buttonSound.play(); }
     }
 
 }

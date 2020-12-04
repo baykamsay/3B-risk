@@ -100,8 +100,8 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
             e.printStackTrace();
         }
 
-        init(mgr.getMaximized());
         this.mgr = mgr;
+        init(mgr.getMaximized());
         back.setOnAction(mgr);
         return scene;
     }
@@ -147,20 +147,18 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
 
         VBox root = new VBox();
         root.setAlignment(Pos.TOP_CENTER);
+        root.setPrefSize(width,height);
         root.setSpacing(8);
 
         VBox pane = new VBox();
-        pane.setSpacing(5);
-        pane.setAlignment(Pos.CENTER);
+        pane.setSpacing(3);
+        pane.setAlignment(Pos.TOP_CENTER);
         for(int i = 0; i < NO_OF_SLOTS; i++){
             slots[i] = new Button("Save Slot " + Integer.toString(i + 1));
             if(occupied[i]){
                 slots[i].setStyle(occupied_style);
-
-                System.out.println("hi " + i + " " + slots[i].toString());
             }else{
                 //TO-DO: Display saved game info?
-                System.out.println("hello " + i + " " + slots[i].toString());
                 slots[i].setStyle(style_save_slot);
             }
             slots[i].setOnAction(this);
