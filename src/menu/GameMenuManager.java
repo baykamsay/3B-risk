@@ -75,6 +75,10 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         window.setResizable(false);
         window.setTitle("RISK 101");
         window.getIcons().add(new Image("img\\logo.png"));
+        window.setOnCloseRequest(e -> {
+            e.consume();
+            exit();
+        });
 
 
         menuState = new MainMenu(width, height);
