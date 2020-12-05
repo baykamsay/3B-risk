@@ -6,7 +6,6 @@ import java.util.*;
 
 public class GameEngine {
     public GameState currentState;
-    public boolean isOver;
     public GameMap map;
     public Objective[] objectives;
     public Player[] players;
@@ -31,8 +30,16 @@ public class GameEngine {
         this.currentState = currentState;
     }
 
-    public boolean gameOver(){
-        return isOver;
+    //map should have a getTerritories method to return the territories array
+    public boolean isGameOver(){
+        for (int i = 0; i < map.getTerritories(); i++) {
+            if( i+1 < (map.getTerritories()).length && (map.getTerritories())[i] != (map.getTerritories())[i+1]){
+                //map is occupied by at least 2 players
+                return false;
+            }
+        }
+        //map is occupied by 1 player
+        return true;
     }
 
     public void removeObjective(String name){
