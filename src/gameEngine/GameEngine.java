@@ -9,21 +9,26 @@ public class GameEngine {
     public GameMap map;
     public Objective[] objectives;
     public Player[] players;
-    public int[] playerSequence;
+    public int playerTurn; //keeps the index of the players array to decide who's gonna play
     public int saveSlot;
-    public int turn;
+    public int turn; //total turn count of the game
 
     public GameEngine(int saveSlot){
+        //variables will be initialized according to the save file(file parameter?)
         this.saveSlot = saveSlot;
     }
 
     public GameEngine(int saveSlot, Player[] players){
         this.saveSlot = saveSlot;
-        this.players = players;
-        isOver = false;
+        this.players = new Player[players.length];
+        for (int i = 0; i < players.length; i++) {
+            //"=" operator for the player class should be overriden
+            this.players[i] = players[i];
+        }
         map = new GameMap();
         turn = 0;
-        currentState = NULL;
+        currentState = null;
+        playerTurn = 0; //first player will go first, which is stored in index 0
     }
 
     public void switchState( GameState currentState){
@@ -44,9 +49,13 @@ public class GameEngine {
 
     public void removeObjective(String name){
         int index = 0;
-        while(objectives[index].getName() != name){
-            index++;
+        Objective[] temp = new Objective[objectives.length - 1];
+        for (int i = 0; i < objectives.length; i++) {
+            if(objectives[i].getName() != name){
+                //"=" operator for objective class should be overriden
+                temp[index++] = objectives[i];
+            }
         }
-
+        objectives = temp;
     }
 }
