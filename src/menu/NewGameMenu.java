@@ -107,7 +107,7 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
     }
 
     public void checkForSaves() throws Exception {
-        File[] files = new File("C:\\Users\\Personal\\AppData\\Local\\RISK101").listFiles();
+        File[] files = new File(System.getenv("LOCALAPPDATA")+"\\RISK101").listFiles();
         for(File f : files){
             System.out.println(f.getName());
             Scanner fScan = null;
@@ -195,14 +195,14 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
         overWrite.setContentText("This will irreversibly destroy the previous save.");
         overWrite.showAndWait();
         if(overWrite.getResult() == ButtonType.YES){
-            File file = new File("C:\\Users\\Personal\\AppData\\Local\\Risk101" + "\\save" + chosenSlot + ".txt");
+            File file = new File(System.getenv("LOCALAPPDATA")+"\\RISK101" + "\\save" + chosenSlot + ".txt");
             file.delete();
             //TO-DO: Call mgr to get to faculty selection screen
         }
     }
 
     public void createSave(int slot){
-        File file = new File("C:\\Users\\Personal\\AppData\\Local\\Risk101" + "\\save" + slot + ".txt");
+        File file = new File(System.getenv("LOCALAPPDATA") + "\\RISK101" + "\\save" + slot + ".txt");
         try {
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
