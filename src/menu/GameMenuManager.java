@@ -78,6 +78,10 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         window.setResizable(false);
         window.setTitle("RISK 101");
         window.getIcons().add(new Image("img\\logo.png"));
+        window.setOnCloseRequest(e -> {
+            e.consume();
+            exit();
+        });
 
 
         menuState = new MainMenu(width, height);
@@ -190,7 +194,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public void checkForDir() throws Exception {
-        File file = new File("C:\\Users\\Personal\\AppData\\Local\\RISK101");
+        File file = new File(System.getenv("LOCALAPPDATA")+"\\RISK101");
         if(!file.exists()){
             boolean success = file.mkdir();
             if(!success){
