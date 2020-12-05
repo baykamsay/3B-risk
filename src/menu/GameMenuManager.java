@@ -1,5 +1,6 @@
 package menu;
 
+import game.state.InitialArmyPlacementState;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -175,8 +176,9 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         this.changeScene(scene);
     }
 
+    // change this
     public void startGame(){
-        menuState = new StickBugGame(width,height);
+        menuState = new InitialArmyPlacementState(width, height);
         scene = menuState.createScene(this);
         this.changeScene(scene);
     }
