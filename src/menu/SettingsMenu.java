@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -62,7 +63,6 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
     private Slider musicSlider;
     private Slider soundFXSlider;
     private boolean musicMuted, soundFXMuted;
-    private Button muteMusicButton, muteSoundFXButton;
     private double musicValue, soundFXValue;
     private boolean maximized;
     private Button borderedButton, maximizedButton;
@@ -90,13 +90,7 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
             mgr.playButtonSound();
         }
 
-        if( e.getSource() == muteMusicButton){
-            musicMuted = !musicMuted;
-            update();
-        } else if (e.getSource() == muteSoundFXButton){
-            soundFXMuted = !soundFXMuted;
-            update();
-        } else if (e.getSource() == borderedButton){
+        if (e.getSource() == borderedButton){
             maximized = false;
             borderedButton.setDisable(true);
             maximizedButton.setDisable(false);
@@ -151,13 +145,9 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         backButton = new Button("Back");
         applyButton = new Button("Apply");
         discardButton = new Button("Discard");
-        muteMusicButton = new Button();
-        muteSoundFXButton = new Button();
         backButton.setStyle(style_back);
         applyButton.setStyle(style_big);
         discardButton.setStyle(style_big);
-        muteMusicButton.setStyle(style_sound);
-        muteSoundFXButton.setStyle(style_sound);
 
         // set settings title style
         title.setFont(new Font("Helvetica", 30));
@@ -225,15 +215,34 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         Image soundFXImg = new Image(soundFXImgPath);
         soundFXIcon = new ImageView();
         musicIcon = new ImageView();
+        soundFXIcon.setPickOnBounds(false);
+        musicIcon.setPickOnBounds(false);
         soundFXIcon.setImage(soundFXImg);
         soundFXIcon.setPreserveRatio(true);
         soundFXIcon.setFitHeight(50);
         musicIcon.setImage(musicImg);
         musicIcon.setPreserveRatio(true);
         musicIcon.setFitHeight(50);
-        muteSoundFXButton.setGraphic(soundFXIcon);
-        muteMusicButton.setGraphic(musicIcon);
+        musicIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 
+            @Override
+            public void handle(MouseEvent event) {
+                musicMuted = !musicMuted;
+                mgr.playButtonSound();
+                update();
+                event.consume();
+            }
+        });
+        soundFXIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                soundFXMuted = !soundFXMuted;
+                mgr.playButtonSound();
+                update();
+                event.consume();
+            }
+        });
         // create the layout
         root = new VBox();
         root.setPrefSize(width,height);
@@ -252,14 +261,14 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         VBox musicControl = new VBox();
         musicControl.setAlignment(Pos.TOP_CENTER);
         musicControl.getChildren().addAll(musicTitle, musicSlider);
-        musicSettings.getChildren().addAll(muteMusicButton, musicControl);
+        musicSettings.getChildren().addAll(musicIcon, musicControl);
 
         HBox soundFXSettings = new HBox();
         soundFXSettings.setAlignment(Pos.TOP_CENTER);
         VBox soundFXControl = new VBox();
         soundFXControl.getChildren().addAll(soundFXTitle, soundFXSlider);
         soundFXControl.setAlignment(Pos.TOP_CENTER);
-        soundFXSettings.getChildren().addAll(muteSoundFXButton, soundFXControl);
+        soundFXSettings.getChildren().addAll(soundFXIcon, soundFXControl);
 
         soundSettings.getChildren().addAll(musicSettings, soundFXSettings);
 
@@ -285,8 +294,6 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
 
     public void addHandlers(){
         backButton.setOnAction(mgr);
-        muteMusicButton.setOnAction(this);
-        muteSoundFXButton.setOnAction(this);
         borderedButton.setOnAction(this);
         maximizedButton.setOnAction(this);
         applyButton.setOnAction(this);
@@ -298,8 +305,7 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         mgr.setSoundFXMuted(soundFXMuted);
         mgr.setSoundFXValue(soundFXValue);
         mgr.setMusicValue(musicValue);
-        System.out.println("currently " + musicValue);
-        mgr.setMaximized(maximized);
+        if(mgr.getMaximized() != maximized) mgr.setMaximized(maximized);
         mgr.viewSettings();
     }
 

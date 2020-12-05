@@ -139,7 +139,7 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        System.out.println("clicked " + actionEvent.getSource());
+        mgr.playButtonSound();
         if(actionEvent.getSource() == next){
             if(pageNo < NO_OF_PAGES){
                 pageNo++;
