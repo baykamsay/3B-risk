@@ -5,10 +5,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import menu.GameMenuManager;
 import menu.MenuState;
@@ -74,13 +78,23 @@ public class MapScene {
         Group gp = new Group();
         gp.getChildren().add(mv);
 
-        VBox root = new VBox();
+        BorderPane top = new BorderPane();
         Button backButton = new Button("STOP THE BUG");
         backButton.setOnAction(mgr);
-        String style_gigantic = style_base + "-fx-pref-width: " + width + "px; -fx-pref-height: 20";
-        backButton.setStyle(style_gigantic);
-        root.getChildren().addAll(backButton,mv);
-        root.setAlignment(Pos.TOP_CENTER);
+        Text[] players = {new Text("MAN"), new Text("ART"), new Text("MF")};
+        HBox playerSequence = new HBox();
+        playerSequence.getChildren().addAll(players[0], players[1], players[2]);
+        playerSequence.setSpacing(5);
+        playerSequence.setAlignment(Pos.CENTER);
+        Button pauseButton = new Button("Pause");
+        pauseButton.setOnAction(e -> System.out.println("wow nothing happened!"));
+        top.setLeft(backButton);
+        top.setCenter(playerSequence);
+        top.setRight(pauseButton);
+
+        BorderPane root = new BorderPane();
+        root.setTop(top);
+        root.setCenter(mv);
         scene = new Scene(root, width, height);
     }
 }
