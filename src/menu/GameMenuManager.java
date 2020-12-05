@@ -13,6 +13,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -29,6 +30,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     private Scene scene;
     private MenuState menuState;
     private Stage window;
+    boolean displayChanged;
 
     // move these to sound engine when implemented
     private boolean musicMuted, soundFXMuted;
@@ -47,6 +49,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         isMaximized = false;
         musicMuted = false;
         soundFXMuted = false;
+        displayChanged = false;
         musicValue = 15.0;
         soundFXValue = 100.0;
 
@@ -91,7 +94,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         String s = "";
         try{
             s = ((Button) e.getSource()).getText();
-            buttonSound.play();
+            playButtonSound();
         } catch (Exception exception) {
             System.out.println("Not a button.");
         }
@@ -167,7 +170,6 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public void back(){
-        System.out.println("w: " + window.getWidth() + " height: " + window.getHeight());
         menuState = new MainMenu(width, height);
         scene = menuState.createScene(this);
         this.changeScene(scene);
@@ -204,13 +206,27 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     public void changeMaximized(boolean maximized){
         this.isMaximized = maximized;
         if (maximized) {
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            width = (int) screenSize.getWidth();
-            height = (int) screenSize.getHeight();
+            if( displayChanged) {
+                window.close();
+                window = new Stage();
+                window.setResizable(false);
+                window.setTitle("RISK 101");
+                window.getIcons().add(new Image("img\\logo.png"));
+                window.initStyle(StageStyle.UNDECORATED);
+                window.setScene(this.scene);
+            }
         } else {
-            width = WINDOWED_WIDTH;
-            height = WINDOWED_HEIGHT;
+            if( displayChanged) {
+                window.close();
+                window = new Stage();
+                window.setResizable(false);
+                window.setTitle("RISK 101");
+                window.getIcons().add(new Image("img\\logo.png"));
+                window.initStyle(StageStyle.DECORATED);
+                window.setScene(this.scene);
+            }
         }
+        displayChanged = false;
         window.setMinHeight(height);
         window.setMinWidth(width);
         this.window.setMaximized(isMaximized);
@@ -238,6 +254,15 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     public void setMaximized(boolean maximized){
         this.isMaximized = maximized;
+        this.displayChanged = true;
+        if(maximized){
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            width = (int) screenSize.getWidth();
+            height = (int) screenSize.getHeight();
+        } else {
+            width = WINDOWED_WIDTH;
+            height = WINDOWED_HEIGHT;
+        }
     }
 
     public void setMusicMuted(boolean mute){
