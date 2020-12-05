@@ -86,7 +86,7 @@ public class LoadGameMenu extends Application implements MenuState{
     }
 
     public void checkForSaves() throws Exception {
-        File[] files = new File("C:\\Users\\Personal\\AppData\\Local\\RISK101").listFiles();
+        File[] files = new File(System.getenv("LOCALAPPDATA")+"\\RISK101").listFiles();
         for(File f : files){
             Scanner fScan = null;
             try {
