@@ -1,12 +1,17 @@
 package game;
 import java.io.*;
 import java.util.*;
-import game.state.*;
 
-//GameState, GameMap, Objective, Player must be imported
+import game.player.Objective;
+import game.player.Player;
+import game.state.*;
+import menu.*;
+
+
+//GameMap must be imported
 
 public class GameEngine {
-    public GameState currentState;
+    public MenuState currentState;
     public GameMap map;
     public Objective[] objectives;
     public Player[] players;
@@ -14,13 +19,17 @@ public class GameEngine {
     public int saveSlot;
     public int turn; //total turn count of the game
     public Player winner;
+    public int width;
+    public int height;
 
-    public GameEngine(int saveSlot){
+    public GameEngine(int saveSlot,int height, int width){
         //variables will be initialized according to the save file(file parameter?)
         this.saveSlot = saveSlot;
+        this.height = height;
+        this.width = width;
     }
 
-    public GameEngine(int saveSlot, Player[] players){
+    public GameEngine(int saveSlot, Player[] players,int height,int width){
         this.saveSlot = saveSlot;
         this.players = new Player[players.length];
         for (int i = 0; i < players.length; i++) {
@@ -32,9 +41,19 @@ public class GameEngine {
         currentState = null;
         playerTurn = 0; //first player will go first, which is stored in index 0
         winner = null;
+        this.height = height;
+        this.width = width;
     }
 
-    public void switchState( GameState currentState){
+    public GameMap getMap() {
+        return map;
+    }
+
+    public Player[] getPlayers(){
+        return players;
+    }
+
+    public void switchState(MenuState currentState){
         this.currentState = currentState;
     }
 
@@ -90,6 +109,9 @@ public class GameEngine {
     }
 
     public void initGame(){
-        //game
+        if(turn == 0){
+            switchState(new InitialArmyPlacementState(width,height,this));
+            //call armyPlacement methods
+        }
     }
 }
