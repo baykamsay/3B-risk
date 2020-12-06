@@ -12,56 +12,22 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class HelpMenu extends Application implements MenuState, EventHandler<ActionEvent> {
 
     private ImageView helpIcon;
-    private ImageView helpPage;
+    private final ImageView helpPage;
     private Label title;
     private Button backButton;
     private Button next;
     private Button previous;
     private int pageNo;
-    private int width;
-    private int height;
+    private final int width, height;
     private GameMenuManager mgr;
     Scene scene;
 
-    //Change this when moving to stylesheets
-    private String backgroundPath;
-
     private final int NO_OF_PAGES = 3;
-    final String traversalStyle = "";
-
-    final String style_base = "{" +
-            "    -fx-background-color: " +
-            "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
-            "        linear-gradient(#020b02, #3a3a3a)," +
-            "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%)," +
-            "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);" +
-            "    -fx-background-insets: 0,1,4,5;" +
-            "    -fx-background-radius: 9,8,5,4;" +
-            "    -fx-padding: 15 30 15 30;" +
-            "    -fx-font-family: \"Helvetica\";" +
-            "    -fx-font-size: 18px;" +
-            "    -fx-font-weight: bold;" +
-            "    -fx-text-fill: #404040;" +
-            "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
-            "    -fx-focus-color: transparent;";
-
-    final String style_big =  style_base +
-            "    -fx-pref-width: 200px;" +
-            "    -fx-pref-height: 50px; "+
-            "}";
-
-    final String style_back = " -fx-background-color: " +
-            "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
-            "        linear-gradient(#020b02, #3a3a3a)," +
-            "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%)," +
-            "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);" +
-            "}";
 
     public HelpMenu(int width, int height){
         pageNo = 1;
@@ -72,26 +38,33 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
     }
 
     public void init(boolean maximized){
-        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
+        String backStyle = mgr.getMaximized() ? "menu_button_back_max" : "menu_button_back_min";
+        String bigButtonStyle = maximized ? "menu_button_max" : "menu_button_min";
+        String titleStyle = mgr.getMaximized() ? "title_max" : "title_min";
+        int imgSize = maximized ? 600 : 400;
+
         //initialize components
         Image img = new Image("img\\help_icon.png");
         helpIcon = new ImageView(img);
+        helpIcon.setPreserveRatio(true);
+        helpIcon.setFitWidth(imgSize / 5);
 
         Image img2 = new Image("img\\help1.png");
         helpPage.setImage(img2);
+        helpPage.setPreserveRatio(true);
+        helpPage.setFitWidth(imgSize);
 
         backButton = new Button("Back");
-        backButton.setStyle(style_back);
+        backButton.getStyleClass().add(backStyle);
 
         next = new Button("next");
         previous = new Button("previous");
-        next.setStyle(style_big);
-        previous.setStyle(style_big);
+        next.getStyleClass().add(bigButtonStyle);
+        previous.getStyleClass().add(bigButtonStyle);
         initButtons();
 
         title = new Label("How to Play RISK101", helpIcon);
-        title.setFont(new Font("Helvetica", 35));
-        title.setStyle("-fx-font-weight: bold");
+        title.getStyleClass().add(titleStyle);
         VBox root = new VBox();
 
         HBox top = new HBox(backButton);
@@ -114,7 +87,6 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
         BorderPane.setMargin(nav, new Insets(10,10,10,10));
         root.getChildren().addAll(top,menu);
         GridPane.setHalignment(menu,HPos.CENTER);
-        root.setStyle(backgroundPath);
         scene = new Scene(root,width,height);
     }
 
@@ -126,8 +98,8 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
 
     @Override
     public Scene createScene(GameMenuManager mgr) {
-        this.init(mgr.getMaximized());
         this.mgr = mgr;
+        this.init(mgr.getMaximized());
         initButtons();
         return scene;
     }

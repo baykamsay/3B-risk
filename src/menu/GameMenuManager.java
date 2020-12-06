@@ -24,8 +24,8 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     private boolean isMaximized;
     // private SoundEngine soundEngine;
-    private static final int WINDOWED_WIDTH = 600;
-    private static final int WINDOWED_HEIGHT = 600;
+    private static final int WINDOWED_WIDTH = 1024;
+    private static final int WINDOWED_HEIGHT = 1024;
     private int width, height;
     private Scene scene;
     private MenuState menuState;
@@ -56,12 +56,9 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         soundEngine = new MediaPlayer(new Media(new File("src\\sound\\menu_music.mp3").toURI().toString()));
         soundEngine.setMute(musicMuted);
         soundEngine.setVolume(musicValue / 100.0);
-        soundEngine.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                soundEngine.seek(Duration.ZERO);
-                soundEngine.play();
-            }
+        soundEngine.setOnEndOfMedia(() -> {
+            soundEngine.seek(Duration.ZERO);
+            soundEngine.play();
         });
         soundEngine.play();
 
@@ -83,7 +80,6 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
             exit();
         });
 
-
         menuState = new MainMenu(width, height);
         scene = menuState.createScene(this);
         this.changeScene(scene);
@@ -99,41 +95,51 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
             System.out.println("Not a button.");
         }
 
-        if(s.equals("Help")){
-            viewHelp();
-        }else if (s.equals("Back")){
-            back();
-        }else if (s.equals("Exit")){
-            exit();
-        }else if (s.equals("Credits")){
-            viewCredits();
-        }else if (s.equals("Load Game")){
-            try {
-                loadGame();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }else if (s.equals("New Game")){
-            try {
-                newGame();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        } else if (s.equals("Settings")){
-            viewSettings();
-        } else if(s.equals("STOP THE BUG")){
-            menuState.update();
-            musicMuted = false;
-            soundEngine.setMute(false);
-            try {
-                newGame();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
+        switch (s) {
+            case "Help":
+                viewHelp();
+                break;
+            case "Back":
+                back();
+                break;
+            case "Exit":
+                exit();
+                break;
+            case "Credits":
+                viewCredits();
+                break;
+            case "Load Game":
+                try {
+                    loadGame();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                break;
+            case "New Game":
+                try {
+                    newGame();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                break;
+            case "Settings":
+                viewSettings();
+                break;
+            case "STOP THE BUG":
+                menuState.update();
+                musicMuted = false;
+                soundEngine.setMute(false);
+                try {
+                    newGame();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                break;
         }
     }
 
     public void changeScene(Scene scene){
+        scene.getStylesheets().add("css/menu_stylesheet.css");
         window.setScene(scene);
         this.changeMaximized(isMaximized);
         window.show();
@@ -171,12 +177,6 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     public void back(){
         menuState = new MainMenu(width, height);
-        scene = menuState.createScene(this);
-        this.changeScene(scene);
-    }
-
-    public void startGame(){
-        menuState = new StickBugGame(width,height);
         scene = menuState.createScene(this);
         this.changeScene(scene);
     }

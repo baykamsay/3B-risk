@@ -16,39 +16,8 @@ public class MainMenu extends Application implements MenuState {
     private static final String[] BUTTON_NAMES = {"New Game", "Load Game", "Help", "Settings", "Credits", "Exit"};
     private final Button[] options = new Button[NO_OF_OPTIONS];
     private ImageView logo;
-    Scene scene;
-    private int width, height;
-    private GameMenuManager mgr;
-
-    //Change this when moving to stylesheets
-    private String backgroundPath;
-
-    //TO-DO: Move the styles to a stylesheet
-    final String style_base = "{" +
-            "    -fx-background-color: " +
-            "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
-            "        linear-gradient(#020b02, #3a3a3a)," +
-            "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%)," +
-            "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);" +
-            "    -fx-background-insets: 0,1,4,5;" +
-            "    -fx-background-radius: 9,8,5,4;" +
-            "    -fx-padding: 15 30 15 30;" +
-            "    -fx-font-family: \"Helvetica\";" +
-            "    -fx-font-size: 18px;" +
-            "    -fx-font-weight: bold;" +
-            "    -fx-text-fill: #404040;" +
-            "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
-            "    -fx-focus-color: transparent;";
-
-    final String style_big =  style_base +
-            "    -fx-pref-width: 200px;" +
-            "    -fx-pref-height: 50px; "+
-            "}";
-
-    final String style_small = style_base +
-            "    -fx-pref-width: 250px;" +
-            "    -fx-pref-height: 30px; "+
-            "}";
+    private Scene scene;
+    private final int width, height;
 
     public MainMenu(int width, int height){
         this.width = width;
@@ -63,7 +32,6 @@ public class MainMenu extends Application implements MenuState {
     @Override
     public Scene createScene(GameMenuManager mgr) {
         init(mgr.getMaximized());
-        this.mgr = mgr;
 
         for( Button b : options){
             b.setOnAction(mgr);
@@ -77,25 +45,26 @@ public class MainMenu extends Application implements MenuState {
     }
 
     public void init(boolean maximized){
-
-        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
+        String bigButtonStyle = maximized ? "menu_button_max" : "menu_button_min";
+        String longButtonStyle = maximized ? "menu_button_long_max" : "menu_button_long_min";
         //initialize buttons
         String buttonLabel;
         for(int i = 0; i < NO_OF_OPTIONS; i++){
             buttonLabel = i < NO_OF_OPTIONS ? BUTTON_NAMES[i] : "";
             options[i] = new Button(buttonLabel);
-            // TO-DO: make buttons BEAUTIFUL
             if(i < 2){
-                options[i].setStyle(style_big);
+                options[i].getStyleClass().add(bigButtonStyle);
             }
             else{
-                options[i].setStyle(style_small);
+                options[i].getStyleClass().add(longButtonStyle);
             }
         }
         //main menu logo
         try {
-            Image img = new Image("img\\logo.png");
+            String logoPath = maximized ? "img\\logo_600.png" : "img\\logo_400.png";
+            Image img = new Image(logoPath);
             logo = new ImageView(img);
+            logo.setPreserveRatio(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -122,7 +91,6 @@ public class MainMenu extends Application implements MenuState {
         menu.setAlignment(Pos.CENTER);
         menu.setFillWidth(true);
 
-        menu.setStyle(backgroundPath);
         scene = new Scene(menu,width,height);
     }
 }

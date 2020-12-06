@@ -1,0 +1,145 @@
+.root{
+    -fx-background-image: url("../img/bg_bilkent.png"); 
+    -fx-background-size: cover;
+}
+
+.label{
+    -fx-font-weight: bold;    
+    -fx-font-family: "Helvetica"; 
+}
+
+.label_min{
+    -fx-font-size: 20px;  
+}
+
+.label_max{
+    -fx-font-size: 30px;  
+}
+
+.title_min{
+    -fx-font-size: 30px; 
+}
+
+.title_max{
+    -fx-font-size: 45px;
+}
+
+.slider{
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);  
+}
+
+.button{
+    -fx-box-shadow: inset 0px 2px 0px 0px #ffffff;
+    -fx-background-color:
+        #f9f9f9,
+        linear-gradient(to bottom, #ebebeb 5%, #b6b6b6 100%);
+    -fx-background-insets: 0,1,4,5;    
+    -fx-background-radius: 9,8,5,4;    
+    -fx-padding: 15 30 15 30;    
+    -fx-font-family: "Helvetica";    
+    -fx-font-size: 20px;    
+    -fx-font-weight: bold;    
+    -fx-text-fill: #404040;    
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);    
+    -fx-focus-color: transparent;    
+}
+
+.button:hover{
+    -fx-background-color:
+        #ffffff,
+        linear-gradient(to top, #ffffff 5%, #e2e2e2 100%);
+}
+
+.menu_button_min{    
+    -fx-pref-width: 250px;    
+    -fx-pref-height: 60px; 
+}
+
+.menu_button_max{
+    -fx-pref-width: 350px;    
+    -fx-pref-height: 90px;
+    -fx-font-size: 25px; 
+}
+
+.menu_button_long_max{   
+    -fx-pref-width: 400px;    
+    -fx-pref-height: 60px;
+    -fx-font-size: 22px; 
+}
+
+.menu_button_long_min{   
+    -fx-pref-width: 300px;    
+    -fx-pref-height: 30px; 
+}
+
+.menu_button_display_max{
+    -fx-pref-width: 450px;    
+    -fx-pref-height: 100px; 
+}
+
+.menu_button_display_min{
+    -fx-pref-width: 300px;    
+    -fx-pref-height: 30px; 
+}
+
+.menu_button_back_min{
+    -fx-padding: 5 5 5 5;  
+    -fx-font-size: 15px;    
+    -fx-font-style: italic;
+    -fx-background-color:
+        #f9f9f9,
+        linear-gradient(to bottom, #dddcdc 5%, #b3b0b0 100%);
+    -fx-pref-width: 70px;    
+    -fx-pref-height: 70px;
+    -fx-background-radius: 30em;
+}
+
+.menu_button_back_max{
+    -fx-padding: 5 5 5 5;  
+    -fx-font-size: 20px;    
+    -fx-font-style: italic;
+    -fx-background-color:
+        #f9f9f9,
+        linear-gradient(to bottom, #dddcdc 5%, #b3b0b0 100%);
+    -fx-pref-width: 100px;    
+    -fx-pref-height: 100px;
+    -fx-background-radius: 40em;
+}
+
+.occupied_slot_min{
+    -fx-background-color: 
+            red,
+            linear-gradient(rgba(255,0,0,1) 0%, rgba(253,29,29,1) 30%, rgba(252,176,69,1) 100%);
+    -fx-pref-width: 200px;
+    -fx-pref-height: 25px;
+}
+
+.occupied_slot_max{
+    -fx-background-color: 
+            red,
+            linear-gradient(rgba(255,0,0,1) 0%, rgba(253,29,29,1) 30%, rgba(252,176,69,1) 100%);
+    -fx-pref-width: 300px;
+    -fx-pref-height: 30px;
+}
+
+.occupied_slot_min:hover{
+    -fx-background-color: 
+            red,
+            linear-gradient(rgba(252,176,69,1) 100%,rgba(253,29,29,1) 30%,  rgba(255,0,0,1) 0%);
+}
+
+.occupied_slot_max:hover{
+    -fx-background-color: 
+            red,
+            linear-gradient(rgba(252,176,69,1) 100%,rgba(253,29,29,1) 30%,  rgba(255,0,0,1) 0%);
+}
+
+.empty_slot_max{
+    -fx-pref-width: 300px;
+    -fx-pref-height: 30px;
+}
+
+.empty_slot_min{
+    -fx-pref-width: 200px;
+    -fx-pref-height: 25px;
+}

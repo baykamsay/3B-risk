@@ -5,10 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -20,45 +18,15 @@ public class LoadGameMenu extends Application implements MenuState{
     private final int NO_OF_SLOTS = 8;
     private final Button[] slots = new Button[NO_OF_SLOTS];
     private final boolean[] occupied = new boolean[NO_OF_SLOTS];
-    final String style_base = "{" +
-            "    -fx-background-color: " +
-            "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
-            "        linear-gradient(#020b02, #3a3a3a)," +
-            "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%)," +
-            "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);" +
-            "    -fx-background-insets: 0,1,4,5;" +
-            "    -fx-background-radius: 9,8,5,4;" +
-            "    -fx-padding: 15 30 15 30;" +
-            "    -fx-font-family: \"Helvetica\";" +
-            "    -fx-font-size: 18px;" +
-            "    -fx-font-weight: bold;" +
-            "    -fx-text-fill: #404040;" +
-            "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
-            "    -fx-focus-color: transparent;";
-
-    final String style_save_slot =  style_base +
-            "    -fx-pref-width: 200px;" +
-            "    -fx-pref-height: 25px;"+
-            "    -fx-max-height: 25px;"+
-            "}";
-    final String style_back = " -fx-background-color: " +
-            "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
-            "        linear-gradient(#020b02, #3a3a3a)," +
-            "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%)," +
-            "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);" +
-            "}";
 
     private Label title;
-    private ScrollPane scrollPane;
     private Button back;
-    private int width, height;
+    private final int width, height;
     private Scene scene;
     private GameMenuManager mgr;
 
-    //Change this when moving to stylesheets
-    private String backgroundPath;
 
-    public LoadGameMenu(int width, int height) throws Exception {
+    public LoadGameMenu(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -104,12 +72,13 @@ public class LoadGameMenu extends Application implements MenuState{
     }
 
     public void init(boolean maximized){
-        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
+        String backStyle = mgr.getMaximized() ? "menu_button_back_max" : "menu_button_back_min";
+        String emptyStyle = maximized ? "empty_slot_max" : "empty_slot_min";
+        String titleStyle = mgr.getMaximized() ? "title_max" : "title_min";
         title = new Label("Load Game");
-        title.setFont(new Font("Helvetica", 30));
-        title.setStyle("-fx-font-weight: bold");
+        title.getStyleClass().add(titleStyle);
         back = new Button("Back");
-        back.setStyle(style_back);
+        back.getStyleClass().add(backStyle);
 
         HBox top = new HBox(back);
         top.setAlignment(Pos.CENTER_LEFT);
@@ -122,14 +91,14 @@ public class LoadGameMenu extends Application implements MenuState{
         pane.setSpacing(5);
         pane.setAlignment(Pos.CENTER);
         for(int i = 0; i < NO_OF_SLOTS; i++){
-            slots[i] = new Button("Save Slot " + Integer.toString(i + 1));
+            slots[i] = new Button("Save Slot " + (i + 1));
             if(!occupied[i]){
                 slots[i].setDisable(true);
             }
             else{
                 //TO-DO: Display saved game info?
             }
-            slots[i].setStyle(style_save_slot);
+            slots[i].getStyleClass().add(emptyStyle);
             pane.getChildren().add(slots[i]);
         }
 
@@ -139,7 +108,6 @@ public class LoadGameMenu extends Application implements MenuState{
         }
 
         root.getChildren().addAll(top,title,pane);
-        root.setStyle(backgroundPath);
         scene = new Scene(root,width,height);
     }
 }

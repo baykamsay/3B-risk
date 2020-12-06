@@ -15,48 +15,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
 public class SettingsMenu extends Application implements MenuState, EventHandler<ActionEvent> {
 
-    final String style_base = "{" +
-            "    -fx-background-color: " +
-            "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
-            "        linear-gradient(#020b02, #3a3a3a)," +
-            "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%)," +
-            "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);" +
-            "    -fx-background-insets: 0,1,4,5;" +
-            "    -fx-background-radius: 9,8,5,4;" +
-            "    -fx-padding: 15 30 15 30;" +
-            "    -fx-font-family: \"Helvetica\";" +
-            "    -fx-font-size: 18px;" +
-            "    -fx-font-weight: bold;" +
-            "    -fx-text-fill: #404040;" +
-            "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
-            "    -fx-focus-color: transparent;";
-    final String style_big =  style_base +
-            "    -fx-pref-width: 200px;" +
-            "    -fx-pref-height: 50px; "+
-            "}";
-    final String style_display = style_base +
-            "    -fx-pref-width: 300px;" +
-            "    -fx-pref-height: 30px; "+
-            "}";
-    final String style_back = " -fx-background-color: " +
-            "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
-            "        linear-gradient(#020b02, #3a3a3a)," +
-            "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%)," +
-            "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);" +
-            "}";
-    final String style_sound = "    -fx-pref-width: 200px;" +
-            "    -fx-pref-height: 50px; "+
-            "    -fx-background-color: transparent;" +
-            "    -fx-border-color: transparent;" +
-            "}";
-    Scene scene;
-    private int width, height;
+    private Scene scene;
+    private final int width, height;
     private GameMenuManager mgr;
     private Button backButton;
     private Label title, musicTitle, soundFXTitle;
@@ -70,9 +35,6 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
     private ImageView displayIcon;
     private ImageView musicIcon, soundFXIcon;
     private VBox root;
-
-    //Change this when moving to stylesheets
-    private String backgroundPath;
 
     public SettingsMenu(int width, int height){
         this.width = width;
@@ -130,12 +92,19 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
     }
 
     public void init(boolean isMaximized){
+        String backStyle = mgr.getMaximized() ? "menu_button_back_max" : "menu_button_back_min";
+        String displayStyle = mgr.getMaximized() ? "menu_button_display_max" : "menu_button_display_min";
+        String bigButtonStyle = mgr.getMaximized() ? "menu_button_max" : "menu_button_min";
+        String labelStyle = mgr.getMaximized() ? "label_max" : "label_min";
+        String titleStyle = mgr.getMaximized() ? "title_max" : "title_min";
+        int sliderW = mgr.getMaximized() ? 400 : 200;
+        int sliderH = mgr.getMaximized() ? 40 : 20;
+        int iconSize = mgr.getMaximized() ? 240 : 120;
         this.musicMuted = mgr.getMusicMuted();
         this.soundFXMuted = mgr.getSoundFXMuted();
         this.musicValue = mgr.getMusicValue();
         this.soundFXValue = mgr.getSoundFXValue();
         this.maximized = isMaximized;
-        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
 
         // trivial initialization
         displayIcon = new ImageView();
@@ -145,25 +114,22 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         backButton = new Button("Back");
         applyButton = new Button("Apply");
         discardButton = new Button("Discard");
-        backButton.setStyle(style_back);
-        applyButton.setStyle(style_big);
-        discardButton.setStyle(style_big);
+        backButton.getStyleClass().add(backStyle);
+        applyButton.getStyleClass().add(bigButtonStyle);
+        discardButton.getStyleClass().add(bigButtonStyle);
 
         // set settings title style
-        title.setFont(new Font("Helvetica", 30));
-        title.setStyle("-fx-font-weight: bold");
+        title.getStyleClass().add(titleStyle);
 
         // set sound setting labels style
-        musicTitle.setFont(new Font("Helvetica", 15));
-        musicTitle.setStyle("-fx-font-weight: bold");
-        soundFXTitle.setFont(new Font("Helvetica", 15));
-        soundFXTitle.setStyle("-fx-font-weight: bold");
+        musicTitle.getStyleClass().add(labelStyle);
+        soundFXTitle.getStyleClass().add(labelStyle);
 
         // initialize buttons for changing display
         borderedButton = new Button("Bordered Window");
         maximizedButton = new Button("Maximized");
-        borderedButton.setStyle(style_display);
-        maximizedButton.setStyle(style_display);
+        borderedButton.getStyleClass().add(displayStyle);
+        maximizedButton.getStyleClass().add(displayStyle);
         // set one to disabled
         if (maximized) {
             maximizedButton.setDisable(true);
@@ -173,40 +139,28 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
 
         // initialize music slider
         musicSlider = new Slider(0, 100, musicValue);
-        musicSlider.setPrefSize(200, 20);
+        musicSlider.setPrefSize(sliderW, sliderH);
         musicSlider.setShowTickMarks(true);
         musicSlider.setMajorTickUnit(25.0);
         musicSlider.setBlockIncrement(1.0);
-        //musicSlider.setStyle(".slider .axis .axis-tick-mark {  -fx-fill: null; -fx-stroke: red; }");
         // add change listener
-        musicSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                musicValue = t1.doubleValue();
-            }
-        });
+        musicSlider.valueProperty().addListener((observableValue, number, t1) -> musicValue = t1.doubleValue());
 
         // initialize soundFX slider
         soundFXSlider = new Slider(0, 100, soundFXValue);
-        soundFXSlider.setPrefSize(200, 20);
+        soundFXSlider.setPrefSize(sliderW, sliderH);
         soundFXSlider.setShowTickMarks(true);
         soundFXSlider.setMajorTickUnit(25.0);
         soundFXSlider.setBlockIncrement(1.0);
-        //soundFXSlider.setStyle(".slider .axis .axis-tick-mark {  -fx-fill: null; -fx-stroke: red; }");
         // add change listener
-        soundFXSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                soundFXValue = t1.doubleValue();
-            }
-        });
+        soundFXSlider.valueProperty().addListener((observableValue, number, t1) -> soundFXValue = t1.doubleValue());
 
         // initialize display icon
         String imgPath = maximized ? "img\\maximized_icon.png" : "img\\windowed_icon.png";
         Image img = new Image(imgPath);
         displayIcon.setImage(img);
         displayIcon.setPreserveRatio(true);
-        displayIcon.setFitHeight(120);
+        displayIcon.setFitHeight(iconSize);
 
         // set graphics for sound mute buttons
         String musicImgPath = musicMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
@@ -219,29 +173,21 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         musicIcon.setPickOnBounds(false);
         soundFXIcon.setImage(soundFXImg);
         soundFXIcon.setPreserveRatio(true);
-        soundFXIcon.setFitHeight(50);
+        soundFXIcon.setFitHeight(iconSize / 4);
         musicIcon.setImage(musicImg);
         musicIcon.setPreserveRatio(true);
-        musicIcon.setFitHeight(50);
-        musicIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                musicMuted = !musicMuted;
-                mgr.playButtonSound();
-                update();
-                event.consume();
-            }
+        musicIcon.setFitHeight(iconSize / 4);
+        musicIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            musicMuted = !musicMuted;
+            mgr.playButtonSound();
+            update();
+            event.consume();
         });
-        soundFXIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                soundFXMuted = !soundFXMuted;
-                mgr.playButtonSound();
-                update();
-                event.consume();
-            }
+        soundFXIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            soundFXMuted = !soundFXMuted;
+            mgr.playButtonSound();
+            update();
+            event.consume();
         });
         // create the layout
         root = new VBox();
@@ -287,7 +233,6 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
 
         root.getChildren().addAll(top, title, soundSettings, displaySettings, controlButtons);
 
-        root.setStyle(backgroundPath);
 
         scene = new Scene(root,width,height);
     }
