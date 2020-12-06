@@ -1,6 +1,7 @@
 package game;
 import java.io.*;
 import java.util.*;
+import game.state.*;
 
 //GameState, GameMap, Objective, Player must be imported
 
@@ -64,5 +65,31 @@ public class GameEngine {
             }
         }
         objectives = temp;
+    }
+
+    public boolean isEliminated(Player p){ //check if a player is eliminated
+        for (int i = 0; i < map.getTerritories(); i++) {
+            if( (((map.getTerritories())[i]).getRuler()).getName() == p.getName()){
+                //player has at least 1 territory
+                return false;
+            }
+        }
+        return true; //player has 0 territory
+    }
+
+    public void removePlayer(Player p){ //remove an eliminated player from player[]
+        int index = 0;
+        Player[] temp = new Player[players.length - 1];
+        for (int i = 0; i < players.length; i++) {
+            if(players[i].getName() != p.getName()){
+                //"=" operator for player class should be overriden
+                temp[index++] = players[i];
+            }
+        }
+        players = temp;
+    }
+
+    public void initGame(){
+        //game
     }
 }
