@@ -1,6 +1,6 @@
 package game.scene;
 
-//import game.GameEngine;
+import game.GameEngine;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -25,6 +25,7 @@ public class MapScene {
     private int width, height;
     private Scene scene;
     private MenuState state;
+    private GameEngine engine;
     private GameMenuManager mgr;
     private MediaPlayer mp;
     private String stateName;
@@ -39,8 +40,9 @@ public class MapScene {
         mp.stop();
     }
 
-    public Scene createScene(GameMenuManager mgr, MenuState state) {
+    public Scene createScene(GameMenuManager mgr, GameEngine engine, MenuState state) {
         this.state = state;
+        this.engine = engine;
         this.mgr = mgr;
 //        init(mgr.getMaximized());
         init(true);
@@ -65,6 +67,11 @@ public class MapScene {
 //        mgr.setMusicMuted(true);
         Group gp = new Group();
         gp.getChildren().add(mv);
+
+        /*
+            Map buttons has a listener that calls a function in the state:
+            e -> state.mapSelect(e);
+         */
 
         // Overlay top
         BorderPane top = new BorderPane();
