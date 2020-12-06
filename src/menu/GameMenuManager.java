@@ -126,6 +126,9 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
             case "Settings":
                 viewSettings();
                 break;
+            case "Return to Main Menu":
+                back();
+                break;
             case "STOP THE BUG":
                 menuState.update();
                 musicMuted = false;
