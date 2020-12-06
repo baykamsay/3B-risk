@@ -66,11 +66,7 @@ public class GameOverScene<GameEngine> extends Application implements MenuState,
     public void update() {
         //
     }
-
-    @Override
-    public Scene createScene(GameMenuManager mgr) {
-        return null;
-    }
+    
 
     @Override
     public Scene createScene(GameMenuManager mgr, GameEngine engine) {
