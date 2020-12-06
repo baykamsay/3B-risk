@@ -101,7 +101,6 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
                 viewHelp();
                 break;
             case "Back":
-            case "Return to Main Menu":
                 back();
                 break;
             case "Exit":
@@ -126,6 +125,9 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
                 break;
             case "Settings":
                 viewSettings();
+                break;
+            case "Return to Main Menu":
+                back();
                 break;
             case "STOP THE BUG":
                 menuState.update();
