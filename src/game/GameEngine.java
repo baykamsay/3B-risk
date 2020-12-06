@@ -12,6 +12,7 @@ public class GameEngine {
     public int playerTurn; //keeps the index of the players array to decide who's gonna play
     public int saveSlot;
     public int turn; //total turn count of the game
+    public Player winner;
 
     public GameEngine(int saveSlot){
         //variables will be initialized according to the save file(file parameter?)
@@ -29,6 +30,7 @@ public class GameEngine {
         turn = 0;
         currentState = null;
         playerTurn = 0; //first player will go first, which is stored in index 0
+        winner = null;
     }
 
     public void switchState( GameState currentState){
@@ -44,7 +46,12 @@ public class GameEngine {
             }
         }
         //map is occupied by 1 player
+        winner = (map.getTerritories[0]).getRuler();
         return true;
+    }
+
+    public Player getWinner(){
+        return winner;
     }
 
     public void removeObjective(String name){
