@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import menu.GameMenuManager;
@@ -20,21 +21,6 @@ import menu.MenuState;
 import java.io.File;
 
 public class MapScene {
-    final String style_base = "{" +
-            "    -fx-background-color: " +
-            "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%)," +
-            "        linear-gradient(#020b02, #3a3a3a)," +
-            "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%)," +
-            "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);" +
-            "    -fx-background-insets: 0,1,4,5;" +
-            "    -fx-background-radius: 9,8,5,4;" +
-            "    -fx-padding: 15 30 15 30;" +
-            "    -fx-font-family: \"Helvetica\";" +
-            "    -fx-font-size: 18px;" +
-            "    -fx-font-weight: bold;" +
-            "    -fx-text-fill: #404040;" +
-            "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
-            "    -fx-focus-color: transparent;";
 
     private int width, height;
     private Scene scene;
@@ -56,11 +42,13 @@ public class MapScene {
     public Scene createScene(GameMenuManager mgr, MenuState state) {
         this.state = state;
         this.mgr = mgr;
-        init(mgr.getMaximized());
+//        init(mgr.getMaximized());
+        init(true);
         return scene;
     }
 
     public void init(boolean maximized) {
+        // Filler for map
         Media video = new Media(new File("src\\video\\stickbug.mp4").toURI().toString());
         mp = new MediaPlayer(video);
         mp.setOnEndOfMedia(new Runnable() {
@@ -74,13 +62,14 @@ public class MapScene {
         mv.setFitHeight(height);
         mv.setFitWidth(width);
         mp.setAutoPlay(true);
-        mgr.setMusicMuted(true);
+//        mgr.setMusicMuted(true);
         Group gp = new Group();
         gp.getChildren().add(mv);
 
+        // Overlay top
         BorderPane top = new BorderPane();
         Button backButton = new Button("STOP THE BUG");
-        backButton.setOnAction(mgr);
+//        backButton.setOnAction(mgr);
         Text[] players = {new Text("MAN"), new Text("ART"), new Text("MF")};
         HBox playerSequence = new HBox();
         playerSequence.getChildren().addAll(players[0], players[1], players[2]);
@@ -89,12 +78,29 @@ public class MapScene {
         Button pauseButton = new Button("Pause");
         pauseButton.setOnAction(e -> System.out.println("wow nothing happened!"));
         top.setLeft(backButton);
-        top.setCenter(playerSequence);
         top.setRight(pauseButton);
+        StackPane topStack = new StackPane(playerSequence, top);
 
-        BorderPane root = new BorderPane();
-        root.setTop(top);
-        root.setCenter(mv);
+        // Overlay bottom
+        BorderPane bottom = new BorderPane();
+        Text currentPlayer = new Text("Faculty of Engineering's Turn");
+        bottom.setLeft(currentPlayer);
+        Text reinforceStage = new Text("REINFORCE");
+        Text attackStage = new Text("ATTACK");
+        Text fortifyStage = new Text("FORTIFY");
+        HBox stages = new HBox();
+        stages.getChildren().addAll(reinforceStage, attackStage, fortifyStage);
+        stages.setSpacing(5);
+        stages.setAlignment(Pos.CENTER);
+        Button pass = new Button("PASS");
+        pass.setOnAction(e -> System.out.println("Switching state"));
+        bottom.setRight(pass);
+        StackPane bottomStack = new StackPane(stages, bottom);
+
+        BorderPane overlay = new BorderPane();
+        overlay.setTop(topStack);
+        overlay.setBottom(bottomStack);
+        StackPane root = new StackPane(mv, overlay);
         scene = new Scene(root, width, height);
     }
 }
