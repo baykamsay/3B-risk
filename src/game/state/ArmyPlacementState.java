@@ -44,7 +44,7 @@ public class ArmyPlacementState implements MenuState {
         ArrayList<Player> players = engine.getPlayers();
         if (e.getSource().toString() == territory.getName() && players.get(currentPlayer).isRuler(territory) && addibleArmies > 0) {
             //pop up ui will be implemented
-            deployArmies(addedArmies, territory) //addedArmies will be returned by the pop ui
+            deployArmies(addedArmies, territory); //addedArmies will be returned by the pop ui
             addibleArmies = addibleArmies - addedArmies;
         } else if (e.getSource().toString() == "PASS") { //?????
             engine.switchState(new AttackingState(width, height, engine));
