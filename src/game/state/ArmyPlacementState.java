@@ -42,13 +42,13 @@ public class ArmyPlacementState implements MenuState {
     public void territorySelect(Event e) {
         Territory[] territories = engine.getMap().getTerritories();
         ArrayList<Player> players = engine.getPlayers();
-        if (e.getSource().toString() == territory.getName() && players.get(currentPlayer).isRuler(territory) && addibleArmies > 0 ) {
+        if (e.getSource().toString() == territory.getName() && players.get(currentPlayer).isRuler(territory) && addibleArmies > 0) {
             //pop up ui will be implemented
             deployArmies(addedArmies, territory) //addedArmies will be returned by the pop ui
             addibleArmies = addibleArmies - addedArmies;
-        }
-        else if (e.getSource().toString() == "PASS") { //?????
+        } else if (e.getSource().toString() == "PASS") { //?????
             engine.switchState(new AttackingState(width, height, engine));
+        }
     }
 
     public void calculateNumberOfArmies(Player p) {
