@@ -9,13 +9,19 @@ public class Player implements Objective {
     private Objective currentObjective;
     private Objective[] accomplishedObjectives;
     private String name;
+    private int numOfTerritory;
+    private int numOfArea;
 
     Player(Faculty faculty){
         this.faculty = faculty;
+        numOfTerritory = 0;
+        numOfArea = 0;
     }
     Player(Faculty faculty, String name){
         this.faculty = faculty;
         this.name = name;
+        numOfTerritory = 0;
+        numOfArea = 0;
     }
     public Faculty getFaculty(){
         return faculty;
@@ -29,6 +35,25 @@ public class Player implements Objective {
     public void setName(String name){
         this.name = name;
     }
+    public int getNumOfTerritory(){
+        return numOfTerritory;
+    }
+    public void increaseTerritory(){
+        numOfTerritory++;
+    }
+    public void setNumOfTerritory(int numOfTerritory){
+        this.numOfTerritory = numOfTerritory;
+    }
+    public int getNumOfArea(){
+        return numOfArea;
+    }
+    public void setNumOfArea(int numOfArea){
+        this.numOfArea = numOfArea;
+    }
+    public void increaseArea(){
+        numOfArea++;
+    }
+
     //not finished yet.
     @Override
     public boolean isDone() {
