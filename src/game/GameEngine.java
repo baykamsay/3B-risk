@@ -2,6 +2,7 @@ package game;
 
 import game.player.Objective;
 import game.player.Player;
+import game.scene.GameOverScene;
 import game.state.*;
 import javafx.scene.Scene;
 import menu.*;
@@ -61,7 +62,7 @@ public class GameEngine implements MenuState{
     //map should have a getTerritories method to return the territories array
     public boolean isGameOver(){
         for (int i = 0; i < map.getTerritories(); i++) {
-            if( i+1 < (map.getTerritories()).length && (map.getTerritories())[i] != (map.getTerritories())[i+1]){
+            if( i+1 < (map.getTerritories()).length && (map.getTerritories())[i].getRuler() != (map.getTerritories())[i+1].getRuler()){
                 //map is occupied by at least 2 players
                 return false;
             }
@@ -78,7 +79,7 @@ public class GameEngine implements MenuState{
     public void removeObjective(String name){
         int index = 0;
         for (int i = 0; i < objectives.size(); i++) {
-            if((objectives.get(i)).getName() == name){
+            if((objectives.get(i)).getName() == name){ //may be description?
                 index = i;
                 break;
             }
@@ -88,7 +89,7 @@ public class GameEngine implements MenuState{
 
     public boolean isEliminated(Player p){ //check if a player is eliminated
         for (int i = 0; i < map.getTerritories(); i++) {
-            if( (((map.getTerritories())[i]).getRuler()).getName() == p.getName()){
+            if( (((map.getTerritories())[i]).getRuler()).getFaculty() == p.getFaculty()){
                 //player has at least 1 territory
                 return false;
             }
@@ -99,7 +100,7 @@ public class GameEngine implements MenuState{
     public void removePlayer(Player p){ //remove an eliminated player from player[]
         int index = 0;
         for (int i = 0; i < players.size(); i++) {
-            if((players.get(i)).getName() == p.getName()){
+            if((players.get(i)).getFaculty() == p.getFaculty()){
                 index = i;
                 break;
             }
@@ -108,10 +109,26 @@ public class GameEngine implements MenuState{
     }
 
     public void initGame(){
+        //initial state
         if(turn == 0){
             switchState(new InitialArmyPlacementState(width,height,this));
-            //call armyPlacement methods
-            //fill
+            //call InitialArmyPlacement methods
+
+
+        }
+        //game itself
+        else if(!isGameOver()){
+            while(!isGameOver()){
+                for (Player p: players) {
+                    //army placement
+                    switchState(new ArmyPlacementState(width,height,this));
+
+                }
+            }
+        }
+        //game is over
+        else{
+            switchState(new GameOverScene<>(width,height,this));
         }
     }
 
