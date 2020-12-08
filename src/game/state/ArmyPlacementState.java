@@ -42,23 +42,28 @@ public class ArmyPlacementState implements MenuState {
     public void territorySelect(Event e) {
         Territory[] territories = engine.getMap().getTerritories();
         ArrayList<Player> players = engine.getPlayers();
-        if (e.getSource().toString() == territory.getName() && players.get(currentPlayer).isRuler(territory) && addibleArmies > 0) {
-            //pop up ui will be implemented
-            deployArmies(addedArmies, territory); //addedArmies will be returned by the pop ui
-            addibleArmies = addibleArmies - addedArmies;
-        } else if (e.getSource().toString() == "PASS") { //?????
+        if (e.getSource().toString() == "PASS") { //string of the button in the map scene
             engine.switchState(new AttackingState(width, height, engine));
+        }
+        else {
+            for (Territory territory : territories) {
+                if ((e.getSource().toString() == territory.getName()) && (players.get(currentPlayer) == territory.getRuler()) && addibleArmies > 0) {
+                    //pop up ui will be implemented
+                    deployArmies(addedArmies, territory); //addedArmies will be returned by the pop ui
+                    addibleArmies = addibleArmies - addedArmies;
+                }
+            }
         }
     }
 
     public void calculateNumberOfArmies(Player p) {
-        if (p.territoryList.size() <= 11) { //Arraylists of areas and territories can be implemented in a way where player holds an integer instead of a list
+        if (p.getNumOfTerritory() <= 11) {
             addibleArmies = 3;
         } else {
-            addibleArmies = p.territoryList.size() / 3;
+            addibleArmies = p.getNumOfTerritory() / 3;
         }
-        if (p.areaList.size() > 0) {
-            addibleArmies = noOfArmies + p.areaList.size(); //The increase in army number depends on which area is occupied so this is left as a default for now
+        if (p.getNumOfArea() > 0) {
+            addibleArmies = addibleArmies + p.getNumOfArea(); //This part's calculation will be further discussed
         }
     }
 
