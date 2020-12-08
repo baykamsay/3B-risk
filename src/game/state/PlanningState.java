@@ -1,6 +1,7 @@
 package game.state;
 
 import game.GameEngine;
+import game.player.Territory;
 import game.scene.MapScene;
 import javafx.scene.Scene;
 import menu.GameMenuManager;
@@ -13,23 +14,23 @@ public class PlanningState implements MenuState {
     public GameEngine engine;
     public GameMenuManager mgr;
     public int width, height, currentPlayer;
-    public String destination;
-    public String source;
+    public Territory destination;
+    public Territory source;
 
     public PlanningState(int width, int height, GameEngine engine) {
         this.width = width;
         this.height = height;
         this.engine = engine;
         currentPlayer = 0;
-        destination = "";
-        source = "";
+        destination = null;
+        source = null;
     }
 
-    public String getDestination() {
+    public Territory getDestination() {
         return destination;
     }
 
-    public String getSource() {
+    public Territory getSource() {
         return source;
     }
 

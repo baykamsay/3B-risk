@@ -1,6 +1,7 @@
 package game.state;
 
 import game.GameEngine;
+import game.player.Territory;
 import game.scene.MapScene;
 import javafx.scene.Scene;
 import menu.GameMenuManager;
@@ -14,21 +15,33 @@ public class AttackingState implements MenuState {
     public Scene scene;
     public GameEngine engine;
     public GameMenuManager mgr;
-    public int width, height, currentPlayer;
-    public String destination;
-    public String source;
+    public int width, height;
+    public Territory destination;
+    public Territory source;
     public int attackingArmies;
+    public int defendingArmies;
     public AttackingArmySelectionMenuState armySelectionState;
     public AttackingPlanningState planningState;
+    public WarState warState;
 
     public AttackingState(int width, int height, GameEngine engine) {
         this.width = width;
         this.height = height;
         this.engine = engine;
-        currentPlayer = 0;
-        destination = "";
-        source = "";
-        attackingArmies = 0;
+        init();
+    }
+
+    public void init(){
+        //plan attacking
+        planningState = new AttackingPlanningState(width,height,engine);
+        destination = planningState.getDestination();
+        source = planningState.getSource();
+        //select armies
+        armySelectionState = new ArmySelectionState(width,height,engine);
+        attackingArmies = armySelectionState.getAttackingArmies();
+        defendingArmies = armySelectionState.getDefendingArmies();
+        //war
+        warState = new WarState(width,height,engine);
     }
 
     @Override

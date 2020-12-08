@@ -2,8 +2,6 @@ package game;
 
 import game.player.Objective;
 import game.player.Player;
-import game.scene.GameOverScene;
-import game.state.*;
 import javafx.scene.Scene;
 import menu.*;
 import java.util.ArrayList;
@@ -45,6 +43,10 @@ public class GameEngine implements MenuState{
         winner = null;
         this.height = height;
         this.width = width;
+    }
+
+    public int getPlayerTurn() {
+        return playerTurn;
     }
 
     public GameMap getMap() {
@@ -97,7 +99,7 @@ public class GameEngine implements MenuState{
         return true; //player has 0 territory
     }
 
-    public void removePlayer(Player p){ //remove an eliminated player from player[]
+    public void removePlayer(Player p){ //remove an eliminated player from player<>
         int index = 0;
         for (int i = 0; i < players.size(); i++) {
             if((players.get(i)).getFaculty() == p.getFaculty()){
@@ -106,30 +108,6 @@ public class GameEngine implements MenuState{
             }
         }
         players.remove(index);
-    }
-
-    public void initGame(){
-        //initial state
-        if(turn == 0){
-            switchState(new InitialArmyPlacementState(width,height,this));
-            //call InitialArmyPlacement methods
-
-
-        }
-        //game itself
-        else if(!isGameOver()){
-            while(!isGameOver()){
-                for (Player p: players) {
-                    //army placement
-                    switchState(new ArmyPlacementState(width,height,this));
-
-                }
-            }
-        }
-        //game is over
-        else{
-            switchState(new GameOverScene<>(width,height,this));
-        }
     }
 
     @Override
