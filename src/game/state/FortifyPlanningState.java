@@ -11,9 +11,9 @@ public class FortifyPlanningState extends PlanningState implements MenuState {
         super(width, height, engine);
     }
 
-    //Select the territory which armies will be moved from
-    public void selectSource(Event e) {
-        if(destination.equals("")) {
+    //Select source and destination territories
+    public void selectTerritories(Event e) {
+        if (destination.equals("")) {
             Territory[] territories = engine.getMap().getTerritories();
             for (Territory territory : territories) {
                 //check the territory name && if player is the ruler
@@ -23,11 +23,7 @@ public class FortifyPlanningState extends PlanningState implements MenuState {
                 }
             }
         }
-    }
-
-    //Select the target territory
-    public void selectDestination(Event e) { 
-        if(!(source.equals(""))) {
+        else if(!(source.equals(""))) {
             Territory[] territories = engine.getMap().getTerritories();
             for (Territory territory : territories) {
                 if (territory.getName() == e.getSource().toString()) {
