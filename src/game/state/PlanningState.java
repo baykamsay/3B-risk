@@ -42,7 +42,7 @@ public class PlanningState implements MenuState {
     @Override
     public Scene createScene(GameMenuManager mgr) {
         this.mgr = mgr;
-        mapScene = new MapScene(width, height, "Attacking");
+        mapScene = new MapScene(width, height, "Planning");
         scene = mapScene.createScene(mgr, engine, this);
         return scene;
     }
