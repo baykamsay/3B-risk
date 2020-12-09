@@ -11,7 +11,7 @@ import menu.MenuState;
 
 import java.util.ArrayList;
 
-public class ArmyPlacementState implements MenuState {
+public class ArmyPlacementState implements GameState {
     private MapScene mapScene;
     private Scene scene;
     private GameEngine engine;
@@ -39,14 +39,19 @@ public class ArmyPlacementState implements MenuState {
         return scene;
     }
 
-    public void territorySelect(Event e) {
+    public void mapSelect(Event e) {
         Territory[] territories = engine.getMap().getTerritories();
         ArrayList<Player> players = engine.getPlayers();
-        for (Territory territory : territories) {
-            if ((e.getSource().toString() == territory.getName()) && (players.get(currentPlayer) == territory.getRuler()) && addibleArmies > 0) {
-                //pop up ui will be implemented
-                deployArmies(addedArmies, territory); //addedArmies will be returned by the pop ui
-                addibleArmies = addibleArmies - addedArmies;
+        if (addibleArmies == 0){
+            engine.switchState(AttackingState);
+        }
+        else {
+            for (Territory territory : territories) {
+                if ((e.getSource().toString() == territory.getName()) && (players.get(currentPlayer) == territory.getRuler())) {
+                    //pop up ui will be implemented
+                    deployArmies(addedArmies, territory); //addedArmies will be returned by the pop ui
+                    addibleArmies = addibleArmies - addedArmies;
+                }
             }
         }
     }
@@ -64,5 +69,9 @@ public class ArmyPlacementState implements MenuState {
 
     public void deployArmies(int addedArmies, Territory t) {
         t.setNumOfArmies(t.getNumOfArmies() + addedArmies);
+    }
+
+    public int getAddibleArmies(){
+        return addibleArmies;
     }
 }
