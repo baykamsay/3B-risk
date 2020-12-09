@@ -30,7 +30,7 @@ public class AttackingState implements MenuState {
     }
 
     public void Attack(Event e){
-        if((e.getSource().toString().equals("PASS"))){
+        if(!(e.getSource().toString().equals("PASS"))){
             //plan attacking
             AttackPlanningState = new AttackingPlanningState(width, height, engine);
             destination = AttackPlanningState.getDestination();
