@@ -5,12 +5,13 @@ import game.player.Territory;
 import javafx.event.Event;
 import menu.MenuState;
 
-public class AttackingPlanningState extends PlanningState implements MenuState {
-    public AttackingPlanningState(int width, int height, GameEngine engine) {
+public class FortifyPlanningState extends PlanningState implements MenuState {
+
+    public FortifyPlanningState(int width, int height, GameEngine engine) {
         super(width, height, engine);
     }
 
-    //Select the source territory
+    //Select the territory which armies will be moved from
     public void selectSource(Event e) {
         if(destination.equals("")) {
             Territory[] territories = engine.getMap().getTerritories();
@@ -25,7 +26,7 @@ public class AttackingPlanningState extends PlanningState implements MenuState {
     }
 
     //Select the target territory
-    public void selectDestination(Event e) {
+    public void selectDestination(Event e) { 
         if(!(source.equals(""))) {
             Territory[] territories = engine.getMap().getTerritories();
             for (Territory territory : territories) {
@@ -37,5 +38,4 @@ public class AttackingPlanningState extends PlanningState implements MenuState {
             }
         }
     }
-
 }

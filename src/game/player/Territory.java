@@ -1,5 +1,7 @@
 package game.player;
 
+import java.util.ArrayList;
+
 enum Area{
     BILKENTISLAND,EASTCAMPUS,LOWERMAINCAMPUS,UPPERMAINCAMPUS
 }
@@ -8,10 +10,24 @@ public class Territory {
     private String name;
     private int numOfArmies;
     private Player ruler;
+    private ArrayList<Territory> adjacentTerritories;
 
     Territory(Area area, String name){
         this.area = area;
         this.name = name;
+        adjacentTerritories = new ArrayList<>();
+
+    }
+    //Add an adjacent territory
+    public void addAdjacentTerritory(Territory t){
+        adjacentTerritories.add(t);
+    }
+    //Check if a territory is adjacent
+    public boolean isAdjacent(Territory t){
+        if(adjacentTerritories.contains(t))
+            return true;
+        else
+            return false;
     }
     public Area getArea(){
         return area;
