@@ -15,9 +15,10 @@ public class AttackingPlanningState extends PlanningState implements MenuState {
             if (destination.equals("")) {
                 Territory[] territories = engine.getMap().getTerritories();
                 for (Territory territory : territories) {
-                    //check the territory name && if player is the ruler
+                    //check the territory name && if player is the ruler && has at least 2 armies
                     if (territory.getName() == e.getSource().toString()
-                            && ((engine.getPlayers()).get(engine.getPlayerTurn()) == territory.getRuler())) {
+                            && ((engine.getPlayers()).get(engine.getPlayerTurn()) == territory.getRuler())
+                            &&  territory.getNumOfArmies() >= 2) {
                         source = territory;
                     }
                 }
