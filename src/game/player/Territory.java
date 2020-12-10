@@ -1,35 +1,58 @@
 package game.player;
 
+import java.util.ArrayList;
+
 enum Area{
     BILKENTISLAND,EASTCAMPUS,LOWERMAINCAMPUS,UPPERMAINCAMPUS
 }
 public class Territory {
-    public Area area;
+    private Area area;
     private String name;
     private int numOfArmies;
     private Player ruler;
+    private ArrayList<Territory> adjacentTerritories;
 
     Territory(Area area, String name){
         this.area = area;
         this.name = name;
+        adjacentTerritories = new ArrayList<>();
+
     }
-    private Area getArea(){
+    //Add an adjacent territory
+    public void addAdjacentTerritory(Territory t){
+        adjacentTerritories.add(t);
+    }
+    //Check if a territory is adjacent
+    public boolean isAdjacent(Territory t){
+        if(adjacentTerritories.contains(t))
+            return true;
+        else
+            return false;
+    }
+    public Area getArea(){
         return area;
     }
-    private String getName(){
+    public String getName(){
         return name;
     }
-    private int getNumOfArmies(){
+    public int getNumOfArmies(){
         return numOfArmies;
     }
-    private Player getRuler(){
+    public Player getRuler(){
         return ruler;
     }
-    private void setNumOfArmies(int numOfArmies){
+    public void setNumOfArmies(int numOfArmies){
         this.numOfArmies = numOfArmies;
     }
-    private void setRuler(Player ruler){
+    public void setRuler(Player ruler){
         this.ruler = ruler;
     }
 
+    //isRuler checks Territory's ruler. Returns true if the given player matches with the ruler otherwise returns false.
+    public Boolean isRuler(Territory t){
+        if (t.getRuler().getName().equals(ruler.getName())){
+            return true;
+        }
+        return false;
+    }
 }

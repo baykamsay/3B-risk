@@ -1,5 +1,6 @@
 package game.scene;
 
+import game.player.Player;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -49,11 +50,11 @@ public class GameOverScene<GameEngine> extends Application implements MenuState,
             "    -fx-pref-height: 50px; "+
             "}";
 
-    public GameOverScene(int width, int height){
-        engine = NULL;
+    public GameOverScene(int width, int height, GameEngine engine){
         mgr = NULL;
         this.width = width;
         this.height = height;
+        this.engine = engine;
     }
 
     @Override
@@ -69,59 +70,56 @@ public class GameOverScene<GameEngine> extends Application implements MenuState,
 
 
     @Override
-    public Scene createScene(GameMenuManager mgr, GameEngine engine) {
+    public Scene createScene(GameMenuManager mgr) {
         this.mgr = mgr;
-        this.engine = engine;
-        init(engine.isGameOver(), mgr.getMaximized(), engine.getWinner());
+        init(mgr.getMaximized(), engine.getWinner());
         returnButton.setOnAction(mgr);
         return scene;
     }
 
 
-    public void init(boolean isGameOver, boolean maximized, Player winner){
-        if (isGameOver){
-            backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
+    public void init(boolean maximized, Player winner){
+        backgroundPath = maximized ? "-fx-background-image: url(\"img/bg_bilkent.png\"); -fx-background-size: cover;" : "-fx-background-image: url(\"img/bg_bilkent.png\");";
 
-            returnButton = new Button("Return to Main Menu");
-            returnButton.setStyle(style_big);
+        returnButton = new Button("Return to Main Menu");
+        returnButton.setStyle(style_big);
 
-            gameOver = new Text("Game Over\n");
-            gameOver.setFont(Font.font ("Verdana", 20)); //Temporarily
-            gameOver.setFill(Color.BLACK);                 //Temporarily
+        gameOver = new Text("Game Over\n");
+        gameOver.setFont(Font.font ("Verdana", 20)); //Temporarily
+        gameOver.setFill(Color.BLACK);                 //Temporarily
 
-            winnerName = new Text(winner.name);
-            winnerName.setFont(Font.font ("Verdana", 16));  //Temporarily
+        winnerName = new Text(winner.name);
+        winnerName.setFont(Font.font ("Verdana", 16));  //Temporarily
 
-            if(winner.color == "red" ) {
-                winnerName.setFill(Color.RED);
-            }
-            else if(winner.color == "blue" ) {
-                winnerName.setFill(Color.BLUE);
-            }
-            else if(winner.color == "green" ) {
-                winnerName.setFill(Color.GREEN);
-            }
-            else if(winner.color == "yellow" ) {
-                winnerName.setFill(Color.YELLOW);
-            }
-
-            winAnnouncement = new Text(" is the winner!\n");
-            winAnnouncement.setFont(Font.font ("Verdana", 20)); //Temporarily
-            winAnnouncement.setFill(Color.BLACK);                     //Temporarily
-
-            VBox root = new VBox();
-
-            TextFlow txtFlowPane = new TextFlow();
-            txtFlowPane.setTextAlignment(TextAlignment.JUSTIFY);
-            txtFlowPane.setPrefSize(600, 300);  //Correct numbers will be given after testing
-            txtFlowPane.setLineSpacing(5.0);
-
-            txtFlowPane.getChildren().addAll(gameOver, winnerName, winAnnouncement);
-            root.getChildren().addAll(txtFlowPane, returnButton);
-            root.setSpacing(20);
-            root.setStyle(backgroundPath);
-            scene = new Scene(root,width,height);
+        if(winner.color == "red" ) {
+            winnerName.setFill(Color.RED);
         }
+        else if(winner.color == "blue" ) {
+            winnerName.setFill(Color.BLUE);
+        }
+        else if(winner.color == "green" ) {
+            winnerName.setFill(Color.GREEN);
+           }
+        else if(winner.color == "yellow" ) {
+            winnerName.setFill(Color.YELLOW);
+        }
+
+        winAnnouncement = new Text(" is the winner!\n");
+        winAnnouncement.setFont(Font.font ("Verdana", 20)); //Temporarily
+        winAnnouncement.setFill(Color.BLACK);                     //Temporarily
+
+        VBox root = new VBox();
+
+        TextFlow txtFlowPane = new TextFlow();
+        txtFlowPane.setTextAlignment(TextAlignment.JUSTIFY);
+        txtFlowPane.setPrefSize(600, 300);  //Correct numbers will be given after testing
+        txtFlowPane.setLineSpacing(5.0);
+
+        txtFlowPane.getChildren().addAll(gameOver, winnerName, winAnnouncement);
+        root.getChildren().addAll(txtFlowPane, returnButton);
+        root.setSpacing(20);
+        root.setStyle(backgroundPath);
+        scene = new Scene(root,width,height);
     }
 
 
