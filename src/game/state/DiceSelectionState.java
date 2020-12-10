@@ -39,7 +39,7 @@ public class DiceSelectionState implements GameState {
     }
 
     public void mapSelect(ActionEvent e){
-        calculateLeastDiceNo());
+        calculateLeastDiceNo();
         //pass leastDiceNo && e to the pop up ui, it will return the selected number of dice
         //engine.switchState(WarState(...));
     }
