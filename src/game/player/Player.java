@@ -4,7 +4,7 @@ enum Faculty{
     ART, FAS, FEASS, FEDU, FEN, IBEF, LAW, MAN, MF, MSSF;
 }
 
-public class Player implements Objective {
+public class Player {
     private Faculty faculty;
     private Objective currentObjective;
     private Objective[] accomplishedObjectives;
@@ -54,9 +54,5 @@ public class Player implements Objective {
         numOfArea++;
     }
 
-    //not finished yet.
-    @Override
-    public boolean isDone() {
-        return false;
-    }
+
 }
