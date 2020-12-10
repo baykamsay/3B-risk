@@ -5,9 +5,11 @@ import game.player.Territory;
 import game.scene.MapScene;
 import javafx.scene.Scene;
 import menu.GameMenuManager;
-import menu.MenuState;
 
-public class PlanningState implements MenuState {
+import javafx.event.ActionEvent;
+
+
+public class PlanningState implements GameState {
 
     public MapScene mapScene;
     public Scene scene;
@@ -40,10 +42,14 @@ public class PlanningState implements MenuState {
     }
 
     @Override
-    public Scene createScene(GameMenuManager mgr) {
+    public Scene createScene() {
         this.mgr = mgr;
         mapScene = new MapScene(width, height, "Planning");
-        scene = mapScene.createScene(mgr, engine, this);
         return scene;
+    }
+
+    @Override
+    public void mapSelect(ActionEvent e) {
+
     }
 }

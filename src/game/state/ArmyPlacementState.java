@@ -4,7 +4,7 @@ import game.GameEngine;
 import game.player.Player;
 import game.player.Territory;
 import game.scene.MapScene;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import menu.GameMenuManager;
 import menu.MenuState;
@@ -32,18 +32,17 @@ public class ArmyPlacementState implements GameState {
     }
 
     @Override
-    public Scene createScene(GameMenuManager mgr) {
-        this.mgr = mgr;
+    public Scene createScene() {
         mapScene = new MapScene(width, height, "Army Placement");
-        scene = mapScene.createScene(mgr, engine, this);
         return scene;
     }
 
-    public void mapSelect(Event e) {
+    @Override
+    public void mapSelect(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();
         ArrayList<Player> players = engine.getPlayers();
         if (addibleArmies == 0){
-            engine.switchState(AttackingState);
+            engine.switchState(AttackingState); //??????
         }
         else {
             for (Territory territory : territories) {

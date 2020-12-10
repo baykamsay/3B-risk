@@ -4,12 +4,12 @@ import game.GameEngine;
 import game.player.Player;
 import game.player.Territory;
 import game.scene.MapScene;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import menu.GameMenuManager;
-import menu.MenuState;
+import java.util.ArrayList;
 
-public class InitialArmyPlacementState implements MenuState {
+public class InitialArmyPlacementState implements GameState {
 
     private MapScene mapScene;
     private Scene scene;
@@ -30,24 +30,22 @@ public class InitialArmyPlacementState implements MenuState {
     }
 
     @Override
-    public Scene createScene(GameMenuManager mgr) {
-        this.mgr = mgr;
+    public Scene createScene() {
         mapScene = new MapScene(width, height, "Initial Army Placement");
-        scene = mapScene.createScene(mgr, engine, this);
         return scene;
     }
 
     // When player selects a map territory
-    public void mapSelect(Event e) {
+    public void mapSelect(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();
-        Player[] players = engine.getPlayers();
+        ArrayList<Player> players = engine.getPlayers();
         for (Territory territory : territories) {
             // getName() can also be getId() if ids are implemented and the other part requires something to compare
             // when the map is implemented fix this
             // && territory.getRuler() == null this can also be checked but if it is not null disabling the button is
             // better
             if (territory.getName() == e.getSource().toString()) {
-                territory.setRuler(players[currentPlayer]);
+                territory.setRuler(players.get(currentPlayer));
             }
         }
         checkIfStateOver();

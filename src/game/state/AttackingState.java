@@ -3,12 +3,12 @@ package game.state;
 import game.GameEngine;
 import game.player.Territory;
 import game.scene.MapScene;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import menu.GameMenuManager;
 import menu.MenuState;
 
-public class AttackingState implements MenuState {
+public class AttackingState implements GameState {
 
     public MapScene mapScene;
     public Scene scene;
@@ -19,7 +19,7 @@ public class AttackingState implements MenuState {
     public Territory source;
     public int attackingArmies;
     public int defendingArmies;
-    public AttackingArmySelectionMenuState armySelectionState;
+    public DiceSelectionState diceSelectionState;
     public AttackingPlanningState AttackPlanningState;
     public WarState warState;
 
@@ -29,16 +29,15 @@ public class AttackingState implements MenuState {
         this.engine = engine;
     }
 
-    public void selectMap(Event e){
+    public void mapSelect(ActionEvent e){
         if(!(e.getSource().toString().equals("PASS"))){
             //plan attacking
             AttackPlanningState = new AttackingPlanningState(width, height, engine);
             destination = AttackPlanningState.getDestination();
             source = AttackPlanningState.getSource();
             //select armies
-            armySelectionState = new ArmySelectionState(width, height, engine);
-            attackingArmies = armySelectionState.getAttackingArmies();
-            defendingArmies = armySelectionState.getDefendingArmies();
+            diceSelectionState = new DiceSelectionState();
+
             //war - not complete
             warState = new WarState(width, height, engine); //pass armies as parameters?
         }
@@ -50,10 +49,9 @@ public class AttackingState implements MenuState {
     }
 
     @Override
-    public Scene createScene(GameMenuManager mgr) {
-        this.mgr = mgr;
+    public Scene createScene() {
         mapScene = new MapScene(width, height, "Attacking");
-        scene = mapScene.createScene(mgr, engine, this);
         return scene;
     }
+
 }
