@@ -4,4 +4,6 @@ package game.player;
 public interface Objective {
 
     boolean isDone();
+
+    String getName();
 }

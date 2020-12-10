@@ -63,14 +63,14 @@ public class GameEngine implements MenuState{
 
     //map should have a getTerritories method to return the territories array
     public boolean isGameOver(){
-        for (int i = 0; i < map.getTerritories(); i++) {
+        for (int i = 0; i < map.getTerritories().length; i++) {
             if( i+1 < (map.getTerritories()).length && (map.getTerritories())[i].getRuler() != (map.getTerritories())[i+1].getRuler()){
                 //map is occupied by at least 2 players
                 return false;
             }
         }
         //map is occupied by 1 player
-        winner = (map.getTerritories[0]).getRuler();
+        winner = (map.getTerritories())[0].getRuler();
         return true;
     }
 
@@ -81,7 +81,7 @@ public class GameEngine implements MenuState{
     public void removeObjective(String name){
         int index = 0;
         for (int i = 0; i < objectives.size(); i++) {
-            if((objectives.get(i)).getName() == name){ //may be description?
+            if(((objectives.get(i)).getName()).equals(name)){ //may be description?
                 index = i;
                 break;
             }
@@ -90,7 +90,7 @@ public class GameEngine implements MenuState{
     }
 
     public boolean isEliminated(Player p){ //check if a player is eliminated
-        for (int i = 0; i < map.getTerritories(); i++) {
+        for (int i = 0; i < map.getTerritories().length; i++) {
             if( (((map.getTerritories())[i]).getRuler()).getFaculty() == p.getFaculty()){
                 //player has at least 1 territory
                 return false;

@@ -1,5 +1,6 @@
 package game.scene;
 
+import game.GameEngine;
 import game.player.Player;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 import menu.GameMenuManager;
 import menu.MenuState;
 
-public class GameOverScene<GameEngine> extends Application implements MenuState, EventHandler<ActionEvent> {
+public class GameOverScene extends Application implements MenuState, EventHandler<ActionEvent> {
     private Scene scene;
     private Button returnButton;
     private Text gameOver;
@@ -51,7 +52,7 @@ public class GameOverScene<GameEngine> extends Application implements MenuState,
             "}";
 
     public GameOverScene(int width, int height, GameEngine engine){
-        mgr = NULL;
+        mgr = null;
         this.width = width;
         this.height = height;
         this.engine = engine;
@@ -88,7 +89,7 @@ public class GameOverScene<GameEngine> extends Application implements MenuState,
         gameOver.setFont(Font.font ("Verdana", 20)); //Temporarily
         gameOver.setFill(Color.BLACK);                 //Temporarily
 
-        winnerName = new Text(winner.name);
+        winnerName = new Text(winner.getName());
         winnerName.setFont(Font.font ("Verdana", 16));  //Temporarily
 
         if(winner.color == "red" ) {

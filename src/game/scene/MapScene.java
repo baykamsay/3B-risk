@@ -1,11 +1,8 @@
 package game.scene;
 
-<<<<<<< HEAD
 //import game.GameEngine;
 import javafx.fxml.FXMLLoader;
-=======
 import game.GameEngine;
->>>>>>> 5f80902a61087ab50eb1be382bff1693812a0fd8
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -47,12 +44,12 @@ public class MapScene implements MenuState{
     public void update() {
     }
 
-<<<<<<< HEAD
     @Override
     public Scene createScene(GameMenuManager mgr) {
-=======
+        return null;
+    }
+
     public Scene createScene(GameMenuManager mgr, GameEngine engine, MenuState state) {
->>>>>>> 5f80902a61087ab50eb1be382bff1693812a0fd8
         this.state = state;
         this.engine = engine;
         this.mgr = mgr;
