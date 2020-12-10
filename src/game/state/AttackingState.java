@@ -36,7 +36,7 @@ public class AttackingState implements GameState {
             destination = AttackPlanningState.getDestination();
             source = AttackPlanningState.getSource();
             //select armies
-            diceSelectionState = new DiceSelectionState();
+            diceSelectionState = new DiceSelectionState(width, height, engine);
 
             //war - not complete
             warState = new WarState(width, height, engine); //pass armies as parameters?

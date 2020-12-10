@@ -41,17 +41,19 @@ public class ArmyPlacementState implements GameState {
     public void mapSelect(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();
         ArrayList<Player> players = engine.getPlayers();
-        if (addibleArmies == 0){
-            engine.switchState(AttackingState); //??????
-        }
-        else {
+
+        if (addibleArmies == 0) {
             for (Territory territory : territories) {
                 if ((e.getSource().toString() == territory.getName()) && (players.get(currentPlayer) == territory.getRuler())) {
                     //pop up ui will be implemented
-                    deployArmies(addedArmies, territory); //addedArmies will be returned by the pop ui
-                    addibleArmies = addibleArmies - addedArmies;
+                    //deployArmies(addedArmies, territory); *addedArmies will be returned by the pop ui
+                    //addibleArmies = addibleArmies - addedArmies;
                 }
             }
+        }
+        else
+        {
+            //engine.switchState(AttackingState(....)
         }
     }
 
