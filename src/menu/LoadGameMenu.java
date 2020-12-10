@@ -30,6 +30,7 @@ public class LoadGameMenu extends Application implements MenuState{
         this.width = width;
         this.height = height;
     }
+
     @Override
     public void start(Stage stage) throws Exception {
 

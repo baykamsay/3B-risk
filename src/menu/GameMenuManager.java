@@ -156,9 +156,10 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public void newGame() throws Exception {
-        menuState = new NewGameMenu(width,height);
-        scene = menuState.createScene(this);
-        this.changeScene(scene);
+        testMap();
+//        menuState = new NewGameMenu(width,height);
+//        scene = menuState.createScene(this);
+//        this.changeScene(scene);
     }
 
     public void viewCredits(){
@@ -181,6 +182,12 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     public void back(){
         menuState = new MainMenu(width, height);
+        scene = menuState.createScene(this);
+        this.changeScene(scene);
+    }
+
+    public void testMap(){
+        menuState = new game.scene.MapScene(width,height,"");
         scene = menuState.createScene(this);
         this.changeScene(scene);
     }

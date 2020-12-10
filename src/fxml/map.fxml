@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Ellipse?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
+   <children>
+      <ImageView fitHeight="1046.0" fitWidth="1304.0" layoutX="218.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/complete_world_map.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mayfestUpperMain" fitHeight="112.0" fitWidth="188.0" layoutX="904.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mayfest_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="mayfest" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="cafeteriaEast" fitHeight="157.0" fitWidth="212.0" layoutX="255.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/cafeteria_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="cafeteria" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="atmEast" fitHeight="198.0" fitWidth="212.0" layoutX="379.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/atm_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="atm" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="coffeeBreakEast" fitHeight="93.0" fitWidth="169.0" layoutX="286.0" layoutY="455.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/coffee_break_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="coffee_break" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="dormsEast" fitHeight="226.0" fitWidth="238.0" layoutX="395.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/dorms_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="dorms" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="entranceEast" fitHeight="150.0" fitWidth="200.0" layoutX="355.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/entrance_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="entrance" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="healthCenterEast" fitHeight="198.0" fitWidth="210.0" layoutX="440.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/health_center_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="health_center" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="libraryEast" fitHeight="225.0" fitWidth="143.0" layoutX="245.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/library_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="library" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mozartEast" fitHeight="131.0" fitWidth="169.0" layoutX="219.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mozart_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="mozart" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="sportsEast" fitHeight="106.0" fitWidth="182.0" layoutX="317.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/sports_center_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="sports" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="bBuildingLowerMain" fitHeight="121.0" fitWidth="249.0" layoutX="1100.0" layoutY="686.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/b_building_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="b_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="cafeInLowerMain" fitHeight="150.0" fitWidth="200.0" layoutX="936.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/cafe_in_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="cafe_in" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="cafeteriaLowerMain" fitHeight="180.0" fitWidth="151.0" layoutX="964.0" layoutY="785.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/cafeteria_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="cafeteria" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="coffeeBreakLowerMain" fitHeight="141.0" fitWidth="163.0" layoutX="1100.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/coffee_break_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="coffee_break" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="cyberParkLowerMain" fitHeight="99.0" fitWidth="160.0" layoutX="1361.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/cyberpark_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="cyber_park" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="eaBuildingLowerMain" fitHeight="150.0" fitWidth="200.0" layoutX="1048.0" layoutY="880.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/ea_building_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="ea_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="entranceLowerMain" fitHeight="69.0" fitWidth="135.0" layoutX="817.0" layoutY="993.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/entrance_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="entrance" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="gBuildingLowerMain" fitHeight="129.0" fitWidth="169.0" layoutX="956.0" layoutY="536.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/g_building_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="g_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="libraryLowerMain" fitHeight="263.0" fitWidth="284.0" layoutX="1023.0" layoutY="711.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/library_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="library" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="meteksanLowerMain" fitHeight="106.0" fitWidth="100.0" layoutX="847.0" layoutY="915.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/meteksan_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="meteksan" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mithatCoruhLowerMain" fitHeight="83.0" fitWidth="169.0" layoutX="986.0" layoutY="979.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mithat_coruh_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="mithat_coruh" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mozartLowerMain" fitHeight="129.0" fitWidth="151.0" layoutX="1211.0" layoutY="763.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mozart_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="mozart" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="odeonLowerMain" fitHeight="189.0" fitWidth="135.0" layoutX="862.0" layoutY="694.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/odeon_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="odeon" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="squareLowerMain" fitHeight="179.0" fitWidth="279.0" layoutX="1194.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/square_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="square" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="statueLowerMain" fitHeight="114.0" fitWidth="152.0" layoutX="1074.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/statue_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="statue" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="eeBuildingLowerMain" fitHeight="141.0" fitWidth="133.0" layoutX="927.0" layoutY="920.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/ee_building_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="ee_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="ankuvaIsland" fitHeight="121.0" fitWidth="182.0" layoutX="491.0" layoutY="758.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/ankuva_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="ankuva" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="bilkent12Island" fitHeight="150.0" fitWidth="222.0" layoutX="547.0" layoutY="586.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/bilkent_1_2_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="bilkent_1_2" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="centerIsland" fitHeight="225.0" fitWidth="337.0" layoutX="445.0" layoutY="770.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/center_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="center" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="hotelIsland" fitHeight="217.0" fitWidth="159.0" layoutX="683.0" layoutY="632.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/hotel_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="hotel" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="sportsInternationalIsland" fitHeight="116.0" fitWidth="209.0" layoutX="437.0" layoutY="711.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/sports_int_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="sports_international" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="vBuildingUpperMain" fitHeight="109.0" fitWidth="163.0" layoutX="970.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/v_building_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="v_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="aBuildingUpperMain" fitHeight="168.0" fitWidth="122.0" layoutX="1166.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/a_building_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="a_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="concertHallUpperMain" fitHeight="129.0" fitWidth="87.0" layoutX="855.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/concert_hall_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="concert_hall" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="dormsUpperMain" fitHeight="139.0" fitWidth="249.0" layoutX="1075.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/dorms_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="dorms" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="fBuildingsUpperMain" fitHeight="113.0" fitWidth="135.0" layoutX="1119.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/f_buildings_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="f_buildings" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mBuildingUpperMain" fitHeight="129.0" fitWidth="108.0" layoutX="1073.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/m_building_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="m_building" />
+            <String fx:value="upper_main" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="meteksanUpperMain" fitHeight="139.0" fitWidth="106.0" layoutX="1162.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/meteksan_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="meteksan" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mescitUpperMain" fitHeight="106.0" fitWidth="132.0" layoutX="913.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mescit_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="mescit" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mssfUpperMain" fitHeight="121.0" fitWidth="115.0" layoutX="807.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mssf_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="mssf" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="nanotamUpperMain" fitHeight="189.0" fitWidth="96.0" layoutX="1314.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/nanotam_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="nanotam" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="sBuildingUpperMain" fitHeight="198.0" fitWidth="114.0" layoutX="1238.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/s_buildings_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="s_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="sportsCenterUpperMain" fitHeight="179.0" fitWidth="132.0" layoutX="1213.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/sports_center_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="sports_center" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="starbucksUpperMain" fitHeight="112.0" fitWidth="133.0" layoutX="1013.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/starbucks_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="starbucks" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="tBuildingUpperMain" fitHeight="99.0" fitWidth="135.0" layoutX="1169.0" layoutY="456.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/t_building_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="t_building" />
+         </styleClass>
+      </ImageView>
+      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="112.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_5" />
+            <String fx:value="player_5_bg" />
+            <String fx:value="player_bg" />
+         </styleClass>
+      </Ellipse>
+      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="280.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_3" />
+            <String fx:value="player_3_bg" />
+            <String fx:value="player_bg" />
+         </styleClass>
+      </Ellipse>
+      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="440.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_1" />
+            <String fx:value="player_1_bg" />
+            <String fx:value="player_bg" />
+         </styleClass>
+      </Ellipse>
+      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="605.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_2" />
+            <String fx:value="player_2_bg" />
+            <String fx:value="player_bg" />
+         </styleClass>
+      </Ellipse>
+      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="770.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_4" />
+            <String fx:value="player_4_bg" />
+            <String fx:value="player_bg" />
+         </styleClass>
+      </Ellipse>
+      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="932.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_6" />
+            <String fx:value="player_6_bg" />
+            <String fx:value="player_bg" />
+         </styleClass>
+      </Ellipse>
+      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="112.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_5" />
+            <String fx:value="player_5_icon" />
+            <String fx:value="player_icon" />
+         </styleClass>
+      </Circle>
+      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="280.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_3" />
+            <String fx:value="player_3_icon" />
+            <String fx:value="player_icon" />
+         </styleClass>
+      </Circle>
+      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="440.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_1" />
+            <String fx:value="player_1_icon" />
+            <String fx:value="player_icon" />
+         </styleClass>
+      </Circle>
+      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="605.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_2" />
+            <String fx:value="player_2_icon" />
+            <String fx:value="player_icon" />
+         </styleClass>
+      </Circle>
+      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="768.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_4" />
+            <String fx:value="player_4_icon" />
+            <String fx:value="player_icon" />
+         </styleClass>
+      </Circle>
+      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="932.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+         <styleClass>
+            <String fx:value="player_6" />
+            <String fx:value="player_6_icon" />
+            <String fx:value="player_icon" />
+         </styleClass>
+      </Circle>
+      <ImageView fx:id="prepEast" fitHeight="217.0" fitWidth="188.0" layoutX="357.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/prep_buildings_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="prep" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="dorm76UpperMain" fitHeight="139.0" fitWidth="182.0" layoutX="1163.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/76_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="dorm_76" />
+            <String fx:value="upper_main" />
+         </styleClass>
+      </ImageView>
+   </children>
+</Pane>
