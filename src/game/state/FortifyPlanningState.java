@@ -12,7 +12,7 @@ public class FortifyPlanningState extends PlanningState implements MenuState {
     }
 
     //Select source and destination territories
-    public void selectTerritories(Event e) {
+    public void selectMap(Event e) {
         if (destination.equals("")) {
             Territory[] territories = engine.getMap().getTerritories();
             for (Territory territory : territories) {

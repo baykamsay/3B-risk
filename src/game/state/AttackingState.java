@@ -29,7 +29,7 @@ public class AttackingState implements MenuState {
         this.engine = engine;
     }
 
-    public void Attack(Event e){
+    public void selectMap(Event e){
         if(!(e.getSource().toString().equals("PASS"))){
             //plan attacking
             AttackPlanningState = new AttackingPlanningState(width, height, engine);
