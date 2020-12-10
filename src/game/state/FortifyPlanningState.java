@@ -2,17 +2,17 @@ package game.state;
 
 import game.GameEngine;
 import game.player.Territory;
-import javafx.event.Event;
-import menu.MenuState;
+import javafx.event.ActionEvent;
 
-public class FortifyPlanningState extends PlanningState implements MenuState {
+
+public class FortifyPlanningState extends PlanningState implements GameState {
 
     public FortifyPlanningState(int width, int height, GameEngine engine) {
         super(width, height, engine);
     }
 
     //Select source and destination territories
-    public void selectMap(Event e) {
+    public void mapSelect(ActionEvent e) {
         if (destination.equals("")) {
             Territory[] territories = engine.getMap().getTerritories();
             for (Territory territory : territories) {

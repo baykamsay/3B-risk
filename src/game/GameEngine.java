@@ -2,6 +2,7 @@ package game;
 
 import game.player.Objective;
 import game.player.Player;
+import game.state.GameState;
 import javafx.scene.Scene;
 import menu.*;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 //GameMap must be imported
 
 public class GameEngine implements MenuState{
-    public MenuState currentState;
+    public GameState currentState;
     public GameMap map;
     public ArrayList<Objective> objectives;
     public ArrayList<Player> players;
@@ -57,7 +58,7 @@ public class GameEngine implements MenuState{
         return players;
     }
 
-    public void switchState(MenuState currentState){
+    public void switchState(GameState currentState){
         this.currentState = currentState;
     }
 

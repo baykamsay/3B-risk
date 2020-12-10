@@ -5,7 +5,7 @@ import game.player.Territory;
 import game.scene.MapScene;
 import javafx.scene.Scene;
 import menu.GameMenuManager;
-import menu.MenuState;
+
 
 public class DiceSelectionState implements GameState {
     private MapScene mapScene;
@@ -29,7 +29,7 @@ public class DiceSelectionState implements GameState {
     }
 
     @Override
-    public Scene createScene(GameMenuManager mgr) {
+    public Scene createScene() {
         this.mgr = mgr;
         mapScene = new MapScene(width, height, "Dice Selection");
         scene = mapScene.createScene(mgr, engine, this);
