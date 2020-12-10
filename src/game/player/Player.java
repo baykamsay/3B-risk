@@ -57,7 +57,6 @@ public class Player implements Objective {
     //not finished yet.
     @Override
     public boolean isDone() {
-
         return false;
     }
 }
