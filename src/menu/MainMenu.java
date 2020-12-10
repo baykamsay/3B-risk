@@ -90,7 +90,7 @@ public class MainMenu extends Application implements MenuState {
         menu.setPadding(new Insets(10,10,10,10));
         menu.setAlignment(Pos.CENTER);
         menu.setFillWidth(true);
-
+        menu.setId("menu_bg");
         scene = new Scene(menu,width,height);
     }
 }

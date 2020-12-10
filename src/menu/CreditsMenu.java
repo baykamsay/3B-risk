@@ -1,6 +1,7 @@
 package menu;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -63,9 +64,10 @@ public class CreditsMenu extends Application implements MenuState{
 
         HBox top = new HBox(back);
         top.setAlignment(Pos.CENTER_LEFT);
+        top.setPadding(new Insets(5));
 
         VBox root = new VBox();
-
+        root.setId("menu_bg");
         VBox bottom = new VBox(title, members, logo);
         bottom.setAlignment(Pos.CENTER);
         bottom.setSpacing(20);

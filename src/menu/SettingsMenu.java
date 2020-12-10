@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -196,6 +197,7 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
         root.setSpacing(40);
 
         HBox top = new HBox(backButton);
+        top.setPadding(new Insets(5));
         top.setAlignment(Pos.CENTER_LEFT);
 
         VBox soundSettings = new VBox();
@@ -233,7 +235,7 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
 
         root.getChildren().addAll(top, title, soundSettings, displaySettings, controlButtons);
 
-
+        root.setId("menu_bg");
         scene = new Scene(root,width,height);
     }
 

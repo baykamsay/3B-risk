@@ -1,6 +1,7 @@
 package menu;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -82,6 +83,7 @@ public class LoadGameMenu extends Application implements MenuState{
         back.getStyleClass().add(backStyle);
 
         HBox top = new HBox(back);
+        top.setPadding(new Insets(5));
         top.setAlignment(Pos.CENTER_LEFT);
 
         VBox root = new VBox();
@@ -109,6 +111,7 @@ public class LoadGameMenu extends Application implements MenuState{
         }
 
         root.getChildren().addAll(top,title,pane);
+        root.setId("menu_bg");
         scene = new Scene(root,width,height);
     }
 }

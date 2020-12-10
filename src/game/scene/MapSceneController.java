@@ -6,10 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 
 import java.io.IOException;
@@ -17,6 +19,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MapSceneController implements Initializable {
+
+    private static final String[] TERRITORY_NAMES = {"Dorms","Sports Center", "Library", "Prep Buildings", "Health Center", "Cafeteria", "ATM",
+            "Coffee Break", "Mozart Cafe", "Entrance", "Bilkent 1 & 2", "Sports International", "Ankuva", "Bilkent Center", "Bilkent Hotel", "MSSF",
+            "Concert Hall", "Dorms", "V Building", "F Buildings", "Dorm 76", "Mescit", "Starbucks", "M Building", "Meteksan", "Sports Center", "Nanotam",
+            "Mayfest", "A Building", "S Building", "T Building", "G Building", "Coffee Break", "Square", "CafeIn", "Statue", "B Building", "Cyber Park", "ODEON",
+            "Library", "Mozart Cafe", "Cafeteria", "EA Building", "Meteksan", "EE Building", "Mithat Coruh", "Entrance"};
+
     // East
     @FXML ImageView dormsEast;
     @FXML ImageView sportsEast;
@@ -73,16 +82,16 @@ public class MapSceneController implements Initializable {
     @FXML ImageView entranceLowerMain;
 
     private Parent root;
+    private ImageView[] imageViews;
     public MapSceneController(){
-        System.out.println("hello?");
     }
 
     public void init(){
         ColorAdjust ca = new ColorAdjust();
         ColorAdjust ca2 = new ColorAdjust();
         ca.setHue(-0.792);
-        ca2.setHue(0.2805);
-        ImageView[] imageViews = new ImageView[]{dormsEast, sportsEast, libraryEast, prepEast, healthCenterEast, cafeteriaEast, atmEast,
+        ca2.setSaturation(-1.0);
+        imageViews = new ImageView[]{dormsEast, sportsEast, libraryEast, prepEast, healthCenterEast, cafeteriaEast, atmEast,
                 coffeeBreakEast, mozartEast, entranceEast, bilkent12Island, sportsInternationalIsland, ankuvaIsland, centerIsland, hotelIsland,
                 mssfUpperMain, concertHallUpperMain, dormsUpperMain, vBuildingUpperMain, fBuildingsUpperMain, dorm76UpperMain, mescitUpperMain,
                 starbucksUpperMain, mBuildingUpperMain, meteksanUpperMain, sportsCenterUpperMain, nanotamUpperMain, mayfestUpperMain, aBuildingUpperMain,
@@ -90,6 +99,7 @@ public class MapSceneController implements Initializable {
                 bBuildingLowerMain, cyberParkLowerMain, odeonLowerMain, libraryLowerMain, mozartLowerMain, cafeteriaLowerMain, eaBuildingLowerMain, meteksanLowerMain,
                 eeBuildingLowerMain, mithatCoruhLowerMain, entranceLowerMain};
 
+        int i = 0;
         for(ImageView iv : imageViews){
             if( iv != null) {
                 iv.setPickOnBounds(false);
@@ -105,10 +115,17 @@ public class MapSceneController implements Initializable {
                 );
                 iv.setCache(true);
                 iv.setCacheHint(CacheHint.SPEED);
+                Tooltip tp = new Tooltip(TERRITORY_NAMES[i]);
+                tp.setShowDelay(new Duration(0));
+                tp.setHideDelay(new Duration(0));
+                tp.setShowDuration(Duration.INDEFINITE);
+                tp.setId("territory_tooltip");
+                Tooltip.install(iv, tp);
             }
             else{
-                System.out.println("null");
+                System.out.println("ImageView is null");
             }
+            i++;
         }
     }
 

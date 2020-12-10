@@ -8,10 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -46,7 +43,12 @@ public class MapScene implements MenuState{
 
     @Override
     public Scene createScene(GameMenuManager mgr) {
-        return null;
+        try {
+            init(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return scene;
     }
 
     public Scene createScene(GameMenuManager mgr, GameEngine engine, MenuState state) {
@@ -70,7 +72,11 @@ public class MapScene implements MenuState{
         FXMLLoader loader = new FXMLLoader();
         URL fxmlUrl = getClass().getResource("../../fxml/map.fxml");
         loader.setLocation(fxmlUrl);
-        Parent root = loader.load();
-        scene = new Scene(root);
+        VBox root = new VBox();
+        root.setId("map_bg");
+        Pane map = loader.load();
+        root.getChildren().addAll(map);
+        root.setAlignment(Pos.CENTER);
+        scene = new Scene(root,width,height);
     }
 }

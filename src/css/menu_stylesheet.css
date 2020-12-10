@@ -1,4 +1,4 @@
-.root{
+#menu_bg{
     -fx-background-image: url("../img/bg_bilkent.png"); 
     -fx-background-size: cover;
 }
@@ -22,6 +22,24 @@
 
 .title_max{
     -fx-font-size: 45px;
+}
+
+.faculty_title_max{
+    -fx-font-size: 45px;
+    -fx-text-wrap: true;
+    -fx-vpos: center;
+    -fx-hpos: center;
+    -fx-text-alignment: center;
+    -fx-text-fill: white; 
+}
+
+.faculty_title_min{
+    -fx-font-size: 25px;
+    -fx-text-wrap: true;
+    -fx-vpos: center;
+    -fx-hpos: center;
+    -fx-text-alignment: center;
+    -fx-text-fill: white;
 }
 
 .slider{
@@ -83,7 +101,7 @@
 }
 
 .menu_button_back_min{
-    -fx-padding: 5 5 5 5;  
+    -fx-padding: 10 10 10 10;  
     -fx-font-size: 15px;    
     -fx-font-style: italic;
     -fx-background-color:
@@ -92,6 +110,34 @@
     -fx-pref-width: 70px;    
     -fx-pref-height: 70px;
     -fx-background-radius: 30em;
+}
+
+.player_bg{
+    -fx-opacity: 0.5;
+    -fx-fill: black;
+    -fx-stroke-width: 0;
+}
+
+.player_icon{
+    -fx-opacity: 1;
+    -fx-fill: black;
+}
+
+#map_bg{
+    -fx-background-image: url("../img/map_bg.png");
+    -fx-background-size: cover;
+}
+
+#ability_tooltip{
+    -fx-background-radius: 4em;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 15px;
+}
+
+#territory_tooltip{
+    -fx-background-radius: 10em;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 20px;
 }
 
 .menu_button_back_max{

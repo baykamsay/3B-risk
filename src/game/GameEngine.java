@@ -21,14 +21,14 @@ public class GameEngine implements MenuState{
     public int width;
     public int height;
 
-    public GameEngine(int saveSlot,int height, int width){
+    public GameEngine(int saveSlot, int height, int width){
         //variables will be initialized according to the save file(file parameter?)
         this.saveSlot = saveSlot;
         this.height = height;
         this.width = width;
     }
 
-    public GameEngine(int saveSlot, ArrayList<Player> players,int height,int width){
+    public GameEngine(int saveSlot, ArrayList<Player> players, int height, int width){
         this.saveSlot = saveSlot;
         this.players = new ArrayList<Player>();
         this.objectives = new ArrayList<Objective>();

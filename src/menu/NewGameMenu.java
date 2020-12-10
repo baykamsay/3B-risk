@@ -3,12 +3,12 @@ package menu;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class NewGameMenu extends Application implements MenuState, EventHandler<ActionEvent> {
+public class NewGameMenu implements MenuState, EventHandler<ActionEvent> {
 
     private final int NO_OF_SLOTS = 8;
     private final Button[] slots = new Button[NO_OF_SLOTS];
@@ -32,10 +32,6 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
     public NewGameMenu(int width, int height) {
         this.width = width;
         this.height = height;
-    }
-    @Override
-    public void start(Stage stage) throws Exception {
-
     }
 
     @Override
@@ -95,6 +91,7 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
         back = new Button("Back");
         back.getStyleClass().add(backStyle);
         HBox top = new HBox(back);
+        top.setPadding(new Insets(5));
         top.setAlignment(Pos.TOP_LEFT);
 
         VBox root = new VBox();
@@ -118,6 +115,7 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
         }
 
         root.getChildren().addAll(top,title,pane);
+        root.setId("menu_bg");
         scene = new Scene(root,width,height);
     }
 
@@ -134,8 +132,8 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
         }
         else{
             createSave(chosenSlot);
+            mgr.facultySelection();
         }
-        //TO-DO: Call mgr to get to faculty selection screen
     }
 
     public void overWrite(){
@@ -147,7 +145,7 @@ public class NewGameMenu extends Application implements MenuState, EventHandler<
         if(overWrite.getResult() == ButtonType.YES){
             File file = new File(System.getenv("LOCALAPPDATA")+"\\RISK101" + "\\save" + chosenSlot + ".txt");
             file.delete();
-            //TO-DO: Call mgr to get to faculty selection screen
+            mgr.facultySelection();
         }
     }
 

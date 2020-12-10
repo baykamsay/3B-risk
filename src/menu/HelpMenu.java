@@ -68,6 +68,7 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
         VBox root = new VBox();
 
         HBox top = new HBox(backButton);
+        top.setPadding(new Insets(5));
         top.setAlignment(Pos.CENTER_LEFT);
 
         //the main layout
@@ -87,6 +88,7 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
         BorderPane.setMargin(nav, new Insets(10,10,10,10));
         root.getChildren().addAll(top,menu);
         GridPane.setHalignment(menu,HPos.CENTER);
+        root.setId("menu_bg");
         scene = new Scene(root,width,height);
     }
 

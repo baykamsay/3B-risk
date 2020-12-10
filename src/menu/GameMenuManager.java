@@ -1,6 +1,5 @@
 package menu;
 
-import game.state.InitialArmyPlacementState;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -145,7 +144,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     public void changeScene(Scene scene){
         scene.getStylesheets().add("css/menu_stylesheet.css");
         window.setScene(scene);
-        this.changeMaximized(isMaximized);
+        this.changeMaximized();
         window.show();
     }
 
@@ -156,10 +155,9 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public void newGame() throws Exception {
-        testMap();
-//        menuState = new NewGameMenu(width,height);
-//        scene = menuState.createScene(this);
-//        this.changeScene(scene);
+        menuState = new NewGameMenu(width,height);
+        scene = menuState.createScene(this);
+        this.changeScene(scene);
     }
 
     public void viewCredits(){
@@ -176,6 +174,12 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     public void viewSettings(){
         menuState = new SettingsMenu(width,height);
+        scene = menuState.createScene(this);
+        this.changeScene(scene);
+    }
+
+    public void facultySelection(){
+        menuState = new FacultySelectionMenu(width, height);
         scene = menuState.createScene(this);
         this.changeScene(scene);
     }
@@ -204,6 +208,25 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         }
     }
 
+    public boolean forceMaximized(){
+        if(!isMaximized) {
+            Alert maximizeAlert = new Alert(Alert.AlertType.CONFIRMATION, "Set Maximized?", ButtonType.YES, ButtonType.NO);
+            maximizeAlert.setTitle("");
+            maximizeAlert.setHeaderText("Maximize?");
+            maximizeAlert.setContentText("RISK101 can only be played in the maximized display mode, set to maximized?");
+            maximizeAlert.showAndWait();
+            if (maximizeAlert.getResult() == ButtonType.YES) {
+                this.setMaximized(true);
+                this.changeMaximized();
+                return true;
+            }
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     public void checkForDir() throws Exception {
         File file = new File(System.getenv("LOCALAPPDATA")+"\\RISK101");
         if(!file.exists()){
@@ -214,9 +237,8 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         }
     }
 
-    public void changeMaximized(boolean maximized){
-        this.isMaximized = maximized;
-        if (maximized) {
+    public void changeMaximized(){
+        if (isMaximized) {
             if( displayChanged) {
                 window.close();
                 window = new Stage();

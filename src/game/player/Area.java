@@ -1,0 +1,5 @@
+package game.player;
+
+public enum Area {
+    BILKENTISLAND, EASTCAMPUS, LOWERMAINCAMPUS, UPPERMAINCAMPUS
+}

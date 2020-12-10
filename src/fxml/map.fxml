@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Ellipse?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../css/menu_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
    <children>
       <ImageView fitHeight="1046.0" fitWidth="1304.0" layoutX="218.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -419,84 +420,84 @@
             <String fx:value="t_building" />
          </styleClass>
       </ImageView>
-      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="112.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+      <Ellipse fx:id="p5InfoBg" fill="DODGERBLUE" layoutX="1766.0" layoutY="112.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_5" />
             <String fx:value="player_5_bg" />
             <String fx:value="player_bg" />
          </styleClass>
       </Ellipse>
-      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="280.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+      <Ellipse fx:id="p3InfoBg" fill="DODGERBLUE" layoutX="1766.0" layoutY="280.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_3" />
             <String fx:value="player_3_bg" />
             <String fx:value="player_bg" />
          </styleClass>
       </Ellipse>
-      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="440.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+      <Ellipse fx:id="p1InfoBg" fill="DODGERBLUE" layoutX="1775.0" layoutY="440.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_1" />
             <String fx:value="player_1_bg" />
             <String fx:value="player_bg" />
          </styleClass>
       </Ellipse>
-      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="605.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+      <Ellipse fx:id="p2InfoBg" fill="DODGERBLUE" layoutX="1775.0" layoutY="605.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_2" />
             <String fx:value="player_2_bg" />
             <String fx:value="player_bg" />
          </styleClass>
       </Ellipse>
-      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="770.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+      <Ellipse fx:id="p4InfoBg" fill="DODGERBLUE" layoutX="1776.0" layoutY="769.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_4" />
             <String fx:value="player_4_bg" />
             <String fx:value="player_bg" />
          </styleClass>
       </Ellipse>
-      <Ellipse fill="DODGERBLUE" layoutX="1752.0" layoutY="932.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
+      <Ellipse fx:id="p6InfoBg" fill="DODGERBLUE" layoutX="1776.0" layoutY="932.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_6" />
             <String fx:value="player_6_bg" />
             <String fx:value="player_bg" />
          </styleClass>
       </Ellipse>
-      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="112.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+      <Circle fx:id="p5IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="112.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_5" />
             <String fx:value="player_5_icon" />
             <String fx:value="player_icon" />
          </styleClass>
       </Circle>
-      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="280.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+      <Circle fx:id="p3IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="280.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_3" />
             <String fx:value="player_3_icon" />
             <String fx:value="player_icon" />
          </styleClass>
       </Circle>
-      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="440.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+      <Circle fx:id="p1IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="440.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_1" />
             <String fx:value="player_1_icon" />
             <String fx:value="player_icon" />
          </styleClass>
       </Circle>
-      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="605.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+      <Circle fx:id="p2IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="605.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_2" />
             <String fx:value="player_2_icon" />
             <String fx:value="player_icon" />
          </styleClass>
       </Circle>
-      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="768.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+      <Circle fx:id="p4IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="768.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_4" />
             <String fx:value="player_4_icon" />
             <String fx:value="player_icon" />
          </styleClass>
       </Circle>
-      <Circle fill="DODGERBLUE" layoutX="1836.0" layoutY="932.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
+      <Circle fx:id="p6IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="932.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
          <styleClass>
             <String fx:value="player_6" />
             <String fx:value="player_6_icon" />
@@ -521,5 +522,18 @@
             <String fx:value="upper_main" />
          </styleClass>
       </ImageView>
+      <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
+      <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="24.0" layoutY="22.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/pause_icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="p5Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p3Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p1Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p2Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p4Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p6Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="872.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="24.0" layoutY="941.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
    </children>
 </Pane>

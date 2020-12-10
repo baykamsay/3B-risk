@@ -2,21 +2,22 @@ package game.player;
 
 import java.util.ArrayList;
 
-enum Area{
-    BILKENTISLAND,EASTCAMPUS,LOWERMAINCAMPUS,UPPERMAINCAMPUS
-}
 public class Territory {
     private Area area;
     private String name;
     private int numOfArmies;
+
+    // Used to recognize which ImageView to update
+    private int id;
     private Player ruler;
     private ArrayList<Territory> adjacentTerritories;
 
-    Territory(Area area, String name){
+    public Territory(Area area, String name, int id){
+        this.id = id;
         this.area = area;
         this.name = name;
+        this.ruler = null;
         adjacentTerritories = new ArrayList<>();
-
     }
     //Add an adjacent territory
     public void addAdjacentTerritory(Territory t){
