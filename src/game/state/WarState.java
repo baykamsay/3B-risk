@@ -110,20 +110,20 @@ public class WarState implements GameState{
     }
 
     private void terminating() {
-//        Territory defendingTerritory = attack.getDestination();
-//        Territory attackingTerritory = attack.getSource();
-//
-//        if (defendingTerritory.getNumOfArmies() == 0) {
-//            defendingTerritory.setRuler(engine.getCurrentPlayer());
-//            int movingArmies = displayArmyNumberSelection();
-//            attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
-//            defendingTerritory.setNumOfArmies(movingArmies);
-//            attack.switchState(AttackingPlanningState.getInstance());
-//        } else if (attackingTerritory.getNumOfArmies() == 1) {
-//            attack.switchState(AttackingPlanningState.getInstance());
-//        } else {
-//            attack.switchState(DiceSelectionState.getInstance());
-//        }
+        Territory defendingTerritory = attack.getDestination();
+        Territory attackingTerritory = attack.getSource();
+
+        if (defendingTerritory.getNumOfArmies() == 0) {
+            defendingTerritory.setRuler(engine.getCurrentPlayer());
+            int movingArmies = displayArmyNumberSelection();
+            attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
+            defendingTerritory.setNumOfArmies(movingArmies);
+            attack.switchState(AttackingPlanningState.getInstance());
+        } else if (attackingTerritory.getNumOfArmies() == 1) {
+            attack.switchState(AttackingPlanningState.getInstance());
+        } else {
+            attack.switchState(DiceSelectionState.getInstance());
+        }
     }
 
     // Map is not used in this state

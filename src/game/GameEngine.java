@@ -215,4 +215,8 @@ public class GameEngine extends Application {
         GameMenuManager mgr = new GameMenuManager(launcher);
         mgr.start(window);
     }
+
+    public Player getCurrentPlayer() {
+        return players.get(playerTurn);
+    }
 }
