@@ -10,18 +10,12 @@ import menu.MenuState;
 
 public class AttackingState implements GameState {
 
-    public MapScene mapScene;
-    public Scene scene;
     public GameEngine engine;
-    public GameMenuManager mgr;
-    public int width, height;
     public GameState currentState;
 
-    public AttackingState(int width, int height, GameEngine engine) {
-        this.width = width;
-        this.height = height;
+    public AttackingState(GameEngine engine) {
         this.engine = engine;
-        currentState = new AttackingPlanningState(width,height,engine,this);
+        currentState = new AttackingPlanningState(engine,this);
     }
 
     public void mapSelect(ActionEvent e){
@@ -29,7 +23,7 @@ public class AttackingState implements GameState {
             currentState.mapSelect(e);
         }
         else
-            engine.switchState(new FortifyState(width,height,engine));
+            engine.switchState(new FortifyState(engine));
     }
 
     public void switchState(GameState state){

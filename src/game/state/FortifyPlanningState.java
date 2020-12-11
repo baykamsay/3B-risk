@@ -7,8 +7,8 @@ import javafx.event.ActionEvent;
 
 public class FortifyPlanningState extends PlanningState implements GameState {
 
-    public FortifyPlanningState(int width, int height, GameEngine engine) {
-        super(width, height, engine);
+    public FortifyPlanningState(GameEngine engine) {
+        super(engine);
     }
 
     //Select source and destination territories

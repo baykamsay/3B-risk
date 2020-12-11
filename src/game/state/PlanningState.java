@@ -11,17 +11,12 @@ import javafx.event.ActionEvent;
 
 public class PlanningState implements GameState {
 
-    public MapScene mapScene;
-    public Scene scene;
     public GameEngine engine;
-    public GameMenuManager mgr;
-    public int width, height, currentPlayer;
+    public int currentPlayer;
     public Territory destination;
     public Territory source;
 
-    public PlanningState(int width, int height, GameEngine engine) {
-        this.width = width;
-        this.height = height;
+    public PlanningState(GameEngine engine) {
         this.engine = engine;
         currentPlayer = 0;
         destination = null;

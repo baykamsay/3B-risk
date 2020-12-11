@@ -11,15 +11,10 @@ import java.util.ArrayList;
 
 public class InitialArmyPlacementState implements GameState {
 
-    private MapScene mapScene;
-    private Scene scene;
     private GameEngine engine;
-    private GameMenuManager mgr;
-    private int width, height, currentPlayer;
+    private int currentPlayer;
 
-    public InitialArmyPlacementState(int width, int height, GameEngine engine) {
-        this.width = width;
-        this.height = height;
+    public InitialArmyPlacementState(GameEngine engine) {
         this.engine = engine;
         currentPlayer = 0;
     }
@@ -51,7 +46,7 @@ public class InitialArmyPlacementState implements GameState {
         }
         if (stateOver) {
             // fix
-            engine.switchState(new ArmyPlacementState(width, height, engine));
+            engine.switchState(new ArmyPlacementState(engine));
         }
     }
 }

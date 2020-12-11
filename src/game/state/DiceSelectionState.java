@@ -9,17 +9,14 @@ import menu.GameMenuManager;
 
 
 public class DiceSelectionState implements GameState {
-    private MapScene mapScene;
-    private Scene scene;
     private GameEngine engine;
-    private GameMenuManager mgr;
-    private int width, height, currentPlayer, leastDiceNo;
+    private AttackingState attack;
+    private int currentPlayer, leastDiceNo;
     private Territory territory;
 
-    public DiceSelectionState(int width, int height, GameEngine engine){
-        this.width = width;
-        this.height = height;
+    public DiceSelectionState(GameEngine engine, AttackingState attack){
         this.engine = engine;
+        this.attack = attack;
         territory = null;
         currentPlayer = 0;
         leastDiceNo = 0;
@@ -75,4 +72,4 @@ public class DiceSelectionState implements GameState {
 //
 //
 //
-//}
+}

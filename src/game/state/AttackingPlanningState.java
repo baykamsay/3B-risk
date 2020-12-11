@@ -10,8 +10,8 @@ public class AttackingPlanningState extends PlanningState implements GameState {
 
     public AttackingState attack;
 
-    public AttackingPlanningState(int width, int height, GameEngine engine,AttackingState attack) {
-        super(width, height, engine);
+    public AttackingPlanningState(GameEngine engine,AttackingState attack) {
+        super(engine);
         this.attack = attack;
     }
 
@@ -40,7 +40,7 @@ public class AttackingPlanningState extends PlanningState implements GameState {
 
             }
             else
-                attack.switchState(new DiceSelectionState(width,height,engine,this));
+                attack.switchState(new DiceSelectionState(engine, attack));
     }
 
 

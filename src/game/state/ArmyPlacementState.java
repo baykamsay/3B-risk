@@ -12,15 +12,10 @@ import menu.MenuState;
 import java.util.ArrayList;
 
 public class ArmyPlacementState implements GameState {
-    private MapScene mapScene;
-    private Scene scene;
     private GameEngine engine;
-    private GameMenuManager mgr;
-    private int width, height, currentPlayer, addibleArmies;
+    private int currentPlayer, addibleArmies;
 
-    public ArmyPlacementState(int width, int height, GameEngine engine) {
-        this.width = width;
-        this.height = height;
+    public ArmyPlacementState(GameEngine engine) {
         this.engine = engine;
         currentPlayer = 0;
         addibleArmies = 0;
