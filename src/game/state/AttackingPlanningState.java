@@ -41,7 +41,7 @@ public class AttackingPlanningState implements GameState {
                     if ((territory.getName()).equals(e.getSource().toString())
                             && ((engine.getPlayers()).get(engine.getPlayerTurn()) == territory.getRuler())
                             &&  territory.getNumOfArmies() >= 2) {
-                        attack.source = territory;
+                        attack.setSource(territory);
                     }
                 }
             }
@@ -50,7 +50,7 @@ public class AttackingPlanningState implements GameState {
                 for (Territory territory : territories) {
                     if ((territory.getName()).equals(e.getSource().toString())) {
                         if(source.isAdjacent(territory)) { //check if destination is adjacent to the source
-                            attack.destination = territory;
+                            attack.setDestination(territory);
                         }
                     }
                 }

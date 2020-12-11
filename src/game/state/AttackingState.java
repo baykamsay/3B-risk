@@ -11,18 +11,18 @@ import menu.MenuState;
 public class AttackingState implements GameState {
 
     private static AttackingState instance;
-    public GameEngine engine;
-    public GameState currentState;
-    public Territory destination; //attackPlanning will handle it
-    public Territory source; //attackPlanning will handle it
-    public int attackerDice; //diceSelection w.h.i
-    public int defenderDice; //diceSelection w.h.i
+    private GameEngine engine;
+    private GameState currentState;
+    private Territory destination, source; //attackPlanning will handle it
+    private int attackingArmies, defendingArmies; //diceSelection w.h.i
 
     private AttackingState() {
         engine = GameEngine.getInstance();
         destination = null;
         source = null;
         currentState = AttackingPlanningState.getInstance();
+        attackingArmies = 0;
+        defendingArmies = 0;
     }
 
     public static AttackingState getInstance() {
@@ -48,4 +48,36 @@ public class AttackingState implements GameState {
         currentState = state;
     }
 
+
+    public Territory getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Territory destination) {
+        this.destination = destination;
+    }
+
+    public Territory getSource() {
+        return source;
+    }
+
+    public void setSource(Territory source) {
+        this.source = source;
+    }
+
+    public int getAttackingArmies() {
+        return attackingArmies;
+    }
+
+    public void setAttackingArmies(int attackingArmies) {
+        this.attackingArmies = attackingArmies;
+    }
+
+    public int getDefendingArmies() {
+        return defendingArmies;
+    }
+
+    public void setDefendingArmies(int defendingArmies) {
+        this.defendingArmies = defendingArmies;
+    }
 }

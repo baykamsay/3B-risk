@@ -39,16 +39,6 @@ public class GameEngine extends Application {
     private Scene gameScene;
     private Stage window;
 
-//    public GameEngine() {
-//        super();
-//        synchronized (GameEngine.class) {
-//            if (instance != null) throw new UnsupportedOperationException(
-//                    getClass() + "is singleton"
-//            );
-//            instance = this;
-//        }
-//    }
-
     private GameEngine(int saveSlot, int width, int height, Launcher launcher){
         super();
         //variables will be initialized according to the save file(file parameter?)
@@ -58,13 +48,6 @@ public class GameEngine extends Application {
         this.soundEngine = SoundEngine.getInstance();
         this.launcher = launcher;
         soundEngine.changeToGameMusic();
-//
-//        synchronized (GameEngine.class) {
-//            if (instance != null) throw new UnsupportedOperationException(
-//                    getClass() + "is singleton"
-//            );
-//            instance = this;
-//        }
     }
 
     private GameEngine(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher){
@@ -85,13 +68,6 @@ public class GameEngine extends Application {
         currentState = null;
         playerTurn = 0; //first player will go first, which is stored in index 0
         winner = null;
-//
-//        synchronized (GameEngine.class) {
-//            if (instance != null) throw new UnsupportedOperationException(
-//                    getClass() + "is singleton"
-//            );
-//            instance = this;
-//        }
     }
 
     public static GameEngine init(int saveSlot, int width, int height, Launcher launcher) {
@@ -119,6 +95,9 @@ public class GameEngine extends Application {
 
     // first call init before using getInstance()
     public static GameEngine getInstance() {
+        if (instance == null) throw new UnsupportedOperationException(
+                    "GameEngine needs to be initialized first"
+            );
         return instance;
     }
 
