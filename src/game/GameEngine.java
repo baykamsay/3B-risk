@@ -2,48 +2,68 @@ package game;
 
 import game.player.Objective;
 import game.player.Player;
+import game.scene.MapScene;
+import game.scene.MapSceneController;
 import game.state.GameState;
+import javafx.application.Application;
 import javafx.scene.Scene;
-import menu.*;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import menu.GameMenuManager;
+import menu.Launcher;
+import menu.PauseMenu;
+
 import java.util.ArrayList;
 
-
-//GameMap must be imported
-
-public class GameEngine implements MenuState{
+public class GameEngine extends Application {
     public GameState currentState;
     public GameMap map;
+    public MapScene mapScene;
+    private MapSceneController controller;
+    private SoundEngine soundEngine;
     public ArrayList<Objective> objectives;
     public ArrayList<Player> players;
+    private Launcher launcher;
+
     public int playerTurn; //keeps the index of the players array to decide who's gonna play
     public int saveSlot;
     public int turn; //total turn count of the game
+
     public Player winner;
     public int width;
     public int height;
 
-    public GameEngine(int saveSlot, int height, int width){
+    private Scene gameScene;
+    private Stage window;
+
+    public GameEngine(int saveSlot, int width, int height, SoundEngine soundEngine, Launcher launcher){
         //variables will be initialized according to the save file(file parameter?)
         this.saveSlot = saveSlot;
         this.height = height;
         this.width = width;
+        this.soundEngine = soundEngine;
+        this.launcher = launcher;
+        soundEngine.changeToGameMusic();
     }
 
-    public GameEngine(int saveSlot, ArrayList<Player> players, int height, int width){
+    public GameEngine(int saveSlot,  int width, int height, ArrayList<Player> players, SoundEngine soundEngine, Launcher launcher){
+        this.height = height;
+        this.width = width;
         this.saveSlot = saveSlot;
         this.players = new ArrayList<Player>();
         this.objectives = new ArrayList<Objective>();
+        this.soundEngine = soundEngine;
+        this.launcher = launcher;
+        soundEngine.changeToGameMusic();
         for (int i = 0; i < players.size(); i++) {
             //"=" operator for the player class should be overriden
             (this.players).add(players.get(i));
         }
-        map = new GameMap();
         turn = 0;
         currentState = null;
         playerTurn = 0; //first player will go first, which is stored in index 0
         winner = null;
-        this.height = height;
-        this.width = width;
     }
 
     public int getPlayerTurn() {
@@ -112,13 +132,52 @@ public class GameEngine implements MenuState{
     }
 
     @Override
-    public void update() {
-        //fill
+    public void start(Stage stage) throws Exception {
+        this.window = stage;
+        window.setResizable(false);
+        window.setTitle("RISK 101");
+        window.getIcons().add(new Image("img\\logo.png"));
+        window.initStyle(StageStyle.UNDECORATED);
+        window.setMaximized(true);
+        this.setupMapScene();
+        window.setScene(gameScene);
+        window.show();
     }
 
-    @Override
-    public Scene createScene(GameMenuManager mgr) {
-        //fill
-        return null;
+    public void setupMapScene(){
+        map = new GameMap();
+        mapScene = new MapScene(width, height);
+        this.gameScene = mapScene.createScene();
+        controller = mapScene.getController();
+        controller.setPlayers(players);
+        this.gameScene.getStylesheets().add("css/menu_stylesheet.css");
+        controller.setPlayers(players);
+        controller.setMap(map);
+        controller.setGameEngine(this);
+        controller.addHandlers();
+        controller.test();
+    }
+
+    public void pause(){
+        PauseMenu pause = new PauseMenu(width,height,soundEngine,this);
+        Scene pauseScene = pause.createScene();
+        pauseScene.getStylesheets().add("css/menu_stylesheet.css");
+        window.setScene(pauseScene);
+    }
+
+    public void unpause(){
+        window.setScene(gameScene);
+    }
+
+    public void setScene(Scene scene){
+        scene.getStylesheets().add("css/menu_stylesheet.css");
+        window.setScene(scene);
+    }
+
+    public void backToMainMenu(){
+        // Save the file here
+        window.close();
+        GameMenuManager mgr = new GameMenuManager(launcher, soundEngine);
+        mgr.start(window);
     }
 }

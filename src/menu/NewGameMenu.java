@@ -1,6 +1,5 @@
 package menu;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -56,7 +55,6 @@ public class NewGameMenu implements MenuState, EventHandler<ActionEvent> {
     public void checkForSaves(){
         File[] files = new File(System.getenv("LOCALAPPDATA")+"\\RISK101").listFiles();
         for(File f : files){
-            System.out.println(f.getName());
             Scanner fScan = null;
             try {
                 fScan = new Scanner(f);
@@ -132,7 +130,7 @@ public class NewGameMenu implements MenuState, EventHandler<ActionEvent> {
         }
         else{
             createSave(chosenSlot);
-            mgr.facultySelection();
+            mgr.facultySelection(chosenSlot);
         }
     }
 
@@ -145,7 +143,7 @@ public class NewGameMenu implements MenuState, EventHandler<ActionEvent> {
         if(overWrite.getResult() == ButtonType.YES){
             File file = new File(System.getenv("LOCALAPPDATA")+"\\RISK101" + "\\save" + chosenSlot + ".txt");
             file.delete();
-            mgr.facultySelection();
+            mgr.facultySelection(chosenSlot);
         }
     }
 

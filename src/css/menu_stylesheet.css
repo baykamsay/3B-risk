@@ -140,6 +140,15 @@
     -fx-font-size: 20px;
 }
 
+#troop_counter{
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-fill: black;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
 .menu_button_back_max{
     -fx-padding: 5 5 5 5;  
     -fx-font-size: 20px;    

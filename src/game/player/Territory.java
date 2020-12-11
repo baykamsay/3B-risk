@@ -1,5 +1,7 @@
 package game.player;
 
+import javafx.scene.effect.ColorAdjust;
+
 import java.util.ArrayList;
 
 public class Territory {
@@ -10,6 +12,7 @@ public class Territory {
     // Used to recognize which ImageView to update
     private int id;
     private Player ruler;
+    private ColorAdjust ca;
     private ArrayList<Territory> adjacentTerritories;
 
     public Territory(Area area, String name, int id){
@@ -18,6 +21,7 @@ public class Territory {
         this.name = name;
         this.ruler = null;
         adjacentTerritories = new ArrayList<>();
+        this.ca = new ColorAdjust();
     }
     //Add an adjacent territory
     public void addAdjacentTerritory(Territory t){
@@ -45,15 +49,21 @@ public class Territory {
     public void setNumOfArmies(int numOfArmies){
         this.numOfArmies = numOfArmies;
     }
+
     public void setRuler(Player ruler){
         this.ruler = ruler;
+        this.ca = ruler.getCa();
     }
 
     //isRuler checks Territory's ruler. Returns true if the given player matches with the ruler otherwise returns false.
     public Boolean isRuler(Territory t){
-        if (t.getRuler().getName().equals(ruler.getName())){
+        if (t.getRuler() == ruler){
             return true;
         }
         return false;
+    }
+
+    public ColorAdjust getCa(){
+        return ca;
     }
 }

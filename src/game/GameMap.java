@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GameMap {
 
-    private static final int TOTAL_TERRITORY_COUNT = 49;
+    private static final int TOTAL_TERRITORY_COUNT = 47;
 //    private static final int EAST_TERRITORY_COUNT = 10;
 //    private static final int ISLAND_TERRITORY_COUNT = 5;
 //    private static final int UPPER_MAIN_TERRITORY_COUNT = 16;
@@ -36,8 +36,7 @@ public class GameMap {
         island = new ArrayList<>();
         upperMain = new ArrayList<>();
         lowerMain = new ArrayList<>();
-
-
+        initTerritories();
     }
 
     // Initialize saved game

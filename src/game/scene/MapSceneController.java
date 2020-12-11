@@ -1,21 +1,28 @@
 package game.scene;
+
+import game.GameEngine;
+import game.GameMap;
+import game.player.Player;
+import game.player.Territory;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.CacheHint;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 
-import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MapSceneController implements Initializable {
@@ -81,38 +88,70 @@ public class MapSceneController implements Initializable {
     @FXML ImageView mithatCoruhLowerMain;
     @FXML ImageView entranceLowerMain;
 
-    private Parent root;
-    private ImageView[] imageViews;
+    // Troop Counters
+    @FXML
+    Text troops0,troops1,troops2,troops3,troops4,troops5,troops6,troops7,troops8,troops9,troops10,troops11,troops12,
+            troops13,troops14,troops15,troops16,troops17,troops18,troops19,troops20,troops21,troops22,troops23,troops24,
+            troops25,troops26,troops27,troops28,troops29,troops30,troops31,troops32,troops33,troops34,troops35,troops36,
+            troops37,troops38,troops39,troops40,troops41,troops42,troops43,troops44,troops45,troops46;
+
+    // Player Info
+    @FXML
+    Shape p1InfoBg,p2InfoBg,p3InfoBg,p4InfoBg,p5InfoBg,p6InfoBg;
+
+    @FXML
+    Shape p1IconBg,p2IconBg,p3IconBg,p4IconBg,p5IconBg,p6IconBg;
+
+    @FXML
+    ImageView p1Icon,p2Icon,p3Icon,p4Icon,p5Icon,p6Icon;
+
+    @FXML
+    Button pauseButton;
+
+    private ArrayList<Player> players;
+    private ImageView[] territories;
+    private ImageView[] pIcons;
+    private Shape[] pIconBgs;
+    private Shape[] pInfoBgs;
+    private Text[] troops;
+    private GameMap map;
+    private GameEngine gameEngine;
+
     public MapSceneController(){
     }
 
     public void init(){
-        ColorAdjust ca = new ColorAdjust();
-        ColorAdjust ca2 = new ColorAdjust();
-        ca.setHue(-0.792);
-        ca2.setSaturation(-1.0);
-        imageViews = new ImageView[]{dormsEast, sportsEast, libraryEast, prepEast, healthCenterEast, cafeteriaEast, atmEast,
+
+        territories = new ImageView[]{dormsEast, sportsEast, libraryEast, prepEast, healthCenterEast, cafeteriaEast, atmEast,
                 coffeeBreakEast, mozartEast, entranceEast, bilkent12Island, sportsInternationalIsland, ankuvaIsland, centerIsland, hotelIsland,
                 mssfUpperMain, concertHallUpperMain, dormsUpperMain, vBuildingUpperMain, fBuildingsUpperMain, dorm76UpperMain, mescitUpperMain,
                 starbucksUpperMain, mBuildingUpperMain, meteksanUpperMain, sportsCenterUpperMain, nanotamUpperMain, mayfestUpperMain, aBuildingUpperMain,
                 sBuildingUpperMain, tBuildingUpperMain, gBuildingLowerMain, coffeeBreakLowerMain, squareLowerMain, cafeInLowerMain, statueLowerMain,
                 bBuildingLowerMain, cyberParkLowerMain, odeonLowerMain, libraryLowerMain, mozartLowerMain, cafeteriaLowerMain, eaBuildingLowerMain, meteksanLowerMain,
                 eeBuildingLowerMain, mithatCoruhLowerMain, entranceLowerMain};
+        troops = new Text[]{troops0,troops1,troops2,troops3,troops4,troops5,troops6,troops7,troops8,troops9,troops10,
+                troops11,troops12,troops13,troops14,troops15,troops16,troops17,troops18,troops19,troops20,troops21,
+                troops22,troops23,troops24,troops25,troops26,troops27,troops28,troops29,troops30,troops31,troops32,
+                troops33,troops34,troops35,troops36,troops37,troops38,troops39,troops40,troops41,troops42,troops43,
+                troops44,troops45,troops46};
+        pIcons = new ImageView[]{p1Icon,p2Icon,p3Icon,p4Icon,p5Icon,p6Icon};
+        pIconBgs = new Shape[]{p1IconBg,p2IconBg,p3IconBg,p4IconBg,p5IconBg,p6IconBg};
+        pInfoBgs = new Shape[]{p1InfoBg,p2InfoBg,p3InfoBg,p4InfoBg,p5InfoBg,p6InfoBg};
+
+        Random rand = new Random();
+        for(Text t : troops){
+            t.setId("troop_counter");
+            t.setText(Integer.toString(rand.nextInt(100)));
+        }
 
         int i = 0;
-        for(ImageView iv : imageViews){
+        for(ImageView iv : territories){
             if( iv != null) {
                 iv.setPickOnBounds(false);
                 iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                     System.out.println(iv.getId());
                     event.consume();
                 });
-                iv.effectProperty().bind(
-                        Bindings
-                                .when(iv.hoverProperty())
-                                .then((Effect) ca)
-                                .otherwise((Effect) ca2)
-                );
                 iv.setCache(true);
                 iv.setCacheHint(CacheHint.SPEED);
                 Tooltip tp = new Tooltip(TERRITORY_NAMES[i]);
@@ -132,5 +171,57 @@ public class MapSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         init();
+    }
+
+    public void setPlayers(ArrayList<Player> players){
+        this.players = players;
+        for(int i = 0; i < players.size(); i++){
+            pIconBgs[i].setFill(players.get(i).getColor());
+            pInfoBgs[i].setOpacity(0.45);
+            pInfoBgs[i].setFill(players.get(i).getColor());
+            pIcons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                event.consume();
+            });
+        }
+        for(int i = players.size(); i < 6; i++){
+            pIconBgs[i].setVisible(false);
+            pInfoBgs[i].setVisible(false);
+            pIcons[i].setVisible(false);
+        }
+    }
+
+    public void setMap(GameMap map){
+        this.map = map;
+    }
+
+    public void setGameEngine(GameEngine gameEngine){
+        this.gameEngine = gameEngine;
+    }
+
+    public void update(){
+        for(int i = 0; i < territories.length; i++){
+            ColorAdjust base = map.getTerritories()[i].getCa();
+            ColorAdjust hover = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + 0.25, base.getContrast());
+            territories[i].effectProperty().bind(
+                    Bindings
+                            .when(territories[i].hoverProperty())
+                            .then((Effect) hover)
+                            .otherwise((Effect) base)
+            );
+        }
+    }
+
+    public void test(){
+        Random rand = new Random();
+        for(Territory t : map.getTerritories()){
+            t.setRuler(players.get(rand.nextInt(players.size())));
+        }
+        update();
+    }
+
+    public void addHandlers(){
+        pauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            gameEngine.pause();
+        });
     }
 }

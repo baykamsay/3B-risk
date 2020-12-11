@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../css/menu_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
    <children>
@@ -420,90 +421,18 @@
             <String fx:value="t_building" />
          </styleClass>
       </ImageView>
-      <Ellipse fx:id="p5InfoBg" fill="DODGERBLUE" layoutX="1766.0" layoutY="112.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_5" />
-            <String fx:value="player_5_bg" />
-            <String fx:value="player_bg" />
-         </styleClass>
-      </Ellipse>
-      <Ellipse fx:id="p3InfoBg" fill="DODGERBLUE" layoutX="1766.0" layoutY="280.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_3" />
-            <String fx:value="player_3_bg" />
-            <String fx:value="player_bg" />
-         </styleClass>
-      </Ellipse>
-      <Ellipse fx:id="p1InfoBg" fill="DODGERBLUE" layoutX="1775.0" layoutY="440.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_1" />
-            <String fx:value="player_1_bg" />
-            <String fx:value="player_bg" />
-         </styleClass>
-      </Ellipse>
-      <Ellipse fx:id="p2InfoBg" fill="DODGERBLUE" layoutX="1775.0" layoutY="605.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_2" />
-            <String fx:value="player_2_bg" />
-            <String fx:value="player_bg" />
-         </styleClass>
-      </Ellipse>
-      <Ellipse fx:id="p4InfoBg" fill="DODGERBLUE" layoutX="1776.0" layoutY="769.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_4" />
-            <String fx:value="player_4_bg" />
-            <String fx:value="player_bg" />
-         </styleClass>
-      </Ellipse>
-      <Ellipse fx:id="p6InfoBg" fill="DODGERBLUE" layoutX="1776.0" layoutY="932.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_6" />
-            <String fx:value="player_6_bg" />
-            <String fx:value="player_bg" />
-         </styleClass>
-      </Ellipse>
-      <Circle fx:id="p5IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="112.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_5" />
-            <String fx:value="player_5_icon" />
-            <String fx:value="player_icon" />
-         </styleClass>
-      </Circle>
-      <Circle fx:id="p3IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="280.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_3" />
-            <String fx:value="player_3_icon" />
-            <String fx:value="player_icon" />
-         </styleClass>
-      </Circle>
-      <Circle fx:id="p1IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="440.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_1" />
-            <String fx:value="player_1_icon" />
-            <String fx:value="player_icon" />
-         </styleClass>
-      </Circle>
-      <Circle fx:id="p2IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="605.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_2" />
-            <String fx:value="player_2_icon" />
-            <String fx:value="player_icon" />
-         </styleClass>
-      </Circle>
-      <Circle fx:id="p4IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="768.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_4" />
-            <String fx:value="player_4_icon" />
-            <String fx:value="player_icon" />
-         </styleClass>
-      </Circle>
-      <Circle fx:id="p6IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="932.0" radius="70.0" stroke="BLACK" strokeType="INSIDE">
-         <styleClass>
-            <String fx:value="player_6" />
-            <String fx:value="player_6_icon" />
-            <String fx:value="player_icon" />
-         </styleClass>
-      </Circle>
+      <Ellipse fx:id="p5InfoBg" fill="DODGERBLUE" layoutX="1766.0" layoutY="112.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
+      <Ellipse fx:id="p3InfoBg" fill="DODGERBLUE" layoutX="1766.0" layoutY="280.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
+      <Ellipse fx:id="p1InfoBg" fill="DODGERBLUE" layoutX="1775.0" layoutY="440.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
+      <Ellipse fx:id="p2InfoBg" fill="DODGERBLUE" layoutX="1775.0" layoutY="605.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
+      <Ellipse fx:id="p4InfoBg" fill="DODGERBLUE" layoutX="1776.0" layoutY="769.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
+      <Ellipse fx:id="p6InfoBg" fill="DODGERBLUE" layoutX="1776.0" layoutY="932.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p5IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="112.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p3IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="280.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p1IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="440.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p2IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="605.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p4IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="768.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p6IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="932.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="prepEast" fitHeight="217.0" fitWidth="188.0" layoutX="357.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/map/prep_buildings_east.png" />
@@ -522,7 +451,7 @@
             <String fx:value="upper_main" />
          </styleClass>
       </ImageView>
-      <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
+      <Button fx:id="pauseButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
       <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="24.0" layoutY="22.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/pause_icon.png" />
@@ -535,5 +464,99 @@
       <ImageView fx:id="p4Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="p6Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="872.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="24.0" layoutY="941.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="445.0" layoutY="244.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="388.0" layoutY="140.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="529.0" layoutY="117.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="529.0" layoutY="328.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="327.0" layoutY="296.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="339.0" layoutY="444.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="474.0" layoutY="448.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="380.0" layoutY="502.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="304.0" layoutY="558.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="422.0" layoutY="585.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="862.0" layoutY="86.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="909.0" layoutY="144.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1187.0" layoutY="63.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1278.0" layoutY="172.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1169.0" layoutY="174.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1361.0" layoutY="252.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="975.0" layoutY="233.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1040.0" layoutY="188.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1092.0" layoutY="273.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1210.0" layoutY="273.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1288.0" layoutY="281.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="998.0" layoutY="314.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1142.0" layoutY="314.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1224.0" layoutY="424.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1295.0" layoutY="401.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1238.0" layoutY="500.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="621.0" layoutY="680.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="589.0" layoutY="739.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="604.0" layoutY="790.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="664.0" layoutY="830.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="738.0" layoutY="789.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="942.0" layoutY="830.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="904.0" layoutY="974.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="918.0" layoutY="1030.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="983.0" layoutY="995.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1045.0" layoutY="906.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1124.0" layoutY="951.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1073.0" layoutY="1011.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1163.0" layoutY="853.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1017.0" layoutY="705.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1052.0" layoutY="608.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1146.0" layoutY="685.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1226.0" layoutY="747.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1288.0" layoutY="812.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1428.0" layoutY="720.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1342.0" layoutY="629.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1186.0" layoutY="601.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="troops1" layoutX="373.0" layoutY="145.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops0" layoutX="514.0" layoutY="122.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops2" layoutX="312.0" layoutY="301.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops3" layoutX="430.0" layoutY="249.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops4" layoutX="514.0" layoutY="333.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops5" layoutX="324.0" layoutY="449.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops6" layoutX="459.0" layoutY="453.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops7" layoutX="365.0" layoutY="507.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops8" layoutX="289.0" layoutY="563.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops9" layoutX="407.0" layoutY="591.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops10" layoutX="606.0" layoutY="687.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops11" layoutX="574.0" layoutY="744.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops12" layoutX="589.0" layoutY="795.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops13" layoutX="649.0" layoutY="835.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops14" layoutX="723.0" layoutY="795.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops15" layoutX="849.0" layoutY="91.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops16" layoutX="894.0" layoutY="149.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops17" layoutX="1172.0" layoutY="68.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops18" layoutX="1025.0" layoutY="193.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops19" layoutX="1154.0" layoutY="179.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops20" layoutX="1263.0" layoutY="179.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops21" layoutX="960.0" layoutY="238.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops22" layoutX="1077.0" layoutY="279.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops23" layoutX="1129.0" layoutY="320.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops24" layoutX="1196.0" layoutY="279.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops25" layoutX="1273.0" layoutY="286.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops26" layoutX="1346.0" layoutY="258.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops27" layoutX="983.0" layoutY="319.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops28" layoutX="1209.0" layoutY="429.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops29" layoutX="1280.0" layoutY="406.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops30" layoutX="1224.0" layoutY="506.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops31" layoutX="1037.0" layoutY="613.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops32" layoutX="1171.0" layoutY="605.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops33" layoutX="1327.0" layoutY="635.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops34" layoutX="1002.0" layoutY="710.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops35" layoutX="1135.0" layoutY="690.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops36" layoutX="1212.0" layoutY="753.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops37" layoutX="1413.0" layoutY="725.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops38" layoutX="928.0" layoutY="835.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops39" layoutX="1148.0" layoutY="858.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops40" layoutX="1273.0" layoutY="817.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops41" layoutX="1030.0" layoutY="911.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops42" layoutX="1109.0" layoutY="956.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops43" layoutX="889.0" layoutY="979.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops44" layoutX="968.0" layoutY="1002.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops45" layoutX="1058.0" layoutY="1016.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops46" layoutX="904.0" layoutY="1035.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
    </children>
 </Pane>

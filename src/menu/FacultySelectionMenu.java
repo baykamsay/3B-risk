@@ -1,7 +1,8 @@
 package menu;
 
 
-import javafx.application.Platform;
+import game.player.faculties.*;
+import game.player.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,6 +18,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent> {
 
     private static final int MAX_SELECTED = 6;
@@ -24,7 +27,6 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
     private static final String[] ICON_PATHS = {"img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png"};
     private static final String[] SELECTED_ICON_PATHS = {"img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png"};
     private static final String[] ABILITY_DESCRIPTIONS = {"Everything by Design: Once a turn, you may choose to swap the result of one of your die rolls with the opponent","Eastern Affinity: You win ties when attacking in the East region.", "The Moderate Depression: Once a turn, you may reduce 1 from the dice rolls of the enemy.", "Reeducate: When you draw a new Objective card, you may discard it and draw another one.", "Knowledge Above All: Once a game, reveal all other players' Objective cards.", "The Pen is Mightier: If the attacker has more armies, gain an extra die.", "Lawyered: Once a turn, you may choose to redo a dice roll.", "Hostile Takeover: Once a game, take over an opponent's territory along with the soldiers.", "Over-Engineered: You can't roll a 1.", "Smoke and Mirrors: Once a game, you may choose to play an extra turn right after your normal one."};
-
     private int width, height;
     private int selected;
     private boolean[] selectedFaculties;
@@ -35,8 +37,10 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
     private ImageView[] icons;
     private Label[] labels;
     private HBox[] elements;
+    private int saveSlot;
 
-    public FacultySelectionMenu(int width, int height) {
+    public FacultySelectionMenu(int width, int height, int saveSlot) {
+        this.saveSlot = saveSlot;
         this.width = width;
         this.height = height;
         selected = 0;
@@ -64,7 +68,49 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
     public void handle(ActionEvent actionEvent) {
         if( selected >= 2) {
             if (mgr.forceMaximized()) {
-                mgr.testMap();
+                ArrayList<Player> players = new ArrayList<>();
+                for(int i = 0; i < 10; i++){
+                    if(selectedFaculties[i]){
+                        switch(i) {
+                            case 0:
+                                players.add(new Player(new Art()));
+                                break;
+                            case 1:
+                                players.add(new Player(new Fas()));
+                                break;
+                            case 2:
+                                players.add(new Player(new Feass()));
+                                break;
+                            case 3:
+                                players.add(new Player(new Fedu()));
+                                break;
+                            case 4:
+                                players.add(new Player(new Fen()));
+                                break;
+                            case 5:
+                                players.add(new Player(new Ibef()));
+                                break;
+                            case 6:
+                                players.add(new Player(new Law()));
+                                break;
+                            case 7:
+                                players.add(new Player(new Man()));
+                                break;
+                            case 8:
+                                players.add(new Player(new Mf()));
+                                break;
+                            case 9:
+                                players.add(new Player(new Mssf()));
+                                break;
+                        }
+                    }
+                }
+
+                try {
+                    mgr.startGameEngine(saveSlot, players);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

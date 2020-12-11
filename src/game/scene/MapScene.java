@@ -1,74 +1,37 @@
 package game.scene;
 
-//import game.GameEngine;
 import javafx.fxml.FXMLLoader;
 import game.GameEngine;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 import menu.GameMenuManager;
 import menu.MenuState;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-//implementing menustate to test for now, remove later
-public class MapScene implements MenuState{
+public class MapScene {
 
     private int width, height;
     private Scene scene;
-    private MenuState state;
-    private GameEngine engine;
-    private GameMenuManager mgr;
-    private String stateName;
+    private MapSceneController controller;
 
-    public MapScene(int width, int height, String stateName) {
+    public MapScene(int width, int height) {
         this.height = height;
         this.width = width;
-        this.stateName = stateName;
     }
 
-    public void update() {
-    }
-
-    @Override
-    public Scene createScene(GameMenuManager mgr) {
+    public Scene createScene() {
         try {
-            init(true);
+            init();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return scene;
     }
 
-    public Scene createScene(GameMenuManager mgr, GameEngine engine, MenuState state) {
-        this.state = state;
-        this.engine = engine;
-        this.mgr = mgr;
-//        init(mgr.getMaximized());
-        try {
-            init(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return scene;
-    }
-
-    public Scene createScene(GameMenuManager mgr, MenuState state) {
-        return null;
-    }
-
-    public void init(boolean maximized) throws IOException {
+    public void init() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         URL fxmlUrl = getClass().getResource("../../fxml/map.fxml");
         loader.setLocation(fxmlUrl);
@@ -77,6 +40,11 @@ public class MapScene implements MenuState{
         Pane map = loader.load();
         root.getChildren().addAll(map);
         root.setAlignment(Pos.CENTER);
+        this.controller = loader.getController();
         scene = new Scene(root,width,height);
+    }
+
+    public MapSceneController getController(){
+        return controller;
     }
 }

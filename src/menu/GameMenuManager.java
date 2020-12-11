@@ -1,5 +1,8 @@
 package menu;
 
+import game.GameEngine;
+import game.SoundEngine;
+import game.player.Player;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -9,21 +12,20 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 
 public class GameMenuManager extends Application implements EventHandler<ActionEvent> {
 
+    private Launcher launcher;
+
     private boolean isMaximized;
-    // private SoundEngine soundEngine;
+    private SoundEngine soundEngine;
     private static final int WINDOWED_WIDTH = 1024;
     private static final int WINDOWED_HEIGHT = 1024;
     private int width, height;
@@ -32,11 +34,16 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     private Stage window;
     boolean displayChanged;
 
-    // move these to sound engine when implemented
-    private boolean musicMuted, soundFXMuted;
-    private double musicValue, soundFXValue;
-    private MediaPlayer soundEngine;
-    private AudioClip buttonSound;
+
+
+    public GameMenuManager(Launcher launcher){
+        this.launcher = launcher;
+    }
+
+    public GameMenuManager(Launcher launcher, SoundEngine soundEngine){
+        this.launcher = launcher;
+        this.soundEngine = soundEngine;
+    }
 
     public static void main(String[] args) {
         launch(args);
@@ -47,24 +54,9 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         width = WINDOWED_WIDTH;
         height = WINDOWED_HEIGHT;
         isMaximized = false;
-        musicMuted = false;
-        soundFXMuted = false;
-        displayChanged = false;
-        musicValue = 15.0;
-        soundFXValue = 100.0;
-
-        soundEngine = new MediaPlayer(new Media(new File("src\\sound\\menu_music.mp3").toURI().toString()));
-        soundEngine.setMute(musicMuted);
-        soundEngine.setVolume(musicValue / 100.0);
-        soundEngine.setOnEndOfMedia(() -> {
-            soundEngine.seek(Duration.ZERO);
-            soundEngine.play();
-        });
-        soundEngine.play();
-
-        buttonSound = new AudioClip(new File("src\\sound\\button_click.wav").toURI().toString());
-        buttonSound.setVolume(soundFXValue / 100.0);
-
+        displayChanged = true;
+        if(soundEngine == null) { this.soundEngine = new SoundEngine(); }
+        soundEngine.changeToMenuMusic();
         try {
             checkForDir();
         } catch (Exception e) {
@@ -128,16 +120,6 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
             case "Return to Main Menu":
                 back();
                 break;
-            case "STOP THE BUG":
-                menuState.update();
-                musicMuted = false;
-                soundEngine.setMute(false);
-                try {
-                    newGame();
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-                break;
         }
     }
 
@@ -178,8 +160,8 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         this.changeScene(scene);
     }
 
-    public void facultySelection(){
-        menuState = new FacultySelectionMenu(width, height);
+    public void facultySelection(int saveSlot){
+        menuState = new FacultySelectionMenu(width, height, saveSlot);
         scene = menuState.createScene(this);
         this.changeScene(scene);
     }
@@ -190,10 +172,10 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         this.changeScene(scene);
     }
 
-    public void testMap(){
-        menuState = new game.scene.MapScene(width,height,"");
-        scene = menuState.createScene(this);
-        this.changeScene(scene);
+    public void startGameEngine(int saveSlot, ArrayList<Player> players) throws Exception {
+        this.close();
+        GameEngine game = new GameEngine(saveSlot, width,height, players, soundEngine, launcher);
+        game.start(window);
     }
 
     public void exit(){
@@ -270,19 +252,17 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public boolean getMusicMuted(){
-        return musicMuted;
+        return soundEngine.isMusicMuted();
     }
 
-    public boolean getSoundFXMuted(){
-        return soundFXMuted;
-    }
+    public boolean getSoundFXMuted(){ return soundEngine.isSoundFXMuted(); }
 
     public double getMusicValue(){
-        return musicValue;
+        return soundEngine.getMusicVolume();
     }
 
     public double getSoundFXValue(){
-        return soundFXValue;
+        return soundEngine.getSoundFXVolume();
     }
 
     public void setMaximized(boolean maximized){
@@ -299,26 +279,26 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public void setMusicMuted(boolean mute){
-        this.musicMuted = mute;
-        soundEngine.setMute(musicMuted);
+        soundEngine.setMusicMuted(mute);
     }
 
     public void setSoundFXMuted(boolean mute){
-        this.soundFXMuted = mute;
+        soundEngine.setSoundFXMuted(mute);
     }
 
     public void setSoundFXValue(double value){
-        this.soundFXValue = value;
-        buttonSound.setVolume( soundFXValue / 100.0);
+        soundEngine.setSoundFXVolume(value);
     }
 
     public void setMusicValue(double value){
-        this.musicValue = value;
-        soundEngine.setVolume(musicValue / 100.0);
+        soundEngine.setMusicVolume(value);
     }
 
     public void playButtonSound(){
-        if(!soundFXMuted){ buttonSound.play(); }
+        soundEngine.playButtonSound();
     }
 
+    public void close(){
+        window.close();
+    }
 }
