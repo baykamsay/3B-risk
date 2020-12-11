@@ -7,8 +7,12 @@ import game.player.Territory;
 import javafx.event.ActionEvent;
 
 public class AttackingPlanningState extends PlanningState implements GameState {
-    public AttackingPlanningState(int width, int height, GameEngine engine) {
+
+    public AttackingState attack;
+
+    public AttackingPlanningState(int width, int height, GameEngine engine,AttackingState attack) {
         super(width, height, engine);
+        this.attack = attack;
     }
 
     //Select source and destination territories
@@ -24,16 +28,19 @@ public class AttackingPlanningState extends PlanningState implements GameState {
                     }
                 }
             }
-            else {
+            else if( destination == null){
                 Territory[] territories = engine.getMap().getTerritories();
                 for (Territory territory : territories) {
                     if ((territory.getName()).equals(e.getSource().toString())) {
                         if(source.isAdjacent(territory)) { //check if destination is adjacent to the source
                             destination = territory;
+                        }
                     }
                 }
+
             }
-        }
+            else
+                attack.switchState(new DiceSelectionState(width,height,engine,this));
     }
 
 

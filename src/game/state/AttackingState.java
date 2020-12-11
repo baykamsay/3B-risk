@@ -15,43 +15,25 @@ public class AttackingState implements GameState {
     public GameEngine engine;
     public GameMenuManager mgr;
     public int width, height;
-    public Territory destination;
-    public Territory source;
-    public int attackingArmies;
-    public int defendingArmies;
-    public DiceSelectionState diceSelectionState;
-    public AttackingPlanningState AttackPlanningState;
-    public WarState warState;
+    public GameState currentState;
 
     public AttackingState(int width, int height, GameEngine engine) {
         this.width = width;
         this.height = height;
         this.engine = engine;
+        currentState = new AttackingPlanningState(width,height,engine,this);
     }
 
     public void mapSelect(ActionEvent e){
         if(!(e.getSource().toString().equals("PASS"))){
-            //plan attacking
-            AttackPlanningState = new AttackingPlanningState(width, height, engine);
-            destination = AttackPlanningState.getDestination();
-            source = AttackPlanningState.getSource();
-            //select armies
-            diceSelectionState = new DiceSelectionState(width, height, engine);
-
-            //war - not complete
-            warState = new WarState(width, height, engine); //pass armies as parameters?
+            currentState.mapSelect(e);
         }
+        else
+            engine.switchState(new FortifyState(width,height,engine));
     }
 
-    @Override
-    public void update() {
-        mapScene.update();
-    }
-
-    @Override
-    public Scene createScene() {
-        mapScene = new MapScene(width, height, "Attacking");
-        return scene;
+    public void switchState(GameState state){
+        currentState = state;
     }
 
 }
