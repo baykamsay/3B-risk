@@ -15,6 +15,8 @@ public class AttackingState implements GameState {
     public GameState currentState;
     public Territory destination; //attackPlanning will handle it
     public Territory source; //attackPlanning will handle it
+    public int attackerDice; //diceSelection w.h.i
+    public int defenderDice; //diceSelection w.h.i
 
     private AttackingState() {
         engine = GameEngine.getInstance();

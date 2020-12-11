@@ -1,11 +1,24 @@
 package game.state;
 
+import game.GameEngine;
+import game.player.Territory;
 import javafx.event.ActionEvent;
 
 public class FortifyingState implements GameState {
     private static FortifyingState instance;
 
-    private FortifyingState() {}
+    public GameEngine engine;
+    public GameState currentState;
+    public Territory destination; //fortifyPlanning will handle it
+    public Territory source; //fortifyPlanning will handle it
+    public int movingArmies; //fortifyingArmySelection will handle it
+
+    private FortifyingState() {
+        engine = GameEngine.getInstance();
+        destination = null;
+        source = null;
+        currentState = FortifyPlanningState.getInstance();
+    }
 
     public static FortifyingState getInstance() {
         if (instance == null) {
@@ -18,8 +31,15 @@ public class FortifyingState implements GameState {
         return instance;
     }
 
-    @Override
-    public void mapSelect(ActionEvent e) {
+    public void mapSelect(ActionEvent e){
+        if(!(e.getSource().toString().equals("PASS"))){
+            currentState.mapSelect(e);
+        }
+        else
+            engine.switchState(FortifyingState.getInstance());
+    }
 
+    public void switchState(GameState state){
+        currentState = state;
     }
 }
