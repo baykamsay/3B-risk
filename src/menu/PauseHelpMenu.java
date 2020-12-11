@@ -30,9 +30,9 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
 
     private final int NO_OF_PAGES = 3;
 
-    public PauseHelpMenu(int width, int height, SoundEngine soundEngine, PauseMenu pauseMenu){
+    public PauseHelpMenu(int width, int height, PauseMenu pauseMenu){
         pageNo = 1;
-        this.soundEngine = soundEngine;
+        this.soundEngine = SoundEngine.getInstance();
         this.pauseMenu = pauseMenu;
         helpPage = new ImageView();
         this.width = width;

@@ -8,6 +8,8 @@ import javafx.util.Duration;
 import java.io.File;
 
 public class SoundEngine {
+
+    private static SoundEngine instance;
     private final Media MENU_MUSIC = new Media(new File("src\\sound\\menu_music.mp3").toURI().toString());
     private final Media GAME_MUSIC = new Media(new File("src\\sound\\game_music.mp3").toURI().toString());
     private MediaPlayer music;
@@ -15,7 +17,7 @@ public class SoundEngine {
     private double musicVolume, soundFXVolume;
     private final AudioClip buttonSound = new AudioClip(new File("src\\sound\\button_click.wav").toURI().toString());
 
-    public SoundEngine(){
+    private SoundEngine(){
         musicMuted = false;
         soundFXMuted = false;
         musicVolume = 0.15;
@@ -23,6 +25,17 @@ public class SoundEngine {
         buttonSound.setVolume(soundFXVolume);
         music = new MediaPlayer(MENU_MUSIC);
         initMusic();
+    }
+
+    public static SoundEngine getInstance() {
+        if (instance == null) {
+            synchronized (SoundEngine.class) {
+                if (instance == null) {
+                    instance = new SoundEngine();
+                }
+            }
+        }
+        return instance;
     }
 
     public boolean isMusicMuted() {

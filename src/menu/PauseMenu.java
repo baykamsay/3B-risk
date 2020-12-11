@@ -22,10 +22,10 @@ public class PauseMenu implements EventHandler<ActionEvent>{
     private SoundEngine soundEngine;
     private GameEngine gameEngine;
 
-    public PauseMenu(int width, int height, SoundEngine soundEngine, GameEngine gameEngine){
+    public PauseMenu(int width, int height, GameEngine gameEngine){
         this.width = width;
         this.height = height;
-        this.soundEngine = soundEngine;
+        this.soundEngine = SoundEngine.getInstance();
         this.gameEngine = gameEngine;
     }
 
@@ -89,12 +89,12 @@ public class PauseMenu implements EventHandler<ActionEvent>{
     }
 
     public void openSettings(){
-        PauseSettingsMenu pauseSettings = new PauseSettingsMenu(width,height,soundEngine, this);
+        PauseSettingsMenu pauseSettings = new PauseSettingsMenu(width,height,this);
         gameEngine.setScene(pauseSettings.createScene());
     }
 
     private void openHelp() {
-        PauseHelpMenu pauseHelp = new PauseHelpMenu(width,height,soundEngine,this);
+        PauseHelpMenu pauseHelp = new PauseHelpMenu(width,height,this);
         gameEngine.setScene(pauseHelp.createScene());
     }
 

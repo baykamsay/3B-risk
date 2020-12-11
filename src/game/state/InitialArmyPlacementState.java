@@ -3,20 +3,29 @@ package game.state;
 import game.GameEngine;
 import game.player.Player;
 import game.player.Territory;
-import game.scene.MapScene;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
-import menu.GameMenuManager;
 import java.util.ArrayList;
 
 public class InitialArmyPlacementState implements GameState {
 
+    private static InitialArmyPlacementState instance;
     private GameEngine engine;
     private int currentPlayer;
 
-    public InitialArmyPlacementState(GameEngine engine) {
-        this.engine = engine;
+    private InitialArmyPlacementState() {
+        engine = GameEngine.getInstance();
         currentPlayer = 0;
+    }
+
+    public static InitialArmyPlacementState getInstance() {
+        if (instance == null) {
+            synchronized (InitialArmyPlacementState.class) {
+                if (instance == null) {
+                    instance = new InitialArmyPlacementState();
+                }
+            }
+        }
+        return instance;
     }
 
     // When player selects a map territory
@@ -46,7 +55,7 @@ public class InitialArmyPlacementState implements GameState {
         }
         if (stateOver) {
             // fix
-            engine.switchState(new ArmyPlacementState(engine));
+            engine.switchState(ArmyPlacementState.getInstance());
         }
     }
 }

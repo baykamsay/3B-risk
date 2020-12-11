@@ -32,10 +32,10 @@ public class PauseSettingsMenu implements EventHandler<ActionEvent>{
     private SoundEngine soundEngine;
     private PauseMenu pauseMenu;
 
-    public PauseSettingsMenu(int width, int height, SoundEngine soundEngine, PauseMenu pauseMenu){
+    public PauseSettingsMenu(int width, int height, PauseMenu pauseMenu){
         this.width = width;
         this.height = height;
-        this.soundEngine = soundEngine;
+        this.soundEngine = SoundEngine.getInstance();
         this.pauseMenu = pauseMenu;
     }
 

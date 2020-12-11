@@ -2,24 +2,34 @@ package game.state;
 
 import game.GameEngine;
 import game.player.Territory;
-import game.scene.MapScene;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
-import menu.GameMenuManager;
 
 
 public class DiceSelectionState implements GameState {
+
+    private static DiceSelectionState instance;
     private GameEngine engine;
     private AttackingState attack;
     private int currentPlayer, leastDiceNo;
     private Territory territory;
 
-    public DiceSelectionState(GameEngine engine, AttackingState attack){
-        this.engine = engine;
-        this.attack = attack;
+    private DiceSelectionState() {
+        engine = GameEngine.getInstance();
+        attack = AttackingState.getInstance();
         territory = null;
         currentPlayer = 0;
         leastDiceNo = 0;
+    }
+
+    public static DiceSelectionState getInstance() {
+        if (instance == null) {
+            synchronized (DiceSelectionState.class) {
+                if (instance == null) {
+                    instance = new DiceSelectionState();
+                }
+            }
+        }
+        return instance;
     }
 
     public void mapSelect(ActionEvent e){

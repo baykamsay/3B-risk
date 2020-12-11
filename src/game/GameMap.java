@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class GameMap {
 
+    private static GameMap instance;
     private static final int TOTAL_TERRITORY_COUNT = 47;
 //    private static final int EAST_TERRITORY_COUNT = 10;
 //    private static final int ISLAND_TERRITORY_COUNT = 5;
@@ -30,7 +31,7 @@ public class GameMap {
     private ArrayList<Territory> lowerMain;
 
     // Initialize new game
-    public GameMap(){
+    private GameMap(){
         territories = new Territory[TOTAL_TERRITORY_COUNT];
         east = new ArrayList<>();
         island = new ArrayList<>();
@@ -39,12 +40,23 @@ public class GameMap {
         initTerritories();
     }
 
+    public static GameMap getInstance() {
+        if (instance == null) {
+            synchronized (GameMap.class) {
+                if (instance == null) {
+                    instance = new GameMap();
+                }
+            }
+        }
+        return instance;
+    }
+
     // Initialize saved game
-    public GameMap(int saveSlot){
+    public void loadGame(int saveSlot) {
 
     }
 
-    public void initTerritories(){
+    private void initTerritories(){
 
         // Initialize territories
         for(int i = 0; i <TOTAL_TERRITORY_COUNT; i++){

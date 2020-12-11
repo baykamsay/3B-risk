@@ -6,13 +6,30 @@ import game.player.Territory;
 
 import javafx.event.ActionEvent;
 
-public class AttackingPlanningState extends PlanningState implements GameState {
+public class AttackingPlanningState implements GameState {
 
-    public AttackingState attack;
+    private static AttackingPlanningState instance;
+    private AttackingState attack;
+    private GameEngine engine;
+    private Territory destination;
+    private Territory source;
 
-    public AttackingPlanningState(GameEngine engine,AttackingState attack) {
-        super(engine);
-        this.attack = attack;
+    private AttackingPlanningState() {
+        attack = AttackingState.getInstance();
+        engine = GameEngine.getInstance();
+        destination = null;
+        source = null;
+    }
+
+    public static AttackingPlanningState getInstance() {
+        if (instance == null) {
+            synchronized (AttackingPlanningState.class) {
+                if (instance == null) {
+                    instance = new AttackingPlanningState();
+                }
+            }
+        }
+        return instance;
     }
 
     //Select source and destination territories
@@ -40,8 +57,6 @@ public class AttackingPlanningState extends PlanningState implements GameState {
 
             }
             else
-                attack.switchState(new DiceSelectionState(engine, attack));
+                attack.switchState(DiceSelectionState.getInstance());
     }
-
-
 }

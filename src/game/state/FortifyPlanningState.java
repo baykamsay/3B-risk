@@ -5,10 +5,30 @@ import game.player.Territory;
 import javafx.event.ActionEvent;
 
 
-public class FortifyPlanningState extends PlanningState implements GameState {
+public class FortifyPlanningState implements GameState {
 
-    public FortifyPlanningState(GameEngine engine) {
-        super(engine);
+    private static FortifyPlanningState instance;
+    private FortifyingState fortify;
+    private GameEngine engine;
+    private Territory destination;
+    private Territory source;
+
+    private FortifyPlanningState() {
+        fortify = FortifyingState.getInstance();
+        engine = GameEngine.getInstance();
+        destination = null;
+        source = null;
+    }
+
+    public static FortifyPlanningState getInstance() {
+        if (instance == null) {
+            synchronized (FortifyPlanningState.class) {
+                if (instance == null) {
+                    instance = new FortifyPlanningState();
+                }
+            }
+        }
+        return instance;
     }
 
     //Select source and destination territories

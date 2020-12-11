@@ -34,15 +34,9 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     private Stage window;
     boolean displayChanged;
 
-
-
     public GameMenuManager(Launcher launcher){
         this.launcher = launcher;
-    }
-
-    public GameMenuManager(Launcher launcher, SoundEngine soundEngine){
-        this.launcher = launcher;
-        this.soundEngine = soundEngine;
+        this.soundEngine = SoundEngine.getInstance();
     }
 
     public static void main(String[] args) {
@@ -55,7 +49,6 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         height = WINDOWED_HEIGHT;
         isMaximized = false;
         displayChanged = true;
-        if(soundEngine == null) { this.soundEngine = new SoundEngine(); }
         soundEngine.changeToMenuMusic();
         try {
             checkForDir();
@@ -174,7 +167,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     public void startGameEngine(int saveSlot, ArrayList<Player> players) throws Exception {
         this.close();
-        GameEngine game = new GameEngine(saveSlot, width,height, players, soundEngine, launcher);
+        GameEngine game = GameEngine.init(saveSlot, width,height, players, launcher);
         game.start(window);
     }
 

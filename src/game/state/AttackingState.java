@@ -10,16 +10,28 @@ import menu.MenuState;
 
 public class AttackingState implements GameState {
 
+    private static AttackingState instance;
     public GameEngine engine;
     public GameState currentState;
     public Territory destination; //attackPlanning will handle it
     public Territory source; //attackPlanning will handle it
 
-    public AttackingState(GameEngine engine) {
-        this.engine = engine;
+    private AttackingState() {
+        engine = GameEngine.getInstance();
         destination = null;
         source = null;
-        currentState = new AttackingPlanningState(engine,this);
+        currentState = AttackingPlanningState.getInstance();
+    }
+
+    public static AttackingState getInstance() {
+        if (instance == null) {
+            synchronized (AttackingState.class) {
+                if (instance == null) {
+                    instance = new AttackingState();
+                }
+            }
+        }
+        return instance;
     }
 
     public void mapSelect(ActionEvent e){
@@ -27,7 +39,7 @@ public class AttackingState implements GameState {
             currentState.mapSelect(e);
         }
         else
-            engine.switchState(new FortifyState(engine));
+            engine.switchState(FortifyingState.getInstance());
     }
 
     public void switchState(GameState state){

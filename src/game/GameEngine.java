@@ -17,6 +17,8 @@ import menu.PauseMenu;
 import java.util.ArrayList;
 
 public class GameEngine extends Application {
+
+    private static GameEngine instance;
     public GameState currentState;
     public GameMap map;
     public MapScene mapScene;
@@ -37,23 +39,42 @@ public class GameEngine extends Application {
     private Scene gameScene;
     private Stage window;
 
-    public GameEngine(int saveSlot, int width, int height, SoundEngine soundEngine, Launcher launcher){
+//    public GameEngine() {
+//        super();
+//        synchronized (GameEngine.class) {
+//            if (instance != null) throw new UnsupportedOperationException(
+//                    getClass() + "is singleton"
+//            );
+//            instance = this;
+//        }
+//    }
+
+    private GameEngine(int saveSlot, int width, int height, Launcher launcher){
+        super();
         //variables will be initialized according to the save file(file parameter?)
         this.saveSlot = saveSlot;
         this.height = height;
         this.width = width;
-        this.soundEngine = soundEngine;
+        this.soundEngine = SoundEngine.getInstance();
         this.launcher = launcher;
         soundEngine.changeToGameMusic();
+//
+//        synchronized (GameEngine.class) {
+//            if (instance != null) throw new UnsupportedOperationException(
+//                    getClass() + "is singleton"
+//            );
+//            instance = this;
+//        }
     }
 
-    public GameEngine(int saveSlot,  int width, int height, ArrayList<Player> players, SoundEngine soundEngine, Launcher launcher){
+    private GameEngine(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher){
+        super();
         this.height = height;
         this.width = width;
         this.saveSlot = saveSlot;
         this.players = new ArrayList<Player>();
         this.objectives = new ArrayList<Objective>();
-        this.soundEngine = soundEngine;
+        this.soundEngine = SoundEngine.getInstance();
         this.launcher = launcher;
         soundEngine.changeToGameMusic();
         for (int i = 0; i < players.size(); i++) {
@@ -64,6 +85,41 @@ public class GameEngine extends Application {
         currentState = null;
         playerTurn = 0; //first player will go first, which is stored in index 0
         winner = null;
+//
+//        synchronized (GameEngine.class) {
+//            if (instance != null) throw new UnsupportedOperationException(
+//                    getClass() + "is singleton"
+//            );
+//            instance = this;
+//        }
+    }
+
+    public static GameEngine init(int saveSlot, int width, int height, Launcher launcher) {
+        if (instance == null) {
+            synchronized (GameEngine.class) {
+                if (instance == null) {
+                    instance = new GameEngine(saveSlot, width, height, launcher);
+                }
+            }
+        }
+        return instance;
+    }
+
+    public static GameEngine init(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher) {
+        if (instance == null) {
+            // yey?
+            synchronized (GameEngine.class) {
+                if (instance == null) {
+                    instance = new GameEngine(saveSlot, width, height, players, launcher);
+                }
+            }
+        }
+        return instance;
+    }
+
+    // first call init before using getInstance()
+    public static GameEngine getInstance() {
+        return instance;
     }
 
     public int getPlayerTurn() {
@@ -145,7 +201,7 @@ public class GameEngine extends Application {
     }
 
     public void setupMapScene(){
-        map = new GameMap();
+        map = GameMap.getInstance();
         mapScene = new MapScene(width, height);
         this.gameScene = mapScene.createScene();
         controller = mapScene.getController();
@@ -159,7 +215,7 @@ public class GameEngine extends Application {
     }
 
     public void pause(){
-        PauseMenu pause = new PauseMenu(width,height,soundEngine,this);
+        PauseMenu pause = new PauseMenu(width,height,this);
         Scene pauseScene = pause.createScene();
         pauseScene.getStylesheets().add("css/menu_stylesheet.css");
         window.setScene(pauseScene);
@@ -177,7 +233,7 @@ public class GameEngine extends Application {
     public void backToMainMenu(){
         // Save the file here
         window.close();
-        GameMenuManager mgr = new GameMenuManager(launcher, soundEngine);
+        GameMenuManager mgr = new GameMenuManager(launcher);
         mgr.start(window);
     }
 }

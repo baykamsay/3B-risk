@@ -12,13 +12,25 @@ import menu.MenuState;
 import java.util.ArrayList;
 
 public class ArmyPlacementState implements GameState {
+    private static ArmyPlacementState instance;
     private GameEngine engine;
     private int currentPlayer, addibleArmies;
 
-    public ArmyPlacementState(GameEngine engine) {
-        this.engine = engine;
+    private ArmyPlacementState() {
+        engine = GameEngine.getInstance();
         currentPlayer = 0;
         addibleArmies = 0;
+    }
+
+    public static ArmyPlacementState getInstance() {
+        if (instance == null) {
+            synchronized (ArmyPlacementState.class) {
+                if (instance == null) {
+                    instance = new ArmyPlacementState();
+                }
+            }
+        }
+        return instance;
     }
 
     @Override
