@@ -55,7 +55,7 @@ public class Territory {
         this.ca = ruler.getCa();
     }
 
-    //isRuler checks Territory's ruler. Returns true if the given player matches with the ruler otherwise returns false.
+    //isRuler checks Territory's ruler. Returns true if the given player's faculty matches with the ruler's faculty otherwise returns false.
     public Boolean isRuler(Territory t){
         if (t.getRuler() == ruler){
             return true;
