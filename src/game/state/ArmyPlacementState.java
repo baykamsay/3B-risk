@@ -27,17 +27,6 @@ public class ArmyPlacementState implements GameState {
     }
 
     @Override
-    public void update() {
-        mapScene.update();
-    }
-
-    @Override
-    public Scene createScene() {
-        mapScene = new MapScene(width, height, "Army Placement");
-        return scene;
-    }
-
-    @Override
     public void mapSelect(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();
         ArrayList<Player> players = engine.getPlayers();

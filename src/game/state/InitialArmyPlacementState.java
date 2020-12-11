@@ -24,17 +24,6 @@ public class InitialArmyPlacementState implements GameState {
         currentPlayer = 0;
     }
 
-    @Override
-    public void update() {
-        mapScene.update();
-    }
-
-    @Override
-    public Scene createScene() {
-        mapScene = new MapScene(width, height, "Initial Army Placement");
-        return scene;
-    }
-
     // When player selects a map territory
     public void mapSelect(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();

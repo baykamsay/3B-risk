@@ -37,18 +37,6 @@ public class PlanningState implements GameState {
     }
 
     @Override
-    public void update() {
-        mapScene.update();
-    }
-
-    @Override
-    public Scene createScene() {
-        this.mgr = mgr;
-        mapScene = new MapScene(width, height, "Planning");
-        return scene;
-    }
-
-    @Override
     public void mapSelect(ActionEvent e) {
 
     }

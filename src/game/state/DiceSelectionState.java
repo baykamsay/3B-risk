@@ -25,19 +25,6 @@ public class DiceSelectionState implements GameState {
         leastDiceNo = 0;
     }
 
-    @Override
-    public void update() {
-        mapScene.update();
-    }
-
-    @Override
-    public Scene createScene() {
-        this.mgr = mgr;
-        mapScene = new MapScene(width, height, "Dice Selection");
-        scene = mapScene.createScene(mgr, engine, this);
-        return scene;
-    }
-
     public void mapSelect(ActionEvent e){
         calculateLeastDiceNo();
         //pass leastDiceNo && e to the pop up ui, it will return the selected number of dice
