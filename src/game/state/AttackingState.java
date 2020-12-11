@@ -12,9 +12,13 @@ public class AttackingState implements GameState {
 
     public GameEngine engine;
     public GameState currentState;
+    public Territory destination; //attackPlanning will handle it
+    public Territory source; //attackPlanning will handle it
 
     public AttackingState(GameEngine engine) {
         this.engine = engine;
+        destination = null;
+        source = null;
         currentState = new AttackingPlanningState(engine,this);
     }
 
