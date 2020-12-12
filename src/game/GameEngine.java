@@ -223,4 +223,8 @@ public class GameEngine extends Application {
     public Player getCurrentPlayer() {
         return players.get(playerTurn);
     }
+
+    public void setPlayerTurn(int i) {
+        playerTurn = i;
+    }
 }
