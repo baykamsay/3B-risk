@@ -41,7 +41,7 @@ public class ArmyPlacementState implements GameState {
         if (addibleArmyNo == 0) {
             for (Territory territory : territories) {
                 if ((e.getSource().toString() == territory.getName()) && (engine.getCurrentPlayer().getFaculty() == territory.getRuler().getFaculty())) {
-                    //pop up ui will be implemented, it will take the user input
+                    displayArmyPlacement(e);
                     deployArmies(chosenArmyNo, territory);
                     addibleArmyNo = addibleArmyNo - chosenArmyNo;
                 }
@@ -51,6 +51,10 @@ public class ArmyPlacementState implements GameState {
         {
             engine.switchState(AttackingPlanningState.getInstance());
         }
+    }
+
+    public void displayArmyPlacement(ActionEvent e) {
+        //to do
     }
 
     public void calculateNumberOfArmies(Player p) {
