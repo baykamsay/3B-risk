@@ -10,15 +10,17 @@ public class DiceSelectionState implements GameState {
     private static DiceSelectionState instance;
     private GameEngine engine;
     private AttackingState attack;
-    private int currentPlayer, leastDiceNo;
-    private Territory territory;
+    private int currentPlayer, attackDiceNo, defendDiceNo,
+                               aChosenDice, dChosenDice;
 
     private DiceSelectionState() {
         engine = GameEngine.getInstance();
         attack = AttackingState.getInstance();
-        territory = null;
         currentPlayer = 0;
-        leastDiceNo = 0;
+        attackDiceNo = 0;
+        defendDiceNo = 0;
+        aChosenDice = 0;
+        dChosenDice = 0;
     }
 
     public static DiceSelectionState getInstance() {
@@ -33,53 +35,62 @@ public class DiceSelectionState implements GameState {
     }
 
     public void mapSelect(ActionEvent e){
-        calculateLeastDiceNo();
-        //pass leastDiceNo && e to the pop up ui, it will return the selected number of dice
-        //engine.switchState(WarState(...));
+        calculateSourceDiceNo();
+        calculateDestinationDiceNo();
+//        pass attack, defend diceNo && e to the pop up ui, it will return the selected number of dice
+        attack.setAttackingArmies(aChosenDice);
+        attack.setDefendingArmies(dChosenDice);
+        attack.switchState(WarState.getInstance());
     }
 
-    public void calculateLeastDiceNo(){
-        int troopAmount = territory.getNumOfArmies();
-        if (troopAmount > 3){
-            leastDiceNo = 3;
+    public void calculateSourceDiceNo(){
+        attack.getSource().getNumOfArmies();
+        if (attack.getSource().getNumOfArmies() > 3){
+            attackDiceNo = 3;
         }
-        else if (troopAmount == 2) {
-            leastDiceNo = 2;
+        else if (attack.getSource().getNumOfArmies() == 3) {
+            attackDiceNo = 2;
+        }
+        else if (attack.getSource().getNumOfArmies() == 2) {
+            attackDiceNo = 1;
         }
         else
         {
-            leastDiceNo = 0;
+            attackDiceNo = 0;
         }
     }
 
-//    public int getLeastDiceNo(){
-//        return leastDiceNo;
-//    }
-//
-//    public int calculateLeastDiceNo(int troopAmount){
-//        if (troopAmount > 3){
-//            leastDiceNo = 3;
-//            return leastDiceNo;
-//        }
-//        else if (troopAmount == 2) {
-//            leastDiceNo = 2;
-//            return leastDiceNo;
-//        }
-//        else
-//        {
-//            leastDiceNo = 0;
-//            return leastDiceNo;
-//        }
-//    }
-//
-////    public int getLeastDiceNo(){
-////        return leastDiceNo;
-////    }
-////
-////    public int getSelectedDiceNo(){
-////        return selectedDiceNo;
-////    }
-//
-//
-//
+    public void calculateDestinationDiceNo(){
+        if (attack.getDestination().getNumOfArmies() >= 2) {
+            defendDiceNo = 2;
+        }
+        else
+        {
+            defendDiceNo = 1;
+        }
+    }
+
+    public int getDefendDiceNo() {
+        return defendDiceNo;
+    }
+
+    public int getAttackDiceNo() {
+        return attackDiceNo;
+    }
+
+    public int getChosenDefendingDice() {
+        return dChosenDice;
+    }
+
+    public int getChosenAttackingDice() {
+        return aChosenDice;
+    }
+
+    public void setChosenDefendingDice(int d) {
+        dChosenDice = d;
+    }
+
+    public void setChosenAttackingDice(int a) {
+        aChosenDice = a;
+    }
 }
