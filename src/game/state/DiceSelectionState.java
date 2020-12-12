@@ -33,10 +33,14 @@ public class DiceSelectionState implements GameState {
         return instance;
     }
 
+    public void displayDiceSelection() {
+        // to do
+    }
+
     public void mapSelect(ActionEvent e){
         calculateSourceDiceNo();
         calculateDestinationDiceNo();
-//        pass attack, defend diceNo && e to the pop up ui, it will return the selected number of dice
+        displayDiceSelection();
         attack.setAttackingArmies(aChosenDice);
         attack.setDefendingArmies(dChosenDice);
         attack.switchState(WarState.getInstance());
@@ -69,11 +73,11 @@ public class DiceSelectionState implements GameState {
         }
     }
 
-    public int getDefendDiceNo() {
+    public int getDefendingDiceNo() {
         return defendDiceNo;
     }
 
-    public int getAttackDiceNo() {
+    public int getAttackingDiceNo() {
         return attackDiceNo;
     }
 
