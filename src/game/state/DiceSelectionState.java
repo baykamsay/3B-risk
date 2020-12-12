@@ -10,13 +10,12 @@ public class DiceSelectionState implements GameState {
     private static DiceSelectionState instance;
     private GameEngine engine;
     private AttackingState attack;
-    private int currentPlayer, attackDiceNo, defendDiceNo,
-                               aChosenDice, dChosenDice;
+    private int attackDiceNo, defendDiceNo,
+                aChosenDice, dChosenDice;
 
     private DiceSelectionState() {
         engine = GameEngine.getInstance();
         attack = AttackingState.getInstance();
-        currentPlayer = 0;
         attackDiceNo = 0;
         defendDiceNo = 0;
         aChosenDice = 0;

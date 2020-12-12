@@ -14,12 +14,13 @@ import java.util.ArrayList;
 public class ArmyPlacementState implements GameState {
     private static ArmyPlacementState instance;
     private GameEngine engine;
-    private int currentPlayer, addibleArmies;
+    private int currentPlayer, addibleArmyNo, chosenArmyNo;
 
     private ArmyPlacementState() {
         engine = GameEngine.getInstance();
         currentPlayer = 0;
-        addibleArmies = 0;
+        addibleArmyNo = 0;
+        chosenArmyNo = 0;
     }
 
     public static ArmyPlacementState getInstance() {
@@ -36,31 +37,30 @@ public class ArmyPlacementState implements GameState {
     @Override
     public void mapSelect(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();
-        ArrayList<Player> players = engine.getPlayers();
 
-        if (addibleArmies == 0) {
+        if (addibleArmyNo == 0) {
             for (Territory territory : territories) {
-                if ((e.getSource().toString() == territory.getName()) && (players.get(currentPlayer) == territory.getRuler())) {
-                    //pop up ui will be implemented
-                    //deployArmies(addedArmies, territory); *addedArmies will be returned by the pop ui
-                    //addibleArmies = addibleArmies - addedArmies;
+                if ((e.getSource().toString() == territory.getName()) && (engine.getCurrentPlayer().getFaculty() == territory.getRuler().getFaculty())) {
+                    //pop up ui will be implemented, it will take the user input
+                    deployArmies(chosenArmyNo, territory);
+                    addibleArmyNo = addibleArmyNo - chosenArmyNo;
                 }
             }
         }
         else
         {
-            //engine.switchState(AttackingState(....)
+            engine.switchState(AttackingPlanningState.getInstance());
         }
     }
 
     public void calculateNumberOfArmies(Player p) {
         if (p.getNumOfTerritory() <= 11) {
-            addibleArmies = 3;
+            addibleArmyNo = 3;
         } else {
-            addibleArmies = p.getNumOfTerritory() / 3;
+            addibleArmyNo = p.getNumOfTerritory() / 3;
         }
         if (p.getNumOfArea() > 0) {
-            addibleArmies = addibleArmies + p.getNumOfArea(); //This part's calculation will be further discussed
+            addibleArmyNo = addibleArmyNo + p.getNumOfArea(); //This part's calculation will be further discussed
         }
     }
 
@@ -68,7 +68,15 @@ public class ArmyPlacementState implements GameState {
         t.setNumOfArmies(t.getNumOfArmies() + addedArmies);
     }
 
-    public int getAddibleArmies(){
-        return addibleArmies;
+    public int getAddibleArmyNo(){
+        return addibleArmyNo;
+    }
+
+    public int getChosenArmyNo(){
+        return chosenArmyNo;
+    }
+
+    public void setChosenArmyNo(int armyNo){
+        chosenArmyNo = armyNo;
     }
 }
