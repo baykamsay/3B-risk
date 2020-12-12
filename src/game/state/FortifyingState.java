@@ -50,16 +50,8 @@ public class FortifyingState implements GameState {
         currentState = state;
     }
 
-    public Territory getDestination() {
-        return destination;
-    }
-
     public void setDestination(Territory destination) {
         this.destination = destination;
-    }
-
-    public Territory getSource() {
-        return source;
     }
 
     public void setSource(Territory source) {
