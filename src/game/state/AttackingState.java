@@ -39,6 +39,7 @@ public class AttackingState implements GameState {
     public void mapSelect(ActionEvent e){
         if(!(e.getSource().toString().equals("PASS"))){
             currentState.mapSelect(e);
+
         }
         else
             engine.switchState(FortifyingState.getInstance());

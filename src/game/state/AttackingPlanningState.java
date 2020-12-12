@@ -39,7 +39,7 @@ public class AttackingPlanningState implements GameState {
                 for (Territory territory : territories) {
                     //check the territory name && if player is the ruler && has at least 2 armies
                     if ((territory.getName()).equals(e.getSource().toString())
-                            && ((engine.getPlayers()).get(engine.getPlayerTurn()) == territory.getRuler())
+                            && (engine.getCurrentPlayer() == territory.getRuler())
                             &&  territory.getNumOfArmies() >= 2) {
                         attack.setSource(territory);
                     }
