@@ -36,7 +36,7 @@ public class FortifyingState implements GameState {
             currentState.mapSelect(e);
         }
         else
-            engine.switchState(FortifyingState.getInstance());
+            engine.playerTurn++; //turn is over
     }
 
     public void switchState(GameState state){
