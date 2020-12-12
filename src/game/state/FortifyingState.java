@@ -40,6 +40,14 @@ public class FortifyingState implements GameState {
             engine.playerTurn++; //turn is over
     }
 
+    public Territory getSource(){
+        return source;
+    }
+
+    public Territory getDestination(){
+        return destination;
+    }
+
     public void switchState(GameState state){
         currentState = state;
     }

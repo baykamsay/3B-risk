@@ -105,6 +105,10 @@ public class GameEngine extends Application {
         return playerTurn;
     }
 
+    public void setPlayerTurn(int turnNo) {
+        turn = turnNo;
+    }
+
     public GameMap getMap() {
         return map;
     }
