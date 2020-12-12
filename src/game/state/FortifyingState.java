@@ -36,11 +36,33 @@ public class FortifyingState implements GameState {
         if(!(e.getSource().toString().equals("PASS"))){
             currentState.mapSelect(e);
         }
-        else
-            engine.playerTurn++; //turn is over
     }
 
     public void switchState(GameState state){
         currentState = state;
+    }
+
+    public Territory getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Territory destination) {
+        this.destination = destination;
+    }
+
+    public Territory getSource() {
+        return source;
+    }
+
+    public void setSource(Territory source) {
+        this.source = source;
+    }
+
+    public int getMovingArmies() {
+        return movingArmies;
+    }
+
+    public void setMovingArmies(int movingArmies) {
+        this.movingArmies = movingArmies;
     }
 }
