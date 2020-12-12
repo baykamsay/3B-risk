@@ -25,10 +25,12 @@ public class FortifyingArmySelectionMenuState implements GameState{
     }
 
     public void displayArmyNumberSelection(ActionEvent e) {
-        //to do
-        //setNumOfArmies(...);
-        engine.setPlayerTurn(engine.getPlayerTurn() + 1);
-        engine.switchState(ArmyPlacementState.getInstance());
+        if (fortify.getSource().getNumOfArmies() > 1) {
+            //to do
+            //setNumOfArmies(...);
+            engine.setPlayerTurn(engine.getPlayerTurn() + 1);
+            engine.switchState(ArmyPlacementState.getInstance());
+        }
     }
 
     public void setNumOfArmies(int armies){
@@ -37,10 +39,6 @@ public class FortifyingArmySelectionMenuState implements GameState{
     }
 
     public void mapSelect(ActionEvent e) {
-        if (fortify.getSource().getNumOfArmies() > 1) {
-            displayArmyNumberSelection(e);
-        }
+        //not implemented
     }
-
-
 }

@@ -34,16 +34,16 @@ public class DiceSelectionState implements GameState {
     }
 
     public void displayDiceSelection(ActionEvent e) {
-        // to do
-    }
-
-    public void mapSelect(ActionEvent e){
         calculateSourceDiceNo();
         calculateDestinationDiceNo();
-        displayDiceSelection(e);
+        //this part will be implemented
         attack.setAttackingArmies(aChosenDice);
         attack.setDefendingArmies(dChosenDice);
         attack.switchState(WarState.getInstance());
+    }
+
+    public void mapSelect(ActionEvent e){
+        //will not be implemented
     }
 
     public void calculateSourceDiceNo(){
