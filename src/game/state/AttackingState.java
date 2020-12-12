@@ -46,6 +46,9 @@ public class AttackingState implements GameState {
 
     public void switchState(GameState state){
         currentState = state;
+        if(currentState instanceof WarState){
+            ((WarState) currentState).war();
+        }
     }
 
 
