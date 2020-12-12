@@ -33,14 +33,14 @@ public class DiceSelectionState implements GameState {
         return instance;
     }
 
-    public void displayDiceSelection() {
+    public void displayDiceSelection(ActionEvent e) {
         // to do
     }
 
     public void mapSelect(ActionEvent e){
         calculateSourceDiceNo();
         calculateDestinationDiceNo();
-        displayDiceSelection();
+        displayDiceSelection(e);
         attack.setAttackingArmies(aChosenDice);
         attack.setDefendingArmies(dChosenDice);
         attack.switchState(WarState.getInstance());
