@@ -36,17 +36,12 @@ public class ArmyPlacementState implements GameState {
 
     @Override
     public void mapSelect(ActionEvent e) {
-        //not implemented
-    }
-
-    public void displayArmyPlacement(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();
-        if (addibleArmyNo == 0) {
+        if (addibleArmyNo != 0) {
             for (Territory territory : territories) {
-                if ((e.getSource().toString() == territory.getName()) && (engine.getCurrentPlayer().getFaculty() == territory.getRuler().getFaculty())) {
-                    //this part will be implemented
-                    deployArmies(chosenArmyNo, territory);
-                    addibleArmyNo = addibleArmyNo - chosenArmyNo;
+                if ((e.getSource() == territory) && (engine.getCurrentPlayer() == territory.getRuler())) {
+                    territory.setNumOfArmies(territory.getNumOfArmies() + 1);
+                    addibleArmyNo = addibleArmyNo - 1;
                 }
             }
         }
@@ -65,10 +60,6 @@ public class ArmyPlacementState implements GameState {
         if (p.getNumOfArea() > 0) {
             addibleArmyNo = addibleArmyNo + p.getNumOfArea(); //This part's calculation will be further discussed
         }
-    }
-
-    public void deployArmies(int addedArmies, Territory t) {
-        t.setNumOfArmies(t.getNumOfArmies() + addedArmies);
     }
 
     public int getAddibleArmyNo(){
