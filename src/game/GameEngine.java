@@ -47,7 +47,6 @@ public class GameEngine extends Application {
         this.width = width;
         this.soundEngine = SoundEngine.getInstance();
         this.launcher = launcher;
-        soundEngine.changeToGameMusic();
     }
 
     private GameEngine(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher){
@@ -59,7 +58,6 @@ public class GameEngine extends Application {
         this.objectives = new ArrayList<Objective>();
         this.soundEngine = SoundEngine.getInstance();
         this.launcher = launcher;
-        soundEngine.changeToGameMusic();
         for (int i = 0; i < players.size(); i++) {
             //"=" operator for the player class should be overriden
             (this.players).add(players.get(i));

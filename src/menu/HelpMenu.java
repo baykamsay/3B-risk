@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class HelpMenu extends Application implements MenuState, EventHandler<ActionEvent> {
+public class HelpMenu implements MenuState, EventHandler<ActionEvent> {
 
     private ImageView helpIcon;
     private final ImageView helpPage;
@@ -104,11 +104,6 @@ public class HelpMenu extends Application implements MenuState, EventHandler<Act
         this.init(mgr.getMaximized());
         initButtons();
         return scene;
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
     }
 
     @Override

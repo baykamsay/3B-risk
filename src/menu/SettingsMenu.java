@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class SettingsMenu extends Application implements MenuState, EventHandler<ActionEvent> {
+public class SettingsMenu implements MenuState, EventHandler<ActionEvent> {
 
     private Scene scene;
     private final int width, height;
@@ -40,11 +40,6 @@ public class SettingsMenu extends Application implements MenuState, EventHandler
     public SettingsMenu(int width, int height){
         this.width = width;
         this.height = height;
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
     }
 
     @Override

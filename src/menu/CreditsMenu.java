@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class CreditsMenu extends Application implements MenuState{
+public class CreditsMenu implements MenuState{
 
     private Label title;
     private ImageView logo;
@@ -24,11 +24,6 @@ public class CreditsMenu extends Application implements MenuState{
     public CreditsMenu(int width, int height){
         this.width = width;
         this.height = height;
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
     }
 
     @Override

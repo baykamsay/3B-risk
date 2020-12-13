@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MainMenu extends Application implements MenuState {
+public class MainMenu implements MenuState {
     private static final int NO_OF_OPTIONS = 6;
     private static final String[] BUTTON_NAMES = {"New Game", "Load Game", "Help", "Settings", "Credits", "Exit"};
     private final Button[] options = new Button[NO_OF_OPTIONS];
@@ -37,11 +37,6 @@ public class MainMenu extends Application implements MenuState {
             b.setOnAction(mgr);
         }
         return scene;
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
     }
 
     public void init(boolean maximized){

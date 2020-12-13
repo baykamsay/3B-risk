@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class LoadGameMenu extends Application implements MenuState{
+public class LoadGameMenu implements MenuState{
 
     private final int NO_OF_SLOTS = 8;
     private final Button[] slots = new Button[NO_OF_SLOTS];
@@ -30,11 +30,6 @@ public class LoadGameMenu extends Application implements MenuState{
     public LoadGameMenu(int width, int height) {
         this.width = width;
         this.height = height;
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
     }
 
     @Override
