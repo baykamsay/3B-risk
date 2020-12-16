@@ -45,6 +45,12 @@ public class InitialArmyPlacementState implements GameState {
         currentPlayer++;
     }
 
+    @Override
+    public void start() {
+        currentPlayer = 0;
+    }
+
+    // Is the state really over when no territory left empty?
     public void checkIfStateOver() {
         Territory[] territories = engine.getMap().getTerritories();
         boolean stateOver = true;
@@ -54,7 +60,6 @@ public class InitialArmyPlacementState implements GameState {
             }
         }
         if (stateOver) {
-            // fix
             engine.switchState(ArmyPlacementState.getInstance());
         }
     }
