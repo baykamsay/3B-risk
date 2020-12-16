@@ -69,24 +69,15 @@ public class GameEngine extends Application {
     }
 
     public static GameEngine init(int saveSlot, int width, int height, Launcher launcher) {
-        if (instance == null) {
-            synchronized (GameEngine.class) {
-                if (instance == null) {
-                    instance = new GameEngine(saveSlot, width, height, launcher);
-                }
-            }
+        synchronized (GameEngine.class) {
+            instance = new GameEngine(saveSlot, width, height, launcher);
         }
         return instance;
     }
 
     public static GameEngine init(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher) {
-        if (instance == null) {
-            // yey?
-            synchronized (GameEngine.class) {
-                if (instance == null) {
-                    instance = new GameEngine(saveSlot, width, height, players, launcher);
-                }
-            }
+        synchronized (GameEngine.class) {
+            instance = new GameEngine(saveSlot, width, height, players, launcher);
         }
         return instance;
     }
@@ -117,6 +108,7 @@ public class GameEngine extends Application {
 
     public void switchState(GameState currentState){
         this.currentState = currentState;
+        this.currentState.start();
     }
 
     //map should have a getTerritories method to return the territories array
