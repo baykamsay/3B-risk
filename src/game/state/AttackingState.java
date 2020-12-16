@@ -38,25 +38,21 @@ public class AttackingState implements GameState {
     }
 
     public void mapSelect(ActionEvent e){
-        if(!(e.getSource().toString().equals("PASS"))){
-            currentState.mapSelect(e);
-        }
-        else if(!engine.isGameOver()) //gameOver check--if it is over, the winner is written into the engine
-            engine.switchState(FortifyingState.getInstance());
+        currentState.mapSelect(e);
+    }
+
+    @Override
+    public void start() {
+        currentState = AttackingPlanningState.getInstance();
+    }
+
+    public void pass(ActionEvent e) {
+        engine.switchState(FortifyingState.getInstance());
     }
 
     public void switchState(GameState state){
         currentState = state;
-        //call the war method if current state is war
-        if(currentState instanceof WarState){
-            ((WarState) currentState).war();
-            //elimination check after a war
-            for (Player p: engine.getPlayers()) {
-                if(engine.isEliminated(p)){
-                    engine.removePlayer(p);
-                }
-            }
-        }
+        currentState.start();
     }
 
 

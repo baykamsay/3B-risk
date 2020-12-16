@@ -129,7 +129,7 @@ public class GameEngine extends Application {
         }
         //map is occupied by 1 player
         winner = (map.getTerritories())[0].getRuler();
-        return true;
+        return true; // display game over screen?
     }
 
     public Player getWinner(){

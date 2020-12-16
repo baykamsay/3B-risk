@@ -41,6 +41,11 @@ public class ArmyPlacementState implements GameState {
         }
     }
 
+    @Override
+    public void start() {
+
+    }
+
     public void calculateNumberOfArmies(Player p) {
         if (p.getNumOfTerritory() <= 11) {
             addibleArmyNo = 3;

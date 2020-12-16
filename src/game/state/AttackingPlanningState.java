@@ -55,4 +55,9 @@ public class AttackingPlanningState implements GameState {
             }
         }
     }
+
+    @Override
+    public void start() {
+        engine.isGameOver();
+    }
 }
