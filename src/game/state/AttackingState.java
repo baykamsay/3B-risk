@@ -19,11 +19,7 @@ public class AttackingState implements GameState {
 
     private AttackingState() {
         engine = GameEngine.getInstance();
-        destination = null;
-        source = null;
-        currentState = AttackingPlanningState.getInstance();
-        attackingArmies = 0;
-        defendingArmies = 0;
+        start();
     }
 
     public static AttackingState getInstance() {
@@ -43,7 +39,11 @@ public class AttackingState implements GameState {
 
     @Override
     public void start() {
+        destination = null;
+        source = null;
         currentState = AttackingPlanningState.getInstance();
+        attackingArmies = 0;
+        defendingArmies = 0;
     }
 
     public void pass(ActionEvent e) {
