@@ -42,7 +42,6 @@ public class FortifyingArmySelectionState implements GameState{
     public void start() {
         int armies = displayArmyNumberSelection();
         setNumOfArmies(armies);
-        engine.setPlayerTurn(engine.getPlayerTurn() + 1);
-        engine.switchState(ArmyPlacementState.getInstance());
+        fortify.pass();
     }
 }

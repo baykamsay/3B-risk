@@ -15,10 +15,7 @@ public class FortifyingState implements GameState {
 
     private FortifyingState() {
         engine = GameEngine.getInstance();
-        destination = null;
-        source = null;
-        currentState = FortifyPlanningState.getInstance();
-        movingArmies = 0;
+        start();
     }
 
     public static FortifyingState getInstance() {
@@ -33,9 +30,20 @@ public class FortifyingState implements GameState {
     }
 
     public void mapSelect(ActionEvent e){
-        if(!(e.getSource().toString().equals("PASS"))){
-            currentState.mapSelect(e);
-        }
+        currentState.mapSelect(e);
+    }
+
+    public void pass() {
+        engine.setPlayerTurn(engine.getPlayerTurn() + 1);
+        engine.switchState(ArmyPlacementState.getInstance());
+    }
+
+    @Override
+    public void start() {
+        destination = null;
+        source = null;
+        currentState = FortifyPlanningState.getInstance();
+        movingArmies = 0;
     }
 
     public Territory getSource(){
@@ -48,6 +56,7 @@ public class FortifyingState implements GameState {
 
     public void switchState(GameState state){
         currentState = state;
+        currentState.start();
     }
 
     public void setDestination(Territory destination) {

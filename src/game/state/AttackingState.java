@@ -46,7 +46,7 @@ public class AttackingState implements GameState {
         defendingArmies = 0;
     }
 
-    public void pass(ActionEvent e) {
+    public void pass() {
         engine.switchState(FortifyingState.getInstance());
     }
 
