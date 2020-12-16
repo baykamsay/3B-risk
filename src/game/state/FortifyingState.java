@@ -42,7 +42,7 @@ public class FortifyingState implements GameState {
     public void start() {
         destination = null;
         source = null;
-        currentState = FortifyPlanningState.getInstance();
+        currentState = FortifyingPlanningState.getInstance();
         movingArmies = 0;
     }
 
