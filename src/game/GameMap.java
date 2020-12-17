@@ -30,6 +30,12 @@ public class GameMap {
     private ArrayList<Territory> upperMain;
     private ArrayList<Territory> lowerMain;
 
+    //Area adjustments
+    Area eastArea;
+    Area islandArea;
+    Area upperMainArea;
+    Area lowerMainArea;
+
     // Initialize new game
     private GameMap(){
         territories = new Territory[TOTAL_TERRITORY_COUNT];
@@ -37,6 +43,13 @@ public class GameMap {
         island = new ArrayList<>();
         upperMain = new ArrayList<>();
         lowerMain = new ArrayList<>();
+
+        //Area adjustments
+        eastArea = new Area("EASTCAMPUS",east);
+        islandArea = new Area("BILKENTISLAND",island);
+        upperMainArea = new Area("UPPERMAINCAMPUS",upperMain);
+        lowerMainArea = new Area("LOWERMAINCAMPUS",lowerMain);
+
         initTerritories();
     }
 
@@ -61,16 +74,21 @@ public class GameMap {
         // Initialize territories
         for(int i = 0; i <TOTAL_TERRITORY_COUNT; i++){
             if(i < 10){
-                territories[i] = new Territory(Area.EASTCAMPUS, TERRITORY_NAMES[i], i);
+                //Area adjustments
+                //territories[i] = new Territory(Area.EASTCAMPUS, TERRITORY_NAMES[i], i);
+                territories[i] = new Territory(eastArea, TERRITORY_NAMES[i], i);
                 east.add(territories[i]);
             }else if ( i < 15){
-                territories[i] = new Territory(Area.BILKENTISLAND, TERRITORY_NAMES[i], i);
+                //territories[i] = new Territory(Area.BILKENTISLAND, TERRITORY_NAMES[i], i);
+                territories[i] = new Territory(islandArea, TERRITORY_NAMES[i], i);
                 island.add(territories[i]);
             }else if ( i < 31){
-                territories[i] = new Territory(Area.UPPERMAINCAMPUS, TERRITORY_NAMES[i], i);
+                //territories[i] = new Territory(Area.UPPERMAINCAMPUS, TERRITORY_NAMES[i], i);
+                territories[i] = new Territory(upperMainArea, TERRITORY_NAMES[i], i);
                 upperMain.add(territories[i]);
             }else{
-                territories[i] = new Territory(Area.LOWERMAINCAMPUS, TERRITORY_NAMES[i], i);
+                //territories[i] = new Territory(Area.LOWERMAINCAMPUS, TERRITORY_NAMES[i], i);
+                territories[i] = new Territory(lowerMainArea, TERRITORY_NAMES[i], i);
                 lowerMain.add(territories[i]);
             }
         }

@@ -11,14 +11,14 @@ public class Area{
     private String name;
 
     //This constructor requires to add territories later
-    Area(String name){
+    public Area(String name){
         territories = new ArrayList<>();
         this.name = name;
     }
-    //This constructor initializes the territories
-    Area(String name, ArrayList<Territory> t){
+
+    public Area(String name, ArrayList<Territory> t){
         this.name = name;
-        this.territories.addAll(t);
+        this.territories = t;
     }
     public String getName(){
         return name;
