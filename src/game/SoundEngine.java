@@ -5,23 +5,30 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-import java.io.File;
+import java.net.URISyntaxException;
 
 public class SoundEngine {
 
     private static SoundEngine instance;
-    private final Media MENU_MUSIC = new Media(new File("src\\sound\\menu_music.mp3").toURI().toString());
-    private final Media GAME_MUSIC = new Media(new File("src\\sound\\game_music.mp3").toURI().toString());
+    private Media MENU_MUSIC;
+    private Media GAME_MUSIC;
     private MediaPlayer music;
     private boolean musicMuted, soundFXMuted;
     private double musicVolume, soundFXVolume;
-    private final AudioClip buttonSound = new AudioClip(new File("src\\sound\\button_click.wav").toURI().toString());
+    private AudioClip buttonSound;
 
     private SoundEngine(){
         musicMuted = false;
         soundFXMuted = false;
         musicVolume = 0.15;
         soundFXVolume = 1.0;
+        try {
+            MENU_MUSIC = new Media(menu.Launcher.class.getResource("/sound/menu_music.mp3").toURI().toString());
+            GAME_MUSIC = new Media(menu.Launcher.class.getResource("/sound/game_music.mp3").toURI().toString());
+            buttonSound = new AudioClip(menu.Launcher.class.getResource("/sound/button_click.wav").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         buttonSound.setVolume(soundFXVolume);
         music = new MediaPlayer(MENU_MUSIC);
         initMusic();

@@ -1,6 +1,5 @@
 package menu;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class MainMenu implements MenuState {
     private static final int NO_OF_OPTIONS = 6;
@@ -56,8 +54,8 @@ public class MainMenu implements MenuState {
         }
         //main menu logo
         try {
-            String logoPath = maximized ? "img\\logo_600.png" : "img\\logo_400.png";
-            Image img = new Image(logoPath);
+            String logoPath = maximized ? "logo_600.png" : "logo_400.png";
+            Image img = new Image(Launcher.class.getResource("/img/" + logoPath).toURI().toString());
             logo = new ImageView(img);
             logo.setPreserveRatio(true);
         } catch (Exception e) {

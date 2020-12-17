@@ -1,6 +1,5 @@
 package menu;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,7 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
+
+import java.net.URISyntaxException;
 
 public class CreditsMenu implements MenuState{
 
@@ -52,7 +52,12 @@ public class CreditsMenu implements MenuState{
                 Baykam Say
                 Yiğit Erkal""");
         members.getStyleClass().add(labelStyle);
-        Image img = new Image("img\\bilkent_logo.png");
+        Image img = null;
+        try {
+            img = new Image(Launcher.class.getResource("/img/bilkent_logo.png").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         logo = new ImageView(img);
         back = new Button("Back");
         back.getStyleClass().add(backStyle);

@@ -1,15 +1,12 @@
 package game.scene;
 
 import javafx.fxml.FXMLLoader;
-import game.GameEngine;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
-import menu.GameMenuManager;
-import menu.MenuState;
+import menu.Launcher;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class MapScene {
 
@@ -33,8 +30,7 @@ public class MapScene {
 
     public void init() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        URL fxmlUrl = getClass().getResource("../../fxml/map.fxml");
-        loader.setLocation(fxmlUrl);
+        loader.setLocation(Launcher.class.getResource("/fxml/map.fxml"));
         VBox root = new VBox();
         root.setId("map_bg");
         Pane map = loader.load();
