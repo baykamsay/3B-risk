@@ -91,15 +91,20 @@ public class GameEngine extends Application {
     }
     public int getTurn(){return turn;}
 
-    public void setTurn(int turn){this.turn = turn;}
-    
+    public void nextPlayer(){
+        if(playerTurn == players.size() - 1) { //last player has played
+            playerTurn = 0; //reset the player turn
+            turn++; //increment the total turn count
+        }
+        else
+            playerTurn++; //increment the current player turn
+
+    }
+
     public int getPlayerTurn() {
         return playerTurn;
     }
 
-    public void setPlayerTurn(int turnNo) {
-        turn = turnNo;
-    }
 
     public GameMap getMap() {
         return map;

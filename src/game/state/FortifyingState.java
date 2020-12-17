@@ -34,7 +34,7 @@ public class FortifyingState implements GameState {
     }
 
     public void pass() {
-        engine.setPlayerTurn(engine.getPlayerTurn() + 1);
+        engine.nextPlayer();
         engine.switchState(ArmyPlacementState.getInstance());
     }
 
