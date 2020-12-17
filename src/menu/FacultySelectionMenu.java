@@ -18,14 +18,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent> {
 
     private static final int MAX_SELECTED = 6;
     private static final String[] FACULTY_NAMES = {"Art, Design \nand Architecture","Applied Sciences","Economics, Administration \nand Social Sciences","Education","Science","Humanities and Letters","Law","Bussiness Administration","Engineering","Music \nand Performing Arts"};
-    private static final String[] ICON_PATHS = {"img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png","img\\faculty_icon_placeholder.png"};
-    private static final String[] SELECTED_ICON_PATHS = {"img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png","img\\faculty_icon_placeholder_selected.png"};
+    private static final String[] ICON_PATHS = {"faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png"};
+    private static final String[] SELECTED_ICON_PATHS = {"faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png"};
     private static final String[] ABILITY_DESCRIPTIONS = {"Everything by Design: Once a turn, you may choose to swap the result of one of your die rolls with the opponent","Eastern Affinity: You win ties when attacking in the East region.", "The Moderate Depression: Once a turn, you may reduce 1 from the dice rolls of the enemy.", "Reeducate: When you draw a new Objective card, you may discard it and draw another one.", "Knowledge Above All: Once a game, reveal all other players' Objective cards.", "The Pen is Mightier: If the attacker has more armies, gain an extra die.", "Lawyered: Once a turn, you may choose to redo a dice roll.", "Hostile Takeover: Once a game, take over an opponent's territory along with the soldiers.", "Over-Engineered: You can't roll a 1.", "Smoke and Mirrors: Once a game, you may choose to play an extra turn right after your normal one."};
     private int width, height;
     private int selected;
@@ -60,7 +61,7 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
     @Override
     public Scene createScene(GameMenuManager mgr) {
         this.mgr = mgr;
-        init(mgr.getMaximized());
+        init();
         return scene;
     }
 
@@ -115,7 +116,7 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
         }
     }
 
-    public void init(boolean maximized){
+    public void init(){
         String backStyle = mgr.getMaximized() ? "menu_button_back_max" : "menu_button_back_min";
         String facultyTitleStyle = mgr.getMaximized() ? "faculty_title_max" : "faculty_title_min";
         String bigButtonStyle = mgr.getMaximized() ? "menu_button_max" : "menu_button_min";
@@ -213,9 +214,13 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
         int i = 0;
         Image tmp;
         for(String s : ICON_PATHS){
-            tmp = new Image(s);
-            icons[i] = new ImageView();
-            icons[i].setImage(tmp);
+            try {
+                tmp = new Image(Launcher.class.getResource("/img/" + s).toURI().toString());
+                icons[i] = new ImageView();
+                icons[i].setImage(tmp);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             icons[i].setPickOnBounds(false);
             icons[i].setId(Integer.toString(i));
             icons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -239,7 +244,11 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
             selected--;
         }else {
             if (selected < MAX_SELECTED) {
-                icons[i].setImage(new Image(SELECTED_ICON_PATHS[i]));
+                try {
+                    icons[i].setImage(new Image(Launcher.class.getResource("/img/" + SELECTED_ICON_PATHS[i]).toURI().toString()));
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
                 selectedFaculties[i] = true;
                 mgr.playButtonSound();
                 selected++;

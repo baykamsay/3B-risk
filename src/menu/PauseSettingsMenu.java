@@ -15,6 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.net.URISyntaxException;
+
 
 public class PauseSettingsMenu implements EventHandler<ActionEvent>{
 
@@ -56,21 +58,31 @@ public class PauseSettingsMenu implements EventHandler<ActionEvent>{
 
     public void update() {
 
-        String musicImgPath = musicMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
-        String soundFXImgPath = soundFXMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
-        Image musicImg = new Image(musicImgPath);
-        Image soundFXImg = new Image(soundFXImgPath);
-        musicIcon.setImage(musicImg);
-        soundFXIcon.setImage(soundFXImg);
+        String musicImgPath = musicMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        String soundFXImgPath = soundFXMuted ? "sound_icon_muted.png" : "sound_icon.png";
+
+
+        try {
+            Image musicImg = new Image(Launcher.class.getResource("/img/" + musicImgPath).toURI().toString());
+            Image soundFXImg = new Image(Launcher.class.getResource("/img/" + soundFXImgPath).toURI().toString());
+            musicIcon.setImage(musicImg);
+            soundFXIcon.setImage(soundFXImg);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     public Scene createScene() {
-        init();
+        try {
+            init();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         addHandlers();
         return scene;
     }
 
-    public void init(){
+    public void init() throws URISyntaxException {
         String bigButtonStyle = "menu_button_max" ;
         String labelStyle = "label_max";
         String titleStyle = "title_max";
@@ -119,10 +131,10 @@ public class PauseSettingsMenu implements EventHandler<ActionEvent>{
         soundFXSlider.valueProperty().addListener((observableValue, number, t1) -> soundFXValue = t1.doubleValue());
 
         // set graphics for sound mute buttons
-        String musicImgPath = musicMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
-        String soundFXImgPath = soundFXMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
-        Image musicImg = new Image(musicImgPath);
-        Image soundFXImg = new Image(soundFXImgPath);
+        String musicImgPath = musicMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        String soundFXImgPath = soundFXMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        Image musicImg = new Image(Launcher.class.getResource("/img/" + musicImgPath).toURI().toString() );
+        Image soundFXImg = new Image(Launcher.class.getResource("/img/" + soundFXImgPath).toURI().toString());
         soundFXIcon = new ImageView();
         musicIcon = new ImageView();
         soundFXIcon.setPickOnBounds(false);

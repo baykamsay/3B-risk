@@ -14,6 +14,7 @@ import menu.GameMenuManager;
 import menu.Launcher;
 import menu.PauseMenu;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class GameEngine extends Application {
@@ -173,9 +174,7 @@ public class GameEngine extends Application {
         this.window = stage;
         window.setResizable(false);
         window.setTitle("RISK 101");
-        window.getIcons().add(new Image("img\\logo.png"));
-        window.initStyle(StageStyle.UNDECORATED);
-        window.setMaximized(true);
+        window.getIcons().add(new Image(Launcher.class.getResource("/img/logo.png").toURI().toString()));
         this.setupMapScene();
         window.setScene(gameScene);
         window.show();
@@ -187,7 +186,11 @@ public class GameEngine extends Application {
         this.gameScene = mapScene.createScene();
         controller = mapScene.getController();
         controller.setPlayers(players);
-        this.gameScene.getStylesheets().add("css/menu_stylesheet.css");
+        try {
+            this.gameScene.getStylesheets().add(getClass().getResource("/css/menu_stylesheet.css").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         controller.setPlayers(players);
         controller.setMap(map);
         controller.setGameEngine(this);
@@ -198,7 +201,11 @@ public class GameEngine extends Application {
     public void pause(){
         PauseMenu pause = new PauseMenu(width,height,this);
         Scene pauseScene = pause.createScene();
-        pauseScene.getStylesheets().add("css/menu_stylesheet.css");
+        try {
+            pauseScene.getStylesheets().add(Launcher.class.getResource("/css/menu_stylesheet.css").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         window.setScene(pauseScene);
     }
 
@@ -207,7 +214,11 @@ public class GameEngine extends Application {
     }
 
     public void setScene(Scene scene){
-        scene.getStylesheets().add("css/menu_stylesheet.css");
+        try {
+            scene.getStylesheets().add(Launcher.class.getResource("/css/menu_stylesheet.css").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         window.setScene(scene);
     }
 

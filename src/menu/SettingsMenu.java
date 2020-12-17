@@ -1,8 +1,5 @@
 package menu;
 
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,7 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+
+import java.net.URISyntaxException;
 
 
 public class SettingsMenu implements MenuState, EventHandler<ActionEvent> {
@@ -67,27 +65,37 @@ public class SettingsMenu implements MenuState, EventHandler<ActionEvent> {
 
     @Override
     public void update() {
-        String displayImgPath = maximized ? "img\\maximized_icon.png" : "img\\windowed_icon.png";
-        Image displayImg = new Image(displayImgPath);
-        displayIcon.setImage(displayImg);
-
-        String musicImgPath = musicMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
-        String soundFXImgPath = soundFXMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
-        Image musicImg = new Image(musicImgPath);
-        Image soundFXImg = new Image(soundFXImgPath);
+        String displayImgPath = maximized ? "maximized_icon.png" : "windowed_icon.png";
+        String musicImgPath = musicMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        String soundFXImgPath = soundFXMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        Image soundFXImg = null;
+        Image musicImg = null;
+        Image displayImg = null;
+        try {
+            soundFXImg = new Image(Launcher.class.getResource("/img/" + soundFXImgPath).toURI().toString());
+            musicImg = new Image(Launcher.class.getResource("/img/" + musicImgPath).toURI().toString());
+            displayImg = new Image(Launcher.class.getResource("/img/" + displayImgPath).toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         musicIcon.setImage(musicImg);
         soundFXIcon.setImage(soundFXImg);
+        displayIcon.setImage(displayImg);
     }
 
     @Override
     public Scene createScene(GameMenuManager mgr) {
         this.mgr = mgr;
-        init(mgr.getMaximized());
+        try {
+            init(mgr.getMaximized());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         addHandlers();
         return scene;
     }
 
-    public void init(boolean isMaximized){
+    public void init(boolean isMaximized) throws URISyntaxException {
         String backStyle = mgr.getMaximized() ? "menu_button_back_max" : "menu_button_back_min";
         String displayStyle = mgr.getMaximized() ? "menu_button_display_max" : "menu_button_display_min";
         String bigButtonStyle = mgr.getMaximized() ? "menu_button_max" : "menu_button_min";
@@ -152,17 +160,17 @@ public class SettingsMenu implements MenuState, EventHandler<ActionEvent> {
         soundFXSlider.valueProperty().addListener((observableValue, number, t1) -> soundFXValue = t1.doubleValue());
 
         // initialize display icon
-        String imgPath = maximized ? "img\\maximized_icon.png" : "img\\windowed_icon.png";
-        Image img = new Image(imgPath);
+        String imgPath = maximized ? "maximized_icon.png" : "windowed_icon.png";
+        Image img = new Image(Launcher.class.getResource("/img/" + imgPath).toURI().toString());
         displayIcon.setImage(img);
         displayIcon.setPreserveRatio(true);
         displayIcon.setFitHeight(iconSize);
 
         // set graphics for sound mute buttons
-        String musicImgPath = musicMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
-        String soundFXImgPath = soundFXMuted ? "img\\sound_icon_muted.png" : "img\\sound_icon.png";
-        Image musicImg = new Image(musicImgPath);
-        Image soundFXImg = new Image(soundFXImgPath);
+        String musicImgPath = musicMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        String soundFXImgPath = soundFXMuted ? "sound_icon_muted.png" : "sound_icon.png";
+        Image musicImg = new Image(Launcher.class.getResource("/img/" + musicImgPath).toURI().toString());
+        Image soundFXImg = new Image(Launcher.class.getResource("/img/" + soundFXImgPath).toURI().toString());
         soundFXIcon = new ImageView();
         musicIcon = new ImageView();
         soundFXIcon.setPickOnBounds(false);

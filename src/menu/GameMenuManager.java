@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 
 import java.awt.*;
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 
@@ -59,7 +60,11 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         window = primaryStage;
         window.setResizable(false);
         window.setTitle("RISK 101");
-        window.getIcons().add(new Image("img\\logo.png"));
+        try {
+            window.getIcons().add(new Image(Launcher.class.getResource("/img/logo.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         window.setOnCloseRequest(e -> {
             e.consume();
             exit();
@@ -117,7 +122,11 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
     }
 
     public void changeScene(Scene scene){
-        scene.getStylesheets().add("css/menu_stylesheet.css");
+        try {
+            scene.getStylesheets().add(Launcher.class.getResource("/css/menu_stylesheet.css").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         window.setScene(scene);
         this.changeMaximized();
         window.show();
@@ -220,7 +229,11 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
                 window = new Stage();
                 window.setResizable(false);
                 window.setTitle("RISK 101");
-                window.getIcons().add(new Image("img\\logo.png"));
+                try {
+                    window.getIcons().add(new Image(Launcher.class.getResource("/img/logo.png").toURI().toString()));
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
                 window.initStyle(StageStyle.UNDECORATED);
                 window.setScene(this.scene);
             }
@@ -230,7 +243,11 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
                 window = new Stage();
                 window.setResizable(false);
                 window.setTitle("RISK 101");
-                window.getIcons().add(new Image("img\\logo.png"));
+                try {
+                    window.getIcons().add(new Image(Launcher.class.getResource("/img/logo.png").toURI().toString()));
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
                 window.initStyle(StageStyle.DECORATED);
                 window.setScene(this.scene);
             }

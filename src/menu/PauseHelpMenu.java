@@ -1,7 +1,6 @@
 package menu;
 
 import game.SoundEngine;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -13,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+
+import java.net.URISyntaxException;
 
 public class PauseHelpMenu implements EventHandler<ActionEvent> {
 
@@ -39,18 +40,18 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
         this.height = height;
     }
 
-    public void init(){
+    public void init() throws URISyntaxException {
         String bigButtonStyle = "menu_button_max";
         String titleStyle = "title_max";
         int imgSize = 600;
 
         //initialize components
-        Image img = new Image("img\\help_icon.png");
+        Image img = new Image(Launcher.class.getResource("/img/help_icon.png").toURI().toString());
         helpIcon = new ImageView(img);
         helpIcon.setPreserveRatio(true);
         helpIcon.setFitWidth(imgSize / 5);
 
-        Image img2 = new Image("img\\help1.png");
+        Image img2 = new Image(Launcher.class.getResource("/img/help1.png").toURI().toString());
         helpPage.setImage(img2);
         helpPage.setPreserveRatio(true);
         helpPage.setFitWidth(imgSize);
@@ -95,12 +96,21 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
     }
 
     public void update() {
-        Image img2 = new Image("img\\help" + pageNo + ".png");
+        Image img2 = null;
+        try {
+            img2 = new Image(Launcher.class.getResource("/img/help" + pageNo + ".png").toURI().toString() );
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         helpPage.setImage(img2);
     }
 
     public Scene createScene() {
-        init();
+        try {
+            init();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         initButtons();
         return scene;
     }

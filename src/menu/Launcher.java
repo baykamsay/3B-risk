@@ -1,8 +1,8 @@
 package menu;
 
-
 import javafx.application.Application;
 import javafx.stage.Stage;
+import menu.GameMenuManager;
 
 public class Launcher extends Application {
     private Stage window;
