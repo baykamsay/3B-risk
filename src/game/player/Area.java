@@ -11,11 +11,15 @@ public class Area implements Place{
         this.name = name;
     }
 
+    @Override
     public String getName(){
         return name;
     }
     public void addTerritory(Territory t){
         territories.add(t);
+    }
+    public ArrayList<Territory> getTerritories() {
+        return territories;
     }
     public void cloneTerritories(ArrayList<Territory> t){
         territories.addAll(t);

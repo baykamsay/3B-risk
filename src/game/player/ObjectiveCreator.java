@@ -1,60 +1,54 @@
 package game.player;
 
 import game.GameEngine;
-import game.player.*;
+import game.GameMap;
 
 public class ObjectiveCreator {
 
-    private Player p;
-    private GameEngine engine;
-    final int MAX_HOLD_TURN = 5;
-    final int AREA_TURN_LIMIT = 5; //area objectives will be given after this turn
-    private Territory[] target;
+    static final int HOLD_LIMIT = 5;
+    static final int CAPTURE_LIMIT = 5;
+    static final int AREA_TURN_LIMIT = 5; //area objectives will be given after this turn
+    static final double CAPTURE_PROB = 0.5;
+    static final double TERRITORY_PROB = 0.5;
 
-    public ObjectiveCreator(Player p, GameEngine engine){
-        this.p = p;
-        this.engine = engine;
-        generateObjective();
-    }
-
-    public Objective generateObjective(){
+    public static Objective generateObjective(Player p){
+        GameEngine engine = GameEngine.getInstance();
         Objective objective;
         ObjectiveStrategy strategy;
         ObjectiveStrategy decorator;
+//        boolean isArea;
+        Place place;
+
         String objectiveName; //create objective name by adding "capture" or "hold" to the target name
+        int limit;
 
-        //choose if the strategy will be capture or hold
-        int range = 3;
-        int captureOrHold = (int)(Math.random() * range) + 1;
-        if(captureOrHold == 1){ //hold objective is frequent than capture
-            int limit = (int)(Math.random() * MAX_HOLD_TURN) + 1; //determine the turn for hold objective
-            strategy = new HoldObjective(p.getFaculty(), limit);
-            objectiveName = "hold";
-        }
-        else{
-            strategy = new CaptureObjective(p.getFaculty());
-            objectiveName = "capture";
+        // select strategy
+        if (Math.random() < CAPTURE_PROB) {
+            limit = (int)(Math.random() * HOLD_LIMIT) + 1; //determine the turn for hold objective
+            objectiveName = "Capture ";
+            strategy = new CaptureObjective();
+        } else {
+            limit = (int)(Math.random() * CAPTURE_LIMIT) + 1;
+            objectiveName = "Hold ";
+            strategy = new HoldObjective();
         }
 
-        //DECORATORS
-        //generate territory decorator
-        if(engine.getTurn() < AREA_TURN_LIMIT){
-            decorator = new TerritoryDecorator(strategy);
-            //select the territory to be assigned
-            int territoryIndex = (int)(Math.random() * engine.getMap().getTerritories().length);
-            target = new Territory[1];
-            target[0] = engine.getMap().getTerritories()[territoryIndex];
-            objectiveName = objectiveName + target[0].getName();
-        }
-        else{
+        // select decorator
+        if (Math.random() > TERRITORY_PROB && engine.getTurn() > AREA_TURN_LIMIT) {
+//            isArea = true;
+            Area[] areas = GameMap.getInstance().getAreas();
+            int areaIndex = (int)(Math.random() + areas.length);
+            place = areas[areaIndex];
             decorator = new AreaDecorator(strategy);
-            //select the area to be assigned
-            int areaIndex = (int)(Math.random() * 4);
-            //target = engine.getMap().getAreas()[areaIndex].getTerritories(); //will be ok after the area adjustments
-            //objectiveName = objectiveName + engine.getMap().getAreas()[areaIndex].getName(); //will be ok after area adjustments
+        } else {
+//            isArea = false;
+            int territoryIndex = (int)(Math.random() * GameMap.TOTAL_TERRITORY_COUNT);
+            place = GameMap.getInstance().getTerritories()[territoryIndex];
+            decorator = new TerritoryDecorator(strategy);
         }
-        objective = new Objective(decorator,target);
-        objective.setName(objectiveName);
+
+        objectiveName += place.getName();
+        objective = new Objective(decorator, place, limit, objectiveName, p);
         return objective;
     }
 

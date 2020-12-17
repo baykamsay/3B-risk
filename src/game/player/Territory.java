@@ -37,6 +37,7 @@ public class Territory implements Place{
     public Area getArea(){
         return area;
     }
+    @Override
     public String getName(){
         return name;
     }
@@ -56,11 +57,8 @@ public class Territory implements Place{
     }
 
     //isRuler checks Territory's ruler. Returns true if the given player's faculty matches with the ruler's faculty otherwise returns false.
-    public Boolean isRuler(Territory t){
-        if (t.getRuler() == ruler){
-            return true;
-        }
-        return false;
+    public boolean isRuler(Player p){
+        return ruler.equals(p);
     }
 
     public ColorAdjust getCa(){
