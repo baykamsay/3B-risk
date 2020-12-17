@@ -1,4 +1,4 @@
-package game.player.faculties;
+package game.player;
 
 import game.GameEngine;
 import game.player.*;
