@@ -4,7 +4,7 @@ import javafx.scene.effect.ColorAdjust;
 
 import java.util.ArrayList;
 
-public class Territory {
+public class Territory implements Place{
     private Area area;
     private String name;
     private int numOfArmies;

@@ -5,26 +5,26 @@ import game.player.Territory;
 import javafx.event.ActionEvent;
 
 
-public class FortifyPlanningState implements GameState {
+public class FortifyingPlanningState implements GameState {
 
-    private static FortifyPlanningState instance;
+    private static FortifyingPlanningState instance;
     private FortifyingState fortify;
     private GameEngine engine;
     private Territory destination;
     private Territory source;
 
-    private FortifyPlanningState() {
+    private FortifyingPlanningState() {
         fortify = FortifyingState.getInstance();
         engine = GameEngine.getInstance();
         destination = null;
         source = null;
     }
 
-    public static FortifyPlanningState getInstance() {
+    public static FortifyingPlanningState getInstance() {
         if (instance == null) {
-            synchronized (FortifyPlanningState.class) {
+            synchronized (FortifyingPlanningState.class) {
                 if (instance == null) {
-                    instance = new FortifyPlanningState();
+                    instance = new FortifyingPlanningState();
                 }
             }
         }
@@ -49,9 +49,14 @@ public class FortifyPlanningState implements GameState {
                 if ((territory.getName()).equals(e.getSource().toString())) {
                     if(source.isAdjacent(territory)) { //check if destination is adjacent to the source
                         destination = territory;
+                        fortify.switchState(FortifyingArmySelectionState.getInstance());
                     }
                 }
             }
         }
     }
+
+    // not used
+    @Override
+    public void start() {}
 }

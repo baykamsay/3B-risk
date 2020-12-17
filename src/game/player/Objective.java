@@ -1,14 +1,16 @@
 package game.player;
 
 
+import game.player.faculties.Faculty;
+
 public class Objective {
 
     private String name;
     private int turnLimit;
-    private Place target;
+    private Place[] target;
     private ObjectiveStrategy strategy;
 
-    Objective(ObjectiveStrategy strategy){
+    public Objective(ObjectiveStrategy strategy, Place[] target){
         this.strategy = strategy;
     }
 
@@ -25,5 +27,7 @@ public class Objective {
         this.turnLimit = turnLimit;
     }
 
-
+    public boolean isDone() {
+        return strategy.isDone((Territory[])target);
+    }
 }

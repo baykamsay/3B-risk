@@ -70,24 +70,15 @@ public class GameEngine extends Application {
     }
 
     public static GameEngine init(int saveSlot, int width, int height, Launcher launcher) {
-        if (instance == null) {
-            synchronized (GameEngine.class) {
-                if (instance == null) {
-                    instance = new GameEngine(saveSlot, width, height, launcher);
-                }
-            }
+        synchronized (GameEngine.class) {
+            instance = new GameEngine(saveSlot, width, height, launcher);
         }
         return instance;
     }
 
     public static GameEngine init(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher) {
-        if (instance == null) {
-            // yey?
-            synchronized (GameEngine.class) {
-                if (instance == null) {
-                    instance = new GameEngine(saveSlot, width, height, players, launcher);
-                }
-            }
+        synchronized (GameEngine.class) {
+            instance = new GameEngine(saveSlot, width, height, players, launcher);
         }
         return instance;
     }
@@ -99,14 +90,22 @@ public class GameEngine extends Application {
             );
         return instance;
     }
+    public int getTurn(){return turn;}
+
+    public void nextPlayer(){
+        if(playerTurn == players.size() - 1) { //last player has played
+            playerTurn = 0; //reset the player turn
+            turn++; //increment the total turn count
+        }
+        else
+            playerTurn++; //increment the current player turn
+
+    }
 
     public int getPlayerTurn() {
         return playerTurn;
     }
 
-    public void setPlayerTurn(int turnNo) {
-        turn = turnNo;
-    }
 
     public GameMap getMap() {
         return map;
@@ -118,6 +117,7 @@ public class GameEngine extends Application {
 
     public void switchState(GameState currentState){
         this.currentState = currentState;
+        this.currentState.start();
     }
 
     //map should have a getTerritories method to return the territories array
@@ -130,7 +130,7 @@ public class GameEngine extends Application {
         }
         //map is occupied by 1 player
         winner = (map.getTerritories())[0].getRuler();
-        return true;
+        return true; // display game over screen?
     }
 
     public Player getWinner(){

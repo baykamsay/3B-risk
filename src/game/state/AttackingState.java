@@ -1,6 +1,7 @@
 package game.state;
 
 import game.GameEngine;
+import game.player.Player;
 import game.player.Territory;
 import game.scene.MapScene;
 import javafx.event.ActionEvent;
@@ -18,11 +19,7 @@ public class AttackingState implements GameState {
 
     private AttackingState() {
         engine = GameEngine.getInstance();
-        destination = null;
-        source = null;
-        currentState = AttackingPlanningState.getInstance();
-        attackingArmies = 0;
-        defendingArmies = 0;
+        start();
     }
 
     public static AttackingState getInstance() {
@@ -37,18 +34,25 @@ public class AttackingState implements GameState {
     }
 
     public void mapSelect(ActionEvent e){
-        if(!(e.getSource().toString().equals("PASS"))){
-            currentState.mapSelect(e);
-        }
-        else
-            engine.switchState(FortifyingState.getInstance());
+        currentState.mapSelect(e);
+    }
+
+    @Override
+    public void start() {
+        destination = null;
+        source = null;
+        currentState = AttackingPlanningState.getInstance();
+        attackingArmies = 0;
+        defendingArmies = 0;
+    }
+
+    public void pass() {
+        engine.switchState(FortifyingState.getInstance());
     }
 
     public void switchState(GameState state){
         currentState = state;
-        if(currentState instanceof WarState){
-            ((WarState) currentState).war();
-        }
+        currentState.start();
     }
 
 

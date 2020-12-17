@@ -1,7 +1,6 @@
 package game.state;
 
 import game.GameEngine;
-import game.player.Territory;
 import javafx.event.ActionEvent;
 
 
@@ -33,17 +32,18 @@ public class DiceSelectionState implements GameState {
         return instance;
     }
 
-    public void displayDiceSelection(ActionEvent e) {
+    public void mapSelect(ActionEvent e){
+        //will not be implemented
+    }
+
+    @Override
+    public void start() {
         calculateSourceDiceNo();
         calculateDestinationDiceNo();
         //this part will be implemented
         attack.setAttackingArmies(aChosenDice);
         attack.setDefendingArmies(dChosenDice);
         attack.switchState(WarState.getInstance());
-    }
-
-    public void mapSelect(ActionEvent e){
-        //will not be implemented
     }
 
     public void calculateSourceDiceNo(){

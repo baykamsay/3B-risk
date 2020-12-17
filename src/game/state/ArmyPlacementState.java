@@ -3,24 +3,16 @@ package game.state;
 import game.GameEngine;
 import game.player.Player;
 import game.player.Territory;
-import game.scene.MapScene;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
-import menu.GameMenuManager;
-import menu.MenuState;
-
-import java.util.ArrayList;
 
 public class ArmyPlacementState implements GameState {
     private static ArmyPlacementState instance;
     private GameEngine engine;
-    private int currentPlayer, addibleArmyNo, chosenArmyNo;
+    private int addibleArmyNo;
 
     private ArmyPlacementState() {
         engine = GameEngine.getInstance();
-        currentPlayer = 0;
-        addibleArmyNo = 0;
-        chosenArmyNo = 0;
+        calculateNumberOfArmies(engine.getCurrentPlayer());
     }
 
     public static ArmyPlacementState getInstance() {
@@ -37,18 +29,21 @@ public class ArmyPlacementState implements GameState {
     @Override
     public void mapSelect(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();
-        if (addibleArmyNo != 0) {
-            for (Territory territory : territories) {
-                if ((e.getSource() == territory) && (engine.getCurrentPlayer() == territory.getRuler())) {
-                    territory.setNumOfArmies(territory.getNumOfArmies() + 1);
-                    addibleArmyNo = addibleArmyNo - 1;
-                }
+
+        for (Territory territory : territories) { // disabling the button is a better solution
+            if ((e.getSource() == territory) && (engine.getCurrentPlayer() == territory.getRuler())) {
+                territory.setNumOfArmies(territory.getNumOfArmies() + 1);
+                addibleArmyNo = addibleArmyNo - 1;
             }
         }
-        else
-        {
+        if (addibleArmyNo <= 0) {
             engine.switchState(AttackingPlanningState.getInstance());
         }
+    }
+
+    @Override
+    public void start() {
+
     }
 
     public void calculateNumberOfArmies(Player p) {
@@ -64,13 +59,5 @@ public class ArmyPlacementState implements GameState {
 
     public int getAddibleArmyNo(){
         return addibleArmyNo;
-    }
-
-    public int getChosenArmyNo(){
-        return chosenArmyNo;
-    }
-
-    public void setChosenArmyNo(int armyNo){
-        chosenArmyNo = armyNo;
     }
 }

@@ -2,8 +2,6 @@ package game.state;
 
 import game.GameEngine;
 import game.player.Territory;
-
-
 import javafx.event.ActionEvent;
 
 public class AttackingPlanningState implements GameState {
@@ -34,29 +32,32 @@ public class AttackingPlanningState implements GameState {
 
     //Select source and destination territories
     public void mapSelect(ActionEvent e) {
-            if (destination == null && source == null) { //make sure that the first selection will be source
-                Territory[] territories = engine.getMap().getTerritories();
-                for (Territory territory : territories) {
-                    //check the territory name && if player is the ruler && has at least 2 armies
-                    if ((territory.getName()).equals(e.getSource().toString())
-                            && (engine.getCurrentPlayer() == territory.getRuler())
-                            &&  territory.getNumOfArmies() >= 2) {
-                        attack.setSource(territory);
+        if (destination == null && source == null) { //make sure that the first selection will be source
+            Territory[] territories = engine.getMap().getTerritories();
+            for (Territory territory : territories) {
+                //check the territory name && if player is the ruler && has at least 2 armies
+                if ((territory.getName()).equals(e.getSource().toString())
+                        && (engine.getCurrentPlayer() == territory.getRuler())
+                        &&  territory.getNumOfArmies() >= 2) {
+                    attack.setSource(territory);
+                }
+            }
+        }
+        else if( destination == null){
+            Territory[] territories = engine.getMap().getTerritories();
+            for (Territory territory : territories) {
+                if ((territory.getName()).equals(e.getSource().toString())) {
+                    if(source.isAdjacent(territory)) { //check if destination is adjacent to the source
+                        attack.setDestination(territory);
+                        attack.switchState(DiceSelectionState.getInstance());
                     }
                 }
             }
-            else if( destination == null){
-                Territory[] territories = engine.getMap().getTerritories();
-                for (Territory territory : territories) {
-                    if ((territory.getName()).equals(e.getSource().toString())) {
-                        if(source.isAdjacent(territory)) { //check if destination is adjacent to the source
-                            attack.setDestination(territory);
-                        }
-                    }
-                }
+        }
+    }
 
-            }
-            else
-                attack.switchState(DiceSelectionState.getInstance());
+    @Override
+    public void start() {
+        engine.isGameOver();
     }
 }

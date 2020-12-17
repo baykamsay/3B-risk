@@ -1,6 +1,7 @@
 package game.state;
 
 import game.GameEngine;
+import game.player.Player;
 import game.player.Territory;
 import javafx.event.ActionEvent;
 
@@ -114,10 +115,14 @@ public class WarState implements GameState{
         Territory attackingTerritory = attack.getSource();
 
         if (defendingTerritory.getNumOfArmies() == 0) {
+            Player pastRuler = defendingTerritory.getRuler();
             defendingTerritory.setRuler(engine.getCurrentPlayer());
             int movingArmies = displayArmyNumberSelection();
             attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
             defendingTerritory.setNumOfArmies(movingArmies);
+            if (engine.isEliminated(pastRuler)) { // remove player if they have no territories left
+                engine.removePlayer(pastRuler);
+            }
             attack.switchState(AttackingPlanningState.getInstance());
         } else if (attackingTerritory.getNumOfArmies() == 1) {
             attack.switchState(AttackingPlanningState.getInstance());
@@ -129,4 +134,9 @@ public class WarState implements GameState{
     // Map is not used in this state
     @Override
     public void mapSelect(ActionEvent e) {}
+
+    @Override
+    public void start() {
+        war();
+    }
 }
