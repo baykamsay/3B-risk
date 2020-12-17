@@ -89,7 +89,10 @@ public class GameEngine extends Application {
             );
         return instance;
     }
+    public int getTurn(){return turn;}
 
+    public void setTurn(int turn){this.turn = turn;}
+    
     public int getPlayerTurn() {
         return playerTurn;
     }
