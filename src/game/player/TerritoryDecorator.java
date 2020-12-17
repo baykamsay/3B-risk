@@ -4,7 +4,7 @@ public class TerritoryDecorator implements ObjectiveStrategy{
 
     private ObjectiveStrategy strategy;
 
-    TerritoryDecorator(ObjectiveStrategy strategy){
+    public TerritoryDecorator(ObjectiveStrategy strategy){
         this.strategy = strategy;
     }
 

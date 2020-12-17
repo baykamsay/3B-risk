@@ -10,7 +10,7 @@ public class Objective {
     private Place[] target;
     private ObjectiveStrategy strategy;
 
-    Objective(ObjectiveStrategy strategy, Place[] target){
+    public Objective(ObjectiveStrategy strategy, Place[] target){
         this.strategy = strategy;
     }
 
