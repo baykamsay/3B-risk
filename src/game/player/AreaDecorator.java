@@ -2,7 +2,7 @@ package game.player;
 
 public class AreaDecorator implements ObjectiveStrategy {
 
-    ObjectiveStrategy strategy;
+    private ObjectiveStrategy strategy;
 
     AreaDecorator(ObjectiveStrategy strategy){
         this.strategy = strategy;
@@ -10,6 +10,6 @@ public class AreaDecorator implements ObjectiveStrategy {
 
     @Override
     public boolean isDone(Territory[] territories) {
-        return false;
+        return this.strategy.isDone(territories);
     }
 }

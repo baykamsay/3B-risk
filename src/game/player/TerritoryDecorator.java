@@ -7,8 +7,9 @@ public class TerritoryDecorator implements ObjectiveStrategy{
     TerritoryDecorator(ObjectiveStrategy strategy){
         this.strategy = strategy;
     }
+
     @Override
     public boolean isDone(Territory[] territories) {
-        return false;
+        return this.strategy.isDone(territories);
     }
 }
