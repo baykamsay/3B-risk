@@ -9,14 +9,17 @@ public class AreaDecorator implements ObjectiveStrategy {
     }
 
     @Override
-    public boolean isDone(Objective objective) {
+    public int isDone(Objective objective) {
         Place originalTarget = objective.target;
         Area target = (Area) objective.target;
-        boolean result = true;
+        int result = 1;
         for (Territory territory : target.getTerritories()) {
             objective.target = territory;
-            if (this.strategy.isDone(objective)) {
-                result = false;
+            int calc = this.strategy.isDone(objective);
+            if (calc == -1) {
+                return -1;
+            } else if (calc == 0) {
+                result = 0;
             }
         }
         objective.target = originalTarget;

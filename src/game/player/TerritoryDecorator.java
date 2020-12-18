@@ -9,7 +9,7 @@ public class TerritoryDecorator implements ObjectiveStrategy{
     }
 
     @Override
-    public boolean isDone(Objective objective) {
+    public int isDone(Objective objective) {
         return this.strategy.isDone(objective);
     }
 }
