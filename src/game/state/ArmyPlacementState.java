@@ -47,13 +47,22 @@ public class ArmyPlacementState implements GameState {
     }
 
     public void calculateNumberOfArmies(Player p) {
-        if (p.getNumOfTerritory() <= 11) {
+        if (p.getNumOfTerritory() <= 9) {
             addibleArmyNo = 3;
         } else {
             addibleArmyNo = p.getNumOfTerritory() / 3;
         }
-        if (p.getNumOfArea() > 0) {
-            addibleArmyNo = addibleArmyNo + p.getNumOfArea(); //This part's calculation will be further discussed
+        if( p.getFaculty() == engine.getMap().getAreas()[0].getRuler()){ //east campus area = +3
+            addibleArmyNo += 3;
+        }
+        if( p.getFaculty() == engine.getMap().getAreas()[1].getRuler()){ //island area = +2
+            addibleArmyNo += 2;
+        }
+        if( p.getFaculty() == engine.getMap().getAreas()[2].getRuler()){ //upper main campus area = +5
+            addibleArmyNo += 5;
+        }
+        if( p.getFaculty() == engine.getMap().getAreas()[3].getRuler()){ //lower main campus area = +5
+            addibleArmyNo += 5;
         }
     }
 
