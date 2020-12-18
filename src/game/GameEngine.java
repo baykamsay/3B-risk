@@ -4,6 +4,7 @@ import game.player.Objective;
 import game.player.Player;
 import game.scene.MapScene;
 import game.scene.MapSceneController;
+import game.state.ArmyPlacementState;
 import game.state.GameState;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -99,7 +100,7 @@ public class GameEngine extends Application {
         }
         else
             playerTurn++; //increment the current player turn
-
+        instance.switchState(ArmyPlacementState.getInstance());
     }
 
     public int getPlayerTurn() {
