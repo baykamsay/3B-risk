@@ -93,6 +93,9 @@ public class GameEngine extends Application {
                 ((DiceSelectionState) currentState).setChosenDefendingDice(defenderDice);
             }
         }
+        else if(currentState instanceof ArmyPlacementState){
+            ((ArmyPlacementState) currentState).setArmyCount(count);
+        }
     }
 
     public static GameEngine init(int saveSlot, int width, int height, Launcher launcher) {
