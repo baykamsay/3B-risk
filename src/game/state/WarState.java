@@ -5,6 +5,8 @@ import game.player.Player;
 import game.player.Territory;
 import javafx.event.ActionEvent;
 
+import java.util.Arrays;
+
 public class WarState implements GameState{
 
     private static WarState instance;
@@ -27,7 +29,7 @@ public class WarState implements GameState{
         return instance;
     }
 
-    public void displayWar(int[] attackingDice, int[] defendingDice) {
+    public void displayWar(int[] attackingDice, int[] defendingDice, Player attacker, Player defender) {
         // to do
     }
 
@@ -36,73 +38,35 @@ public class WarState implements GameState{
         return 1;
     }
 
-    // returns the location of the maximum number in an int array
-    private int getMax(int[] arr) {
-        int max = -1;
-        int maxLocation = -1;
-        for (int i = 0; i < arr.length; i++) {
-            if (max < arr[i]) {
-                max = arr[i];
-                maxLocation = i;
-            }
-        }
-        return maxLocation;
-    }
-
     // wage war on an enemy territory
     public void war() {
-        int[] attackingDice = {0, 0, 0};
-        int[] defendingDice = {0, 0};
+        Territory attackingTerritory = attack.getSource();
+        Territory defendingTerritory = attack.getDestination();
+        int[] attackingDice = new int[attack.getAttackingArmies()];
+        int[] defendingDice = new int[attack.getDefendingArmies()];
         int attackingLostDice = 0;
         int defendingLostDice = 0;
 
-        for (int i = 0; i < attack.getAttackingArmies(); i++) {
+        for (int i = 0; i < attackingDice.length; i++) {
             attackingDice[i] = (int) (Math.random() * 6 + 1);
         }
-        for (int i = 0; i < attack.getDefendingArmies(); i++) {
+        for (int i = 0; i < defendingDice.length; i++) {
             defendingDice[i] = (int) (Math.random() * 6 + 1);
         }
 
-        displayWar(attackingDice, defendingDice);
+        Arrays.sort(attackingDice);
+        Arrays.sort(defendingDice);
 
-        // find max rolls
-        int maxLocation;
-        maxLocation = getMax(attackingDice);
-        int maxAttack = attackingDice[maxLocation];
-        attackingDice[maxLocation] = 0;
-        maxLocation = getMax(defendingDice);
-        int maxDefend = defendingDice[maxLocation];
-        defendingDice[maxLocation] = 0;
+        displayWar(attackingDice, defendingDice, attackingTerritory.getRuler(), defendingTerritory.getRuler());
 
-        // compare
-        if (maxAttack > maxDefend) {
-            defendingLostDice++;
-        } else {
-            attackingLostDice++;
-        }
-
-        maxLocation = getMax(defendingDice);
-        maxDefend = defendingDice[maxLocation];
-
-        if (maxDefend > 0) {
-            defendingDice[maxLocation] = 0;
-            maxLocation = getMax(attackingDice);
-            maxAttack = attackingDice[maxLocation];
-
-            if (maxAttack > 0) {
-                attackingDice[maxLocation] = 0;
-
-                // compare
-                if (maxAttack > maxDefend) {
-                    defendingLostDice++;
-                } else {
-                    attackingLostDice++;
-                }
+        for (int i = 0; i < attackingDice.length && i < defendingDice.length; i++) {
+            // compare
+            if (attackingDice[i] > defendingDice[i]) {
+                defendingLostDice++;
+            } else {
+                attackingLostDice++;
             }
         }
-
-        Territory attackingTerritory = attack.getSource();
-        Territory defendingTerritory = attack.getDestination();
 
         attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - attackingLostDice);
         defendingTerritory.setNumOfArmies(defendingTerritory.getNumOfArmies() - defendingLostDice);
