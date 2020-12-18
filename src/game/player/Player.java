@@ -23,6 +23,7 @@ public class Player{
     public Objective getObjective(){
         return currentObjective;
     }
+    public void setObjective(Objective o){this.currentObjective = o;}
     public int getNumOfTerritory(){
         return numOfTerritory;
     }

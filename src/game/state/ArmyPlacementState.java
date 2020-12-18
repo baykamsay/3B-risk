@@ -1,6 +1,7 @@
 package game.state;
 
 import game.GameEngine;
+import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
 import javafx.event.ActionEvent;
@@ -63,6 +64,10 @@ public class ArmyPlacementState implements GameState {
         }
         if( p.getFaculty() == engine.getMap().getAreas()[3].getRuler()){ //lower main campus area = +5
             addibleArmyNo += 5;
+        }
+        if(p.getObjective().isDone()){
+            addibleArmyNo += p.getObjective().getBonus(); //bonus army for a completed objective
+            p.setObjective(Objective.generateObjective(p));
         }
     }
 
