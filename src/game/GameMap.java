@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class GameMap {
 
     private static GameMap instance;
-    private static final int TOTAL_TERRITORY_COUNT = 47;
+    public static final int TOTAL_TERRITORY_COUNT = 47;
 //    private static final int EAST_TERRITORY_COUNT = 10;
 //    private static final int ISLAND_TERRITORY_COUNT = 5;
 //    private static final int UPPER_MAIN_TERRITORY_COUNT = 16;
@@ -25,30 +25,22 @@ public class GameMap {
             {18,19,22,24,27},{19,23,25,28,29},{19,20,24,26,29},{20,25},{16,21,22,23,31},{23,24,29,30},{24,25,28,30},{28,29,32,33},{27,32,34,35},{30,31,33,35},
             {30,35,36},{31,35,38,39},{31,32,33,34,36,39},{33,35,37,39,40},{36},{13,34,41},{34,35,36,40,41,42},{36,39},{38,39,42,44},{39,41,44,45},{44,46},{41,42,43,45,46},{42,44},{43,44}};
     private Territory[] territories;
-    private ArrayList<Territory> east;
-    private ArrayList<Territory> island;
-    private ArrayList<Territory> upperMain;
-    private ArrayList<Territory> lowerMain;
 
     //Area adjustments
-    Area eastArea;
-    Area islandArea;
-    Area upperMainArea;
-    Area lowerMainArea;
+    private Area east;
+    private Area island;
+    private Area upperMain;
+    private Area lowerMain;
 
     // Initialize new game
     private GameMap(){
         territories = new Territory[TOTAL_TERRITORY_COUNT];
-        east = new ArrayList<>();
-        island = new ArrayList<>();
-        upperMain = new ArrayList<>();
-        lowerMain = new ArrayList<>();
 
         //Area adjustments
-        eastArea = new Area("EASTCAMPUS",east);
-        islandArea = new Area("BILKENTISLAND",island);
-        upperMainArea = new Area("UPPERMAINCAMPUS",upperMain);
-        lowerMainArea = new Area("LOWERMAINCAMPUS",lowerMain);
+        east = new Area("EASTCAMPUS");
+        island = new Area("BILKENTISLAND");
+        upperMain = new Area("UPPERMAINCAMPUS");
+        lowerMain = new Area("LOWERMAINCAMPUS");
 
         initTerritories();
     }
@@ -76,20 +68,20 @@ public class GameMap {
             if(i < 10){
                 //Area adjustments
                 //territories[i] = new Territory(Area.EASTCAMPUS, TERRITORY_NAMES[i], i);
-                territories[i] = new Territory(eastArea, TERRITORY_NAMES[i], i);
-                east.add(territories[i]);
+                territories[i] = new Territory(east, TERRITORY_NAMES[i], i);
+                east.addTerritory(territories[i]);
             }else if ( i < 15){
                 //territories[i] = new Territory(Area.BILKENTISLAND, TERRITORY_NAMES[i], i);
-                territories[i] = new Territory(islandArea, TERRITORY_NAMES[i], i);
-                island.add(territories[i]);
+                territories[i] = new Territory(island, TERRITORY_NAMES[i], i);
+                island.addTerritory(territories[i]);
             }else if ( i < 31){
                 //territories[i] = new Territory(Area.UPPERMAINCAMPUS, TERRITORY_NAMES[i], i);
-                territories[i] = new Territory(upperMainArea, TERRITORY_NAMES[i], i);
-                upperMain.add(territories[i]);
+                territories[i] = new Territory(upperMain, TERRITORY_NAMES[i], i);
+                upperMain.addTerritory(territories[i]);
             }else{
                 //territories[i] = new Territory(Area.LOWERMAINCAMPUS, TERRITORY_NAMES[i], i);
-                territories[i] = new Territory(lowerMainArea, TERRITORY_NAMES[i], i);
-                lowerMain.add(territories[i]);
+                territories[i] = new Territory(lowerMain, TERRITORY_NAMES[i], i);
+                lowerMain.addTerritory(territories[i]);
             }
         }
 
@@ -103,5 +95,9 @@ public class GameMap {
 
     public Territory[] getTerritories() {
         return territories;
+    }
+    public Area[] getAreas() {
+        Area[] areas = {east, island, upperMain, lowerMain};
+        return areas;
     }
 }
