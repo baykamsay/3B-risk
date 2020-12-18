@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Fedu implements Faculty{
 
-    final public Color color = Color.OLIVE;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.OLIVE;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/education_faculty_icon.png";
 
     public Fedu(){
         ca.setHue(0.638);
@@ -33,4 +34,7 @@ public class Fedu implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,9 +25,8 @@ import java.util.ArrayList;
 public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent> {
 
     private static final int MAX_SELECTED = 6;
-    private static final String[] FACULTY_NAMES = {"Art, Design \nand Architecture","Applied Sciences","Economics, Administration \nand Social Sciences","Education","Science","Humanities and Letters","Law","Bussiness Administration","Engineering","Music \nand Performing Arts"};
-    private static final String[] ICON_PATHS = {"faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png","faculty_icon_placeholder.png"};
-    private static final String[] SELECTED_ICON_PATHS = {"faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png","faculty_icon_placeholder_selected.png"};
+    private static final String[] FACULTY_NAMES = {"Art, Design \nand Architecture","Applied Sciences","Economics, Administration \nand Social Sciences","Education","Science","Humanities and Letters","Law","Business Administration","Engineering","Music \nand Performing Arts"};
+    private static final String[] ICON_PATHS = {"art_faculty_icon.png","applied_sciences_faculty_icon.png","econ_faculty_icon.png","education_faculty_icon.png","science_faculty_icon.png","humanities_faculty_icon.png","law_faculty_icon.png","business_faculty_icon.png","engineering_faculty_icon.png","music_finearts_faculty_icon.png"};
     private static final String[] ABILITY_DESCRIPTIONS = {"Everything by Design: Once a turn, you may choose to swap the result of one of your die rolls with the opponent","Eastern Affinity: You win ties when attacking in the East region.", "The Moderate Depression: Once a turn, you may reduce 1 from the dice rolls of the enemy.", "Reeducate: When you draw a new Objective card, you may discard it and draw another one.", "Knowledge Above All: Once a game, reveal all other players' Objective cards.", "The Pen is Mightier: If the attacker has more armies, gain an extra die.", "Lawyered: Once a turn, you may choose to redo a dice roll.", "Hostile Takeover: Once a game, take over an opponent's territory along with the soldiers.", "Over-Engineered: You can't roll a 1.", "Smoke and Mirrors: Once a game, you may choose to play an extra turn right after your normal one."};
     private int width, height;
     private int selected;
@@ -213,11 +213,14 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
         icons = new ImageView[10];
         int i = 0;
         Image tmp;
+        ColorAdjust unselected = new ColorAdjust();
+        unselected.setSaturation(-0.9);
         for(String s : ICON_PATHS){
             try {
-                tmp = new Image(Launcher.class.getResource("/img/" + s).toURI().toString());
+                tmp = new Image(Launcher.class.getResource("/img/icons/" + s).toURI().toString());
                 icons[i] = new ImageView();
                 icons[i].setImage(tmp);
+                icons[i].setEffect(unselected);
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
@@ -237,18 +240,17 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
     }
 
     public void setSelected(int i, boolean set){
+        ColorAdjust unselected = new ColorAdjust();
+        unselected.setSaturation(-0.9);
         if(!set){
-            icons[i].setImage(new Image(ICON_PATHS[i]));
+
+            icons[i].setEffect(unselected);
             selectedFaculties[i] = false;
             mgr.playButtonSound();
             selected--;
         }else {
             if (selected < MAX_SELECTED) {
-                try {
-                    icons[i].setImage(new Image(Launcher.class.getResource("/img/" + SELECTED_ICON_PATHS[i]).toURI().toString()));
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
+                icons[i].setEffect(null);
                 selectedFaculties[i] = true;
                 mgr.playButtonSound();
                 selected++;

@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Feass implements Faculty{
 
-    final public Color color = Color.YELLOW;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.YELLOW;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/econ_faculty_icon.png";
 
     public Feass(){
         ca.setHue(0.6165);
@@ -31,4 +32,7 @@ public class Feass implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }

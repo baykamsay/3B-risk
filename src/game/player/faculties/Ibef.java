@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Ibef implements Faculty{
 
-    final public Color color = Color.CYAN;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.CYAN;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/humanities_faculty_icon.png";
 
     public Ibef(){
         ca.setHue(-0.792);
@@ -31,4 +32,7 @@ public class Ibef implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }

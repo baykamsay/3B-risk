@@ -1,12 +1,14 @@
 package game.player.faculties;
 
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Art implements Faculty{
 
-    final public Color color = Color.DARKORANGE;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.DARKORANGE;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/art_faculty_icon.png";
 
     public Art(){
         ca.setHue(0.44);
@@ -31,4 +33,7 @@ public class Art implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }

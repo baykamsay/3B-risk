@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Fas implements Faculty{
 
-    final public Color color = Color.HOTPINK;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.HOTPINK;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/applied_sciences_faculty_icon.png";
 
     public Fas(){
         ca.setHue(0.0935);
@@ -31,4 +32,7 @@ public class Fas implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }

@@ -2,11 +2,13 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../css/menu_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
@@ -451,19 +453,12 @@
             <String fx:value="upper_main" />
          </styleClass>
       </ImageView>
-      <Button fx:id="pauseButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
-      <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="24.0" layoutY="22.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/pause_icon.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="p5Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="p3Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="p1Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="p2Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="p4Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="p6Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="872.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="24.0" layoutY="941.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
       <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="445.0" layoutY="244.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="388.0" layoutY="140.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="529.0" layoutY="117.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
@@ -558,5 +553,88 @@
       <Text fx:id="troops44" layoutX="968.0" layoutY="1002.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
       <Text fx:id="troops45" layoutX="1058.0" layoutY="1016.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
       <Text fx:id="troops46" layoutX="904.0" layoutY="1035.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Button fx:id="passButton" layoutX="145.0" layoutY="943.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
+      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="161.0" layoutY="961.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/pass_icon.png" />
+         </image>
+      </ImageView>
+      <Rectangle id="map_blocker" fx:id="mapBlocker" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" />
+      <Button fx:id="pauseButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
+      <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="24.0" layoutY="22.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/pause_icon.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="24.0" layoutY="941.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
+      <Pane id="battle_result_pane" fx:id="battleResultPane" layoutX="592.0" layoutY="172.0" prefHeight="736.0" prefWidth="736.0">
+         <children>
+            <Circle fx:id="attackerCircle" fill="DODGERBLUE" layoutX="200.0" layoutY="162.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" style="-fx-opacity: 0.1;" />
+            <Circle fx:id="defenderCircle" fill="DODGERBLUE" layoutX="524.0" layoutY="162.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="attackerIcon" fitHeight="100.0" fitWidth="100.0" layoutX="150.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/faculty_icon_placeholder.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="defenderIcon" fitHeight="100.0" fitWidth="100.0" layoutX="474.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/faculty_icon_placeholder.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="114.0" layoutY="52.0" styleClass="battle_label" text="ATTACKING" />
+            <Label layoutX="438.0" layoutY="52.0" styleClass="battle_label" text="DEFENDING" />
+            <ImageView fx:id="attackerDie1" fitHeight="100.0" fitWidth="100.0" layoutX="149.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="attackerDie2" fitHeight="100.0" fitWidth="100.0" layoutX="149.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="attackerDie3" fitHeight="100.0" fitWidth="100.0" layoutX="149.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="defenderDie1" fitHeight="100.0" fitWidth="100.0" layoutX="473.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="defenderDie2" fitHeight="100.0" fitWidth="100.0" layoutX="473.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_2.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="battleOKButton" layoutX="323.0" layoutY="618.0" mnemonicParsing="false" text="OK" />
+         </children>
+      </Pane>
+      <Pane fx:id="selectorPane" layoutX="440.0" layoutY="820.0" prefHeight="200.0" prefWidth="1042.0" style="-fx-background-color: blue;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" layoutX="35.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" style="-fx-opacity: 0.5; -fx-fill: black; -fx-arc-height: 100; -fx-arc-width: 100;" width="972.0" />
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="421.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/selector.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="selectorConfirm" fitHeight="150.0" fitWidth="150.0" layoutX="890.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/selection_confirm.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="selectorCancel" fitHeight="150.0" fitWidth="150.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/selection_cancel.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="selector2" layoutX="500.0" layoutY="60.0" styleClass="selector_number" text="4" />
+            <Label fx:id="selector1" layoutX="305.0" layoutY="60.0" styleClass="selector_number" text="3" />
+            <Label fx:id="selector0" layoutX="156.0" layoutY="60.0" styleClass="selector_number" text="2" />
+            <Label fx:id="selector3" layoutX="682.0" layoutY="60.0" styleClass="selector_number" text="1" />
+            <Label fx:id="selector4" layoutX="845.0" layoutY="60.0" styleClass="selector_number" text="2" />
+         </children>
+      </Pane>
    </children>
 </Pane>

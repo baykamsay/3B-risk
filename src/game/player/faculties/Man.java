@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Man implements Faculty{
 
-    final public Color color = Color.DARKSLATEGRAY;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.DARKSLATEGRAY;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/business_faculty_icon.png";
 
     public Man(){
         ca.setHue(-0.7095);
@@ -33,4 +34,7 @@ public class Man implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }

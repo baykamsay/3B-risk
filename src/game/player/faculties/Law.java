@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Law implements Faculty{
 
-    final public Color color = Color.DARKBLUE;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.DARKBLUE;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/law_faculty_icon.png";
 
     public Law(){
         ca.setHue(-0.3135);
@@ -31,4 +32,7 @@ public class Law implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }

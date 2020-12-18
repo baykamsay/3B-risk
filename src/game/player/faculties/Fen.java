@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Fen implements Faculty{
 
-    final public Color color = Color.LIME;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.LIME;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/science_faculty_icon.png";
 
     public Fen(){
         ca.setHue(-1.0);
@@ -31,4 +32,7 @@ public class Fen implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }

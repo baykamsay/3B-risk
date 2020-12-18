@@ -16,6 +16,11 @@
     -fx-font-size: 30px;  
 }
 
+.battle_label{
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+}
+
 .title_min{
     -fx-font-size: 30px; 
 }
@@ -147,6 +152,28 @@
     -fx-font-family: "Helvetica";
     -fx-font-size: 17px;
     -fx-font-weight: bold;
+}
+
+#map_blocker{
+    -fx-fill: rgb(44, 44, 44);
+    -fx-opacity: 0.96;
+}
+
+#battle_result_pane{
+    -fx-background-radius: 4em;
+    -fx-background-color: rgb(47, 56, 78);
+    -fx-opacity: 0.9;
+}
+
+.selector_number{
+    -fx-text-fill: white;
+    -fx-font-size: 70px;
+    -fx-font-family: "Arial";
+}
+
+.selector_number .text{
+    -fx-stroke: black;
+    -fx-stroke-width: 3px;
 }
 
 .menu_button_back_max{

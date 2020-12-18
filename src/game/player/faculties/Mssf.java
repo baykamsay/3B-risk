@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 
 public class Mssf implements Faculty{
 
-    final public Color color = Color.INDIGO;
-    final public ColorAdjust ca = new ColorAdjust();
+    final private Color color = Color.INDIGO;
+    final private ColorAdjust ca = new ColorAdjust();
+    final private String icon = "/img/icons/music_finearts_faculty_icon.png";
 
     public Mssf(){
         ca.setHue(-0.143);
@@ -31,4 +32,7 @@ public class Mssf implements Faculty{
     public ColorAdjust getCa() {
         return ca;
     }
+
+    @Override
+    public String getIconName(){ return icon;}
 }
