@@ -10,6 +10,7 @@ public class ArmyPlacementState implements GameState {
     private static ArmyPlacementState instance;
     private GameEngine engine;
     private int addibleArmyNo;
+    private int armyCount; //add amount per territory
 
     private ArmyPlacementState() {
         engine = GameEngine.getInstance();
@@ -26,15 +27,17 @@ public class ArmyPlacementState implements GameState {
         }
         return instance;
     }
-
+    public void setArmyCount(int count){
+        this.armyCount = armyCount;
+    }
     @Override
     public void mapSelect(ActionEvent e) {
         Territory[] territories = engine.getMap().getTerritories();
 
         for (Territory territory : territories) { // disabling the button is a better solution
             if ((e.getSource() == territory) && (engine.getCurrentPlayer() == territory.getRuler())) {
-                territory.setNumOfArmies(territory.getNumOfArmies() + 1);
-                addibleArmyNo = addibleArmyNo - 1;
+                territory.setNumOfArmies(territory.getNumOfArmies() + armyCount);
+                addibleArmyNo = addibleArmyNo - armyCount;
             }
         }
         if (addibleArmyNo <= 0) {

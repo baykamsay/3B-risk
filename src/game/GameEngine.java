@@ -4,10 +4,7 @@ import game.player.Objective;
 import game.player.Player;
 import game.scene.MapScene;
 import game.scene.MapSceneController;
-import game.state.ArmyPlacementState;
-import game.state.DiceSelectionState;
-import game.state.FortifyingArmySelectionState;
-import game.state.GameState;
+import game.state.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -94,6 +91,12 @@ public class GameEngine extends Application {
                 defenderDice = count;
                 ((DiceSelectionState) currentState).setChosenDefendingDice(defenderDice);
             }
+        }
+        else if(currentState instanceof ArmyPlacementState){
+            ((ArmyPlacementState) currentState).setArmyCount(count);
+        }
+        else if(currentState instanceof WarState){
+            ((WarState) currentState).armyNumberSelection(count);
         }
     }
 
