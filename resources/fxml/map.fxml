@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
@@ -569,12 +570,6 @@
       <Text fx:id="troops44" layoutX="968.0" layoutY="1002.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
       <Text fx:id="troops45" layoutX="1058.0" layoutY="1016.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
       <Text fx:id="troops46" layoutX="904.0" layoutY="1035.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
-      <Button fx:id="passButton" layoutX="145.0" layoutY="943.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
-      <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="161.0" layoutY="961.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/pass_icon.png" />
-         </image>
-      </ImageView>
       <Rectangle id="map_blocker" fx:id="mapBlocker" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" />
       <Button fx:id="pauseButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
       <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="24.0" layoutY="22.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
@@ -582,7 +577,6 @@
             <Image url="@../img/pause_icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="24.0" layoutY="941.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
       <Pane id="battle_result_pane" fx:id="battleResultPane" layoutX="592.0" layoutY="172.0" prefHeight="736.0" prefWidth="736.0">
          <children>
             <Circle fx:id="attackerCircle" fill="DODGERBLUE" layoutX="200.0" layoutY="162.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" style="-fx-opacity: 0.1;" />
@@ -645,9 +639,8 @@
                   <Image url="@../img/selection_cancel.png" />
                </image>
             </ImageView>
-            <Label fx:id="selector2" layoutX="500.0" layoutY="60.0" styleClass="selector_number" text="2" />
-            <Label fx:id="selector1" layoutX="246.0" layoutY="62.0" styleClass="selector_number" text="1" />
-            <Label fx:id="selector3" layoutX="755.0" layoutY="60.0" styleClass="selector_number" text="3" />
+            <Label fx:id="selector1" layoutX="246.0" layoutY="66.0" styleClass="selector_number" text="1" />
+            <Label fx:id="selector3" layoutX="765.0" layoutY="66.0" styleClass="selector_number" text="3" />
             <ImageView fx:id="selectorLeft" fitHeight="81.0" fitWidth="94.0" layoutX="345.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/left_arrow.png" />
@@ -658,6 +651,32 @@
                   <Image url="@../img/right_arrow.png" />
                </image>
             </ImageView>
+            <HBox alignment="CENTER" layoutX="421.0" layoutY="41.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="selector2" styleClass="selector_number_center" text="2" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <Pane fx:id="statePane" layoutX="24.0" layoutY="773.0" prefHeight="285.0" prefWidth="398.0">
+         <children>
+            <Rectangle fx:id="stateBg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="61.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px; -fx-opacity: 0.3;" width="299.0" />
+            <Button layoutX="310.0" layoutY="50.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="80.0" styleClass="ability_button" />
+            <Button fx:id="passButton" layoutX="310.0" layoutY="151.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="pass_button" />
+            <ImageView fitHeight="58.0" fitWidth="54.0" layoutX="323.0" layoutY="164.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pass_icon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stateIcon" fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/science_faculty_icon.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="stateLabel" layoutX="134.0" layoutY="125.0" prefWidth="187.0" styleClass="state_name" text="PLACEMENT" textAlignment="CENTER" />
+            <Rectangle fx:id="state0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="141.0" layoutY="175.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
+            <Rectangle fx:id="state1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="195.0" layoutY="175.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
+            <Rectangle fx:id="state2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="250.0" layoutY="175.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
          </children>
       </Pane>
    </children>

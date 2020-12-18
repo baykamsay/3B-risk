@@ -21,6 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -142,6 +143,14 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     @FXML
     Label selector1, selector2, selector3;
 
+    // Used to display current state
+    @FXML
+    Rectangle stateBg, state0, state1, state2;
+    @FXML
+    ImageView stateIcon;
+    @FXML
+    Label stateLabel;
+
     private ArrayList<Player> players;
 
     private ImageView[] territories;
@@ -157,10 +166,12 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     private GameEngine gameEngine;
     private ImageView[] defenderDiceImages, attackerDiceImages;
 
-    private int selectionMax;
+    private int selectionMin, selectionMax;
     private Label[] selectionLabels;
 
     private int curTurn;
+    private int curState;
+
 
     public MapSceneController(){
     }
@@ -200,7 +211,13 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
                     System.out.println(iv.getId());
                     map.getTerritories()[Integer.parseInt(iv.getId())].getRuler().setNumOfTerritory(map.getTerritories()[Integer.parseInt(iv.getId())].getRuler().getNumOfTerritory() - 1);
                     map.getTerritories()[Integer.parseInt(iv.getId())].setRuler(new Player(new Mf()));
-                    nextTurn();
+                    if(curState == 2){
+                        nextTurn();
+                        setState(0);
+                    } else {
+                        setState(curState + 1);
+                    }
+                    update();
                     event.consume();
                 });
                 //
@@ -237,6 +254,13 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         selectionLabels = new Label[]{selector1,selector2,selector3};
         selectorCancel.setPickOnBounds(false);
         selectorConfirm.setPickOnBounds(false);
+
+        try {
+            selectorLeft.setImage(new Image(getClass().getResource("/img/left_arrow.png").toURI().toString()));
+            selectorRight.setImage(new Image(getClass().getResource("/img/right_arrow.png").toURI().toString()));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         selectorLeft.setPickOnBounds(false);
         selectorRight.setPickOnBounds(false);
         ColorAdjust hover = new ColorAdjust();
@@ -247,13 +271,13 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
         selectorLeft.effectProperty().bind(
                 Bindings
-                        .when(selectorCancel.hoverProperty())
+                        .when(selectorLeft.hoverProperty())
                         .then((Effect) hover)
                         .otherwise(placebo)
         );
         selectorRight.effectProperty().bind(
                 Bindings
-                        .when(selectorCancel.hoverProperty())
+                        .when(selectorRight.hoverProperty())
                         .then((Effect) hover)
                         .otherwise(placebo)
         );
@@ -395,6 +419,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             p.setNumOfTerritory(p.getNumOfTerritory() + 1);
         }
         setTurn(0);
+        setState(0);
+        displayTroopSelector(3, 10);
         update();
     }
 
@@ -499,9 +525,11 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     public void displayTroopSelector(int max){
         selectionMax = max;
+        selectionMin = 1;
         selectorPane.setVisible(true);
         selectorPane.setMouseTransparent(false);
         mapBlocker.setMouseTransparent(false);
+        mapBlocker.setVisible(true);
         if(max == 1){
             selectionLabels[0].setVisible(false);
             selectionLabels[1].setText("1");
@@ -530,8 +558,49 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             selectionLabels[2].setVisible(true);
             selectorRight.setDisable(false);
             selectorLeft.setDisable(false);
+            selectorRight.setVisible(true);
+            selectorLeft.setVisible(true);
+        }
+    }
+
+    public void displayTroopSelector(int min, int max){
+        selectionMax = max;
+        selectionMin = min;
+        selectorPane.setVisible(true);
+        selectorPane.setMouseTransparent(false);
+        mapBlocker.setMouseTransparent(false);
+        mapBlocker.setVisible(true);
+        int distance = max - min + 1;
+        if(distance == 1){
+            selectionLabels[0].setVisible(false);
+            selectionLabels[1].setText(Integer.toString(selectionMin));
+            selectionLabels[1].setVisible(true);
+            selectionLabels[2].setVisible(false);
+            selectorRight.setDisable(true);
+            selectorLeft.setDisable(true);
+            selectorRight.setVisible(true);
+            selectorLeft.setVisible(true);
+        } else if (distance == 2) {
+            selectionLabels[0].setVisible(false);
+            selectionLabels[1].setText(Integer.toString(selectionMin));
+            selectionLabels[1].setVisible(true);
+            selectionLabels[2].setText(Integer.toString(selectionMin + 1));
+            selectionLabels[2].setVisible(true);
+            selectorRight.setDisable(false);
+            selectorLeft.setDisable(true);
             selectorRight.setVisible(false);
-            selectorLeft.setVisible(false);
+            selectorLeft.setVisible(true);
+        } else {
+            selectionLabels[0].setText(Integer.toString(selectionMin));
+            selectionLabels[0].setVisible(true);
+            selectionLabels[1].setText(Integer.toString(selectionMin + 1));
+            selectionLabels[1].setVisible(true);
+            selectionLabels[2].setText(Integer.toString(selectionMin + 2));
+            selectionLabels[2].setVisible(true);
+            selectorRight.setDisable(false);
+            selectorLeft.setDisable(false);
+            selectorRight.setVisible(true);
+            selectorLeft.setVisible(true);
         }
     }
 
@@ -542,13 +611,13 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     public void nextTurn(){
         setTurn((curTurn + 1) % players.size());
-        return;
     }
 
     public void selectorGoLeft(){
         selectionLabels[2].setText(selectionLabels[1].getText());
+        selectionLabels[2].setVisible(true);
         selectionLabels[1].setText(selectionLabels[0].getText());
-        if(Integer.parseInt(selectionLabels[0].getText()) > 1){
+        if(Integer.parseInt(selectionLabels[0].getText()) > selectionMin){
             selectionLabels[0].setText(Integer.toString(Integer.parseInt(selectionLabels[0].getText()) - 1));
         }
         else{
@@ -562,9 +631,10 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     public void selectorGoRight(){
         selectionLabels[0].setText(selectionLabels[1].getText());
+        selectionLabels[0].setVisible(true);
         selectionLabels[1].setText(selectionLabels[2].getText());
         if(Integer.parseInt(selectionLabels[2].getText()) < selectionMax){
-            selectionLabels[2].setText(Integer.toString(Integer.parseInt(selectionLabels[0].getText()) + 1));
+            selectionLabels[2].setText(Integer.toString(Integer.parseInt(selectionLabels[2].getText()) + 1));
         }
         else{
             selectionLabels[2].setVisible(false);
@@ -572,14 +642,61 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             selectorRight.setDisable(true);
         }
         selectorLeft.setVisible(true);
-        selectorRight.setDisable(false);
+        selectorLeft.setDisable(false);
     }
 
     public void selectionCancel(){
-
+        selectorPane.setVisible(false);
+        selectorPane.setMouseTransparent(true);
+        mapBlocker.setVisible(false);
+        mapBlocker.setMouseTransparent(true);
     }
 
     public void selectionConfirm(){
+        gameEngine.setArmyCount(Integer.parseInt(selectionLabels[1].getText()));
+        selectorPane.setVisible(false);
+        selectorPane.setMouseTransparent(true);
+        mapBlocker.setVisible(false);
+        mapBlocker.setMouseTransparent(true);
+    }
 
+    // state = 0 for placement, 1 for attack, 2 for fortify
+    public void setState(int state){
+        curState = state;
+        Player current = players.get(curTurn);
+        if(state == 0){
+            try {
+                stateIcon.setImage(new Image(getClass().getResource(current.getFaculty().getIconName()).toURI().toString()));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            stateBg.setFill(current.getColor());
+            state0.setFill(current.getColor());
+            state0.setOpacity(1);
+            state1.setFill(Color.DARKGRAY);
+            state1.setOpacity(0.3);
+            state2.setFill(Color.DARKGRAY);
+            state2.setOpacity(0.3);
+            stateLabel.setText("PLACEMENT");
+            stateLabel.setLayoutX(134.0);
+        } else if (state == 1){
+            state1.setFill(current.getColor());
+            state1.setOpacity(1);
+            state0.setFill(Color.DARKGRAY);
+            state0.setOpacity(0.3);
+            state2.setFill(Color.DARKGRAY);
+            state2.setOpacity(0.3);
+            stateLabel.setText("ATTACK");
+            stateLabel.setLayoutX(157.0);
+        } else if (state == 2){
+            state2.setFill(current.getColor());
+            state2.setOpacity(1);
+            state0.setFill(Color.DARKGRAY);
+            state0.setOpacity(0.3);
+            state1.setFill(Color.DARKGRAY);
+            state1.setOpacity(0.3);
+            stateLabel.setText("FORTIFY");
+            stateLabel.setLayoutX(157.0);
+        }
     }
 }

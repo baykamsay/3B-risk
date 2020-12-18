@@ -75,7 +75,9 @@ public class GameEngine extends Application {
         attackerDice = 0;
         defenderDice = 0;
     }
-    public void setArmyCount(int count){ //calls set methods for fortifyingArmySelection and DiceSelection
+
+    // Calls set methods for fortifyingArmySelection and DiceSelection
+    public void setArmyCount(int count){
         if(currentState instanceof FortifyingArmySelectionState){
             ((FortifyingArmySelectionState) currentState).setNumOfArmies(count);
         }
