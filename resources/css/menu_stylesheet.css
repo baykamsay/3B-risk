@@ -167,6 +167,10 @@
     -fx-opacity: 0.9;
 }
 
+#selector_cancel .hover{
+    -fx-brightness: 0.5;
+}
+
 .selector_number{
     -fx-text-fill: white;
     -fx-font-size: 70px;

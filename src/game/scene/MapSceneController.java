@@ -36,6 +36,8 @@ import java.util.ResourceBundle;
 
 public class MapSceneController implements Initializable, EventHandler<ActionEvent> {
 
+    private final double DEFAULT_INFOBG_X = 41.0;
+
     private static final String[] TERRITORY_NAMES = {"Dorms","Sports Center", "Library", "Prep Buildings", "Health Center", "Cafeteria", "ATM",
             "Coffee Break", "Mozart Cafe", "Entrance", "Bilkent 1 & 2", "Sports International", "Ankuva", "Bilkent Center", "Bilkent Hotel", "MSSF",
             "Concert Hall", "Dorms", "V Building", "F Buildings", "Dorm 76", "Mescit", "Starbucks", "M Building", "Meteksan", "Sports Center", "Nanotam",
@@ -136,9 +138,9 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     @FXML
     Pane selectorPane;
     @FXML
-    ImageView selectorCancel, selectorConfirm;
+    ImageView selectorCancel, selectorConfirm, selectorLeft, selectorRight;
     @FXML
-    Label selector0, selector1, selector2, selector3, selector4;
+    Label selector1, selector2, selector3;
 
     private ArrayList<Player> players;
 
@@ -154,8 +156,11 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     private GameMap map;
     private GameEngine gameEngine;
     private ImageView[] defenderDiceImages, attackerDiceImages;
+
+    private int selectionMax;
     private Label[] selectionLabels;
-    private Player curTurn;
+
+    private int curTurn;
 
     public MapSceneController(){
     }
@@ -196,7 +201,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
                     map.getTerritories()[Integer.parseInt(iv.getId())].getRuler().setNumOfTerritory(map.getTerritories()[Integer.parseInt(iv.getId())].getRuler().getNumOfTerritory() - 1);
                     map.getTerritories()[Integer.parseInt(iv.getId())].setRuler(new Player(new Mf()));
                     nextTurn();
-                    update();
                     event.consume();
                 });
                 //
@@ -230,11 +234,58 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         // Initialize selector components
         selectorPane.setVisible(false);
         selectorPane.setMouseTransparent(true);
-        selectionLabels = new Label[]{selector0,selector1,selector2,selector3,selector4};
+        selectionLabels = new Label[]{selector1,selector2,selector3};
         selectorCancel.setPickOnBounds(false);
+        selectorConfirm.setPickOnBounds(false);
+        selectorLeft.setPickOnBounds(false);
+        selectorRight.setPickOnBounds(false);
         ColorAdjust hover = new ColorAdjust();
-        hover.setBrightness(0.5);
-        // CONTINUE HERE for selection
+        hover.setBrightness(0.3);
+
+
+        ColorAdjust placebo = new ColorAdjust(); // This is needed for some reason, couldn't find another way
+
+        selectorLeft.effectProperty().bind(
+                Bindings
+                        .when(selectorCancel.hoverProperty())
+                        .then((Effect) hover)
+                        .otherwise(placebo)
+        );
+        selectorRight.effectProperty().bind(
+                Bindings
+                        .when(selectorCancel.hoverProperty())
+                        .then((Effect) hover)
+                        .otherwise(placebo)
+        );
+        selectorCancel.effectProperty().bind(
+                Bindings
+                        .when(selectorCancel.hoverProperty())
+                        .then((Effect) hover)
+                        .otherwise(placebo)
+        );
+        selectorConfirm.effectProperty().bind(
+                Bindings
+                        .when(selectorConfirm.hoverProperty())
+                        .then((Effect) hover)
+                        .otherwise(placebo)
+        );
+
+        selectorLeft.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            selectorGoLeft();
+            event.consume();
+        });
+        selectorRight.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            selectorGoRight();
+            event.consume();
+        });
+        selectorCancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            selectionCancel();
+            event.consume();
+        });
+        selectorConfirm.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            selectionConfirm();
+            event.consume();
+        });
     }
 
     @Override
@@ -286,6 +337,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         for(int i = 0; i < players.size(); i++){
             if(players.get(i).getNumOfTerritory() == 0){
                 players.remove(i);
+                curTurn += 1;
+                curTurn %= players.size();
             }
         }
         setPlayers(players);
@@ -318,6 +371,15 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             pInfoBgs[i].setVisible(false);
             pTerritoryIcons[i].setVisible(false);
         }
+
+        // Stick out current player's infobg out a bit
+        for(i = 0; i < players.size(); i++){
+            if(i == curTurn){
+                pInfoBgs[i].setLayoutX(DEFAULT_INFOBG_X - 50);
+            } else {
+                pInfoBgs[i].setLayoutX(DEFAULT_INFOBG_X);
+            }
+        }
     }
 
     public void test(){
@@ -332,7 +394,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             t.setRuler(p);
             p.setNumOfTerritory(p.getNumOfTerritory() + 1);
         }
-        setTurn(players.get(0));
+        setTurn(0);
         update();
     }
 
@@ -435,26 +497,89 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         }
     }
 
-    public void setTurn(Player p){
-        curTurn = p;
-        for(int i = 0; i < players.size(); i++){
-            if(players.get(i).equals(p)){
-                double x =  pInfoBgs[i].getLayoutX();
-                pInfoBgs[i].setLayoutX(x - 50);
-                return;
-            }
+    public void displayTroopSelector(int max){
+        selectionMax = max;
+        selectorPane.setVisible(true);
+        selectorPane.setMouseTransparent(false);
+        mapBlocker.setMouseTransparent(false);
+        if(max == 1){
+            selectionLabels[0].setVisible(false);
+            selectionLabels[1].setText("1");
+            selectionLabels[1].setVisible(true);
+            selectionLabels[2].setVisible(false);
+            selectorRight.setDisable(true);
+            selectorLeft.setDisable(true);
+            selectorRight.setVisible(true);
+            selectorLeft.setVisible(true);
+        } else if (max == 2) {
+            selectionLabels[0].setVisible(false);
+            selectionLabels[1].setText("1");
+            selectionLabels[1].setVisible(true);
+            selectionLabels[2].setText("2");
+            selectionLabels[2].setVisible(true);
+            selectorRight.setDisable(false);
+            selectorLeft.setDisable(true);
+            selectorRight.setVisible(false);
+            selectorLeft.setVisible(true);
+        } else {
+            selectionLabels[0].setText("1");
+            selectionLabels[0].setVisible(true);
+            selectionLabels[1].setText("2");
+            selectionLabels[1].setVisible(true);
+            selectionLabels[2].setText("3");
+            selectionLabels[2].setVisible(true);
+            selectorRight.setDisable(false);
+            selectorLeft.setDisable(false);
+            selectorRight.setVisible(false);
+            selectorLeft.setVisible(false);
         }
+    }
+
+    public void setTurn(int i){
+        curTurn = i;
         update();
     }
 
     public void nextTurn(){
-        for(int i = 0; i < players.size(); i++){
-            if(players.get(i).equals(curTurn)){
-                double x =  pInfoBgs[i].getLayoutX();
-                pInfoBgs[i].setLayoutX(x + 50);
-                setTurn(players.get((i + 1) % players.size()));
-                return;
-            }
+        setTurn((curTurn + 1) % players.size());
+        return;
+    }
+
+    public void selectorGoLeft(){
+        selectionLabels[2].setText(selectionLabels[1].getText());
+        selectionLabels[1].setText(selectionLabels[0].getText());
+        if(Integer.parseInt(selectionLabels[0].getText()) > 1){
+            selectionLabels[0].setText(Integer.toString(Integer.parseInt(selectionLabels[0].getText()) - 1));
         }
+        else{
+            selectionLabels[0].setVisible(false);
+            selectorLeft.setVisible(false);
+            selectorLeft.setDisable(true);
+        }
+        selectorRight.setDisable(false);
+        selectorRight.setVisible(true);
+    }
+
+    public void selectorGoRight(){
+        selectionLabels[0].setText(selectionLabels[1].getText());
+        selectionLabels[1].setText(selectionLabels[2].getText());
+        if(Integer.parseInt(selectionLabels[2].getText()) < selectionMax){
+            selectionLabels[2].setText(Integer.toString(Integer.parseInt(selectionLabels[0].getText()) + 1));
+        }
+        else{
+            selectionLabels[2].setVisible(false);
+            selectorRight.setVisible(false);
+            selectorRight.setDisable(true);
+        }
+        selectorLeft.setVisible(true);
+        selectorRight.setDisable(false);
+    }
+
+    public void selectionCancel(){
+
+    }
+
+    public void selectionConfirm(){
+
     }
 }
