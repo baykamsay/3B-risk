@@ -50,7 +50,6 @@ public class Objective {
         Objective objective;
         ObjectiveStrategy strategy;
         ObjectiveStrategy decorator;
-//        boolean isArea;
         Place place;
 
         String objectiveName; //create objective name by adding "capture" or "hold" to the target name
@@ -69,13 +68,11 @@ public class Objective {
 
         // select decorator
         if (Math.random() > TERRITORY_PROB && engine.getTurn() > AREA_TURN_LIMIT) {
-//            isArea = true;
             Area[] areas = GameMap.getInstance().getAreas();
             int areaIndex = (int)(Math.random() + areas.length);
             place = areas[areaIndex];
             decorator = new AreaDecorator(strategy);
         } else {
-//            isArea = false;
             int territoryIndex = (int)(Math.random() * GameMap.TOTAL_TERRITORY_COUNT);
             place = GameMap.getInstance().getTerritories()[territoryIndex];
             decorator = new TerritoryDecorator(strategy);
