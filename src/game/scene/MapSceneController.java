@@ -97,7 +97,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     @FXML ImageView mithatCoruhLowerMain;
     @FXML ImageView entranceLowerMain;
 
-    // Troop Counters
+    // Troop Counters for territories
     @FXML
     Text troops0,troops1,troops2,troops3,troops4,troops5,troops6,troops7,troops8,troops9,troops10,troops11,troops12,
             troops13,troops14,troops15,troops16,troops17,troops18,troops19,troops20,troops21,troops22,troops23,troops24,
@@ -106,14 +106,15 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     // Player Info
     @FXML
-    Shape p1InfoBg,p2InfoBg,p3InfoBg,p4InfoBg,p5InfoBg,p6InfoBg;
-
+    Rectangle p1Bg, p2Bg, p3Bg, p4Bg, p5Bg, p6Bg;
     @FXML
-    Shape p1IconBg,p2IconBg,p3IconBg,p4IconBg,p5IconBg,p6IconBg;
-
+    Circle p1IconBg,p2IconBg,p3IconBg,p4IconBg,p5IconBg,p6IconBg;
     @FXML
-    ImageView p1Icon,p2Icon,p3Icon,p4Icon,p5Icon,p6Icon;
+    ImageView p1Icon,p2Icon,p3Icon,p4Icon,p5Icon,p6Icon, p1TerritoryIcon, p2TerritoryIcon, p3TerritoryIcon, p4TerritoryIcon, p5TerritoryIcon, p6TerritoryIcon;
+    @FXML
+    Label p1TerritoryCount,p2TerritoryCount,p3TerritoryCount,p4TerritoryCount,p5TerritoryCount,p6TerritoryCount;
 
+    // Pause button
     @FXML
     Button pauseButton;
 
@@ -140,21 +141,28 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     Label selector0, selector1, selector2, selector3, selector4;
 
     private ArrayList<Player> players;
+
     private ImageView[] territories;
+    private Text[] troops;
+
     private ImageView[] pIcons;
     private Shape[] pIconBgs;
     private Shape[] pInfoBgs;
-    private Text[] troops;
+    private Label[] pTerritoryCounts;
+    private ImageView[] pTerritoryIcons;
+
     private GameMap map;
     private GameEngine gameEngine;
     private ImageView[] defenderDiceImages, attackerDiceImages;
     private Label[] selectionLabels;
+    private Player curTurn;
 
     public MapSceneController(){
     }
 
     public void init(){
 
+        // Arrays for map info
         territories = new ImageView[]{dormsEast, sportsEast, libraryEast, prepEast, healthCenterEast, cafeteriaEast, atmEast,
                 coffeeBreakEast, mozartEast, entranceEast, bilkent12Island, sportsInternationalIsland, ankuvaIsland, centerIsland, hotelIsland,
                 mssfUpperMain, concertHallUpperMain, dormsUpperMain, vBuildingUpperMain, fBuildingsUpperMain, dorm76UpperMain, mescitUpperMain,
@@ -167,21 +175,32 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
                 troops22,troops23,troops24,troops25,troops26,troops27,troops28,troops29,troops30,troops31,troops32,
                 troops33,troops34,troops35,troops36,troops37,troops38,troops39,troops40,troops41,troops42,troops43,
                 troops44,troops45,troops46};
+
+        // Arrays for player info
         pIcons = new ImageView[]{p1Icon,p2Icon,p3Icon,p4Icon,p5Icon,p6Icon};
         pIconBgs = new Shape[]{p1IconBg,p2IconBg,p3IconBg,p4IconBg,p5IconBg,p6IconBg};
-        pInfoBgs = new Shape[]{p1InfoBg,p2InfoBg,p3InfoBg,p4InfoBg,p5InfoBg,p6InfoBg};
+        pInfoBgs = new Shape[]{p1Bg, p2Bg, p3Bg, p4Bg, p5Bg, p6Bg};
+        pTerritoryCounts = new Label[]{p1TerritoryCount,p2TerritoryCount,p3TerritoryCount,p4TerritoryCount,p5TerritoryCount,p6TerritoryCount};
+        pTerritoryIcons = new ImageView[]{p1TerritoryIcon, p2TerritoryIcon, p3TerritoryIcon, p4TerritoryIcon, p5TerritoryIcon, p6TerritoryIcon};
+
 
         int i = 0;
         for(ImageView iv : territories){
             if( iv != null) {
                 iv.setPickOnBounds(false);
                 iv.setId(Integer.toString(i));
+
+                // TEST CODE
                 iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                     System.out.println(iv.getId());
+                    map.getTerritories()[Integer.parseInt(iv.getId())].getRuler().setNumOfTerritory(map.getTerritories()[Integer.parseInt(iv.getId())].getRuler().getNumOfTerritory() - 1);
                     map.getTerritories()[Integer.parseInt(iv.getId())].setRuler(new Player(new Mf()));
+                    nextTurn();
                     update();
                     event.consume();
                 });
+                //
+
                 iv.setCache(true);
                 iv.setCacheHint(CacheHint.SPEED);
                 Tooltip tp = new Tooltip(TERRITORY_NAMES[i]);
@@ -215,7 +234,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         selectorCancel.setPickOnBounds(false);
         ColorAdjust hover = new ColorAdjust();
         hover.setBrightness(0.5);
-        // CONTINUE HERE
+        // CONTINUE HERE for selection
     }
 
     @Override
@@ -227,14 +246,25 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         this.players = players;
         for(int i = 0; i < players.size(); i++){
             pIconBgs[i].setFill(players.get(i).getColor());
-            pInfoBgs[i].setOpacity(0.45);
             pInfoBgs[i].setFill(players.get(i).getColor());
+            try {
+                pIcons[i].setImage(new Image(getClass().getResource(players.get(i).getFaculty().getIconName()).toURI().toString()));
+                pTerritoryIcons[i].setImage(new Image(getClass().getResource("/img/territory_icon.png").toURI().toString()));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
+            // Test code
             pIcons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 Random rand = new Random();
                 displayBattleResult(new int[]{rand.nextInt(6) + 1}, new int[]{rand.nextInt(6) + 1, rand.nextInt(6) + 1}, new Player(new Fas()), new Player(new Fas()));
                 event.consume();
             });
+            //
+
         }
+
+        // Set extra player information invisible
         for(int i = players.size(); i < 6; i++){
             pIconBgs[i].setVisible(false);
             pInfoBgs[i].setVisible(false);
@@ -251,7 +281,19 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void update(){
+
+        // TEST CODE
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i).getNumOfTerritory() == 0){
+                players.remove(i);
+            }
+        }
+        setPlayers(players);
+        //
+
         for(int i = 0; i < territories.length; i++){
+
+            // Update territory colors
             ColorAdjust base = map.getTerritories()[i].getCa();
             ColorAdjust hover = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + 0.25, base.getContrast());
             territories[i].effectProperty().bind(
@@ -260,6 +302,21 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
                             .then((Effect) hover)
                             .otherwise(base)
             );
+        }
+
+        // Update player territory counts
+        int i;
+        for(i = 0; i < players.size(); i++){
+            pTerritoryCounts[i].setText(Integer.toString(players.get(i).getNumOfTerritory()));
+        }
+
+        // Make eliminated player info invisible
+        for(; i < 6; i++){
+            pTerritoryCounts[i].setVisible(false);
+            pIcons[i].setVisible(false);
+            pIconBgs[i].setVisible(false);
+            pInfoBgs[i].setVisible(false);
+            pTerritoryIcons[i].setVisible(false);
         }
     }
 
@@ -271,8 +328,11 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         }
 
         for(Territory t : map.getTerritories()){
-            t.setRuler(players.get(rand.nextInt(players.size())));
+            Player p = players.get(rand.nextInt(players.size()));
+            t.setRuler(p);
+            p.setNumOfTerritory(p.getNumOfTerritory() + 1);
         }
+        setTurn(players.get(0));
         update();
     }
 
@@ -372,6 +432,29 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             battleResultPane.setMouseTransparent(true);
             mapBlocker.setVisible(false);
             mapBlocker.setMouseTransparent(true);
+        }
+    }
+
+    public void setTurn(Player p){
+        curTurn = p;
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i).equals(p)){
+                double x =  pInfoBgs[i].getLayoutX();
+                pInfoBgs[i].setLayoutX(x - 50);
+                return;
+            }
+        }
+        update();
+    }
+
+    public void nextTurn(){
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i).equals(curTurn)){
+                double x =  pInfoBgs[i].getLayoutX();
+                pInfoBgs[i].setLayoutX(x + 50);
+                setTurn(players.get((i + 1) % players.size()));
+                return;
+            }
         }
     }
 }

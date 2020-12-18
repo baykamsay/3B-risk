@@ -7,12 +7,46 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Ellipse?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../css/menu_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
    <children>
+      <Pane layoutX="1550.0" layoutY="40.0" prefHeight="1000.0" prefWidth="370.0">
+         <children>
+            <Rectangle fx:id="p1Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p2Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="170.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p3Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p4Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="510.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p5Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="680.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p6Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="850.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Circle fx:id="p1IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="75.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p2IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="245.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p3IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="415.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p4IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="585.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p5IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="755.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p6IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="925.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="p1Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p2Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p3Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p4Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p5Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="695.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p6Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="865.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="54.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p1TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p1TerritoryCount" layoutX="157.0" layoutY="46.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p2TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p2TerritoryCount" layoutX="157.0" layoutY="216.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p3TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p3TerritoryCount" layoutX="157.0" layoutY="386.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p4TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p4TerritoryCount" layoutX="157.0" layoutY="556.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p5TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="720.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p5TerritoryCount" layoutX="157.0" layoutY="726.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p6TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="890.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p6TerritoryCount" layoutX="157.0" layoutY="896.0" styleClass="territory_number" text="1" />
+         </children>
+      </Pane>
       <ImageView fitHeight="1046.0" fitWidth="1304.0" layoutX="218.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/map/complete_world_map.png" />
@@ -423,18 +457,6 @@
             <String fx:value="t_building" />
          </styleClass>
       </ImageView>
-      <Ellipse fx:id="p5InfoBg" fill="DODGERBLUE" layoutX="1766.0" layoutY="112.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
-      <Ellipse fx:id="p3InfoBg" fill="DODGERBLUE" layoutX="1766.0" layoutY="280.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
-      <Ellipse fx:id="p1InfoBg" fill="DODGERBLUE" layoutX="1775.0" layoutY="440.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
-      <Ellipse fx:id="p2InfoBg" fill="DODGERBLUE" layoutX="1775.0" layoutY="605.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
-      <Ellipse fx:id="p4InfoBg" fill="DODGERBLUE" layoutX="1776.0" layoutY="769.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
-      <Ellipse fx:id="p6InfoBg" fill="DODGERBLUE" layoutX="1776.0" layoutY="932.0" radiusX="130.0" radiusY="75.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="p5IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="112.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="p3IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="280.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="p1IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="440.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="p2IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="605.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="p4IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="768.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="p6IconBg" fill="DODGERBLUE" layoutX="1836.0" layoutY="932.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="prepEast" fitHeight="217.0" fitWidth="188.0" layoutX="357.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/map/prep_buildings_east.png" />
@@ -453,12 +475,6 @@
             <String fx:value="upper_main" />
          </styleClass>
       </ImageView>
-      <ImageView fx:id="p5Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="p3Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="p1Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="p2Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="p4Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="p6Icon" fitHeight="120.0" fitWidth="120.0" layoutX="1776.0" layoutY="872.0" pickOnBounds="true" preserveRatio="true" />
       <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="445.0" layoutY="244.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="388.0" layoutY="140.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="529.0" layoutY="117.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
@@ -611,7 +627,7 @@
             <Button fx:id="battleOKButton" layoutX="323.0" layoutY="618.0" mnemonicParsing="false" text="OK" />
          </children>
       </Pane>
-      <Pane fx:id="selectorPane" layoutX="440.0" layoutY="820.0" prefHeight="200.0" prefWidth="1042.0" style="-fx-background-color: blue;">
+      <Pane id="selector_pane" fx:id="selectorPane" layoutX="440.0" layoutY="820.0" prefHeight="200.0" prefWidth="1042.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" layoutX="35.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" style="-fx-opacity: 0.5; -fx-fill: black; -fx-arc-height: 100; -fx-arc-width: 100;" width="972.0" />
             <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="421.0" pickOnBounds="true" preserveRatio="true">

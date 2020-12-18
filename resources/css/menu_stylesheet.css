@@ -119,13 +119,15 @@
 
 .player_bg{
     -fx-opacity: 0.5;
-    -fx-fill: black;
-    -fx-stroke-width: 0;
+    -fx-arc-height: 100px;
+    -fx-arc-width: 100px;
+    -fx-stroke: transparent;
 }
 
-.player_icon{
-    -fx-opacity: 1;
-    -fx-fill: black;
+.territory_number{
+    -fx-text-fill: white;
+    -fx-font-size: 50px;
+    -fx-font-family: "Arial";
 }
 
 #map_bg{
