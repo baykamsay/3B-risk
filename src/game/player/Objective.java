@@ -3,6 +3,8 @@ package game.player;
 import game.GameEngine;
 import game.GameMap;
 
+import java.util.ArrayList;
+
 public class Objective {
 
     static final int HOLD_LIMIT = 5;
@@ -45,7 +47,9 @@ public class Objective {
     }
     public int getBonus(){return bonus;}
 
-    public boolean isDone() {
+    // Returns -1 if the turn limit is passed, 0 if there are still turns but the objective is not accomplished,
+    // 1 if objective is accomplished
+    public int isDone() {
         currentTurn++;
         return strategy.isDone(this);
     }
@@ -56,6 +60,7 @@ public class Objective {
         ObjectiveStrategy strategy;
         ObjectiveStrategy decorator;
         Place place;
+        boolean isCapture;
         int bonus = 0;
 
         String objectiveName; //create objective name by adding "capture" or "hold" to the target name
@@ -67,11 +72,13 @@ public class Objective {
             objectiveName = "Capture ";
             strategy = new CaptureObjective();
             bonus += CAPTURE_BONUS;
+            isCapture = true;
         } else {
             limit = (int)(Math.random() * CAPTURE_LIMIT) + 1;
             objectiveName = "Hold ";
             strategy = new HoldObjective();
             bonus += HOLD_BONUS;
+            isCapture = false;
         }
 
         // select decorator
@@ -93,8 +100,26 @@ public class Objective {
                 bonus += 5;
             }
         } else {
-            int territoryIndex = (int)(Math.random() * GameMap.TOTAL_TERRITORY_COUNT);
-            place = GameMap.getInstance().getTerritories()[territoryIndex];
+            ArrayList<Place> ownedTerritories = new ArrayList<>();
+            ArrayList<Place> otherTerritories = new ArrayList<>();
+
+            for (Territory territory : GameMap.getInstance().getTerritories()) {
+                if (territory.isRuler(p)) {
+                    ownedTerritories.add(territory);
+                } else {
+                    otherTerritories.add(territory);
+                }
+            }
+            int territoryIndex;
+
+            if (isCapture) {
+                territoryIndex = (int)(Math.random() * otherTerritories.size());
+                place = otherTerritories.get(territoryIndex);
+            } else {
+                territoryIndex = (int)(Math.random() * ownedTerritories.size());
+                place = ownedTerritories.get(territoryIndex);
+            }
+
             decorator = new TerritoryDecorator(strategy);
         }
 
