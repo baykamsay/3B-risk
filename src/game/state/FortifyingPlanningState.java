@@ -38,7 +38,7 @@ public class FortifyingPlanningState implements GameState {
             for (Territory territory : territories) {
                 //check the territory name && if player is the ruler
                 if ((territory.getName()).equals(e.getSource().toString())
-                        && (engine.getCurrentPlayer() == territory.getRuler())) {
+                        && (territory.isRuler(engine.getCurrentPlayer()))) {
                     source = territory;
                 }
             }

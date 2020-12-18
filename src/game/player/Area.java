@@ -18,10 +18,10 @@ public class Area implements Place{
     public String getName(){
         return name;
     }
-    public Faculty getRuler(){
-        Faculty ruler = territories.get(0).getRuler().getFaculty();
+    public Player getRuler(){
+        Player ruler = territories.get(0).getRuler();
         for (Territory t: territories) {
-                if (t.getRuler().getFaculty() != ruler){
+                if (!(t.isRuler(ruler))){
                     return null;
                 }
         }

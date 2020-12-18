@@ -53,16 +53,16 @@ public class ArmyPlacementState implements GameState {
         } else {
             addibleArmyNo = p.getNumOfTerritory() / 3;
         }
-        if( p.getFaculty() == engine.getMap().getAreas()[0].getRuler()){ //east campus area = +3
+        if( p.equals(engine.getMap().getAreas()[0].getRuler())){ //east campus area = +3
             addibleArmyNo += 3;
         }
-        if( p.getFaculty() == engine.getMap().getAreas()[1].getRuler()){ //island area = +2
+        if( p.equals(engine.getMap().getAreas()[1].getRuler())){ //island area = +2
             addibleArmyNo += 2;
         }
-        if( p.getFaculty() == engine.getMap().getAreas()[2].getRuler()){ //upper main campus area = +5
+        if( p.equals(engine.getMap().getAreas()[2].getRuler())){ //upper main campus area = +5
             addibleArmyNo += 5;
         }
-        if( p.getFaculty() == engine.getMap().getAreas()[3].getRuler()){ //lower main campus area = +5
+        if( p.equals(engine.getMap().getAreas()[3].getRuler())){ //lower main campus area = +5
             addibleArmyNo += 5;
         }
         if(p.getObjective().isDone()){
