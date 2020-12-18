@@ -12,6 +12,9 @@ public class WarState implements GameState{
     private static WarState instance;
     private AttackingState attack;
     private GameEngine engine;
+    private int movingArmies;
+    private int minMovingArmy;
+    private int maxMovingArmy;
 
     private WarState() {
         attack = AttackingState.getInstance();
@@ -33,9 +36,15 @@ public class WarState implements GameState{
         // to do
     }
 
-    public int displayArmyNumberSelection() {
-        // to do
-        return 1;
+    public void armyNumberSelection(int count) { //called by engine
+        movingArmies = count;
+    }
+
+    public int[] getMinMaxMovingArmy(){
+        int[] minMaxArmy = new int[2];
+        minMaxArmy[0] = minMovingArmy;
+        minMaxArmy[1] = maxMovingArmy;
+        return minMaxArmy;
     }
 
     // wage war on an enemy territory
@@ -43,6 +52,8 @@ public class WarState implements GameState{
         Territory attackingTerritory = attack.getSource();
         Territory defendingTerritory = attack.getDestination();
         int[] attackingDice = new int[attack.getAttackingArmies()];
+        minMovingArmy = attackingDice.length; //only used if the territory is captured
+        maxMovingArmy = attackingTerritory.getNumOfArmies() - 1; //only used if the territory is captured
         int[] defendingDice = new int[attack.getDefendingArmies()];
         int attackingLostDice = 0;
         int defendingLostDice = 0;
@@ -81,7 +92,6 @@ public class WarState implements GameState{
         if (defendingTerritory.getNumOfArmies() == 0) {
             Player pastRuler = defendingTerritory.getRuler();
             defendingTerritory.setRuler(engine.getCurrentPlayer());
-            int movingArmies = displayArmyNumberSelection();
             attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
             defendingTerritory.setNumOfArmies(movingArmies);
             if (engine.isEliminated(pastRuler)) { // remove player if they have no territories left
