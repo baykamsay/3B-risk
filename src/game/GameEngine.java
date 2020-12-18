@@ -5,6 +5,8 @@ import game.player.Player;
 import game.scene.MapScene;
 import game.scene.MapSceneController;
 import game.state.ArmyPlacementState;
+import game.state.DiceSelectionState;
+import game.state.FortifyingArmySelectionState;
 import game.state.GameState;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -29,6 +31,8 @@ public class GameEngine extends Application {
     public ArrayList<Objective> objectives;
     public ArrayList<Player> players;
     private Launcher launcher;
+    private int attackerDice;
+    private int defenderDice;
 
     public int playerTurn; //keeps the index of the players array to decide who's gonna play
     public int saveSlot;
@@ -68,6 +72,27 @@ public class GameEngine extends Application {
         currentState = null;
         playerTurn = 0; //first player will go first, which is stored in index 0
         winner = null;
+        attackerDice = 0;
+        defenderDice = 0;
+    }
+    public void setArmyCount(int count){ //calls set methods for fortifyingArmySelection and DiceSelection
+        if(currentState instanceof FortifyingArmySelectionState){
+            ((FortifyingArmySelectionState) currentState).setNumOfArmies(count);
+        }
+        else if(currentState instanceof DiceSelectionState){
+            if(attackerDice != 0 && defenderDice != 0){
+                attackerDice = 0;
+                defenderDice = 0;
+            }
+            if(attackerDice == 0 && defenderDice == 0){
+                attackerDice = count;
+                ((DiceSelectionState) currentState).setChosenAttackingDice(attackerDice);
+            }
+            if(attackerDice != 0 && defenderDice == 0){
+                defenderDice = count;
+                ((DiceSelectionState) currentState).setChosenDefendingDice(defenderDice);
+            }
+        }
     }
 
     public static GameEngine init(int saveSlot, int width, int height, Launcher launcher) {
