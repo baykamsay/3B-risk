@@ -375,8 +375,19 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
         for(int i = 0; i < territories.length; i++){
             // Update territory colors
-            ColorAdjust base = map.getTerritories()[i].getCa();
-            ColorAdjust hover = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + 0.25, base.getContrast());
+            ColorAdjust base;
+            ColorAdjust hover;
+            if(GameMap.getInstance().getTerritory(i).getNumOfArmies() == 0){
+                base = new ColorAdjust();
+                base.setSaturation(-0.95);
+                ColorAdjust pCa = GameEngine.getInstance().getCurrentPlayer().getCa();
+                hover = new ColorAdjust(pCa.getHue(), pCa.getSaturation() - 0.5, pCa.getBrightness(), pCa.getContrast());
+            }else {
+                base = map.getTerritories()[i].getCa();
+                hover = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + 0.25, base.getContrast());
+
+            }
+
             territories[i].effectProperty().bind(
                     Bindings
                             .when(territories[i].hoverProperty())
