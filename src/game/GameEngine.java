@@ -92,6 +92,14 @@ public class GameEngine extends Application {
         }
     }
 
+    public void pass() {
+        if (currentState instanceof AttackingState) {
+            ((AttackingState) currentState).pass();
+        } else if (currentState instanceof FortifyingState) {
+            ((FortifyingState) currentState).pass();
+        }
+    }
+
     // Load Game init
     public static GameEngine init(int saveSlot, int width, int height, Launcher launcher) {
         synchronized (GameEngine.class) {
@@ -221,7 +229,6 @@ public class GameEngine extends Application {
         controller.setMap(map);
         controller.setGameEngine(this);
         controller.setPlayers(players);
-        controller.addHandlers();
         try {
             this.gameScene.getStylesheets().add(getClass().getResource("/css/main_stylesheet.css").toURI().toString());
         } catch (URISyntaxException e) {
