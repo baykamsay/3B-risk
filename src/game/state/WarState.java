@@ -40,12 +40,6 @@ public class WarState implements GameState{
         movingArmies = count;
     }
 
-    public int[] getMinMaxMovingArmy(){
-        int[] minMaxArmy = new int[2];
-        minMaxArmy[0] = minMovingArmy;
-        minMaxArmy[1] = maxMovingArmy;
-        return minMaxArmy;
-    }
 
     // wage war on an enemy territory
     public void war() {
@@ -92,6 +86,8 @@ public class WarState implements GameState{
         if (defendingTerritory.getNumOfArmies() == 0) {
             Player pastRuler = defendingTerritory.getRuler();
             defendingTerritory.setRuler(engine.getCurrentPlayer());
+            //call displayTroopSelector to get the moving armies
+            engine.mapScene.getController().displayTroopSelector(minMovingArmy,maxMovingArmy);
             attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
             defendingTerritory.setNumOfArmies(movingArmies);
             if (engine.isEliminated(pastRuler)) { // remove player if they have no territories left

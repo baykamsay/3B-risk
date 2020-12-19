@@ -40,7 +40,10 @@ public class DiceSelectionState implements GameState {
     public void start() {
         calculateSourceDiceNo();
         calculateDestinationDiceNo();
-        //this part will be implemented
+        //call display troop selection to set the chosen dice
+        engine.mapScene.getController().displayTroopSelector(attackDiceNo);
+        engine.mapScene.getController().displayTroopSelector(defendDiceNo);
+        //set these results in attack for war to get
         attack.setAttackingArmies(aChosenDice);
         attack.setDefendingArmies(dChosenDice);
         attack.switchState(WarState.getInstance());

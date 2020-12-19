@@ -36,6 +36,8 @@ public class ArmyPlacementState implements GameState {
 
         for (Territory territory : territories) { // disabling the button is a better solution
             if ((e.getSource() == territory) && (engine.getCurrentPlayer() == territory.getRuler())) {
+                //call display troop selection, it will set the army no.
+                engine.mapScene.getController().displayTroopSelector(addibleArmyNo);
                 territory.setNumOfArmies(territory.getNumOfArmies() + armyCount);
                 addibleArmyNo = addibleArmyNo - armyCount;
             }
