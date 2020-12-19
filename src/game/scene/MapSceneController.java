@@ -2,9 +2,11 @@ package game.scene;
 
 import game.GameEngine;
 import game.GameMap;
+import game.SoundEngine;
 import game.player.Player;
 import game.player.Territory;
 import game.state.WarState;
+import javafx.animation.FadeTransition;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -161,6 +163,10 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     @FXML Pane troopNumberPane;
     @FXML Label troopNumberLabel, objectiveReward;
 
+    // Objective result
+    @FXML Pane objectiveResult;
+    @FXML Label objectiveResultLabel, objectiveRewardLabel;
+
     private ArrayList<Player> players;
 
     private ImageView[] territories;
@@ -218,6 +224,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
                 iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                     gameEngine.mapSelect(Integer.parseInt(iv.getId()));
+                    SoundEngine.getInstance().clickTerritory();
                     update();
                     event.consume();
                 });
@@ -325,6 +332,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
         troopNumberPane.setVisible(false);
         objectiveDisplay.setVisible(false);
+        objectiveResult.setOpacity(0.0);
+        objectiveResult.setMouseTransparent(true);
     }
 
     @Override
@@ -366,8 +375,19 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
         for(int i = 0; i < territories.length; i++){
             // Update territory colors
-            ColorAdjust base = map.getTerritories()[i].getCa();
-            ColorAdjust hover = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + 0.25, base.getContrast());
+            ColorAdjust base;
+            ColorAdjust hover;
+            if(GameMap.getInstance().getTerritory(i).getNumOfArmies() == 0){
+                base = new ColorAdjust();
+                base.setSaturation(-0.95);
+                ColorAdjust pCa = GameEngine.getInstance().getCurrentPlayer().getCa();
+                hover = new ColorAdjust(pCa.getHue(), pCa.getSaturation() - 0.5, pCa.getBrightness(), pCa.getContrast());
+            }else {
+                base = map.getTerritories()[i].getCa();
+                hover = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + 0.25, base.getContrast());
+
+            }
+
             territories[i].effectProperty().bind(
                     Bindings
                             .when(territories[i].hoverProperty())
@@ -426,7 +446,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         gameEngine.test();
     }
 
-    public void displayBattleResult(int[] attackerDice, int[] defenderDice, Player attacker, Player defender){
+    public void displayBattleResult(int[] attackerDice, int[] defenderDice, boolean[] attackerWon, Player attacker, Player defender){
         // Set all image views for the dice invisible, set dice effects to null
         for(ImageView iv : attackerDiceImages){
             iv.setVisible(false);
@@ -470,7 +490,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         int won = 0;
         int numberOfBattles = Math.min(attackerDice.length,defenderDice.length);
         for(int i = 0; i < numberOfBattles; i++){
-            if(attackerDice[i] > defenderDice[i]){
+            if(attackerWon[i]){
                 defenderDiceImages[i].setEffect(grayOut);
                 won++;
             }
@@ -518,7 +538,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             mapBlocker.setMouseTransparent(true);
             WarState.getInstance().terminating();
         } else if (actionEvent.getSource() == passButton){
-            System.out.println("controller pass");
             gameEngine.pass();
         }
     }
@@ -743,5 +762,31 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     public void updateTroopNumber(int i){
         troopNumberLabel.setText(Integer.toString(i));
+    }
+
+    public void displayObjectiveSuccess(int reward){
+        FadeTransition fade = new FadeTransition();
+        objectiveResultLabel.setText("Objective Completed!");
+        objectiveRewardLabel.setText("You receive " + reward + " troops");
+        fade.setDuration(Duration.seconds(10));
+        fade.setCycleCount(1);
+        fade.setAutoReverse(false);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+        fade.setNode(objectiveResult);
+        fade.play();
+    }
+
+    public void displayObjectiveFail(){
+        FadeTransition fade = new FadeTransition();
+        objectiveResultLabel.setText("Objective Failed!");
+        objectiveRewardLabel.setText("You receive nothing...");
+        fade.setDuration(Duration.seconds(10));
+        fade.setCycleCount(1);
+        fade.setAutoReverse(false);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+        fade.setNode(objectiveResult);
+        fade.play();
     }
 }

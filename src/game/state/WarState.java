@@ -1,6 +1,7 @@
 package game.state;
 
 import game.GameEngine;
+import game.SoundEngine;
 import game.player.Player;
 import game.player.Territory;
 import game.player.faculties.Faculty;
@@ -51,6 +52,8 @@ public class WarState implements GameState{
         int attackingLostDice = 0;
         int defendingLostDice = 0;
 
+        SoundEngine.getInstance().playDiceRoll();
+
         for (int i = 0; i < attackingDice.length; i++) {
             if (engine.getCurrentPlayer().getFaculty() instanceof Mf){
                 attackingDice[i] = (int) (Math.random() * 5 + 2);
@@ -67,6 +70,13 @@ public class WarState implements GameState{
                 defendingDice[i] = (int) (Math.random() * 6 + 1);
             }
         }
+        boolean[] diceResults;
+
+        if (attackingDice.length > defendingDice.length) {
+            diceResults = new boolean[defendingDice.length];
+        } else {
+            diceResults = new boolean[attackingDice.length];
+        }
 
         Arrays.sort(attackingDice);
         int tmp = attackingDice[0];
@@ -77,22 +87,25 @@ public class WarState implements GameState{
         defendingDice[0] = defendingDice[defendingDice.length - 1];
         defendingDice[defendingDice.length - 1] = tmp;
 
-        engine.getController().displayBattleResult(attackingDice, defendingDice, attackingTerritory.getRuler(), defendingTerritory.getRuler());
-
         for (int i = 0; i < attackingDice.length && i < defendingDice.length; i++) {
             // compare
             if (attackingDice[i] > defendingDice[i]) {
                 defendingLostDice++;
+                diceResults[i] = true;
             }
             else if (((Faculty) engine.getCurrentPlayer().getFaculty() instanceof Fas)
                 && attackingTerritory.getArea().getName() == "EASTCAMPUS" && attackingDice[i] == defendingDice[i]) {
                 defendingLostDice++;
+                diceResults[i] = true;
             }
             else
             {
                 attackingLostDice++;
+                diceResults[i] = false;
             }
         }
+
+        engine.getController().displayBattleResult(attackingDice, defendingDice, diceResults, attackingTerritory.getRuler(), defendingTerritory.getRuler());
 
         attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - attackingLostDice);
         defendingTerritory.setNumOfArmies(defendingTerritory.getNumOfArmies() - defendingLostDice);
