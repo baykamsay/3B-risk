@@ -74,6 +74,9 @@ public class GameEngine extends Application {
         attackerDice = 0;
         defenderDice = 0;
     }
+    public void incrementCurrentPlayer(){
+         playerTurn = (playerTurn + 1) % players.size();
+    }
 
     public void mapSelect(int territory){
         currentState.mapSelect(territory);
