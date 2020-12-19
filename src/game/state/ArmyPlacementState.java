@@ -2,6 +2,7 @@ package game.state;
 
 import game.GameEngine;
 import game.GameMap;
+import game.SoundEngine;
 import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
@@ -83,10 +84,13 @@ public class ArmyPlacementState implements GameState {
         }
         int objectiveResult = p.getObjective().isDone();
         if(objectiveResult == -1){
+            SoundEngine.getInstance().objectiveFailed();
+            GameEngine.getInstance().getController().displayObjectiveFail();
             p.setObjective(Objective.generateObjective(p));
         } else if (objectiveResult == 1) {
-            System.out.println("OBJECTIVE COMPLETED");
+            SoundEngine.getInstance().objectiveCompleted();
             addibleArmyNo += p.getObjective().getBonus(); //bonus army for a completed objective
+            GameEngine.getInstance().getController().displayObjectiveSuccess(p.getObjective().getBonus());
             p.setObjective(Objective.generateObjective(p));
         }
         GameEngine.getInstance().getController().updateTroopNumber(addibleArmyNo);

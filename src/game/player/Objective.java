@@ -68,13 +68,13 @@ public class Objective {
 
         // select strategy
         if (Math.random() < CAPTURE_PROB) {
-            limit = (int)(Math.random() * HOLD_LIMIT) + 1; //determine the turn for hold objective
+            limit = (int)(Math.random() * HOLD_LIMIT) + 2; //determine the turn for hold objective
             objectiveName = "Capture ";
             strategy = new CaptureObjective();
             bonus += CAPTURE_BONUS;
             isCapture = true;
         } else {
-            limit = (int)(Math.random() * CAPTURE_LIMIT) + 1;
+            limit = (int)(Math.random() * CAPTURE_LIMIT) + 2;
             objectiveName = "Hold ";
             strategy = new HoldObjective();
             bonus += HOLD_BONUS;

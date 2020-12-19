@@ -718,5 +718,19 @@
             </HBox>
          </children>
       </Pane>
+      <Pane fx:id="objectiveResult" layoutX="34.0" layoutY="488.0" prefHeight="140.0" prefWidth="350.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px; -fx-opacity: 0.5; -fx-fill: black;" width="350.0" />
+            <VBox alignment="CENTER" layoutX="9.0" layoutY="5.0" prefHeight="127.0" prefWidth="335.0" style="-fx-padding: 20px;">
+               <children>
+                  <Label fx:id="objectiveResultLabel" styleClass="objective_result_title" text="OBJECTIVE COMPLETED!" />
+                  <Label fx:id="objectiveRewardLabel" styleClass="objective_text" text="Received 3 Troops!" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </Pane>
    </children>
 </Pane>
