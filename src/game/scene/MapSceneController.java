@@ -411,6 +411,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         setState(0);
         displayTroopSelector(3, 10);
         update();
+        gameEngine.test();
     }
 
     public void addHandlers(){

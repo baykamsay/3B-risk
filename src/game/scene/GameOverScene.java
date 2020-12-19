@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import menu.Launcher;
 
 import java.io.IOException;
 
@@ -31,18 +30,14 @@ public class GameOverScene {
 
     public void init() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Launcher.class.getResource("/fxml/gameOver.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/gameOver.fxml"));
         VBox root = new VBox();
         root.setId("map_bg");
-        Pane map = loader.load();
-        root.getChildren().addAll(map);
+        Pane pane = loader.load();
+        root.getChildren().addAll(pane);
         root.setAlignment(Pos.CENTER);
         this.controller = loader.getController();
         scene = new Scene(root,width,height);
-    }
-
-    public void setWinner(Player p){
-        controller.setWinner(p);
     }
 
     public GameOverSceneController getController(){
