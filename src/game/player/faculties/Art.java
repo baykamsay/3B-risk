@@ -9,6 +9,7 @@ public class Art implements Faculty{
     final private Color color = Color.DARKORANGE;
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/art_faculty_icon.png";
+    final private String name = "Faculty of Art, Design and Architecture";
 
     public Art(){
         ca.setHue(0.44);
@@ -36,4 +37,9 @@ public class Art implements Faculty{
 
     @Override
     public String getIconName(){ return icon;}
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }

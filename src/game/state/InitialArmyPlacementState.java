@@ -29,24 +29,23 @@ public class InitialArmyPlacementState implements GameState {
     }
 
     // When player selects a map territory
-    public void mapSelect(ActionEvent e) {
-        Territory[] territories = engine.getMap().getTerritories();
+    public void mapSelect(int territory) {
+        Territory t = engine.getMap().getTerritory(territory);
         ArrayList<Player> players = engine.getPlayers();
-        for (Territory territory : territories) {
             // getName() can also be getId() if ids are implemented and the other part requires something to compare
             // when the map is implemented fix this
             // && territory.getRuler() == null this can also be checked but if it is not null disabling the button is
             // better
-            if (territory.getName() == e.getSource().toString()) {
-                territory.setRuler(players.get(currentPlayer));
+            if (t.getRuler() == null) {
+                t.setRuler(players.get(currentPlayer));
             }
-        }
         checkIfStateOver();
         currentPlayer++;
     }
 
     @Override
     public void start() {
+        engine.mapScene.getController().setState(0);
         currentPlayer = 0;
     }
 

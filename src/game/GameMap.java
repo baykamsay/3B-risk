@@ -44,7 +44,9 @@ public class GameMap {
 
         initTerritories();
     }
-
+    public Territory getTerritory(int index){
+        return territories[index];
+    }
     public static GameMap getInstance() {
         if (instance == null) {
             synchronized (GameMap.class) {

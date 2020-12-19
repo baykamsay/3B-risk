@@ -33,8 +33,8 @@ public class AttackingState implements GameState {
         return instance;
     }
 
-    public void mapSelect(ActionEvent e){
-        currentState.mapSelect(e);
+    public void mapSelect(int territory){
+        currentState.mapSelect(territory);
     }
 
     @Override
@@ -44,6 +44,7 @@ public class AttackingState implements GameState {
         currentState = AttackingPlanningState.getInstance();
         attackingArmies = 0;
         defendingArmies = 0;
+        engine.mapScene.getController().setState(1);
     }
 
     public void pass() {

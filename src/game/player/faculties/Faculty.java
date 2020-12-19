@@ -9,5 +9,6 @@ public interface Faculty {
     Color getColor();
     ColorAdjust getCa();
     String getIconName();
+    String getName();
 
 }

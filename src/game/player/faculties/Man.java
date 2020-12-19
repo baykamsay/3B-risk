@@ -8,6 +8,7 @@ public class Man implements Faculty{
     final private Color color = Color.DARKSLATEGRAY;
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/business_faculty_icon.png";
+    final private String name = "Faculty of Business Administration";
 
     public Man(){
         ca.setHue(-0.7095);
@@ -37,4 +38,9 @@ public class Man implements Faculty{
 
     @Override
     public String getIconName(){ return icon;}
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }

@@ -8,6 +8,7 @@ public class Ibef implements Faculty{
     final private Color color = Color.CYAN;
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/humanities_faculty_icon.png";
+    final private String name = "Faculty of Humanities and Letters";
 
     public Ibef(){
         ca.setHue(-0.792);
@@ -35,4 +36,9 @@ public class Ibef implements Faculty{
 
     @Override
     public String getIconName(){ return icon;}
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }

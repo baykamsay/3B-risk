@@ -8,6 +8,7 @@ public class Feass implements Faculty{
     final private Color color = Color.YELLOW;
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/econ_faculty_icon.png";
+    final private String name = "Faculty of Economics, Administration and Social Sciences";
 
     public Feass(){
         ca.setHue(0.6165);

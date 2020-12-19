@@ -71,6 +71,9 @@ public class GameEngine extends Application {
         attackerDice = 0;
         defenderDice = 0;
     }
+    public void mapSelect(int territory){
+        currentState.mapSelect(territory);
+    }
 
     // Calls set methods for fortifyingArmySelection and DiceSelection
     public void setArmyCount(int count){

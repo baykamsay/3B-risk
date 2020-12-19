@@ -8,6 +8,7 @@ public class Fen implements Faculty{
     final private Color color = Color.LIME;
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/science_faculty_icon.png";
+    final private String name = "Faculty of Science";
 
     public Fen(){
         ca.setHue(-1.0);
@@ -35,4 +36,9 @@ public class Fen implements Faculty{
 
     @Override
     public String getIconName(){ return icon;}
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }

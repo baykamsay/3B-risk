@@ -29,8 +29,8 @@ public class FortifyingState implements GameState {
         return instance;
     }
 
-    public void mapSelect(ActionEvent e){
-        currentState.mapSelect(e);
+    public void mapSelect(int territory){
+        currentState.mapSelect(territory);
     }
 
     public void pass() {
@@ -44,6 +44,7 @@ public class FortifyingState implements GameState {
         source = null;
         currentState = FortifyingPlanningState.getInstance();
         movingArmies = 0;
+        engine.mapScene.getController().setState(2);
     }
 
     public Territory getSource(){
