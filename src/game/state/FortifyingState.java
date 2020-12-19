@@ -14,7 +14,6 @@ public class FortifyingState implements GameState {
     public int movingArmies; //fortifyingArmySelection will handle it
 
     private FortifyingState() {
-        start();
     }
 
     public static FortifyingState getInstance() {
@@ -34,7 +33,6 @@ public class FortifyingState implements GameState {
 
     public void pass() {
         engine.nextPlayer();
-//        engine.switchState(ArmyPlacementState.getInstance());
     }
 
     @Override
@@ -64,6 +62,12 @@ public class FortifyingState implements GameState {
     public void back(){
         if(currentState instanceof FortifyingArmySelectionState){
             switchState(FortifyingPlanningState.getInstance());
+        }
+    }
+
+    public void setNumOfArmies(int armies){
+        if(currentState instanceof FortifyingArmySelectionState){
+            ((FortifyingArmySelectionState) currentState).setNumOfArmies(armies);
         }
     }
 

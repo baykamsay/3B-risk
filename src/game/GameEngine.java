@@ -81,8 +81,8 @@ public class GameEngine extends Application {
 
     // Calls set methods for fortifyingArmySelection and DiceSelection
     public void setArmyCount(int count){
-        if(currentState instanceof FortifyingArmySelectionState){
-            ((FortifyingArmySelectionState) currentState).setNumOfArmies(count);
+        if(currentState instanceof FortifyingState){
+            ((FortifyingState) currentState).setNumOfArmies(count);
         }
         else if(currentState instanceof AttackingState){
             ((AttackingState) currentState).setDiceNo(count);
@@ -93,6 +93,7 @@ public class GameEngine extends Application {
     }
 
     public void pass() {
+        System.out.println("Gameengine pass");
         if (currentState instanceof AttackingState) {
             ((AttackingState) currentState).pass();
         } else if (currentState instanceof FortifyingState) {
@@ -113,7 +114,6 @@ public class GameEngine extends Application {
         synchronized (GameEngine.class) {
             instance = new GameEngine(saveSlot, width, height, players, launcher);
         }
-        GameEngine.getInstance().switchState(InitialArmyPlacementState.getInstance());
         return instance;
     }
 
@@ -211,6 +211,9 @@ public class GameEngine extends Application {
         window.setTitle("RISK 101");
         window.getIcons().add(new Image(Launcher.class.getResource("/img/logo.png").toURI().toString()));
         this.setupMapScene();
+        if(turn == 0) {
+            GameEngine.getInstance().switchState(InitialArmyPlacementState.getInstance());
+        }
         window.setScene(gameScene);
         window.show();
     }
@@ -299,6 +302,8 @@ public class GameEngine extends Application {
             e.printStackTrace();
         }
         this.setScene(gameOverScene.createScene());
+        soundEngine.stopMusic();
+        soundEngine.playWinSound();
     }
 
     public void test(){

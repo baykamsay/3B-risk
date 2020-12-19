@@ -36,8 +36,8 @@ import java.util.ResourceBundle;
 
 public class MapSceneController implements Initializable, EventHandler<ActionEvent> {
 
-    private static final String[] TERRITORY_NAMES = {"Dorms","Sports Center", "Library", "Prep Buildings", "Health Center", "Cafeteria", "ATM",
-            "Coffee Break", "Mozart Cafe", "Entrance", "Bilkent 1 & 2", "Sports International", "Ankuva", "Bilkent Center", "Bilkent Hotel", "MSSF",
+    private static final String[] TERRITORY_NAMES = {"East Dorms","East Sports Center", "East Library", "Prep Buildings", "Health Center", "East Cafeteria", "ATM",
+            "East Coffee Break", "East Mozart Cafe", "East Entrance", "Bilkent 1 & 2", "Sports International", "Ankuva", "Bilkent Center", "Bilkent Hotel", "MSSF",
             "Concert Hall", "Dorms", "V Building", "F Buildings", "Dorm 76", "Mescit", "Starbucks", "M Building", "Meteksan", "Sports Center", "Nanotam",
             "Mayfest", "A Building", "S Building", "T Building", "G Building", "Coffee Break", "Square", "CafeIn", "Statue", "B Building", "Cyber Park", "ODEON",
             "Library", "Mozart Cafe", "Cafeteria", "EA Building", "Meteksan", "EE Building", "Mithat Coruh", "Entrance"};
@@ -150,7 +150,16 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     // Buttons for ability pass and objective
     @FXML
-    Button passButton, abilityButton, objectiveButton;
+    Button passButton, abilityButton;
+
+    // Objective display
+    @FXML ImageView objectiveIcon;
+    @FXML Label objectiveText, objectiveTurns;
+    @FXML Pane objectiveDisplay;
+
+    // Troop number pane
+    @FXML Pane troopNumberPane;
+    @FXML Label troopNumberLabel, objectiveReward;
 
     private ArrayList<Player> players;
 
@@ -303,9 +312,19 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             selectionConfirm();
             event.consume();
         });
+        objectiveIcon.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+            displayObjective();
+            event.consume();
+        });
+        objectiveIcon.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+            objectiveDisplay.setVisible(false);
+            event.consume();
+        });
+        objectiveIcon.setVisible(false);
+        passButton.setOnAction(this);
 
-        pauseButton.setOnAction(this);
-        objectiveButton.setOnAction(this);
+        troopNumberPane.setVisible(false);
+        objectiveDisplay.setVisible(false);
     }
 
     @Override
@@ -490,7 +509,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         battleResultPane.setMouseTransparent(false);
     }
 
-
     @Override
     public void handle(ActionEvent actionEvent) {
         if(actionEvent.getSource() == battleOKButton){
@@ -500,12 +518,12 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             mapBlocker.setMouseTransparent(true);
             WarState.getInstance().terminating();
         } else if (actionEvent.getSource() == passButton){
+            System.out.println("controller pass");
             gameEngine.pass();
         }
     }
 
     public void displayTroopSelector(int max){
-
         selectorCancel.setVisible(true);
         selectorCancel.setDisable(false);
         selectionMax = max;
@@ -548,7 +566,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void displayTroopSelector(int min, int max){
-
         selectorCancel.setVisible(true);
         selectorCancel.setDisable(false);
         selectionMax = max;
@@ -594,10 +611,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     public void setTurn(int i){
         curTurn = i;
         update();
-    }
-
-    public void nextTurn(){
-        setTurn((curTurn + 1) % players.size());
     }
 
     public void selectorGoLeft(){
@@ -655,8 +668,28 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         curTurn = gameEngine.getPlayerTurn();
         setTurn(curTurn);
         Player current = players.get(curTurn);
-        if(state == 0){
-            pauseButton.setDisable(true);
+        objectiveIcon.setVisible(true);
+        if(state == -1){
+            passButton.setDisable(true);
+            troopNumberPane.setVisible(true);
+            objectiveIcon.setVisible(false);
+            try {
+                stateIcon.setImage(new Image(getClass().getResource(current.getFaculty().getIconName()).toURI().toString()));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            stateBg.setFill(current.getColor());
+            state0.setFill(Color.DARKGRAY);
+            state0.setOpacity(0.3);
+            state1.setFill(Color.DARKGRAY);
+            state1.setOpacity(0.3);
+            state2.setFill(Color.DARKGRAY);
+            state2.setOpacity(0.3);
+            stateLabel.setText("INITIAL");
+            stateLabel.setLayoutX(155.0);
+        }else if(state == 0){
+            troopNumberPane.setVisible(true);
+            passButton.setDisable(true);
             try {
                 stateIcon.setImage(new Image(getClass().getResource(current.getFaculty().getIconName()).toURI().toString()));
             } catch (URISyntaxException e) {
@@ -672,7 +705,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             stateLabel.setText("PLACEMENT");
             stateLabel.setLayoutX(134.0);
         } else if (state == 1){
-            pauseButton.setDisable(false);
+            troopNumberPane.setVisible(false);
+            passButton.setDisable(false);
             state1.setFill(current.getColor());
             state1.setOpacity(1);
             state0.setFill(Color.DARKGRAY);
@@ -682,7 +716,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             stateLabel.setText("ATTACK");
             stateLabel.setLayoutX(157.0);
         } else if (state == 2){
-            pauseButton.setDisable(false);
+            troopNumberPane.setVisible(false);
+            passButton.setDisable(false);
             state2.setFill(current.getColor());
             state2.setOpacity(1);
             state0.setFill(Color.DARKGRAY);
@@ -697,5 +732,16 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     public void disableCancel(){
         selectorCancel.setVisible(false);
         selectorCancel.setDisable(true);
+    }
+
+    public void displayObjective(){
+        objectiveDisplay.setVisible(true);
+        objectiveText.setText(GameEngine.getInstance().getCurrentPlayer().getObjective().getName());
+        objectiveTurns.setText(GameEngine.getInstance().getCurrentPlayer().getObjective().getRemainingTurn() + " turn/s remaining.");
+        objectiveReward.setText("Reward: " + GameEngine.getInstance().getCurrentPlayer().getObjective().getBonus() + " troops");
+    }
+
+    public void updateTroopNumber(int i){
+        troopNumberLabel.setText(Integer.toString(i));
     }
 }
