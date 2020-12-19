@@ -42,6 +42,7 @@ public class InitialArmyPlacementState implements GameState {
                 armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
                 currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
                 p.setNumOfTerritory(p.getNumOfTerritory() + 1);
+                engine.incrementCurrentPlayer();
             }
         }
         else {
@@ -49,10 +50,10 @@ public class InitialArmyPlacementState implements GameState {
                 t.setNumOfArmies(t.getNumOfArmies() + 1);
                 armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
                 currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
+                engine.incrementCurrentPlayer();
+                checkIfStateOver();
             }
         }
-        checkIfStateOver();
-        engine.incrementCurrentPlayer();
     }
 
     //initialize army counts for players
