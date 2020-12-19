@@ -148,6 +148,10 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     @FXML
     Label stateLabel;
 
+    // Buttons for ability pass and objective
+    @FXML
+    Button passButton, abilityButton, objectiveButton;
+
     private ArrayList<Player> players;
 
     private ImageView[] territories;
@@ -224,6 +228,9 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             i++;
         }
 
+        // Add handler to pause button
+        pauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> gameEngine.pause());
+
         // Make mapBlocker inactive.
         mapBlocker.setVisible(false);
         mapBlocker.setMouseTransparent(true);
@@ -252,7 +259,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         selectorRight.setPickOnBounds(false);
         ColorAdjust hover = new ColorAdjust();
         hover.setBrightness(0.3);
-
 
         ColorAdjust placebo = new ColorAdjust(); // This is needed for some reason, couldn't find another way
 
@@ -297,6 +303,9 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             selectionConfirm();
             event.consume();
         });
+
+        pauseButton.setOnAction(this);
+        objectiveButton.setOnAction(this);
     }
 
     @Override
@@ -398,10 +407,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         gameEngine.test();
     }
 
-    public void addHandlers(){
-        pauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> gameEngine.pause());
-    }
-
     public void displayBattleResult(int[] attackerDice, int[] defenderDice, Player attacker, Player defender){
         // Set all image views for the dice invisible, set dice effects to null
         for(ImageView iv : attackerDiceImages){
@@ -494,6 +499,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             mapBlocker.setVisible(false);
             mapBlocker.setMouseTransparent(true);
             WarState.getInstance().terminating();
+        } else if (actionEvent.getSource() == passButton){
+            gameEngine.pass();
         }
     }
 
@@ -642,13 +649,14 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         update();
     }
 
-    // state = 0 for placement, 1 for attack, 2 for fortify
+    // state = -1 for initial placement 0 for placement, 1 for attack, 2 for fortify
     public void setState(int state){
         curState = state;
         curTurn = gameEngine.getPlayerTurn();
         setTurn(curTurn);
         Player current = players.get(curTurn);
         if(state == 0){
+            pauseButton.setDisable(true);
             try {
                 stateIcon.setImage(new Image(getClass().getResource(current.getFaculty().getIconName()).toURI().toString()));
             } catch (URISyntaxException e) {
@@ -664,6 +672,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             stateLabel.setText("PLACEMENT");
             stateLabel.setLayoutX(134.0);
         } else if (state == 1){
+            pauseButton.setDisable(false);
             state1.setFill(current.getColor());
             state1.setOpacity(1);
             state0.setFill(Color.DARKGRAY);
@@ -673,6 +682,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             stateLabel.setText("ATTACK");
             stateLabel.setLayoutX(157.0);
         } else if (state == 2){
+            pauseButton.setDisable(false);
             state2.setFill(current.getColor());
             state2.setOpacity(1);
             state0.setFill(Color.DARKGRAY);
