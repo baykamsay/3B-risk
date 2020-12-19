@@ -34,6 +34,9 @@ public class FortifyingPlanningState implements GameState {
                 fortify.setSource(t);
             }
         }
+        else if (fortify.getSource() == t) {
+            fortify.setSource(null);
+        }
         else {
             if(fortify.getSource().isAdjacent(t) && t.getRuler() == GameEngine.getInstance().getCurrentPlayer()) { //check if destination is adjacent to the source
                 fortify.setDestination(t);
