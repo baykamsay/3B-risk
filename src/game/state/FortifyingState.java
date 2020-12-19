@@ -61,6 +61,12 @@ public class FortifyingState implements GameState {
         currentState.start();
     }
 
+    public void back(){
+        if(currentState instanceof FortifyingArmySelectionState){
+            switchState(FortifyingPlanningState.getInstance());
+        }
+    }
+
     public void setDestination(Territory destination) {
         this.destination = destination;
     }

@@ -84,25 +84,11 @@ public class GameEngine extends Application {
         if(currentState instanceof FortifyingArmySelectionState){
             ((FortifyingArmySelectionState) currentState).setNumOfArmies(count);
         }
-        else if(currentState instanceof DiceSelectionState){
-            if(attackerDice != 0 && defenderDice != 0){
-                attackerDice = 0;
-                defenderDice = 0;
-            }
-            if(attackerDice == 0 && defenderDice == 0){
-                attackerDice = count;
-                ((DiceSelectionState) currentState).setChosenAttackingDice(attackerDice);
-            }
-            if(attackerDice != 0 && defenderDice == 0){
-                defenderDice = count;
-                ((DiceSelectionState) currentState).setChosenDefendingDice(defenderDice);
-            }
+        else if(currentState instanceof AttackingState){
+            ((AttackingState) currentState).setDiceNo(count);
         }
         else if(currentState instanceof ArmyPlacementState){
             ((ArmyPlacementState) currentState).setArmyCount(count);
-        }
-        else if(currentState instanceof WarState){
-            ((WarState) currentState).armyNumberSelection(count);
         }
     }
 
@@ -314,5 +300,13 @@ public class GameEngine extends Application {
 
     public MapSceneController getController(){
         return controller;
+    }
+
+    public void back(){
+        if(currentState instanceof AttackingState){
+            ((AttackingState) currentState).back();
+        }else if(currentState instanceof FortifyingState){
+            ((FortifyingState) currentState).back();
+        }
     }
 }

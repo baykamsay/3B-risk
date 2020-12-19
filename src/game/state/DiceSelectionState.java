@@ -11,6 +11,7 @@ public class DiceSelectionState implements GameState {
     private AttackingState attack;
     private int attackDiceNo, defendDiceNo,
                 aChosenDice, dChosenDice;
+    private boolean attackerSet;
 
     private DiceSelectionState() {
     }
@@ -30,10 +31,22 @@ public class DiceSelectionState implements GameState {
         //will not be implemented
     }
 
+    public void setDiceNo(int diceNo){
+        if(!attackerSet) {
+            attackerSet = true;
+            attack.setAttackingArmies(diceNo);
+            engine.getController().displayTroopSelector(defendDiceNo);
+        } else {
+            attack.setDefendingArmies(diceNo);
+            attack.switchState(WarState.getInstance());
+        }
+    }
+
     @Override
     public void start() {
         engine = GameEngine.getInstance();
         attack = AttackingState.getInstance();
+        attackerSet = false;
         attackDiceNo = 0;
         defendDiceNo = 0;
         aChosenDice = 0;
@@ -42,11 +55,7 @@ public class DiceSelectionState implements GameState {
         calculateDestinationDiceNo();
         //call display troop selection to set the chosen dice
         engine.getController().displayTroopSelector(attackDiceNo);
-        engine.getController().displayTroopSelector(defendDiceNo);
         //set these results in attack for war to get
-        attack.setAttackingArmies(aChosenDice);
-        attack.setDefendingArmies(dChosenDice);
-        attack.switchState(WarState.getInstance());
     }
 
     public void calculateSourceDiceNo(){

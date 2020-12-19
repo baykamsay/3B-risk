@@ -4,6 +4,7 @@ import game.GameEngine;
 import game.GameMap;
 import game.player.Player;
 import game.player.Territory;
+import game.state.WarState;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -204,8 +205,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
                 iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                     gameEngine.mapSelect(Integer.parseInt(iv.getId()));
-                    event.consume();
                     update();
+                    event.consume();
                 });
 
                 iv.setCache(true);
@@ -280,19 +281,19 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
                         .otherwise(placebo)
         );
 
-        selectorLeft.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        selectorLeft.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             selectorGoLeft();
             event.consume();
         });
-        selectorRight.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        selectorRight.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             selectorGoRight();
             event.consume();
         });
-        selectorCancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        selectorCancel.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             selectionCancel();
             event.consume();
         });
-        selectorConfirm.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+        selectorConfirm.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             selectionConfirm();
             event.consume();
         });
@@ -492,6 +493,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             battleResultPane.setMouseTransparent(true);
             mapBlocker.setVisible(false);
             mapBlocker.setMouseTransparent(true);
+            WarState.getInstance().terminating();
         }
     }
 
@@ -509,8 +511,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             selectionLabels[2].setVisible(false);
             selectorRight.setDisable(true);
             selectorLeft.setDisable(true);
-            selectorRight.setVisible(true);
-            selectorLeft.setVisible(true);
+            selectorRight.setVisible(false);
+            selectorLeft.setVisible(false);
         } else if (max == 2) {
             selectionLabels[0].setVisible(false);
             selectionLabels[1].setText("1");
@@ -519,8 +521,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             selectionLabels[2].setVisible(true);
             selectorRight.setDisable(false);
             selectorLeft.setDisable(true);
-            selectorRight.setVisible(false);
-            selectorLeft.setVisible(true);
+            selectorRight.setVisible(true);
+            selectorLeft.setVisible(false);
         } else {
             selectionLabels[0].setText("1");
             selectionLabels[0].setVisible(true);
@@ -550,8 +552,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             selectionLabels[2].setVisible(false);
             selectorRight.setDisable(true);
             selectorLeft.setDisable(true);
-            selectorRight.setVisible(true);
-            selectorLeft.setVisible(true);
+            selectorRight.setVisible(false);
+            selectorLeft.setVisible(false);
         } else if (distance == 2) {
             selectionLabels[0].setVisible(false);
             selectionLabels[1].setText(Integer.toString(selectionMin));
@@ -560,8 +562,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             selectionLabels[2].setVisible(true);
             selectorRight.setDisable(false);
             selectorLeft.setDisable(true);
-            selectorRight.setVisible(false);
-            selectorLeft.setVisible(true);
+            selectorRight.setVisible(true);
+            selectorLeft.setVisible(false);
         } else {
             selectionLabels[0].setText(Integer.toString(selectionMin));
             selectionLabels[0].setVisible(true);
@@ -622,14 +624,15 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         selectorPane.setMouseTransparent(true);
         mapBlocker.setVisible(false);
         mapBlocker.setMouseTransparent(true);
+        gameEngine.back();
     }
 
     public void selectionConfirm(){
-        gameEngine.setArmyCount(Integer.parseInt(selectionLabels[1].getText()));
         selectorPane.setVisible(false);
         selectorPane.setMouseTransparent(true);
         mapBlocker.setVisible(false);
         mapBlocker.setMouseTransparent(true);
+        gameEngine.setArmyCount(Integer.parseInt(selectionLabels[1].getText()));
         update();
     }
 

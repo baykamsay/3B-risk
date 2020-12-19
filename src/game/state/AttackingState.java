@@ -52,11 +52,23 @@ public class AttackingState implements GameState {
     }
 
     public void switchState(GameState state){
-        System.out.println(state);
         currentState = state;
         currentState.start();
     }
 
+    public void setDiceNo(int diceNo){
+        if(currentState instanceof DiceSelectionState){
+            ((DiceSelectionState) currentState).setDiceNo(diceNo);
+        }else if(currentState instanceof WarState){
+            ((WarState) currentState).moveArmies(diceNo);
+        }
+    }
+
+    public void back(){
+        if(currentState instanceof DiceSelectionState) {
+            switchState(AttackingPlanningState.getInstance());
+        }
+    }
 
     public Territory getDestination() {
         return destination;

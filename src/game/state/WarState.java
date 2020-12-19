@@ -15,7 +15,6 @@ public class WarState implements GameState{
     private int movingArmies;
     private int minMovingArmy;
     private int maxMovingArmy;
-
     private WarState() {
     }
 
@@ -30,14 +29,9 @@ public class WarState implements GameState{
         return instance;
     }
 
-//    public void displayWar(int[] attackingDice, int[] defendingDice, Player attacker, Player defender) {
-//        // to do
-//    }
-
     public void armyNumberSelection(int count) { //called by engine
         movingArmies = count;
     }
-
 
     // wage war on an enemy territory
     public void war() {
@@ -74,10 +68,9 @@ public class WarState implements GameState{
         attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - attackingLostDice);
         defendingTerritory.setNumOfArmies(defendingTerritory.getNumOfArmies() - defendingLostDice);
 
-        terminating();
     }
 
-    private void terminating() {
+    public void terminating() {
         Territory defendingTerritory = attack.getDestination();
         Territory attackingTerritory = attack.getSource();
 
@@ -85,18 +78,23 @@ public class WarState implements GameState{
             Player pastRuler = defendingTerritory.getRuler();
             defendingTerritory.setRuler(engine.getCurrentPlayer());
             //call displayTroopSelector to get the moving armies
-            engine.mapScene.getController().displayTroopSelector(minMovingArmy,maxMovingArmy);
-            attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
-            defendingTerritory.setNumOfArmies(movingArmies);
+            engine.getController().displayTroopSelector(minMovingArmy,maxMovingArmy);
             if (engine.isEliminated(pastRuler)) { // remove player if they have no territories left
                 engine.removePlayer(pastRuler);
             }
-            attack.switchState(AttackingPlanningState.getInstance());
         } else if (attackingTerritory.getNumOfArmies() == 1) {
             attack.switchState(AttackingPlanningState.getInstance());
         } else {
             attack.switchState(DiceSelectionState.getInstance());
         }
+    }
+
+    public void moveArmies(int i){
+        Territory defendingTerritory = attack.getDestination();
+        Territory attackingTerritory = attack.getSource();
+        attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
+        defendingTerritory.setNumOfArmies(movingArmies);
+        attack.switchState(AttackingPlanningState.getInstance());
     }
 
     // Map is not used in this state

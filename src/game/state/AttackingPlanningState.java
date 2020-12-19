@@ -28,16 +28,15 @@ public class AttackingPlanningState implements GameState {
 
     //Select source and destination territories
     public void mapSelect(int territory) {
-        if (destination == null && source == null) { //make sure that the first selection will be source
-            Territory t = engine.getMap().getTerritory(territory);
-                //check the territory name && if player is the ruler && has at least 2 armies
+        Territory t = engine.getMap().getTerritory(territory);
+        if (attack.getSource() == null) { //make sure that the first selection will be source
+            //check the territory name && if player is the ruler && has at least 2 armies
                 if ((t.isRuler(engine.getCurrentPlayer())) && t.getNumOfArmies() >= 2) {
                     attack.setSource(t);
                 }
         }
-        else if( destination == null){
-            Territory t = engine.getMap().getTerritory(territory);
-            if(source.isAdjacent(t)) { //check if destination is adjacent to the source
+        else {
+            if(attack.getSource().isAdjacent(t) && t.getRuler() != GameEngine.getInstance().getCurrentPlayer()) { //check if destination is adjacent to the source
                 attack.setDestination(t);
                 attack.switchState(DiceSelectionState.getInstance());
             }
