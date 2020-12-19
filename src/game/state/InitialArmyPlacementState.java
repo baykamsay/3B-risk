@@ -54,6 +54,7 @@ public class InitialArmyPlacementState implements GameState {
             }
         }
         checkIfStateOver();
+        engine.incrementCurrentPlayer();
     }
 
     //initialize army counts for players
