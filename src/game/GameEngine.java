@@ -215,7 +215,6 @@ public class GameEngine extends Application {
         this.setupMapScene();
         window.setScene(gameScene);
         window.show();
-        this.test();
     }
 
     public void setupMapScene(){
@@ -233,7 +232,7 @@ public class GameEngine extends Application {
         controller.setMap(map);
         controller.setGameEngine(this);
         controller.addHandlers();
-        controller.test();
+        controller.update();
     }
 
     public void pause(){
