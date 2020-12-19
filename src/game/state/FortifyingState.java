@@ -2,6 +2,7 @@ package game.state;
 
 import game.GameEngine;
 import game.player.Territory;
+import game.player.faculties.Mssf;
 import javafx.event.ActionEvent;
 
 public class FortifyingState implements GameState {
@@ -12,6 +13,7 @@ public class FortifyingState implements GameState {
     public Territory destination; //fortifyPlanning will handle it
     public Territory source; //fortifyPlanning will handle it
     public int movingArmies; //fortifyingArmySelection will handle it
+    public boolean mssfAbilityCanUse;
 
     private FortifyingState() {
     }
@@ -32,11 +34,17 @@ public class FortifyingState implements GameState {
     }
 
     public void pass() {
-        engine.nextPlayer();
+        if (mssfAbilityCanUse) {
+            engine.switchState(AttackingPlanningState.getInstance());
+        }
+        else {
+            engine.nextPlayer();
+        }
     }
 
     @Override
     public void start() {
+        mssfAbilityCanUse = false;
         engine = GameEngine.getInstance();
         destination = null;
         source = null;
@@ -85,6 +93,10 @@ public class FortifyingState implements GameState {
 
     public void setMovingArmies(int movingArmies) {
         this.movingArmies = movingArmies;
+    }
+
+    public void setMssfAbilityCanUseTrue(){
+        mssfAbilityCanUse = true;
     }
 
 }

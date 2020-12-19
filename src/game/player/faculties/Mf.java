@@ -20,9 +20,7 @@ public class Mf implements Faculty{
     }
 
     @Override
-    public void useAbility() {
-
-    }
+    public void useAbility() {}
 
     @Override
     public Color getColor() {

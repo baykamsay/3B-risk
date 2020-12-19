@@ -3,6 +3,10 @@ package game.state;
 import game.GameEngine;
 import game.player.Player;
 import game.player.Territory;
+import game.player.faculties.Faculty;
+import game.player.faculties.Fas;
+import game.player.faculties.Ibef;
+import game.player.faculties.Mf;
 import javafx.event.ActionEvent;
 
 import java.util.Arrays;
@@ -14,6 +18,7 @@ public class WarState implements GameState{
     private GameEngine engine;
     private int minMovingArmy;
     private int maxMovingArmy;
+
     private WarState() {
     }
 
@@ -35,15 +40,32 @@ public class WarState implements GameState{
         int[] attackingDice = new int[attack.getAttackingArmies()];
         minMovingArmy = attackingDice.length; //only used if the territory is captured
         maxMovingArmy = attackingTerritory.getNumOfArmies() - 1; //only used if the territory is captured
-        int[] defendingDice = new int[attack.getDefendingArmies()];
+        int[] defendingDice;
+        if ((defendingTerritory.getRuler().getFaculty() instanceof Ibef)
+            && attackingTerritory.getNumOfArmies() > defendingTerritory.getNumOfArmies()){
+            defendingDice = new int[attack.getDefendingArmies() + 1];
+        }
+        else {
+            defendingDice = new int[attack.getDefendingArmies()];
+        }
         int attackingLostDice = 0;
         int defendingLostDice = 0;
 
         for (int i = 0; i < attackingDice.length; i++) {
-            attackingDice[i] = (int) (Math.random() * 6 + 1);
+            if (engine.getCurrentPlayer().getFaculty() instanceof Mf){
+                attackingDice[i] = (int) (Math.random() * 5 + 2);
+            }
+            else {
+                attackingDice[i] = (int) (Math.random() * 6 + 1);
+            }
         }
         for (int i = 0; i < defendingDice.length; i++) {
-            defendingDice[i] = (int) (Math.random() * 6 + 1);
+            if (defendingTerritory.getRuler().getFaculty() instanceof Mf){
+                defendingDice[i] = (int) (Math.random() * 5 + 2);
+            }
+            else {
+                defendingDice[i] = (int) (Math.random() * 6 + 1);
+            }
         }
 
         Arrays.sort(attackingDice);
@@ -61,7 +83,13 @@ public class WarState implements GameState{
             // compare
             if (attackingDice[i] > defendingDice[i]) {
                 defendingLostDice++;
-            } else {
+            }
+            else if (((Faculty) engine.getCurrentPlayer().getFaculty() instanceof Fas)
+                && attackingTerritory.getArea().getName() == "EASTCAMPUS" && attackingDice[i] == defendingDice[i]) {
+                defendingLostDice++;
+            }
+            else
+            {
                 attackingLostDice++;
             }
         }
