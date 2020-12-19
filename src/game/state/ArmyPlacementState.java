@@ -40,7 +40,7 @@ public class ArmyPlacementState implements GameState {
                 addibleArmyNo = addibleArmyNo - armyCount;
             }
         if (addibleArmyNo <= 0) {
-            engine.switchState(AttackingPlanningState.getInstance());
+            engine.switchState(AttackingState.getInstance());
         }
     }
 
