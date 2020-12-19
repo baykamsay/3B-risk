@@ -37,8 +37,6 @@ import java.util.ResourceBundle;
 
 public class MapSceneController implements Initializable, EventHandler<ActionEvent> {
 
-    private final double DEFAULT_INFOBG_X = 41.0;
-
     private static final String[] TERRITORY_NAMES = {"Dorms","Sports Center", "Library", "Prep Buildings", "Health Center", "Cafeteria", "ATM",
             "Coffee Break", "Mozart Cafe", "Entrance", "Bilkent 1 & 2", "Sports International", "Ankuva", "Bilkent Center", "Bilkent Hotel", "MSSF",
             "Concert Hall", "Dorms", "V Building", "F Buildings", "Dorm 76", "Mescit", "Starbucks", "M Building", "Meteksan", "Sports Center", "Nanotam",
@@ -206,21 +204,11 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
                 iv.setPickOnBounds(false);
                 iv.setId(Integer.toString(i));
 
-                // TEST CODE
                 iv.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                    System.out.println(iv.getId());
-                    map.getTerritories()[Integer.parseInt(iv.getId())].getRuler().setNumOfTerritory(map.getTerritories()[Integer.parseInt(iv.getId())].getRuler().getNumOfTerritory() - 1);
-                    map.getTerritories()[Integer.parseInt(iv.getId())].setRuler(new Player(new Mf()));
-                    if(curState == 2){
-                        nextTurn();
-                        setState(0);
-                    } else {
-                        setState(curState + 1);
-                    }
-                    update();
+                    gameEngine.mapSelect(Integer.parseInt(iv.getId()));
                     event.consume();
+                    update();
                 });
-                //
 
                 iv.setCache(true);
                 iv.setCacheHint(CacheHint.SPEED);
@@ -398,6 +386,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
         // Stick out current player's infobg out a bit
         for(i = 0; i < players.size(); i++){
+            double DEFAULT_INFOBG_X = 41.0;
             if(i == curTurn){
                 pInfoBgs[i].setLayoutX(DEFAULT_INFOBG_X - 50);
             } else {
@@ -425,9 +414,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void addHandlers(){
-        pauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            gameEngine.pause();
-        });
+        pauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> gameEngine.pause());
     }
 
     public void displayBattleResult(int[] attackerDice, int[] defenderDice, Player attacker, Player defender){
