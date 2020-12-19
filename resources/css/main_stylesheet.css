@@ -29,15 +29,6 @@
     -fx-font-size: 45px;
 }
 
-.win_title{
-    -fx-font-size: 45px;
-}
-
-.win_title .text{
-    -fx-stroke: white;
-    -fx-stroke-width: 1px;
-}
-
 .faculty_title_max{
     -fx-font-size: 45px;
     -fx-text-wrap: true;
@@ -233,18 +224,6 @@
     -fx-background-radius: 40em;
 }
 
-.objective_title{
-    -fx-text-fill: white;
-    -fx-font-size: 30px;
-    -fx-font-family: "Arial";
-}
-
-.objective_text{
-    -fx-text-fill: white;
-    -fx-font-size: 15px;
-    -fx-font-family: "Arial";
-}
-
 .state_name{
     -fx-text-fill: white;
     -fx-font-size: 30px;
@@ -261,15 +240,6 @@
     -fx-arc-width: 10px;
 }
 
-.troop_text{
-    -fx-text-fill: white;
-    -fx-font-size: 20px;
-}
-
-.troop_number{
-    -fx-text-fill: white;
-    -fx-font-size: 30px;
-}
 .occupied_slot_min{
     -fx-background-color: 
             red,

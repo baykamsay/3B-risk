@@ -46,7 +46,7 @@ public class Objective {
         this.turnLimit = turnLimit;
     }
     public int getBonus(){return bonus;}
-    public int getRemainingTurn(){return this.turnLimit - this.currentTurn;}
+
     // Returns -1 if the turn limit is passed, 0 if there are still turns but the objective is not accomplished,
     // 1 if objective is accomplished
     public int isDone() {

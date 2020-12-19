@@ -28,6 +28,7 @@ public class InitialArmyPlacementState implements GameState {
 
     // When player selects a map territory
     public void mapSelect(int territory) {
+//        GameEngine.getInstance().getController().setState(0);
         Territory t = GameEngine.getInstance().getMap().getTerritory(territory);
         Player p = GameEngine.getInstance().getCurrentPlayer();
         if(!territoryCheck()) {
@@ -39,6 +40,7 @@ public class InitialArmyPlacementState implements GameState {
                 currentPlayer = (currentPlayer + 1) % GameEngine.getInstance().getPlayers().size();
                 p.setNumOfTerritory(p.getNumOfTerritory() + 1);
                 GameEngine.getInstance().incrementCurrentPlayer();
+                System.out.println(currentPlayer + " " + GameEngine.getInstance().getPlayerTurn());
             }
         }
         else {
@@ -49,8 +51,7 @@ public class InitialArmyPlacementState implements GameState {
                 GameEngine.getInstance().incrementCurrentPlayer();
             }
         }
-        GameEngine.getInstance().getController().updateTroopNumber(armyCounts.get(currentPlayer));
-        GameEngine.getInstance().getController().setState(-1);
+        GameEngine.getInstance().getController().setState(0);
         checkIfStateOver();
     }
 
@@ -62,7 +63,7 @@ public class InitialArmyPlacementState implements GameState {
         }
         else if(GameEngine.getInstance().getPlayers().size() == 3){
             for(int i = 0; i < 3; i++){
-                armyCounts.add(16);
+                armyCounts.add(35);
             }
         }
         else if(GameEngine.getInstance().getPlayers().size() == 4){
@@ -80,8 +81,6 @@ public class InitialArmyPlacementState implements GameState {
                 armyCounts.add(20);
             }
         }
-        GameEngine.getInstance().getController().updateTroopNumber(armyCounts.get(0));
-        GameEngine.getInstance().getController().setState(-1);
     }
 
     @Override
@@ -113,6 +112,9 @@ public class InitialArmyPlacementState implements GameState {
             }
         }
         if (stateOver) {
+            for(Player p : GameEngine.getInstance().getPlayers()) {
+                p.setObjective(Objective.generateObjective(p));
+            }
             GameEngine.getInstance().switchState(ArmyPlacementState.getInstance());
         }
     }

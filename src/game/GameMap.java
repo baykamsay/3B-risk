@@ -11,8 +11,8 @@ public class GameMap {
 //    private static final int ISLAND_TERRITORY_COUNT = 5;
 //    private static final int UPPER_MAIN_TERRITORY_COUNT = 16;
 //    private static final int LOWER_MAIN_TERRITORY_COUNT = 16;
-    private static final String[] TERRITORY_NAMES = {"East Dorms","East Sports Center", "East Library", "Prep Buildings", "Health Center", "East Cafeteria", "ATM",
-            "East Coffee Break", "East Mozart Cafe", "East Entrance", "Bilkent 1 & 2", "Sports International", "Ankuva", "Bilkent Center", "Bilkent Hotel", "MSSF",
+    private static final String[] TERRITORY_NAMES = {"Dorms","Sports Center", "Library", "Prep Buildings", "Health Center", "Cafeteria", "ATM",
+            "Coffee Break", "Mozart Cafe", "Entrance", "Bilkent 1 & 2", "Sports International", "Ankuva", "Bilkent Center", "Bilkent Hotel", "MSSF",
             "Concert Hall", "Dorms", "V Building", "F Buildings", "Dorm 76", "Mescit", "Starbucks", "M Building", "Meteksan", "Sports Center", "Nanotam",
             "Mayfest", "A Building", "S Building", "T Building", "G Building", "Coffee Break", "Square", "CafeIn", "Statue", "B Building", "Cyber Park", "ODEON",
             "Library", "Mozart Cafe", "Cafeteria", "EA Building", "Meteksan", "EE Building", "Mithat Coruh", "Entrance"};
