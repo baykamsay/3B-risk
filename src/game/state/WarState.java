@@ -32,9 +32,9 @@ public class WarState implements GameState{
         return instance;
     }
 
-    public void displayWar(int[] attackingDice, int[] defendingDice, Player attacker, Player defender) {
-        // to do
-    }
+//    public void displayWar(int[] attackingDice, int[] defendingDice, Player attacker, Player defender) {
+//        // to do
+//    }
 
     public void armyNumberSelection(int count) { //called by engine
         movingArmies = count;
@@ -62,7 +62,7 @@ public class WarState implements GameState{
         Arrays.sort(attackingDice);
         Arrays.sort(defendingDice);
 
-        displayWar(attackingDice, defendingDice, attackingTerritory.getRuler(), defendingTerritory.getRuler());
+        engine.getController().displayBattleResult(attackingDice, defendingDice, attackingTerritory.getRuler(), defendingTerritory.getRuler());
 
         for (int i = 0; i < attackingDice.length && i < defendingDice.length; i++) {
             // compare
