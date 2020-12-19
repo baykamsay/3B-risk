@@ -24,6 +24,7 @@ public class FortifyingArmySelectionState implements GameState{
     public void setNumOfArmies(int armies){
         fortify.getDestination().setNumOfArmies(fortify.getDestination().getNumOfArmies() + armies);
         fortify.getSource().setNumOfArmies(fortify.getSource().getNumOfArmies() - armies);
+        fortify.pass();
     }
 
     public void mapSelect(int territory) {
@@ -36,6 +37,5 @@ public class FortifyingArmySelectionState implements GameState{
         engine = GameEngine.getInstance();
         //call displayTroop selector, setNumOfArmies will be called
         engine.getController().displayTroopSelector(fortify.getSource().getNumOfArmies() - 1);
-        fortify.pass();
     }
 }

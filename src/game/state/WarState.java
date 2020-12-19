@@ -74,6 +74,7 @@ public class WarState implements GameState{
             defendingTerritory.setRuler(engine.getCurrentPlayer());
             //call displayTroopSelector to get the moving armies
             engine.getController().displayTroopSelector(minMovingArmy,maxMovingArmy); // disable back
+            engine.getController().disableCancel();
             if (engine.isEliminated(pastRuler)) { // remove player if they have no territories left
                 engine.removePlayer(pastRuler);
             }
