@@ -36,4 +36,7 @@ public class Feass implements Faculty{
 
     @Override
     public String getIconName(){ return icon;}
+
+    @Override
+    public String getName(){ return name; }
 }
