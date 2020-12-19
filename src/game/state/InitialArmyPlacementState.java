@@ -28,7 +28,7 @@ public class InitialArmyPlacementState implements GameState {
 
     // When player selects a map territory
     public void mapSelect(int territory) {
-        GameEngine.getInstance().getController().setState(0);
+//        GameEngine.getInstance().getController().setState(0);
         Territory t = GameEngine.getInstance().getMap().getTerritory(territory);
         Player p = GameEngine.getInstance().getCurrentPlayer();
         if(!territoryCheck()) {
@@ -40,6 +40,7 @@ public class InitialArmyPlacementState implements GameState {
                 currentPlayer = (currentPlayer + 1) % GameEngine.getInstance().getPlayers().size();
                 p.setNumOfTerritory(p.getNumOfTerritory() + 1);
                 GameEngine.getInstance().incrementCurrentPlayer();
+                System.out.println(currentPlayer + " " + GameEngine.getInstance().getPlayerTurn());
             }
         }
         else {
@@ -50,6 +51,7 @@ public class InitialArmyPlacementState implements GameState {
                 GameEngine.getInstance().incrementCurrentPlayer();
             }
         }
+        GameEngine.getInstance().getController().setState(0);
         checkIfStateOver();
     }
 
