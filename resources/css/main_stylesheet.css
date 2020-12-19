@@ -245,6 +245,13 @@
     -fx-font-family: "Arial";
 }
 
+.objective_result_title{
+    -fx-text-fill: white;
+    -fx-font-size: 23px;
+    -fx-font-family: "Arial";
+}
+
+
 .state_name{
     -fx-text-fill: white;
     -fx-font-size: 30px;

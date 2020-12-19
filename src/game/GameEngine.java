@@ -93,7 +93,6 @@ public class GameEngine extends Application {
     }
 
     public void pass() {
-        System.out.println("Gameengine pass");
         if (currentState instanceof AttackingState) {
             ((AttackingState) currentState).pass();
         } else if (currentState instanceof FortifyingState) {
@@ -237,7 +236,6 @@ public class GameEngine extends Application {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        System.out.println("here");
         if(currentState instanceof InitialArmyPlacementState || currentState instanceof ArmyPlacementState){
             controller.setState(0);
         } else if( currentState instanceof AttackingState){

@@ -1,6 +1,7 @@
 package game.state;
 
 import game.GameEngine;
+import game.SoundEngine;
 import game.player.Player;
 import game.player.Territory;
 import javafx.event.ActionEvent;
@@ -38,6 +39,8 @@ public class WarState implements GameState{
         int[] defendingDice = new int[attack.getDefendingArmies()];
         int attackingLostDice = 0;
         int defendingLostDice = 0;
+
+        SoundEngine.getInstance().playDiceRoll();
 
         for (int i = 0; i < attackingDice.length; i++) {
             attackingDice[i] = (int) (Math.random() * 6 + 1);

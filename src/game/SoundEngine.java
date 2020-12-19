@@ -15,7 +15,7 @@ public class SoundEngine {
     private MediaPlayer music;
     private boolean musicMuted, soundFXMuted;
     private double musicVolume, soundFXVolume;
-    private AudioClip buttonSound, winSound;
+    private AudioClip buttonSound, winSound, territoryClick, diceRoll, objectiveCompleted, objectiveFailed;
 
     private SoundEngine(){
         musicMuted = false;
@@ -27,6 +27,10 @@ public class SoundEngine {
             GAME_MUSIC = new Media(getClass().getResource("/sound/game_music.mp3").toURI().toString());
             buttonSound = new AudioClip(getClass().getResource("/sound/button_click.wav").toURI().toString());
             winSound = new AudioClip(getClass().getResource("/sound/win_sound.wav").toURI().toString());
+            territoryClick = new AudioClip(getClass().getResource("/sound/territory_click.wav").toURI().toString());
+            diceRoll = new AudioClip(getClass().getResource("/sound/dice_roll.wav").toURI().toString());
+            objectiveCompleted = new AudioClip(getClass().getResource("/sound/objective_completed.wav").toURI().toString());
+            objectiveFailed = new AudioClip(getClass().getResource("/sound/objective_failed.wav").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -79,6 +83,10 @@ public class SoundEngine {
     public void setSoundFXVolume(double soundFXVolume) {
         this.soundFXVolume = soundFXVolume / 100.0;
         buttonSound.setVolume(this.soundFXVolume);
+        territoryClick.setVolume(this.soundFXVolume);
+        diceRoll.setVolume(this.soundFXVolume);
+        objectiveCompleted.setVolume(this.soundFXVolume);
+        objectiveFailed.setVolume(this.soundFXVolume);
     }
 
     public void stopMusic(){
@@ -120,4 +128,12 @@ public class SoundEngine {
     public void playWinSound(){
         winSound.play();
     }
+
+    public void clickTerritory() { territoryClick.play();}
+
+    public void playDiceRoll() { diceRoll.play();}
+
+    public void objectiveCompleted() { objectiveCompleted.play(); }
+
+    public void objectiveFailed() { objectiveFailed.play(); }
 }
