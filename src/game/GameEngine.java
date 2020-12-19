@@ -9,7 +9,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import menu.GameMenuManager;
 import menu.Launcher;
 import menu.PauseMenu;
@@ -134,6 +133,7 @@ public class GameEngine extends Application {
         else
             playerTurn++; //increment the current player turn
         instance.switchState(ArmyPlacementState.getInstance());
+        controller.setTurn(playerTurn);
     }
 
     public int getPlayerTurn() {
@@ -155,16 +155,16 @@ public class GameEngine extends Application {
     }
 
     //map should have a getTerritories method to return the territories array
-    public boolean isGameOver(){
+    public void isGameOver(){
         for (int i = 0; i < map.getTerritories().length; i++) {
             if( i+1 < (map.getTerritories()).length && (map.getTerritories())[i].getRuler() != (map.getTerritories())[i+1].getRuler()){
                 //map is occupied by at least 2 players
-                return false;
+                return;
             }
         }
         //map is occupied by 1 player
         winner = (map.getTerritories())[0].getRuler();
-        return true; // display game over screen?
+        displayGameOverScreen(winner);
     }
 
     public Player getWinner(){
@@ -221,7 +221,7 @@ public class GameEngine extends Application {
         controller = mapScene.getController();
         controller.setPlayers(players);
         try {
-            this.gameScene.getStylesheets().add(getClass().getResource("/css/menu_stylesheet.css").toURI().toString());
+            this.gameScene.getStylesheets().add(getClass().getResource("/css/main_stylesheet.css").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -233,10 +233,11 @@ public class GameEngine extends Application {
     }
 
     public void pause(){
+        soundEngine.playButtonSound();
         PauseMenu pause = new PauseMenu(width,height,this);
         Scene pauseScene = pause.createScene();
         try {
-            pauseScene.getStylesheets().add(Launcher.class.getResource("/css/menu_stylesheet.css").toURI().toString());
+            pauseScene.getStylesheets().add(Launcher.class.getResource("/css/main_stylesheet.css").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -244,12 +245,13 @@ public class GameEngine extends Application {
     }
 
     public void unpause(){
+        soundEngine.playButtonSound();
         window.setScene(gameScene);
     }
 
     public void setScene(Scene scene){
         try {
-            scene.getStylesheets().add(Launcher.class.getResource("/css/menu_stylesheet.css").toURI().toString());
+            scene.getStylesheets().add(Launcher.class.getResource("/css/main_stylesheet.css").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -257,6 +259,7 @@ public class GameEngine extends Application {
     }
 
     public void backToMainMenu(){
+        soundEngine.playButtonSound();
         // Save the file here
         window.close();
         GameMenuManager mgr = new GameMenuManager(launcher);
@@ -266,5 +269,9 @@ public class GameEngine extends Application {
     public Player getCurrentPlayer() {
         return players.get(playerTurn);
     }
-    
+
+    public void displayGameOverScreen(Player winner){
+
+    }
+
 }

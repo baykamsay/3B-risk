@@ -123,7 +123,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     public void changeScene(Scene scene){
         try {
-            scene.getStylesheets().add(Launcher.class.getResource("/css/menu_stylesheet.css").toURI().toString());
+            scene.getStylesheets().add(Launcher.class.getResource("/css/main_stylesheet.css").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
