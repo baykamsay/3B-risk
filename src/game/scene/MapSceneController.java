@@ -498,6 +498,9 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void displayTroopSelector(int max){
+
+        selectorCancel.setVisible(true);
+        selectorCancel.setDisable(false);
         selectionMax = max;
         selectionMin = 1;
         selectorPane.setVisible(true);
@@ -538,6 +541,9 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void displayTroopSelector(int min, int max){
+
+        selectorCancel.setVisible(true);
+        selectorCancel.setDisable(false);
         selectionMax = max;
         selectionMin = min;
         selectorPane.setVisible(true);
@@ -676,5 +682,10 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             stateLabel.setText("FORTIFY");
             stateLabel.setLayoutX(157.0);
         }
+    }
+
+    public void disableCancel(){
+        selectorCancel.setVisible(false);
+        selectorCancel.setDisable(true);
     }
 }
