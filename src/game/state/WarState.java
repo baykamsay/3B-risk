@@ -17,8 +17,6 @@ public class WarState implements GameState{
     private int maxMovingArmy;
 
     private WarState() {
-        attack = AttackingState.getInstance();
-        engine = GameEngine.getInstance();
     }
 
     public static WarState getInstance() {
@@ -107,6 +105,8 @@ public class WarState implements GameState{
 
     @Override
     public void start() {
+        attack = AttackingState.getInstance();
+        engine = GameEngine.getInstance();
         war();
     }
 }

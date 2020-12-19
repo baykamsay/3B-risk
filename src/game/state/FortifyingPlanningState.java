@@ -14,10 +14,6 @@ public class FortifyingPlanningState implements GameState {
     private Territory source;
 
     private FortifyingPlanningState() {
-        fortify = FortifyingState.getInstance();
-        engine = GameEngine.getInstance();
-        destination = null;
-        source = null;
     }
 
     public static FortifyingPlanningState getInstance() {
@@ -52,5 +48,10 @@ public class FortifyingPlanningState implements GameState {
 
     // not used
     @Override
-    public void start() {}
+    public void start() {
+        fortify = FortifyingState.getInstance();
+        engine = GameEngine.getInstance();
+        destination = null;
+        source = null;
+    }
 }

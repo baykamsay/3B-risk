@@ -1,9 +1,11 @@
 package game.state;
 
 import game.GameEngine;
+import game.GameMap;
 import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
+import game.scene.MapScene;
 import javafx.event.ActionEvent;
 
 public class ArmyPlacementState implements GameState {
@@ -11,10 +13,9 @@ public class ArmyPlacementState implements GameState {
     private GameEngine engine;
     private int addibleArmyNo;
     private int armyCount; //add amount per territory
-
+    private Territory target;
     private ArmyPlacementState() {
-        engine = GameEngine.getInstance();
-        calculateNumberOfArmies(engine.getCurrentPlayer());
+
     }
 
     public static ArmyPlacementState getInstance() {
@@ -27,27 +28,31 @@ public class ArmyPlacementState implements GameState {
         }
         return instance;
     }
+
     public void setArmyCount(int count){
-        this.armyCount = armyCount;
-    }
-    @Override
-    public void mapSelect(int territory) {
-        engine.mapScene.getController().setState(0);
-        Territory t = engine.getMap().getTerritory(territory);
-        if (engine.getCurrentPlayer() == t.getRuler()) {
-                //call display troop selection, it will set the army no.
-                engine.mapScene.getController().displayTroopSelector(addibleArmyNo);
-                t.setNumOfArmies(t.getNumOfArmies() + armyCount);
-                addibleArmyNo = addibleArmyNo - armyCount;
-            }
+        this.armyCount = count;
+        target.setNumOfArmies(target.getNumOfArmies() + armyCount);
+        addibleArmyNo = addibleArmyNo - armyCount;
         if (addibleArmyNo <= 0) {
             engine.switchState(AttackingState.getInstance());
         }
     }
 
     @Override
+    public void mapSelect(int territory) {
+        Territory t = engine.getMap().getTerritory(territory);
+        if (engine.getCurrentPlayer() == t.getRuler()) {
+            // Call display troop selection, it will set the army no.
+            engine.getController().displayTroopSelector(addibleArmyNo);
+            target = t;
+        }
+    }
+
+    @Override
     public void start() {
-        engine.mapScene.getController().setState(0);
+        engine = GameEngine.getInstance();
+        engine.getController().setState(0);
+        calculateNumberOfArmies(engine.getCurrentPlayer());
     }
 
     public void calculateNumberOfArmies(Player p) {
@@ -56,17 +61,21 @@ public class ArmyPlacementState implements GameState {
         } else {
             addibleArmyNo = p.getNumOfTerritory() / 3;
         }
-        if( p.equals(engine.getMap().getAreas()[0].getRuler())){ //east campus area = +3
-            addibleArmyNo += 3;
+        if( GameMap.getInstance().getAreas()[0].getRuler() != null){ //east campus area = +3
+            if(p.equals(GameMap.getInstance().getAreas()[0].getRuler()))
+                addibleArmyNo += 3;
         }
-        if( p.equals(engine.getMap().getAreas()[1].getRuler())){ //island area = +2
-            addibleArmyNo += 2;
+        if( GameMap.getInstance().getAreas()[1].getRuler() != null){ //island area = +2
+            if(p.equals(GameMap.getInstance().getAreas()[1].getRuler()))
+                addibleArmyNo += 2;
         }
-        if( p.equals(engine.getMap().getAreas()[2].getRuler())){ //upper main campus area = +5
-            addibleArmyNo += 5;
+        if( GameMap.getInstance().getAreas()[2].getRuler() != null){ //upper main campus area = +5
+            if(p.equals(GameMap.getInstance().getAreas()[2].getRuler()))
+                addibleArmyNo += 5;
         }
-        if( p.equals(engine.getMap().getAreas()[3].getRuler())){ //lower main campus area = +5
-            addibleArmyNo += 5;
+        if( GameMap.getInstance().getAreas()[3].getRuler() != null){ //lower main campus area = +5
+            if(p.equals(GameMap.getInstance().getAreas()[3].getRuler()))
+                addibleArmyNo += 5;
         }
         int objectiveResult = p.getObjective().isDone();
         if(objectiveResult == -1){

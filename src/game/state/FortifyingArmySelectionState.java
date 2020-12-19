@@ -9,8 +9,6 @@ public class FortifyingArmySelectionState implements GameState{
     private GameEngine engine;
 
     private FortifyingArmySelectionState() {
-        fortify = FortifyingState.getInstance();
-        engine = GameEngine.getInstance();
     }
 
     public static FortifyingArmySelectionState getInstance() {
@@ -35,8 +33,10 @@ public class FortifyingArmySelectionState implements GameState{
 
     @Override
     public void start() {
+        fortify = FortifyingState.getInstance();
+        engine = GameEngine.getInstance();
         //call displayTroop selector, setNumOfArmies will be called
-        engine.mapScene.getController().displayTroopSelector(fortify.getSource().getNumOfArmies() - 1);
+        engine.getController().displayTroopSelector(fortify.getSource().getNumOfArmies() - 1);
         fortify.pass();
     }
 }

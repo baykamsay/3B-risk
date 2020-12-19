@@ -175,12 +175,12 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         this.changeScene(scene);
     }
 
+    // New Game
     public void startGameEngine(int saveSlot, ArrayList<Player> players) throws Exception {
         this.close();
         soundEngine.changeToGameMusic();
         GameEngine game = GameEngine.init(saveSlot, width,height, players, launcher);
         game.start(window);
-        game.switchState(InitialArmyPlacementState.getInstance());
     }
 
     public void exit(){

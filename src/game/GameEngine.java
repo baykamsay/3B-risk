@@ -59,14 +59,10 @@ public class GameEngine extends Application {
         this.height = height;
         this.width = width;
         this.saveSlot = saveSlot;
-        this.players = new ArrayList<Player>();
+        this.players = players;
         this.objectives = new ArrayList<Objective>();
         this.soundEngine = SoundEngine.getInstance();
         this.launcher = launcher;
-        for (int i = 0; i < players.size(); i++) {
-            //"=" operator for the player class should be overriden
-            (this.players).add(players.get(i));
-        }
         turn = 0;
         currentState = null;
         playerTurn = 0; //first player will go first, which is stored in index 0
@@ -74,6 +70,7 @@ public class GameEngine extends Application {
         attackerDice = 0;
         defenderDice = 0;
     }
+
     public void incrementCurrentPlayer(){
          playerTurn = (playerTurn + 1) % players.size();
     }
@@ -109,6 +106,7 @@ public class GameEngine extends Application {
         }
     }
 
+    // Load Game init
     public static GameEngine init(int saveSlot, int width, int height, Launcher launcher) {
         synchronized (GameEngine.class) {
             instance = new GameEngine(saveSlot, width, height, launcher);
@@ -116,10 +114,12 @@ public class GameEngine extends Application {
         return instance;
     }
 
+    // New Game init
     public static GameEngine init(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher) {
         synchronized (GameEngine.class) {
             instance = new GameEngine(saveSlot, width, height, players, launcher);
         }
+        GameEngine.getInstance().switchState(InitialArmyPlacementState.getInstance());
         return instance;
     }
 
@@ -130,6 +130,7 @@ public class GameEngine extends Application {
             );
         return instance;
     }
+
     public int getTurn(){return turn;}
 
     public void nextPlayer(){
@@ -222,19 +223,32 @@ public class GameEngine extends Application {
 
     public void setupMapScene(){
         map = GameMap.getInstance();
+        map.init();
         mapScene = new MapScene(width, height);
+        try {
+            mapScene.init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.gameScene = mapScene.createScene();
         controller = mapScene.getController();
+        controller.setMap(map);
+        controller.setGameEngine(this);
         controller.setPlayers(players);
+        controller.addHandlers();
         try {
             this.gameScene.getStylesheets().add(getClass().getResource("/css/main_stylesheet.css").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        controller.setPlayers(players);
-        controller.setMap(map);
-        controller.setGameEngine(this);
-        controller.addHandlers();
+        System.out.println("here");
+        if(currentState instanceof InitialArmyPlacementState || currentState instanceof ArmyPlacementState){
+            controller.setState(0);
+        } else if( currentState instanceof AttackingState){
+            controller.setState(1);
+        } else {
+            controller.setState(2);
+        }
         controller.update();
     }
 

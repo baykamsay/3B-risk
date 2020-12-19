@@ -630,6 +630,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         selectorPane.setMouseTransparent(true);
         mapBlocker.setVisible(false);
         mapBlocker.setMouseTransparent(true);
+        update();
     }
 
     // state = 0 for placement, 1 for attack, 2 for fortify

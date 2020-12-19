@@ -20,10 +20,14 @@ public class Area implements Place{
     }
     public Player getRuler(){
         Player ruler = territories.get(0).getRuler();
+        if(ruler == null){
+            return null;
+        }
+
         for (Territory t: territories) {
-                if (!(t.isRuler(ruler))){
-                    return null;
-                }
+            if (!(t.isRuler(ruler))){
+                return null;
+            }
         }
         return ruler;
     }

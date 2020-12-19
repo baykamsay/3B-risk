@@ -1,21 +1,18 @@
 package game.state;
 
 import game.GameEngine;
+import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
-import javafx.event.ActionEvent;
 import java.util.ArrayList;
 
 public class InitialArmyPlacementState implements GameState {
 
     private static InitialArmyPlacementState instance;
-    private GameEngine engine;
     private int currentPlayer;
     private ArrayList<Integer> armyCounts;
 
     private InitialArmyPlacementState() {
-        engine = GameEngine.getInstance();
-        armyCounts = new ArrayList<Integer>();
     }
 
     public static InitialArmyPlacementState getInstance() {
@@ -31,52 +28,53 @@ public class InitialArmyPlacementState implements GameState {
 
     // When player selects a map territory
     public void mapSelect(int territory) {
-        engine.mapScene.getController().setState(0);
-        Territory t = engine.getMap().getTerritory(territory);
-        Player p = engine.getPlayers().get(currentPlayer);
+        GameEngine.getInstance().getController().setState(0);
+        Territory t = GameEngine.getInstance().getMap().getTerritory(territory);
+        Player p = GameEngine.getInstance().getCurrentPlayer();
         if(!territoryCheck()) {
             //if there are territories left, keep selecting
             if (t.getRuler() == null) {
                 t.setRuler(p);
                 t.setNumOfArmies(t.getNumOfArmies() + 1);
                 armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
-                currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
+                currentPlayer = (currentPlayer + 1) % GameEngine.getInstance().getPlayers().size();
                 p.setNumOfTerritory(p.getNumOfTerritory() + 1);
+                GameEngine.getInstance().incrementCurrentPlayer();
             }
         }
         else {
             if (t.isRuler(p)){
                 t.setNumOfArmies(t.getNumOfArmies() + 1);
                 armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
-                currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
+                currentPlayer = (currentPlayer + 1) % GameEngine.getInstance().getPlayers().size();
+                GameEngine.getInstance().incrementCurrentPlayer();
             }
         }
         checkIfStateOver();
-        engine.incrementCurrentPlayer();
     }
 
     //initialize army counts for players
     public void calculateArmyCounts(){
-        if(engine.getPlayers().size() == 2){
-            armyCounts.add(40);
-            armyCounts.add(40);
+        if(GameEngine.getInstance().getPlayers().size() == 2){
+            armyCounts.add(25);
+            armyCounts.add(25);
         }
-        else if(engine.getPlayers().size() == 3){
+        else if(GameEngine.getInstance().getPlayers().size() == 3){
             for(int i = 0; i < 3; i++){
                 armyCounts.add(35);
             }
         }
-        else if(engine.getPlayers().size() == 4){
+        else if(GameEngine.getInstance().getPlayers().size() == 4){
             for(int i = 0; i < 4; i++){
                 armyCounts.add(30);
             }
         }
-        else if(engine.getPlayers().size() == 5){
+        else if(GameEngine.getInstance().getPlayers().size() == 5){
             for(int i = 0; i < 5; i++){
                 armyCounts.add(25);
             }
         }
-        else if(engine.getPlayers().size() == 6){
+        else if(GameEngine.getInstance().getPlayers().size() == 6){
             for(int i = 0; i < 6; i++){
                 armyCounts.add(20);
             }
@@ -85,13 +83,14 @@ public class InitialArmyPlacementState implements GameState {
 
     @Override
     public void start() {
+        armyCounts = new ArrayList<Integer>();
         currentPlayer = 0;
         calculateArmyCounts();
     }
 
     //check if all of the territories are empty
     public boolean territoryCheck(){
-        Territory[] territories = engine.getMap().getTerritories();
+        Territory[] territories = GameEngine.getInstance().getMap().getTerritories();
         boolean territoryOver = true;
         for (Territory territory : territories) {
             if (territory.getRuler() == null) {
@@ -111,7 +110,10 @@ public class InitialArmyPlacementState implements GameState {
             }
         }
         if (stateOver) {
-            engine.switchState(ArmyPlacementState.getInstance());
+            for(Player p : GameEngine.getInstance().getPlayers()) {
+                p.setObjective(Objective.generateObjective(p));
+            }
+            GameEngine.getInstance().switchState(ArmyPlacementState.getInstance());
         }
     }
 }

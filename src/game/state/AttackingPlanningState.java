@@ -13,10 +13,6 @@ public class AttackingPlanningState implements GameState {
     private Territory source;
 
     private AttackingPlanningState() {
-        attack = AttackingState.getInstance();
-        engine = GameEngine.getInstance();
-        destination = null;
-        source = null;
     }
 
     public static AttackingPlanningState getInstance() {
@@ -32,7 +28,6 @@ public class AttackingPlanningState implements GameState {
 
     //Select source and destination territories
     public void mapSelect(int territory) {
-        engine.mapScene.getController().setState(1);
         if (destination == null && source == null) { //make sure that the first selection will be source
             Territory t = engine.getMap().getTerritory(territory);
                 //check the territory name && if player is the ruler && has at least 2 armies
@@ -42,15 +37,20 @@ public class AttackingPlanningState implements GameState {
         }
         else if( destination == null){
             Territory t = engine.getMap().getTerritory(territory);
-                    if(source.isAdjacent(t)) { //check if destination is adjacent to the source
-                        attack.setDestination(t);
-                        attack.switchState(DiceSelectionState.getInstance());
-                    }
+            if(source.isAdjacent(t)) { //check if destination is adjacent to the source
+                attack.setDestination(t);
+                attack.switchState(DiceSelectionState.getInstance());
+            }
         }
     }
 
     @Override
     public void start() {
+        engine = GameEngine.getInstance();
+        destination = null;
+        source = null;
+        attack = AttackingState.getInstance();
+        engine.getController().setState(1);
         engine.isGameOver();
     }
 }

@@ -34,19 +34,14 @@ public class GameMap {
 
     // Initialize new game
     private GameMap(){
-        territories = new Territory[TOTAL_TERRITORY_COUNT];
-
-        //Area adjustments
-        east = new Area("EASTCAMPUS");
-        island = new Area("BILKENTISLAND");
-        upperMain = new Area("UPPERMAINCAMPUS");
-        lowerMain = new Area("LOWERMAINCAMPUS");
-
+        initAreas();
         initTerritories();
     }
+
     public Territory getTerritory(int index){
         return territories[index];
     }
+
     public static GameMap getInstance() {
         if (instance == null) {
             synchronized (GameMap.class) {
@@ -58,12 +53,31 @@ public class GameMap {
         return instance;
     }
 
+    public void init(){
+        initTerritories();
+    }
+
+
+    // Initialize saved game
+    public void init(int[] load){
+
+    }
+
     // Initialize saved game
     public void loadGame(int saveSlot) {
 
     }
 
+
+    private void initAreas(){
+        east = new Area("EASTCAMPUS");
+        island = new Area("BILKENTISLAND");
+        upperMain = new Area("UPPERMAINCAMPUS");
+        lowerMain = new Area("LOWERMAINCAMPUS");
+    }
+
     private void initTerritories(){
+        territories = new Territory[TOTAL_TERRITORY_COUNT];
 
         // Initialize territories
         for(int i = 0; i <TOTAL_TERRITORY_COUNT; i++){

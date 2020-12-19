@@ -14,7 +14,6 @@ public class FortifyingState implements GameState {
     public int movingArmies; //fortifyingArmySelection will handle it
 
     private FortifyingState() {
-        engine = GameEngine.getInstance();
         start();
     }
 
@@ -40,11 +39,13 @@ public class FortifyingState implements GameState {
 
     @Override
     public void start() {
+        engine = GameEngine.getInstance();
         destination = null;
         source = null;
         currentState = FortifyingPlanningState.getInstance();
+        currentState.start();
         movingArmies = 0;
-        engine.mapScene.getController().setState(2);
+        engine.getController().setState(2);
     }
 
     public Territory getSource(){
@@ -75,4 +76,5 @@ public class FortifyingState implements GameState {
     public void setMovingArmies(int movingArmies) {
         this.movingArmies = movingArmies;
     }
+
 }

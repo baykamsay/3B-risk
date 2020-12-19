@@ -13,12 +13,6 @@ public class DiceSelectionState implements GameState {
                 aChosenDice, dChosenDice;
 
     private DiceSelectionState() {
-        engine = GameEngine.getInstance();
-        attack = AttackingState.getInstance();
-        attackDiceNo = 0;
-        defendDiceNo = 0;
-        aChosenDice = 0;
-        dChosenDice = 0;
     }
 
     public static DiceSelectionState getInstance() {
@@ -38,11 +32,17 @@ public class DiceSelectionState implements GameState {
 
     @Override
     public void start() {
+        engine = GameEngine.getInstance();
+        attack = AttackingState.getInstance();
+        attackDiceNo = 0;
+        defendDiceNo = 0;
+        aChosenDice = 0;
+        dChosenDice = 0;
         calculateSourceDiceNo();
         calculateDestinationDiceNo();
         //call display troop selection to set the chosen dice
-        engine.mapScene.getController().displayTroopSelector(attackDiceNo);
-        engine.mapScene.getController().displayTroopSelector(defendDiceNo);
+        engine.getController().displayTroopSelector(attackDiceNo);
+        engine.getController().displayTroopSelector(defendDiceNo);
         //set these results in attack for war to get
         attack.setAttackingArmies(aChosenDice);
         attack.setDefendingArmies(dChosenDice);

@@ -18,8 +18,6 @@ public class AttackingState implements GameState {
     private int attackingArmies, defendingArmies; //diceSelection w.h.i
 
     private AttackingState() {
-        engine = GameEngine.getInstance();
-        start();
     }
 
     public static AttackingState getInstance() {
@@ -39,12 +37,14 @@ public class AttackingState implements GameState {
 
     @Override
     public void start() {
+        engine = GameEngine.getInstance();
         destination = null;
         source = null;
         currentState = AttackingPlanningState.getInstance();
+        currentState.start();
         attackingArmies = 0;
         defendingArmies = 0;
-        engine.mapScene.getController().setState(1);
+        engine.getController().setState(1);
     }
 
     public void pass() {
@@ -52,6 +52,7 @@ public class AttackingState implements GameState {
     }
 
     public void switchState(GameState state){
+        System.out.println(state);
         currentState = state;
         currentState.start();
     }

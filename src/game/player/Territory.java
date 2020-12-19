@@ -58,6 +58,9 @@ public class Territory implements Place{
 
     //isRuler checks Territory's ruler. Returns true if the given player's faculty matches with the ruler's faculty otherwise returns false.
     public boolean isRuler(Player p){
+        if(this.ruler == null){
+            return false;
+        }
         return ruler.equals(p);
     }
 
