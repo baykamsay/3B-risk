@@ -32,6 +32,7 @@ public class ArmyPlacementState implements GameState {
     }
     @Override
     public void mapSelect(int territory) {
+        engine.mapScene.getController().setState(0);
         Territory t = engine.getMap().getTerritory(territory);
         if (engine.getCurrentPlayer() == t.getRuler()) {
                 //call display troop selection, it will set the army no.

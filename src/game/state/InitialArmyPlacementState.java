@@ -33,7 +33,6 @@ public class InitialArmyPlacementState implements GameState {
     public void mapSelect(int territory) {
         engine.mapScene.getController().setState(0);
         Territory t = engine.getMap().getTerritory(territory);
-        ArrayList<Player> players = engine.getPlayers();
         Player p = engine.getPlayers().get(currentPlayer);
         if(!territoryCheck()) {
             //if there are territories left, keep selecting
@@ -50,7 +49,6 @@ public class InitialArmyPlacementState implements GameState {
                 t.setNumOfArmies(t.getNumOfArmies() + 1);
                 armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
                 currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
-                p.setNumOfTerritory(p.getNumOfTerritory() + 1);
             }
         }
         checkIfStateOver();
