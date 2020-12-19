@@ -2,6 +2,8 @@ package game;
 
 import game.player.Objective;
 import game.player.Player;
+import game.player.faculties.Fen;
+import game.scene.GameOverScene;
 import game.scene.MapScene;
 import game.scene.MapSceneController;
 import game.state.*;
@@ -13,6 +15,7 @@ import menu.GameMenuManager;
 import menu.Launcher;
 import menu.PauseMenu;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -71,6 +74,10 @@ public class GameEngine extends Application {
         attackerDice = 0;
         defenderDice = 0;
     }
+    public void incrementCurrentPlayer(){
+         playerTurn = (playerTurn + 1) % players.size();
+    }
+
     public void mapSelect(int territory){
         currentState.mapSelect(territory);
     }
@@ -139,7 +146,6 @@ public class GameEngine extends Application {
     public int getPlayerTurn() {
         return playerTurn;
     }
-
 
     public GameMap getMap() {
         return map;
@@ -229,7 +235,7 @@ public class GameEngine extends Application {
         controller.setMap(map);
         controller.setGameEngine(this);
         controller.addHandlers();
-        controller.test();
+        controller.update();
     }
 
     public void pause(){
@@ -251,7 +257,7 @@ public class GameEngine extends Application {
 
     public void setScene(Scene scene){
         try {
-            scene.getStylesheets().add(Launcher.class.getResource("/css/main_stylesheet.css").toURI().toString());
+            scene.getStylesheets().add(getClass().getResource("/css/main_stylesheet.css").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -266,12 +272,29 @@ public class GameEngine extends Application {
         mgr.start(window);
     }
 
+    public void gameEnd(){
+        soundEngine.playButtonSound();
+        window.close();
+        GameMenuManager mgr = new GameMenuManager(launcher);
+        mgr.start(window);
+    }
+
     public Player getCurrentPlayer() {
         return players.get(playerTurn);
     }
 
     public void displayGameOverScreen(Player winner){
-
+        this.winner = winner;
+        GameOverScene gameOverScene = new GameOverScene(width,height);
+        try {
+            gameOverScene.init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.setScene(gameOverScene.createScene());
     }
 
+    public void test(){
+        displayGameOverScreen(new Player(new Fen()));
+    }
 }
