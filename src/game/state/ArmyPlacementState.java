@@ -49,7 +49,7 @@ public class ArmyPlacementState implements GameState {
 
     @Override
     public void start() {
-
+        engine.mapScene.getController().setState(0);
     }
 
     public void calculateNumberOfArmies(Player p) {

@@ -44,6 +44,7 @@ public class AttackingState implements GameState {
         currentState = AttackingPlanningState.getInstance();
         attackingArmies = 0;
         defendingArmies = 0;
+        engine.mapScene.getController().setState(1);
     }
 
     public void pass() {

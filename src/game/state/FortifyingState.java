@@ -44,6 +44,7 @@ public class FortifyingState implements GameState {
         source = null;
         currentState = FortifyingPlanningState.getInstance();
         movingArmies = 0;
+        engine.mapScene.getController().setState(2);
     }
 
     public Territory getSource(){

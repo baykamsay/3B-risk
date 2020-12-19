@@ -47,6 +47,7 @@ public class InitialArmyPlacementState implements GameState {
 
     @Override
     public void start() {
+        engine.mapScene.getController().setState(0);
         currentPlayer = 0;
     }
 
