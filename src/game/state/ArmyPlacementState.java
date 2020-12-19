@@ -33,6 +33,7 @@ public class ArmyPlacementState implements GameState {
         this.armyCount = count;
         target.setNumOfArmies(target.getNumOfArmies() + armyCount);
         addibleArmyNo = addibleArmyNo - armyCount;
+        GameEngine.getInstance().getController().updateTroopNumber(addibleArmyNo);
         if (addibleArmyNo <= 0) {
             engine.switchState(AttackingState.getInstance());
         }
@@ -56,6 +57,9 @@ public class ArmyPlacementState implements GameState {
     }
 
     public void calculateNumberOfArmies(Player p) {
+        if(p.getObjective() == null){
+            p.setObjective(Objective.generateObjective(p));
+        }
         if (p.getNumOfTerritory() <= 9) {
             addibleArmyNo = 3;
         } else {
@@ -81,9 +85,11 @@ public class ArmyPlacementState implements GameState {
         if(objectiveResult == -1){
             p.setObjective(Objective.generateObjective(p));
         } else if (objectiveResult == 1) {
+            System.out.println("OBJECTIVE COMPLETED");
             addibleArmyNo += p.getObjective().getBonus(); //bonus army for a completed objective
             p.setObjective(Objective.generateObjective(p));
         }
+        GameEngine.getInstance().getController().updateTroopNumber(addibleArmyNo);
     }
 
     public int getAddibleArmyNo(){

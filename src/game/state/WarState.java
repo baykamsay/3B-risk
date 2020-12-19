@@ -47,7 +47,13 @@ public class WarState implements GameState{
         }
 
         Arrays.sort(attackingDice);
+        int tmp = attackingDice[0];
+        attackingDice[0] = attackingDice[attackingDice.length - 1];
+        attackingDice[attackingDice.length - 1] = tmp;
         Arrays.sort(defendingDice);
+        tmp = defendingDice[0];
+        defendingDice[0] = defendingDice[defendingDice.length - 1];
+        defendingDice[defendingDice.length - 1] = tmp;
 
         engine.getController().displayBattleResult(attackingDice, defendingDice, attackingTerritory.getRuler(), defendingTerritory.getRuler());
 
@@ -71,7 +77,9 @@ public class WarState implements GameState{
 
         if (defendingTerritory.getNumOfArmies() == 0) {
             Player pastRuler = defendingTerritory.getRuler();
+            pastRuler.setNumOfTerritory(pastRuler.getNumOfTerritory() - 1);
             defendingTerritory.setRuler(engine.getCurrentPlayer());
+            engine.getCurrentPlayer().setNumOfTerritory(engine.getCurrentPlayer().getNumOfTerritory() + 1);
             //call displayTroopSelector to get the moving armies
             engine.getController().displayTroopSelector(minMovingArmy,maxMovingArmy); // disable back
             engine.getController().disableCancel();

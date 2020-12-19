@@ -16,8 +16,8 @@
       </ImageView>
       <VBox alignment="CENTER" layoutX="438.0" layoutY="27.0" prefHeight="200.0" prefWidth="1045.0">
          <children>
-            <Label styleClass="title_max" text="WINNER!" />
-            <Label fx:id="winnerName" styleClass="title_max" text="Faculty of Economics and Social Sciences" />
+            <Label styleClass="win_title" text="WINNER!" />
+            <Label fx:id="winnerName" styleClass="win_title" text="Faculty of Economics and Social Sciences" />
          </children>
       </VBox>
       <ImageView fx:id="trophyL" fitHeight="377.0" fitWidth="392.0" layoutX="291.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
@@ -658,7 +660,7 @@
             </HBox>
          </children>
       </Pane>
-      <Pane fx:id="statePane" layoutX="24.0" layoutY="773.0" prefHeight="285.0" prefWidth="398.0">
+      <Pane fx:id="statePane" layoutX="24.0" layoutY="773.0" prefHeight="198.0" prefWidth="398.0">
          <children>
             <Rectangle fx:id="stateBg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="61.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px; -fx-opacity: 0.3;" width="299.0" />
             <Button fx:id="abilityButton" layoutX="310.0" layoutY="7.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="80.0" styleClass="ability_button" />
@@ -677,17 +679,43 @@
             <Rectangle fx:id="state0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="141.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
             <Rectangle fx:id="state1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="195.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
             <Rectangle fx:id="state2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="250.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
-            <Button fx:id="objectiveButton" layoutX="159.0" layoutY="188.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="80.0" styleClass="ability_button" />
-            <ImageView fitHeight="60.0" fitWidth="80.0" layoutX="320.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="80.0" layoutX="320.0" layoutY="17.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/ability_icon.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="164.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="objectiveIcon" fitHeight="45.0" fitWidth="45.0" layoutX="196.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/objective_icon.png" />
                </image>
             </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="objectiveDisplay" layoutX="34.0" layoutY="636.0" prefHeight="140.0" prefWidth="350.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px; -fx-opacity: 0.5; -fx-fill: black;" width="350.0" />
+            <VBox alignment="TOP_CENTER" layoutX="9.0" layoutY="5.0" prefHeight="127.0" prefWidth="335.0" style="-fx-padding: 20px;">
+               <children>
+                  <Label styleClass="objective_title" text="OBJECTIVE" />
+                  <Label fx:id="objectiveText" styleClass="objective_text" text="OBJECTIVE TEXT" />
+                  <Label fx:id="objectiveTurns" styleClass="objective_text" text="# TURNS REMAINING" />
+                  <Label fx:id="objectiveReward" styleClass="objective_text" text="REWARD: 1 TROOPS" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="troopNumberPane" layoutX="48.0" layoutY="975.0" prefHeight="92.0" prefWidth="335.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="92.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 30px; -fx-arc-width: 30px; -fx-fill: black; -fx-opacity: 0.7;" width="335.0" />
+            <HBox alignment="CENTER" prefHeight="92.0" prefWidth="335.0" style="-fx-padding: 0px 20px 0px 20px;">
+               <children>
+                  <Label prefHeight="36.0" prefWidth="198.0" styleClass="troop_text" text="Remaining Troops:" />
+                  <Label fx:id="troopNumberLabel" styleClass="troop_number" text="1" />
+               </children>
+            </HBox>
          </children>
       </Pane>
    </children>

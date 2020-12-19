@@ -15,7 +15,7 @@ public class SoundEngine {
     private MediaPlayer music;
     private boolean musicMuted, soundFXMuted;
     private double musicVolume, soundFXVolume;
-    private AudioClip buttonSound;
+    private AudioClip buttonSound, winSound;
 
     private SoundEngine(){
         musicMuted = false;
@@ -23,9 +23,10 @@ public class SoundEngine {
         musicVolume = 0.15;
         soundFXVolume = 1.0;
         try {
-            MENU_MUSIC = new Media(menu.Launcher.class.getResource("/sound/menu_music.mp3").toURI().toString());
-            GAME_MUSIC = new Media(menu.Launcher.class.getResource("/sound/game_music.mp3").toURI().toString());
-            buttonSound = new AudioClip(menu.Launcher.class.getResource("/sound/button_click.wav").toURI().toString());
+            MENU_MUSIC = new Media(getClass().getResource("/sound/menu_music.mp3").toURI().toString());
+            GAME_MUSIC = new Media(getClass().getResource("/sound/game_music.mp3").toURI().toString());
+            buttonSound = new AudioClip(getClass().getResource("/sound/button_click.wav").toURI().toString());
+            winSound = new AudioClip(getClass().getResource("/sound/win_sound.wav").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -114,5 +115,9 @@ public class SoundEngine {
             music.play();
         });
         music.play();
+    }
+
+    public void playWinSound(){
+        winSound.play();
     }
 }
