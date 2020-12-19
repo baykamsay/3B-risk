@@ -9,8 +9,6 @@ public class AttackingPlanningState implements GameState {
     private static AttackingPlanningState instance;
     private AttackingState attack;
     private GameEngine engine;
-    private Territory destination;
-    private Territory source;
 
     private AttackingPlanningState() {
     }
@@ -46,9 +44,9 @@ public class AttackingPlanningState implements GameState {
     @Override
     public void start() {
         engine = GameEngine.getInstance();
-        destination = null;
-        source = null;
         attack = AttackingState.getInstance();
+        attack.setSource(null);
+        attack.setDestination(null);
         engine.getController().setState(1);
         engine.isGameOver();
     }

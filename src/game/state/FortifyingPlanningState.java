@@ -10,8 +10,6 @@ public class FortifyingPlanningState implements GameState {
     private static FortifyingPlanningState instance;
     private FortifyingState fortify;
     private GameEngine engine;
-    private Territory destination;
-    private Territory source;
 
     private FortifyingPlanningState() {
     }
@@ -29,29 +27,27 @@ public class FortifyingPlanningState implements GameState {
 
     //Select source and destination territories
     public void mapSelect(int territory) {
-        engine.mapScene.getController().setState(2);
-    if (destination == null && source == null) { //make sure that the first selection will be source
-            Territory t = engine.getMap().getTerritory(territory);
-                //check the territory name && if player is the ruler
-                if ((t.isRuler(engine.getCurrentPlayer()))) {
-                    source = t;
-                }
+        Territory t = engine.getMap().getTerritory(territory);
+        if (fortify.getSource() == null) { //make sure that the first selection will be source
+            //check the territory name && if player is the ruler && has at least 2 armies
+            if ((t.isRuler(engine.getCurrentPlayer())) && t.getNumOfArmies() >= 2) {
+                fortify.setSource(t);
+            }
         }
         else {
-            Territory t = engine.getMap().getTerritory(territory);
-                    if(source.isAdjacent(t)) { //check if destination is adjacent to the source
-                        destination = t;
-                        fortify.switchState(FortifyingArmySelectionState.getInstance());
-                    }
+            if(fortify.getSource().isAdjacent(t) && t.getRuler() == GameEngine.getInstance().getCurrentPlayer()) { //check if destination is adjacent to the source
+                fortify.setDestination(t);
+                fortify.switchState(FortifyingArmySelectionState.getInstance());
+            }
         }
     }
 
-    // not used
     @Override
     public void start() {
         fortify = FortifyingState.getInstance();
         engine = GameEngine.getInstance();
-        destination = null;
-        source = null;
+        engine.mapScene.getController().setState(2);
+        fortify.setSource(null);
+        fortify.setDestination(null);
     }
 }

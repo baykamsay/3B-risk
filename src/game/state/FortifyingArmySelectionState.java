@@ -1,7 +1,6 @@
 package game.state;
 
 import game.GameEngine;
-import javafx.event.ActionEvent;
 
 public class FortifyingArmySelectionState implements GameState{
     private static FortifyingArmySelectionState instance;

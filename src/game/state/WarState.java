@@ -12,7 +12,6 @@ public class WarState implements GameState{
     private static WarState instance;
     private AttackingState attack;
     private GameEngine engine;
-    private int movingArmies;
     private int minMovingArmy;
     private int maxMovingArmy;
     private WarState() {
@@ -27,10 +26,6 @@ public class WarState implements GameState{
             }
         }
         return instance;
-    }
-
-    public void armyNumberSelection(int count) { //called by engine
-        movingArmies = count;
     }
 
     // wage war on an enemy territory
@@ -78,7 +73,7 @@ public class WarState implements GameState{
             Player pastRuler = defendingTerritory.getRuler();
             defendingTerritory.setRuler(engine.getCurrentPlayer());
             //call displayTroopSelector to get the moving armies
-            engine.getController().displayTroopSelector(minMovingArmy,maxMovingArmy);
+            engine.getController().displayTroopSelector(minMovingArmy,maxMovingArmy); // disable back
             if (engine.isEliminated(pastRuler)) { // remove player if they have no territories left
                 engine.removePlayer(pastRuler);
             }
@@ -89,7 +84,7 @@ public class WarState implements GameState{
         }
     }
 
-    public void moveArmies(int i){
+    public void moveArmies(int movingArmies){
         Territory defendingTerritory = attack.getDestination();
         Territory attackingTerritory = attack.getSource();
         attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
