@@ -8,6 +8,7 @@ public class Fedu implements Faculty{
     final private Color color = Color.OLIVE;
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/education_faculty_icon.png";
+    final private String name =  "Faculty of Education";
 
     public Fedu(){
         ca.setHue(0.638);
@@ -37,4 +38,9 @@ public class Fedu implements Faculty{
 
     @Override
     public String getIconName(){ return icon;}
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }
