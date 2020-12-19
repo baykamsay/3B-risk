@@ -15,6 +15,7 @@ public class InitialArmyPlacementState implements GameState {
 
     private InitialArmyPlacementState() {
         engine = GameEngine.getInstance();
+        armyCounts = new ArrayList<Integer>();
     }
 
     public static InitialArmyPlacementState getInstance() {
@@ -37,14 +38,14 @@ public class InitialArmyPlacementState implements GameState {
             if (t.getRuler() == null) {
                 t.setRuler(players.get(currentPlayer));
                 t.setNumOfArmies(t.getNumOfArmies() + 1);
-                armyCounts.set(currentPlayer,armyCounts.get(currentPlayer)); //-1 from total army counts
+                armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
                 currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
             }
         }
         else {
             if (t.isRuler(engine.getPlayers().get(currentPlayer))){
                 t.setNumOfArmies(t.getNumOfArmies() + 1);
-                armyCounts.set(currentPlayer,armyCounts.get(currentPlayer)); //-1 from total army counts
+                armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
                 currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
             }
         }
