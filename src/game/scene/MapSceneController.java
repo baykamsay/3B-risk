@@ -317,14 +317,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
                 e.printStackTrace();
             }
 
-            // Test code
-            pIcons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                Random rand = new Random();
-                displayBattleResult(new int[]{rand.nextInt(6) + 1}, new int[]{rand.nextInt(6) + 1, rand.nextInt(6) + 1}, new Player(new Fas()), new Player(new Fas()));
-                event.consume();
-            });
-            //
-
         }
 
         // Set extra player information invisible
@@ -344,17 +336,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void update(){
-
-        // TEST CODE
-        for(int i = 0; i < players.size(); i++){
-            if(players.get(i).getNumOfTerritory() == 0){
-                players.remove(i);
-                curTurn += 1;
-                curTurn %= players.size();
-            }
-        }
-        setPlayers(players);
-        //
 
         for(int i = 0; i < territories.length; i++){
 
@@ -382,6 +363,12 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             pIconBgs[i].setVisible(false);
             pInfoBgs[i].setVisible(false);
             pTerritoryIcons[i].setVisible(false);
+        }
+
+
+        // Update territory troop numbers
+        for(i = 0; i < troops.length; i++){
+            troops[i].setText(Integer.toString(map.getTerritory(i).getNumOfArmies()));
         }
 
         // Stick out current player's infobg out a bit
