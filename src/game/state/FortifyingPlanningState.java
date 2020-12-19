@@ -33,6 +33,7 @@ public class FortifyingPlanningState implements GameState {
 
     //Select source and destination territories
     public void mapSelect(int territory) {
+        engine.mapScene.getController().setState(2);
     if (destination == null && source == null) { //make sure that the first selection will be source
             Territory t = engine.getMap().getTerritory(territory);
                 //check the territory name && if player is the ruler
