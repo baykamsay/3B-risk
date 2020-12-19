@@ -3,6 +3,7 @@ package menu;
 import game.GameEngine;
 import game.SoundEngine;
 import game.player.Player;
+import game.state.InitialArmyPlacementState;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -179,6 +180,7 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         soundEngine.changeToGameMusic();
         GameEngine game = GameEngine.init(saveSlot, width,height, players, launcher);
         game.start(window);
+        game.switchState(InitialArmyPlacementState.getInstance());
     }
 
     public void exit(){
