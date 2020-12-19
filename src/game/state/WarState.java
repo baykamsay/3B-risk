@@ -45,6 +45,13 @@ public class WarState implements GameState{
         for (int i = 0; i < defendingDice.length; i++) {
             defendingDice[i] = (int) (Math.random() * 6 + 1);
         }
+        boolean[] diceResults;
+
+        if (attackingDice.length > defendingDice.length) {
+            diceResults = new boolean[defendingDice.length];
+        } else {
+            diceResults = new boolean[attackingDice.length];
+        }
 
         Arrays.sort(attackingDice);
         int tmp = attackingDice[0];
@@ -55,16 +62,18 @@ public class WarState implements GameState{
         defendingDice[0] = defendingDice[defendingDice.length - 1];
         defendingDice[defendingDice.length - 1] = tmp;
 
-        engine.getController().displayBattleResult(attackingDice, defendingDice, attackingTerritory.getRuler(), defendingTerritory.getRuler());
-
         for (int i = 0; i < attackingDice.length && i < defendingDice.length; i++) {
             // compare
             if (attackingDice[i] > defendingDice[i]) {
                 defendingLostDice++;
+                diceResults[i] = true;
             } else {
                 attackingLostDice++;
+                diceResults[i] = false;
             }
         }
+
+        engine.getController().displayBattleResult(attackingDice, defendingDice, diceResults, attackingTerritory.getRuler(), defendingTerritory.getRuler());
 
         attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - attackingLostDice);
         defendingTerritory.setNumOfArmies(defendingTerritory.getNumOfArmies() - defendingLostDice);
