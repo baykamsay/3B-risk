@@ -336,7 +336,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     public void update(){
 
         for(int i = 0; i < territories.length; i++){
-
             // Update territory colors
             ColorAdjust base = map.getTerritories()[i].getCa();
             ColorAdjust hover = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + 0.25, base.getContrast());
@@ -362,7 +361,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             pInfoBgs[i].setVisible(false);
             pTerritoryIcons[i].setVisible(false);
         }
-
 
         // Update territory troop numbers
         for(i = 0; i < troops.length; i++){
@@ -409,7 +407,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             iv.setVisible(false);
             iv.setEffect(null);
         }
-        
+
         for(ImageView iv : defenderDiceImages){
             iv.setVisible(false);
             iv.setEffect(null);
@@ -637,6 +635,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     // state = 0 for placement, 1 for attack, 2 for fortify
     public void setState(int state){
         curState = state;
+        curTurn = gameEngine.getPlayerTurn();
+        setTurn(curTurn);
         Player current = players.get(curTurn);
         if(state == 0){
             try {
