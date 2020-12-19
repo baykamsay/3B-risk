@@ -31,22 +31,26 @@ public class InitialArmyPlacementState implements GameState {
 
     // When player selects a map territory
     public void mapSelect(int territory) {
+        engine.mapScene.getController().setState(0);
         Territory t = engine.getMap().getTerritory(territory);
         ArrayList<Player> players = engine.getPlayers();
+        Player p = engine.getPlayers().get(currentPlayer);
         if(!territoryCheck()) {
             //if there are territories left, keep selecting
             if (t.getRuler() == null) {
-                t.setRuler(players.get(currentPlayer));
+                t.setRuler(p);
                 t.setNumOfArmies(t.getNumOfArmies() + 1);
                 armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
                 currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
+                p.setNumOfTerritory(p.getNumOfTerritory() + 1);
             }
         }
         else {
-            if (t.isRuler(engine.getPlayers().get(currentPlayer))){
+            if (t.isRuler(p)){
                 t.setNumOfArmies(t.getNumOfArmies() + 1);
                 armyCounts.set(currentPlayer,armyCounts.get(currentPlayer) - 1); //-1 from total army counts
                 currentPlayer = (currentPlayer + 1) % engine.getPlayers().size();
+                p.setNumOfTerritory(p.getNumOfTerritory() + 1);
             }
         }
         checkIfStateOver();
@@ -82,7 +86,6 @@ public class InitialArmyPlacementState implements GameState {
 
     @Override
     public void start() {
-        engine.mapScene.getController().setState(0);
         currentPlayer = 0;
         calculateArmyCounts();
     }
