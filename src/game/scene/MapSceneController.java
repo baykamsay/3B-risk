@@ -4,8 +4,6 @@ import game.GameEngine;
 import game.GameMap;
 import game.player.Player;
 import game.player.Territory;
-import game.player.faculties.Fas;
-import game.player.faculties.Mf;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -411,11 +409,11 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             iv.setVisible(false);
             iv.setEffect(null);
         }
+        
         for(ImageView iv : defenderDiceImages){
             iv.setVisible(false);
             iv.setEffect(null);
         }
-
 
         // Set images for available dice and set visible
         for(int i = 0; i < attackerDice.length; i++){
@@ -487,6 +485,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         battleResultPane.setVisible(true);
         battleResultPane.setMouseTransparent(false);
     }
+
 
     @Override
     public void handle(ActionEvent actionEvent) {

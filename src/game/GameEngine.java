@@ -294,4 +294,8 @@ public class GameEngine extends Application {
     public void test(){
         displayGameOverScreen(new Player(new Fen()));
     }
+
+    public MapSceneController getController(){
+        return controller;
+    }
 }
