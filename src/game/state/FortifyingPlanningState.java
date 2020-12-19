@@ -32,27 +32,20 @@ public class FortifyingPlanningState implements GameState {
     }
 
     //Select source and destination territories
-    public void mapSelect(ActionEvent e) {
+    public void mapSelect(int territory) {
     if (destination == null && source == null) { //make sure that the first selection will be source
-            Territory[] territories = engine.getMap().getTerritories();
-            for (Territory territory : territories) {
+            Territory t = engine.getMap().getTerritory(territory);
                 //check the territory name && if player is the ruler
-                if ((territory.getName()).equals(e.getSource().toString())
-                        && (territory.isRuler(engine.getCurrentPlayer()))) {
-                    source = territory;
+                if ((t.isRuler(engine.getCurrentPlayer()))) {
+                    source = t;
                 }
-            }
         }
         else {
-            Territory[] territories = engine.getMap().getTerritories();
-            for (Territory territory : territories) {
-                if ((territory.getName()).equals(e.getSource().toString())) {
-                    if(source.isAdjacent(territory)) { //check if destination is adjacent to the source
-                        destination = territory;
+            Territory t = engine.getMap().getTerritory(territory);
+                    if(source.isAdjacent(t)) { //check if destination is adjacent to the source
+                        destination = t;
                         fortify.switchState(FortifyingArmySelectionState.getInstance());
                     }
-                }
-            }
         }
     }
 

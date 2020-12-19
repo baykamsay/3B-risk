@@ -32,7 +32,7 @@ public class DiceSelectionState implements GameState {
         return instance;
     }
 
-    public void mapSelect(ActionEvent e){
+    public void mapSelect(int territory){
         //will not be implemented
     }
 

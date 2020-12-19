@@ -103,7 +103,7 @@ public class WarState implements GameState{
 
     // Map is not used in this state
     @Override
-    public void mapSelect(ActionEvent e) {}
+    public void mapSelect(int territory) {}
 
     @Override
     public void start() {

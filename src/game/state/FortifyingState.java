@@ -29,8 +29,8 @@ public class FortifyingState implements GameState {
         return instance;
     }
 
-    public void mapSelect(ActionEvent e){
-        currentState.mapSelect(e);
+    public void mapSelect(int territory){
+        currentState.mapSelect(territory);
     }
 
     public void pass() {

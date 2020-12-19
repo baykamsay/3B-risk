@@ -29,7 +29,7 @@ public class FortifyingArmySelectionState implements GameState{
         fortify.getSource().setNumOfArmies(fortify.getSource().getNumOfArmies() - armies);
     }
 
-    public void mapSelect(ActionEvent e) {
+    public void mapSelect(int territory) {
         //not implemented
     }
 

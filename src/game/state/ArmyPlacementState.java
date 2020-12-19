@@ -31,17 +31,14 @@ public class ArmyPlacementState implements GameState {
         this.armyCount = armyCount;
     }
     @Override
-    public void mapSelect(ActionEvent e) {
-        Territory[] territories = engine.getMap().getTerritories();
-
-        for (Territory territory : territories) { // disabling the button is a better solution
-            if ((e.getSource() == territory) && (engine.getCurrentPlayer() == territory.getRuler())) {
+    public void mapSelect(int territory) {
+        Territory t = engine.getMap().getTerritory(territory);
+        if (engine.getCurrentPlayer() == t.getRuler()) {
                 //call display troop selection, it will set the army no.
                 engine.mapScene.getController().displayTroopSelector(addibleArmyNo);
-                territory.setNumOfArmies(territory.getNumOfArmies() + armyCount);
+                t.setNumOfArmies(t.getNumOfArmies() + armyCount);
                 addibleArmyNo = addibleArmyNo - armyCount;
             }
-        }
         if (addibleArmyNo <= 0) {
             engine.switchState(AttackingPlanningState.getInstance());
         }
