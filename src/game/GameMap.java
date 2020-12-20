@@ -55,16 +55,14 @@ public class GameMap {
     }
 
 
-    // Initialize saved game
-    public void init(int[] load){
-
+    // Used to load from save file
+    public void init(int[] troops, int[] rulers){
+        for(int i = 0; i < territories.length; i++){
+            territories[i].setNumOfArmies(troops[i]);
+            territories[i].setRuler(GameEngine.getInstance().getPlayers().get(rulers[i]));
+            GameEngine.getInstance().getPlayers().get(rulers[i]).increaseTerritory();
+        }
     }
-
-    // Initialize saved game
-    public void loadGame(int saveSlot) {
-
-    }
-
 
     private void initAreas(){
         east = new Area("EASTCAMPUS");

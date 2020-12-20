@@ -21,6 +21,7 @@ import javafx.util.Duration;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent> {
 
@@ -108,6 +109,7 @@ public class FacultySelectionMenu implements MenuState, EventHandler<ActionEvent
                 }
 
                 try {
+                    Collections.shuffle(players);
                     mgr.startGameEngine(saveSlot, players);
                 } catch (Exception e) {
                     e.printStackTrace();

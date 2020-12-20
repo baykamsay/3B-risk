@@ -2,6 +2,8 @@ package menu;
 
 import game.SaveManager;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,7 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class LoadGameMenu implements MenuState{
+public class LoadGameMenu implements MenuState {
 
     private final int NO_OF_SLOTS = 8;
     private final Button[] slots = new Button[NO_OF_SLOTS];
@@ -84,8 +86,20 @@ public class LoadGameMenu implements MenuState{
         }
 
         back.setOnAction(mgr);
+
         for( Button b : slots){
-            b.setOnAction(mgr);
+            b.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    String s = b.getText();
+                    int chosenSlot = Integer.parseInt(s.substring(s.length() - 1)) - 1;
+                    try {
+                        mgr.startGameEngine(chosenSlot);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
         root.getChildren().addAll(top,title,pane);

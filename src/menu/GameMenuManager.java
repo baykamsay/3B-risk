@@ -180,7 +180,19 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         this.close();
         soundEngine.changeToGameMusic();
         GameEngine game = GameEngine.init(saveSlot, width,height, players, launcher);
+        game.setupMapScene();
         game.start(window);
+    }
+
+    // Load Game
+    public void startGameEngine(int saveSlot) throws Exception {
+        if(this.forceMaximized()){
+            this.close();
+            soundEngine.changeToGameMusic();
+            GameEngine game = GameEngine.init(saveSlot, width,height, launcher);
+            game.loadGame();
+            game.start(window);
+        }
     }
 
     public void exit(){
