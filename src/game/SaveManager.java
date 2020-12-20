@@ -245,18 +245,18 @@ public class SaveManager {
                     break;
                 case 6:
                     players.add(new Player(new Law()));
-                    players.get(i).getFaculty().setCanUse(!playerAbilityUsed[i]);
+                    ((Law) players.get(i).getFaculty()).loadAbility(!playerAbilityUsed[i]);
                     break;
                 case 7:
                     players.add(new Player(new Man()));
-                    players.get(i).getFaculty().setCanUse(!playerAbilityUsed[i]);
+                    ((Man) players.get(i).getFaculty()).loadAbility(!playerAbilityUsed[i]);
                     break;
                 case 8:
                     players.add(new Player(new Mf()));
                     break;
                 case 9:
                     players.add(new Player(new Mssf()));
-                    players.get(i).getFaculty().setCanUse(!playerAbilityUsed[i]);
+                    ((Mssf) players.get(i).getFaculty()).loadAbility(!playerAbilityUsed[i]);
                     break;
             }
         }

@@ -31,12 +31,14 @@ public class AttackingPlanningState implements GameState {
             //check the territory name && if player is the ruler && has at least 2 armies
                 if (t.getNumOfArmies() >= 2) {
                     attack.setSource(t);
+                    GameEngine.getInstance().getController().setSourceTerritory(territory);
                 }
         }
         else {
             if(attack.getSource() != null && attack.getSource().isAdjacent(t)) { //check if destination is adjacent to the source
                 attack.setDestination(t);
                 attack.switchState(DiceSelectionState.getInstance());
+                GameEngine.getInstance().getController().setDestinationTerritory(territory);
             }
         }
     }
