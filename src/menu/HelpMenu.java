@@ -27,7 +27,7 @@ public class HelpMenu implements MenuState, EventHandler<ActionEvent> {
     private GameMenuManager mgr;
     Scene scene;
 
-    private final int NO_OF_PAGES = 12;
+    private final int NO_OF_PAGES = 11;
 
     public HelpMenu(int width, int height){
         pageNo = 1;
