@@ -112,7 +112,7 @@ public class WarState implements GameState{
                 diceResults[i] = true;
             }
             else if ((engine.getCurrentPlayer().getFaculty() instanceof Fas)
-                && attackingTerritory.getArea().getName() == "EASTCAMPUS" && attackingDice[i] == defendingDice[i]) {
+                && attackingTerritory.getArea().getName() == "East Campus" && attackingDice[i] == defendingDice[i]) {
                 defendingLostDice++;
                 diceResults[i] = true;
             }

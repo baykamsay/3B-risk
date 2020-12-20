@@ -3,7 +3,6 @@ package game.player;
 import game.GameEngine;
 import game.GameMap;
 import game.player.faculties.Fen;
-
 import java.util.ArrayList;
 
 public class Objective {
@@ -13,7 +12,7 @@ public class Objective {
     static final int AREA_TURN_LIMIT = 5; //area objectives will be given after this turn
     static final double CAPTURE_PROB = 0.5;
     static final double TERRITORY_PROB = 0.5;
-    static final int CAPTURE_BONUS = 1;
+    static final int CAPTURE_BONUS = 2;
     static final int HOLD_BONUS = 3;
 
     String name;
@@ -55,6 +54,7 @@ public class Objective {
         return strategy.isDone(this);
     }
 
+    // generates and returns an objective for the given player
     public static Objective generateObjective(Player p){
         GameEngine engine = GameEngine.getInstance();
         Objective objective;
@@ -85,20 +85,41 @@ public class Objective {
         // select decorator
         if (Math.random() > TERRITORY_PROB && engine.getTurn() > AREA_TURN_LIMIT) {
             Area[] areas = GameMap.getInstance().getAreas();
-            int areaIndex = (int)(Math.random() + areas.length);
-            place = areas[areaIndex];
+            int areaIndex;
+            ArrayList<Place> ownedAreas = new ArrayList<>();
+            ArrayList<Place> otherAreas = new ArrayList<>();
+
+            for (Area area : areas) {
+                if (area.getRuler() == p) {
+                    ownedAreas.add(area);
+                } else {
+                    otherAreas.add(area);
+                }
+            }
+
+            if (isCapture) {
+                areaIndex = (int)(Math.random() * otherAreas.size());
+                place = otherAreas.get(areaIndex);
+            } else {
+                if (ownedAreas.isEmpty()) {
+                    return generateObjective(p);
+                }
+                areaIndex = (int)(Math.random() * ownedAreas.size());
+                place = ownedAreas.get(areaIndex);
+            }
             decorator = new AreaDecorator(strategy);
-            if( place.getName().equals("east")){ //east campus area = +3
+
+            if( place.getName().equals("East Campus")){ //east campus area = +3
+                bonus += 5;
+            }
+            else if( place.getName().equals("Bilkent Island")){ //island area = +2
                 bonus += 3;
             }
-            else if( place.getName().equals("island")){ //island area = +2
-                bonus += 2;
+            else if( place.getName().equals("Upper Main Campus")){ //upper main campus area = +5
+                bonus += 7;
             }
-            else if( place.getName().equals("upperMain")){ //upper main campus area = +5
-                bonus += 5;
-            }
-            else if( place.getName().equals("lowerMain")){ //lower main campus area = +5
-                bonus += 5;
+            else if( place.getName().equals("Lower Main Campus")){ //lower main campus area = +5
+                bonus += 7;
             }
         } else {
             ArrayList<Place> ownedTerritories = new ArrayList<>();
