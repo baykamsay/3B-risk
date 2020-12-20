@@ -27,7 +27,7 @@ public class HelpMenu implements MenuState, EventHandler<ActionEvent> {
     private GameMenuManager mgr;
     Scene scene;
 
-    private final int NO_OF_PAGES = 12;
+    private final int NO_OF_PAGES = 11;
 
     public HelpMenu(int width, int height){
         pageNo = 1;
@@ -89,6 +89,7 @@ public class HelpMenu implements MenuState, EventHandler<ActionEvent> {
         root.getChildren().addAll(top,menu);
         GridPane.setHalignment(menu,HPos.CENTER);
         root.setId("menu_bg");
+        previous.setDisable(true);
         scene = new Scene(root,width,height);
     }
 
@@ -122,10 +123,20 @@ public class HelpMenu implements MenuState, EventHandler<ActionEvent> {
             if(pageNo < NO_OF_PAGES){
                 pageNo++;
             }
-        }else if (actionEvent.getSource() == previous){
-            if(pageNo > 1){
+        }else if (actionEvent.getSource() == previous) {
+            if (pageNo > 1) {
                 pageNo--;
             }
+        }
+        if(pageNo == NO_OF_PAGES){
+            next.setDisable(true);
+            previous.setDisable(false);
+        }else if(pageNo == 1){
+            next.setDisable(false);
+            previous.setDisable(true);
+        } else {
+            next.setDisable(false);
+            previous.setDisable(false);
         }
 
         this.update();
