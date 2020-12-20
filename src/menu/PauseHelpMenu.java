@@ -29,7 +29,7 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
     private SoundEngine soundEngine;
     private Scene scene;
 
-    private final int NO_OF_PAGES = 3;
+    private final int NO_OF_PAGES = 12;
 
     public PauseHelpMenu(int width, int height, PauseMenu pauseMenu){
         pageNo = 1;
@@ -51,7 +51,7 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
         helpIcon.setPreserveRatio(true);
         helpIcon.setFitWidth(imgSize / 5);
 
-        Image img2 = new Image(Launcher.class.getResource("/img/help1.png").toURI().toString());
+        Image img2 = new Image(Launcher.class.getResource("/img/help1.gif").toURI().toString());
         helpPage.setImage(img2);
         helpPage.setPreserveRatio(true);
         helpPage.setFitWidth(imgSize);
@@ -98,7 +98,7 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
     public void update() {
         Image img2 = null;
         try {
-            img2 = new Image(Launcher.class.getResource("/img/help" + pageNo + ".png").toURI().toString() );
+            img2 = new Image(Launcher.class.getResource("/img/help" + pageNo + ".gif").toURI().toString() );
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
