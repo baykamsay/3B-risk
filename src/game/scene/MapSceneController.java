@@ -130,7 +130,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     @FXML
     Button battleOKButton;
     @FXML
-    ImageView attackerIcon, defenderIcon, attackerDie1, attackerDie2, attackerDie3, defenderDie1, defenderDie2;
+    ImageView attackerIcon, defenderIcon, attackerDie1, attackerDie2, attackerDie3, defenderDie1, defenderDie2, defenderDie3;
     @FXML
     Circle attackerCircle, defenderCircle;
 
@@ -255,7 +255,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         battleResultPane.setVisible(false);
         battleResultPane.setMouseTransparent(true);
         battleOKButton.setOnAction(this);
-        defenderDiceImages = new ImageView[]{defenderDie1, defenderDie2};
+        defenderDiceImages = new ImageView[]{defenderDie1, defenderDie2, defenderDie3};
         attackerDiceImages = new ImageView[]{attackerDie1, attackerDie2, attackerDie3};
 
         // Initialize selector components

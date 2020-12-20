@@ -32,8 +32,6 @@ public class GameMap {
 
     // Initialize new game
     private GameMap(){
-        initAreas();
-        initTerritories();
     }
 
     public Territory getTerritory(int index){
@@ -52,6 +50,7 @@ public class GameMap {
     }
 
     public void init(){
+        initAreas();
         initTerritories();
     }
 

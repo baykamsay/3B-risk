@@ -621,6 +621,11 @@
                </image>
             </ImageView>
             <Button fx:id="battleOKButton" layoutX="323.0" layoutY="618.0" mnemonicParsing="false" text="OK" />
+            <ImageView fx:id="defenderDie3" fitHeight="100.0" fitWidth="100.0" layoutX="473.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_2.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane id="selector_pane" fx:id="selectorPane" layoutX="440.0" layoutY="820.0" prefHeight="200.0" prefWidth="1042.0">

@@ -40,11 +40,14 @@ public class WarState implements GameState{
         Territory defendingTerritory = attack.getDestination();
         int[] attackingDice = new int[attack.getAttackingArmies()];
         minMovingArmy = attackingDice.length; //only used if the territory is captured
-        maxMovingArmy = attackingTerritory.getNumOfArmies() - 1; //only used if the territory is captured
         int[] defendingDice;
+
+        // Use IBEF ability
+        boolean ibefAbilityUsed = false;
         if ((defendingTerritory.getRuler().getFaculty() instanceof Ibef)
             && attackingTerritory.getNumOfArmies() > defendingTerritory.getNumOfArmies()){
             defendingDice = new int[attack.getDefendingArmies() + 1];
+            ibefAbilityUsed = true;
         }
         else {
             defendingDice = new int[attack.getDefendingArmies()];
@@ -93,7 +96,7 @@ public class WarState implements GameState{
                 defendingLostDice++;
                 diceResults[i] = true;
             }
-            else if (((Faculty) engine.getCurrentPlayer().getFaculty() instanceof Fas)
+            else if ((engine.getCurrentPlayer().getFaculty() instanceof Fas)
                 && attackingTerritory.getArea().getName() == "EASTCAMPUS" && attackingDice[i] == defendingDice[i]) {
                 defendingLostDice++;
                 diceResults[i] = true;
@@ -108,8 +111,12 @@ public class WarState implements GameState{
         engine.getController().displayBattleResult(attackingDice, defendingDice, diceResults, attackingTerritory.getRuler(), defendingTerritory.getRuler());
 
         attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - attackingLostDice);
-        defendingTerritory.setNumOfArmies(defendingTerritory.getNumOfArmies() - defendingLostDice);
 
+        if(ibefAbilityUsed && defendingLostDice > attack.getDefendingArmies()) {
+            defendingLostDice = attack.getDefendingArmies();
+        }
+        defendingTerritory.setNumOfArmies(defendingTerritory.getNumOfArmies() - defendingLostDice);
+        maxMovingArmy = attackingTerritory.getNumOfArmies() - 1; //only used if the territory is captured
     }
 
     public void terminating() {
