@@ -59,4 +59,6 @@ public class Law implements Faculty{
     public void setCanUse(boolean b){
         canUse = b;
     }
+
+    public int abilityUsed(){ return canUse ? 0 : 1;}
 }

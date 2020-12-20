@@ -77,6 +77,7 @@ public class SaveManager {
             switch (p.getFaculty().getSaveId()){
                 case 6:
                     abilityUsed += ((Law) p.getFaculty()).abilityUsed() + " ";
+                    break;
                 case 7:
                     abilityUsed += ((Man) p.getFaculty()).abilityUsed() + " ";
                     break;
