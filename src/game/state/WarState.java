@@ -20,6 +20,7 @@ public class WarState implements GameState{
     private int minMovingArmy;
     private int maxMovingArmy;
 
+
     private WarState() {
     }
 
@@ -89,6 +90,14 @@ public class WarState implements GameState{
         tmp = defendingDice[0];
         defendingDice[0] = defendingDice[defendingDice.length - 1];
         defendingDice[defendingDice.length - 1] = tmp;
+        System.out.println(defendingDice[0]);
+        System.out.println(AttackingState.getInstance().getEconAbilityCanUse());
+        //Econ ability used
+        if(AttackingState.getInstance().getEconAbilityCanUse() && defendingDice[0] > 1){
+            AttackingState.getInstance().setEconAbilityCanUse(false);
+            defendingDice[0] -= 1;
+        }
+        System.out.println(defendingDice[0]);
 
         for (int i = 0; i < attackingDice.length && i < defendingDice.length; i++) {
             // compare

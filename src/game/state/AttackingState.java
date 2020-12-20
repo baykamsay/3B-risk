@@ -16,6 +16,7 @@ public class AttackingState implements GameState {
     private GameState currentState;
     private Territory destination, source; //attackPlanning will handle it
     private int attackingArmies, defendingArmies; //diceSelection w.h.i
+    private boolean econAbilityCanUse, artAbilityCanUse;
 
     private AttackingState() {
     }
@@ -37,6 +38,7 @@ public class AttackingState implements GameState {
 
     @Override
     public void start() {
+        econAbilityCanUse = false;
         engine = GameEngine.getInstance();
         destination = null;
         source = null;
@@ -70,6 +72,8 @@ public class AttackingState implements GameState {
         }
     }
 
+    public GameState getCurrentState() { return currentState; }
+
     public Territory getDestination() {
         return destination;
     }
@@ -101,4 +105,12 @@ public class AttackingState implements GameState {
     public void setDefendingArmies(int defendingArmies) {
         this.defendingArmies = defendingArmies;
     }
+
+    public void setEconAbilityCanUse(boolean b){ econAbilityCanUse = b; }
+
+    public boolean getEconAbilityCanUse() { return econAbilityCanUse;}
+
+    public void setArtAbilityCanUse(boolean b){ artAbilityCanUse = b; }
+
+    public boolean getArtAbilityCanUse() { return artAbilityCanUse;}
 }

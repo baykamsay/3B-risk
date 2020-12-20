@@ -15,6 +15,7 @@ public class Law implements Faculty{
     private boolean canUse;
 
     public Law(){
+        canUse = true;
         ca.setHue(-0.3135);
     }
 
@@ -29,7 +30,8 @@ public class Law implements Faculty{
     @Override
     public void useAbility() {
         canUse = false;
-        ArmyPlacementState.getInstance().setLawAbilityCanUseTrue();
+        ArmyPlacementState.getInstance().doubleTroops();
+        GameEngine.getInstance().getController().setState(0);
     }
 
     @Override
@@ -56,9 +58,7 @@ public class Law implements Faculty{
     }
 
     @Override
-    public void setCanUse(boolean b){
-        canUse = b;
-    }
+    public void setCanUse(boolean b){}
 
     public int abilityUsed(){ return canUse ? 0 : 1;}
 }
