@@ -12,10 +12,11 @@ public class Man implements Faculty{
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/business_faculty_icon.png";
     final private String name = "Faculty of Business Administration";
-    private boolean canUse;
+    private boolean canUse, armyPlaced;
 
     public Man(){
         canUse = true;
+        armyPlaced = false;
         ca.setHue(-0.7095);
         ca.setSaturation(-76);
         ca.setBrightness(-0.63);
@@ -23,7 +24,7 @@ public class Man implements Faculty{
 
     @Override
     public boolean canUseAbility() {
-        if(GameEngine.getInstance().currentState instanceof ArmyPlacementState && canUse) {
+        if(GameEngine.getInstance().currentState instanceof ArmyPlacementState && canUse && !armyPlaced) {
             return true;
         }
         return false;
@@ -33,6 +34,7 @@ public class Man implements Faculty{
     public void useAbility() {
         canUse = false;
         ArmyPlacementState.getInstance().setManAbilityCanUseTrue();
+        GameEngine.getInstance().getController().updateAbilityButton();
     }
 
     @Override
@@ -62,6 +64,8 @@ public class Man implements Faculty{
 
     @Override
     public void setCanUse(boolean b){}
+
+    public void setArmyPlaced(boolean b){ armyPlaced = b;}
 
     public void loadAbility(boolean canUse) { this.canUse = canUse; }
 }

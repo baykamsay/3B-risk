@@ -7,6 +7,7 @@ import game.SoundEngine;
 import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
+import game.player.faculties.Man;
 
 public class ArmyPlacementState implements GameState {
     private static ArmyPlacementState instance;
@@ -15,7 +16,7 @@ public class ArmyPlacementState implements GameState {
     private int armyCount; //add amount per territory
     private Territory target;
     private boolean manAbilityCanUse;
-
+    private int maxPlaceableArmies;
     private ArmyPlacementState() {
 
     }
@@ -39,6 +40,7 @@ public class ArmyPlacementState implements GameState {
         if (addibleArmyNo <= 0) {
             engine.switchState(AttackingState.getInstance());
         }
+        GameEngine.getInstance().getController().updateAbilityButton();
         GameEngine.getInstance().getController().deselect();
     }
 
@@ -46,7 +48,10 @@ public class ArmyPlacementState implements GameState {
     public void mapSelect(int territory) {
         GameEngine.getInstance().getController().setSourceTerritory(territory);
         Territory t = engine.getMap().getTerritory(territory);
-        if (manAbilityCanUse && engine.getCurrentPlayer() != t.getRuler()) {
+        if(maxPlaceableArmies > addibleArmyNo && engine.getCurrentPlayer().getFaculty().getSaveId() == 7){
+            ((Man) engine.getCurrentPlayer().getFaculty()).setArmyPlaced(true);
+        }
+        if (maxPlaceableArmies == addibleArmyNo && manAbilityCanUse && engine.getCurrentPlayer() != t.getRuler()) {
             Player p = t.getRuler();
             manAbilityCanUse = false;
             GameEngine.getInstance().getController().deselect();
@@ -69,8 +74,12 @@ public class ArmyPlacementState implements GameState {
 
     @Override
     public void start() {
+        engine = GameEngine.getInstance();
         manAbilityCanUse = false;
-
+        maxPlaceableArmies = 0;
+        if (engine.getCurrentPlayer().getFaculty().getSaveId() == 7){
+            ((Man) engine.getCurrentPlayer().getFaculty()).setArmyPlaced(false);
+        }
         // If players don't have objectives, generate
         for(Player p: GameEngine.getInstance().getPlayers()) {
             if (p.getObjective() == null) {
@@ -85,8 +94,7 @@ public class ArmyPlacementState implements GameState {
             e.printStackTrace();
             System.err.println("Failed to save");
         }
-        
-        engine = GameEngine.getInstance();
+
         engine.getController().setState(0);
         calculateNumberOfArmies(engine.getCurrentPlayer());
     }
@@ -127,6 +135,7 @@ public class ArmyPlacementState implements GameState {
                 p.setObjective(Objective.generateObjective(p));
         }
 
+        maxPlaceableArmies = addibleArmyNo;
         GameEngine.getInstance().getController().updateTroopNumber(addibleArmyNo);
     }
 
