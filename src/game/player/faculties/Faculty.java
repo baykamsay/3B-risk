@@ -11,4 +11,5 @@ public interface Faculty {
     String getIconName();
     String getName();
     int getSaveId();
+    void setCanUse(boolean b);
 }

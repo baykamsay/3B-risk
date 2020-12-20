@@ -44,4 +44,7 @@ public class Feass implements Faculty{
     public int getSaveId() {
         return 2;
     }
+
+    @Override
+    public void setCanUse(boolean b){}
 }

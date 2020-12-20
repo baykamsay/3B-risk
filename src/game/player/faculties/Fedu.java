@@ -1,6 +1,8 @@
 package game.player.faculties;
 
 import game.GameEngine;
+import game.player.Objective;
+import game.player.Player;
 import game.state.ArmyPlacementState;
 import game.state.FortifyingState;
 import javafx.scene.effect.ColorAdjust;
@@ -23,7 +25,7 @@ public class Fedu implements Faculty{
 
     @Override
     public boolean canUseAbility() {
-        if (GameEngine.getInstance().currentState instanceof ArmyPlacementState &&  canUse) {
+        if (GameEngine.getInstance().currentState instanceof ArmyPlacementState && canUse) {
             return true;
         }
         else{
@@ -33,8 +35,10 @@ public class Fedu implements Faculty{
 
     @Override
     public void useAbility() {
+        Player p = GameEngine.getInstance().getCurrentPlayer();
         canUse = false;
-        ArmyPlacementState.getInstance().setEduAbilityCanUseTrue();
+        GameEngine.getInstance().getController().setState(0);
+        p.setObjective(Objective.generateObjective(p));
     }
 
     @Override
@@ -59,8 +63,9 @@ public class Fedu implements Faculty{
     public int getSaveId() {
         return 3;
     }
-    
-    public void setCanUseTrue() {
-        canUse = true;
+
+    @Override
+    public void setCanUse(boolean b){
+        canUse = b;
     }
 }

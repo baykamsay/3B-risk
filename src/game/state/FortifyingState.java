@@ -35,9 +35,10 @@ public class FortifyingState implements GameState {
 
     public void pass() {
         if (mssfAbilityCanUse) {
-            engine.switchState(AttackingPlanningState.getInstance());
+            engine.switchState(ArmyPlacementState.getInstance());
         }
         else {
+            engine.getCurrentPlayer().getFaculty().setCanUse(true);
             engine.nextPlayer();
         }
     }

@@ -46,4 +46,7 @@ public class Fas implements Faculty{
     public int getSaveId() {
         return 1;
     }
+
+    @Override
+    public void setCanUse(boolean b){}
 }

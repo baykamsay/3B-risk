@@ -47,4 +47,7 @@ public class Art implements Faculty{
     public int getSaveId() {
         return 0;
     }
+
+    @Override
+    public void setCanUse(boolean b){}
 }

@@ -44,4 +44,7 @@ public class Mf implements Faculty{
     public int getSaveId() {
         return 8;
     }
+
+    @Override
+    public void setCanUse(boolean b){}
 }

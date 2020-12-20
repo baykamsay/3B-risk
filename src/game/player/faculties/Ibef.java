@@ -46,4 +46,6 @@ public class Ibef implements Faculty{
     public int getSaveId() {
         return 5;
     }
-}
+
+    @Override
+    public void setCanUse(boolean b){}}

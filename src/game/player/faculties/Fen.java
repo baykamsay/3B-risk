@@ -46,4 +46,7 @@ public class Fen implements Faculty{
     public int getSaveId() {
         return 4;
     }
+
+    @Override
+    public void setCanUse(boolean b){}
 }

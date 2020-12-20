@@ -7,6 +7,7 @@ import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
 import game.player.faculties.Fen;
+import game.player.faculties.Man;
 import game.scene.MapScene;
 import javafx.event.ActionEvent;
 
@@ -16,7 +17,7 @@ public class ArmyPlacementState implements GameState {
     private int addibleArmyNo;
     private int armyCount; //add amount per territory
     private Territory target;
-    private boolean manAbilityUsed, eduAbilityUsed;
+    private boolean manAbilityCanUse, lawAbilityCanUse;
     private ArmyPlacementState() {
 
     }
@@ -45,9 +46,9 @@ public class ArmyPlacementState implements GameState {
     @Override
     public void mapSelect(int territory) {
         Territory t = engine.getMap().getTerritory(territory);
-        if (manAbilityUsed && engine.getCurrentPlayer() != t.getRuler()) {
+        if (manAbilityCanUse && engine.getCurrentPlayer() != t.getRuler()) {
             Player p = t.getRuler();
-            manAbilityUsed = false;
+            manAbilityCanUse = false;
             t.setRuler(engine.getCurrentPlayer());
             p.setNumOfTerritory(p.getNumOfTerritory()-1);
             t.getRuler().increaseTerritory();
@@ -58,6 +59,7 @@ public class ArmyPlacementState implements GameState {
             engine.switchState(AttackingState.getInstance());
         }
         else if (engine.getCurrentPlayer() == t.getRuler()) {
+            manAbilityCanUse = false;
             // Call display troop selection, it will set the army no.
             engine.getController().displayTroopSelector(addibleArmyNo);
             target = t;
@@ -66,8 +68,8 @@ public class ArmyPlacementState implements GameState {
 
     @Override
     public void start() {
-        manAbilityUsed = false;
-        eduAbilityUsed = false;
+        manAbilityCanUse = false;
+        lawAbilityCanUse = false;
         engine = GameEngine.getInstance();
         engine.getController().setState(0);
         calculateNumberOfArmies(engine.getCurrentPlayer());
@@ -109,6 +111,11 @@ public class ArmyPlacementState implements GameState {
                 GameEngine.getInstance().getController().displayObjectiveSuccess(p.getObjective().getBonus());
                 p.setObjective(Objective.generateObjective(p));
         }
+        //Law ability used
+        if (lawAbilityCanUse){
+            lawAbilityCanUse = false;
+            addibleArmyNo *= 2;
+        }
         GameEngine.getInstance().getController().updateTroopNumber(addibleArmyNo);
     }
 
@@ -116,6 +123,6 @@ public class ArmyPlacementState implements GameState {
         return addibleArmyNo;
     }
 
-    public void setManAbilityCanUseTrue() { manAbilityUsed = true; }
-    public void setEduAbilityCanUseTrue() { eduAbilityUsed = true; }
+    public void setManAbilityCanUseTrue() { manAbilityCanUse = true; }
+    public void setLawAbilityCanUseTrue() { lawAbilityCanUse = true; }
 }

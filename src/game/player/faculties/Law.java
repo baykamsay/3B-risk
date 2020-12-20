@@ -1,5 +1,8 @@
 package game.player.faculties;
 
+import game.GameEngine;
+import game.state.ArmyPlacementState;
+import game.state.FortifyingState;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.paint.Color;
 
@@ -9,6 +12,7 @@ public class Law implements Faculty{
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/law_faculty_icon.png";
     final private String name = "Faculty of Law";
+    private boolean canUse;
 
     public Law(){
         ca.setHue(-0.3135);
@@ -16,12 +20,16 @@ public class Law implements Faculty{
 
     @Override
     public boolean canUseAbility() {
+        if(GameEngine.getInstance().currentState instanceof ArmyPlacementState && canUse) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public void useAbility() {
-
+        canUse = false;
+        ArmyPlacementState.getInstance().setLawAbilityCanUseTrue();
     }
 
     @Override
@@ -45,5 +53,10 @@ public class Law implements Faculty{
     @Override
     public int getSaveId() {
         return 6;
+    }
+
+    @Override
+    public void setCanUse(boolean b){
+        canUse = b;
     }
 }

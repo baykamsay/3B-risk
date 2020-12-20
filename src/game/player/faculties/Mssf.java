@@ -56,9 +56,9 @@ public class Mssf implements Faculty{
         return 9;
     }
 
-    public void setCanUseTrue(){
-        canUse = true;
-    }
+    @Override
+    public void setCanUse(boolean b){}
 
     public int abilityUsed() {return canUse ? 0 : 1;}
+
 }

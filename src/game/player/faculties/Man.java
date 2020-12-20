@@ -59,4 +59,7 @@ public class Man implements Faculty{
     }
 
     public int abilityUsed(){ return canUse ? 0 : 1; }
+
+    @Override
+    public void setCanUse(boolean b){}
 }
