@@ -51,7 +51,14 @@ public class Mssf implements Faculty{
         return name;
     }
 
+    @Override
+    public int getSaveId() {
+        return 9;
+    }
+
     public void setCanUseTrue(){
         canUse = true;
     }
+
+    public int abilityUsed() {return canUse ? 0 : 1;}
 }

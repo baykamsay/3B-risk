@@ -41,4 +41,9 @@ public class Ibef implements Faculty{
     public String getName() {
         return name;
     }
+
+    @Override
+    public int getSaveId() {
+        return 5;
+    }
 }

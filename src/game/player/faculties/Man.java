@@ -9,8 +9,9 @@ public class Man implements Faculty{
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/business_faculty_icon.png";
     final private String name = "Faculty of Business Administration";
-
+    final private boolean abilityUsed;
     public Man(){
+        abilityUsed = false;
         ca.setHue(-0.7095);
         ca.setSaturation(-76);
         ca.setBrightness(-0.63);
@@ -43,4 +44,11 @@ public class Man implements Faculty{
     public String getName() {
         return name;
     }
+
+    @Override
+    public int getSaveId() {
+        return 7;
+    }
+
+    public int abilityUsed(){ return abilityUsed ? 1 : 0; }
 }

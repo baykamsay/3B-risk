@@ -39,4 +39,9 @@ public class Feass implements Faculty{
 
     @Override
     public String getName(){ return name; }
+
+    @Override
+    public int getSaveId() {
+        return 2;
+    }
 }

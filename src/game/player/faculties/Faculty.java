@@ -10,5 +10,5 @@ public interface Faculty {
     ColorAdjust getCa();
     String getIconName();
     String getName();
-
+    int getSaveId();
 }

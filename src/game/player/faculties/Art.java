@@ -42,4 +42,9 @@ public class Art implements Faculty{
     public String getName() {
         return name;
     }
+
+    @Override
+    public int getSaveId() {
+        return 0;
+    }
 }
