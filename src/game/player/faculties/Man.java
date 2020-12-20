@@ -1,5 +1,8 @@
 package game.player.faculties;
 
+import game.GameEngine;
+import game.state.ArmyPlacementState;
+import game.state.FortifyingState;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.paint.Color;
 
@@ -9,6 +12,7 @@ public class Man implements Faculty{
     final private ColorAdjust ca = new ColorAdjust();
     final private String icon = "/img/icons/business_faculty_icon.png";
     final private String name = "Faculty of Business Administration";
+    private boolean canUse;
 
     public Man(){
         ca.setHue(-0.7095);
@@ -18,12 +22,16 @@ public class Man implements Faculty{
 
     @Override
     public boolean canUseAbility() {
+        if(GameEngine.getInstance().currentState instanceof ArmyPlacementState && canUse) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public void useAbility() {
-
+        canUse = false;
+        ArmyPlacementState.getInstance().setManAbilityCanUseTrue();
     }
 
     @Override

@@ -2,6 +2,7 @@ package game.player;
 
 import game.GameEngine;
 import game.GameMap;
+import game.player.faculties.Fen;
 
 import java.util.ArrayList;
 
@@ -124,7 +125,13 @@ public class Objective {
         }
 
         objectiveName += place.getName();
-        objective = new Objective(decorator, place, limit, objectiveName, p, bonus);
+        //Science faculty ability used
+        if (p.getFaculty() instanceof Fen){
+            objective = new Objective(decorator, place, limit, objectiveName, p, bonus * 2);
+        }
+        else {
+            objective = new Objective(decorator, place, limit, objectiveName, p, bonus);
+        }
         return objective;
     }
 
