@@ -855,6 +855,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         tp.setShowDelay(new Duration(0));
         tp.setId("ability_tooltip");
         tp.setShowDuration(Duration.INDEFINITE);
+        tp.setStyle("-fx-font-weight: normal;");
         Tooltip.install(abilityTooltip, tp);
+        Tooltip.install(abilityButton, tp);
     }
 }
