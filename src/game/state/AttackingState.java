@@ -39,6 +39,7 @@ public class AttackingState implements GameState {
     @Override
     public void start() {
         econAbilityCanUse = false;
+        artAbilityCanUse = false;
         engine = GameEngine.getInstance();
         destination = null;
         source = null;

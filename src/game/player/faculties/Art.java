@@ -32,7 +32,7 @@ public class Art implements Faculty{
     @Override
     public void useAbility() {
         canUse = false;
-        AttackingState.getInstance().setEconAbilityCanUse(true);
+        AttackingState.getInstance().setArtAbilityCanUse(true);
         GameEngine.getInstance().getController().setState(1);
     }
 

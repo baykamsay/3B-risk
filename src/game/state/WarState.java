@@ -90,14 +90,23 @@ public class WarState implements GameState{
         tmp = defendingDice[0];
         defendingDice[0] = defendingDice[defendingDice.length - 1];
         defendingDice[defendingDice.length - 1] = tmp;
+
         System.out.println(defendingDice[0]);
-        System.out.println(AttackingState.getInstance().getEconAbilityCanUse());
+        System.out.println(AttackingState.getInstance().getArtAbilityCanUse());
+        //Art Faculty ability used
+        if(AttackingState.getInstance().getArtAbilityCanUse()){
+            int temp = attackingDice[attackingDice.length - 1]; //min of the attacker
+            attackingDice[attackingDice.length - 1] = defendingDice[0]; //put the greatest of the defender to the attacker
+            defendingDice[0] = temp;
+            AttackingState.getInstance().setArtAbilityCanUse(false);
+        }
+        System.out.println(defendingDice[0]);
+
         //Econ ability used
         if(AttackingState.getInstance().getEconAbilityCanUse() && defendingDice[0] > 1){
             AttackingState.getInstance().setEconAbilityCanUse(false);
             defendingDice[0] -= 1;
         }
-        System.out.println(defendingDice[0]);
 
         for (int i = 0; i < attackingDice.length && i < defendingDice.length; i++) {
             // compare
