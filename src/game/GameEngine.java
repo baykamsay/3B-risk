@@ -40,13 +40,15 @@ public class GameEngine extends Application {
     public Player winner;
     public int width;
     public int height;
+    private boolean load;
 
     private Scene gameScene;
     private Stage window;
 
     private GameEngine(int saveSlot, int width, int height, Launcher launcher){
         super();
-        //variables will be initialized according to the save file(file parameter?)
+        load = true;
+        SaveManager.getInstance().loadGame(saveSlot);
         this.saveSlot = saveSlot;
         this.height = height;
         this.width = width;
@@ -56,6 +58,7 @@ public class GameEngine extends Application {
 
     private GameEngine(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher){
         super();
+        load = false;
         this.height = height;
         this.width = width;
         this.saveSlot = saveSlot;
@@ -321,4 +324,8 @@ public class GameEngine extends Application {
     }
 
     public int getSaveSlot(){ return saveSlot; }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
 }
