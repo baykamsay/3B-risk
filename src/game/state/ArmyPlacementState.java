@@ -7,10 +7,6 @@ import game.SoundEngine;
 import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
-import game.player.faculties.Fen;
-import game.player.faculties.Man;
-import game.scene.MapScene;
-import javafx.event.ActionEvent;
 
 public class ArmyPlacementState implements GameState {
     private static ArmyPlacementState instance;
@@ -19,6 +15,7 @@ public class ArmyPlacementState implements GameState {
     private int armyCount; //add amount per territory
     private Territory target;
     private boolean manAbilityCanUse;
+
     private ArmyPlacementState() {
 
     }

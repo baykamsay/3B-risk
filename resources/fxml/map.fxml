@@ -573,6 +573,7 @@
       <Text fx:id="troops45" layoutX="1058.0" layoutY="1016.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
       <Text fx:id="troops46" layoutX="904.0" layoutY="1035.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
       <Rectangle id="map_blocker" fx:id="mapBlocker" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" />
+      <Rectangle id="troop_selection_blocker" fx:id="troopBlocker" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" />
       <Button fx:id="pauseButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
       <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="24.0" layoutY="22.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -668,7 +669,6 @@
       <Pane fx:id="statePane" layoutX="24.0" layoutY="773.0" prefHeight="198.0" prefWidth="398.0">
          <children>
             <Rectangle fx:id="stateBg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="61.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px; -fx-opacity: 0.3;" width="299.0" />
-            <Button fx:id="abilityButton" layoutX="310.0" layoutY="7.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="80.0" styleClass="ability_button" />
             <Button fx:id="passButton" layoutX="310.0" layoutY="108.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="pass_button" />
             <ImageView fitHeight="58.0" fitWidth="54.0" layoutX="323.0" layoutY="121.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -684,16 +684,21 @@
             <Rectangle fx:id="state0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="141.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
             <Rectangle fx:id="state1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="195.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
             <Rectangle fx:id="state2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="250.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
-            <ImageView fitHeight="60.0" fitWidth="80.0" layoutX="320.0" layoutY="17.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/ability_icon.png" />
-               </image>
-            </ImageView>
             <ImageView fx:id="objectiveIcon" fitHeight="45.0" fitWidth="45.0" layoutX="196.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/objective_icon.png" />
                </image>
             </ImageView>
+            <Pane fx:id="abilityTooltip" layoutX="306.0" layoutY="14.0" prefHeight="81.0" prefWidth="88.0">
+               <children>
+                  <Button fx:id="abilityButton" layoutX="4.0" layoutY="1.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="80.0" styleClass="ability_button" />
+                  <ImageView fitHeight="60.0" fitWidth="80.0" layoutX="14.0" layoutY="11.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/ability_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
       </Pane>
       <Pane fx:id="objectiveDisplay" layoutX="34.0" layoutY="636.0" prefHeight="140.0" prefWidth="350.0">

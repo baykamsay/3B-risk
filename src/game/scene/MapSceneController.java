@@ -33,11 +33,20 @@ import javafx.util.Duration;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MapSceneController implements Initializable, EventHandler<ActionEvent> {
 
+    private static final String[] ABILITY_DESCRIPTIONS = {"Everything by Design: Once a turn, you may choose to swap the result of your lowest die roll with the opponent's highest one",
+            "Eastern Affinity: You win ties when attacking in the East region.",
+            "The Moderate Depression: Once a turn, you may reduce 1 from the maximum die result of the enemy.",
+            "Reeducate: Once a turn you may discard your objective card and draw another one.",
+            "Knowledge Above All: Your rewards from completed objectives are doubled.",
+            "The Pen is Mightier: If the attacker has more armies, gain an extra die.",
+            "Lawyered: Once a game, the player may choose to place 2 times the troops they have in the deployment phase.\n",
+            "Hostile Takeover: Once a game, take over an opponent's territory along with the soldiers.",
+            "Over-Engineered: You can't roll a 1.",
+            "Smoke and Mirrors: Once a game, you may choose to play an extra turn right after your normal one."};
     private static final String[] TERRITORY_NAMES = {"East Dorms","East Sports Center", "East Library", "Prep Buildings", "Health Center", "East Cafeteria", "ATM",
             "East Coffee Break", "East Mozart Cafe", "East Entrance", "Bilkent 1 & 2", "Sports International", "Ankuva", "Bilkent Center", "Bilkent Hotel", "MSSF",
             "Concert Hall", "Dorms", "V Building", "F Buildings", "Dorm 76", "Mescit", "Starbucks", "M Building", "Meteksan", "Sports Center", "Nanotam",
@@ -122,7 +131,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     // Used to block interaction with the map.
     @FXML
-    Rectangle mapBlocker;
+    Rectangle mapBlocker, troopBlocker;
 
     // Used for displaying battle results.
     @FXML
@@ -166,6 +175,9 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     // Objective result
     @FXML Pane objectiveResult;
     @FXML Label objectiveResultLabel, objectiveRewardLabel;
+
+    // Used to set ability tooltip
+    @FXML Pane abilityTooltip;
 
     private ArrayList<Player> players;
 
@@ -253,6 +265,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         // Make mapBlocker inactive.
         mapBlocker.setVisible(false);
         mapBlocker.setMouseTransparent(true);
+        troopBlocker.setVisible(false);
+        troopBlocker.setMouseTransparent(true);
 
         // Initialize battle result components
         battleResultPane.setVisible(false);
@@ -558,14 +572,15 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void displayTroopSelector(int max){
+        disablePassButton();
         selectorCancel.setVisible(true);
         selectorCancel.setDisable(false);
         selectionMax = max;
         selectionMin = 1;
         selectorPane.setVisible(true);
         selectorPane.setMouseTransparent(false);
-        mapBlocker.setMouseTransparent(false);
-        mapBlocker.setVisible(true);
+        troopBlocker.setVisible(true);
+        troopBlocker.setMouseTransparent(false);
         if(max == 1){
             selectionLabels[0].setVisible(false);
             selectionLabels[1].setText("1");
@@ -600,14 +615,15 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void displayTroopSelector(int min, int max){
+        disablePassButton();
         selectorCancel.setVisible(true);
         selectorCancel.setDisable(false);
         selectionMax = max;
         selectionMin = min;
         selectorPane.setVisible(true);
         selectorPane.setMouseTransparent(false);
-        mapBlocker.setMouseTransparent(false);
-        mapBlocker.setVisible(true);
+        troopBlocker.setVisible(true);
+        troopBlocker.setMouseTransparent(false);
         int distance = max - min + 1;
         if(distance == 1){
             selectionLabels[0].setVisible(false);
@@ -682,16 +698,17 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     public void selectionCancel(){
         selectorPane.setVisible(false);
         selectorPane.setMouseTransparent(true);
-        mapBlocker.setVisible(false);
-        mapBlocker.setMouseTransparent(true);
+        troopBlocker.setVisible(false);
+        troopBlocker.setMouseTransparent(true);
+        gameEngine.enablePassButton();
         gameEngine.back();
     }
 
     public void selectionConfirm(){
         selectorPane.setVisible(false);
         selectorPane.setMouseTransparent(true);
-        mapBlocker.setVisible(false);
-        mapBlocker.setMouseTransparent(true);
+        troopBlocker.setVisible(false);
+        troopBlocker.setMouseTransparent(true);
         gameEngine.setArmyCount(Integer.parseInt(selectionLabels[1].getText()));
         update();
     }
@@ -703,6 +720,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         setTurn(curTurn);
         Player current = players.get(curTurn);
         abilityButton.setDisable(!current.getFaculty().canUseAbility());
+        setAbilityTooltip();
         objectiveIcon.setVisible(true);
         if(state == -1){
             passButton.setDisable(true);
@@ -821,5 +839,22 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     public void updateAbilityButton(){
         abilityButton.setDisable(!GameEngine.getInstance().getCurrentPlayer().getFaculty().canUseAbility());
+    }
+
+    public void disablePassButton(){
+        passButton.setDisable(true);
+    }
+
+    public void enablePassButton(){
+        passButton.setDisable(false);
+    }
+
+    public void setAbilityTooltip(){
+        Tooltip tp = new Tooltip(ABILITY_DESCRIPTIONS[GameEngine.getInstance().getCurrentPlayer().getFaculty().getSaveId()]);
+        tp.setHideDelay(new Duration(0));
+        tp.setShowDelay(new Duration(0));
+        tp.setId("ability_tooltip");
+        tp.setShowDuration(Duration.INDEFINITE);
+        Tooltip.install(abilityTooltip, tp);
     }
 }

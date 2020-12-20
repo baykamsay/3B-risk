@@ -91,8 +91,6 @@ public class WarState implements GameState{
         defendingDice[0] = defendingDice[defendingDice.length - 1];
         defendingDice[defendingDice.length - 1] = tmp;
 
-        System.out.println(defendingDice[0]);
-        System.out.println(AttackingState.getInstance().getArtAbilityCanUse());
         //Art Faculty ability used
         if(AttackingState.getInstance().getArtAbilityCanUse()){
             int temp = attackingDice[attackingDice.length - 1]; //min of the attacker
@@ -100,7 +98,6 @@ public class WarState implements GameState{
             defendingDice[0] = temp;
             AttackingState.getInstance().setArtAbilityCanUse(false);
         }
-        System.out.println(defendingDice[0]);
 
         //Econ ability used
         if(AttackingState.getInstance().getEconAbilityCanUse() && defendingDice[0] > 1){
@@ -148,8 +145,11 @@ public class WarState implements GameState{
             defendingTerritory.setRuler(engine.getCurrentPlayer());
             engine.getCurrentPlayer().setNumOfTerritory(engine.getCurrentPlayer().getNumOfTerritory() + 1);
             //call displayTroopSelector to get the moving armies
-            engine.getController().displayTroopSelector(minMovingArmy,maxMovingArmy); // disable back
+            engine.getController().displayTroopSelector(minMovingArmy,maxMovingArmy);
+            // Disable Cancel
             engine.getController().disableCancel();
+            // Disable pass
+            engine.getController().disablePassButton();
             if (engine.isEliminated(pastRuler)) { // remove player if they have no territories left
                 engine.removePlayer(pastRuler);
             }
@@ -165,6 +165,7 @@ public class WarState implements GameState{
         Territory attackingTerritory = attack.getSource();
         attackingTerritory.setNumOfArmies(attackingTerritory.getNumOfArmies() - movingArmies);
         defendingTerritory.setNumOfArmies(movingArmies);
+        engine.getController().enablePassButton();
         attack.switchState(AttackingPlanningState.getInstance());
     }
 

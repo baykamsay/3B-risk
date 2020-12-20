@@ -48,13 +48,22 @@
 }
 
 .faculty_title_min{
-    -fx-font-size: 25px;
+    -fx-font-size: 23px;
     -fx-text-wrap: true;
     -fx-vpos: center;
     -fx-hpos: center;
     -fx-text-alignment: center;
     -fx-text-fill: white;
 }
+
+.faculty_title_max .text{
+   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+.faculty_title_min .text{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
 
 .slider{
     -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);  
@@ -170,6 +179,11 @@
     -fx-opacity: 0.96;
 }
 
+#troop_selection_blocker{
+    -fx-fill: rgb(44, 44, 44);
+    -fx-opacity: 0.5;
+}
+
 #battle_result_pane{
     -fx-background-radius: 4em;
     -fx-background-color: rgb(47, 56, 78);
@@ -197,6 +211,7 @@
     -fx-stroke: black;
     -fx-stroke-width: 4px;
 }
+
 .menu_button_back_max{
     -fx-padding: 5 5 5 5;  
     -fx-font-size: 20px;    

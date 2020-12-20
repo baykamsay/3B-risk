@@ -322,4 +322,10 @@ public class GameEngine extends Application {
     }
 
     public void setCurrentPlayer(int currentPlayer){ this.playerTurn = currentPlayer; }
+
+    public void enablePassButton(){
+        if(!(currentState instanceof ArmyPlacementState)){
+            controller.enablePassButton();
+        }
+    }
 }
