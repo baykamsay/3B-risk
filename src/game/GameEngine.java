@@ -27,11 +27,8 @@ public class GameEngine extends Application {
     public MapScene mapScene;
     private MapSceneController controller;
     private SoundEngine soundEngine;
-    public ArrayList<Objective> objectives;
     public ArrayList<Player> players;
     private Launcher launcher;
-    private int attackerDice;
-    private int defenderDice;
 
     public int playerTurn; //keeps the index of the players array to decide who's gonna play
     public int saveSlot;
@@ -48,12 +45,12 @@ public class GameEngine extends Application {
     private GameEngine(int saveSlot, int width, int height, Launcher launcher){
         super();
         load = true;
-        SaveManager.getInstance().loadGame(saveSlot);
         this.saveSlot = saveSlot;
         this.height = height;
         this.width = width;
         this.soundEngine = SoundEngine.getInstance();
         this.launcher = launcher;
+        winner = null;
     }
 
     private GameEngine(int saveSlot,  int width, int height, ArrayList<Player> players, Launcher launcher){
@@ -63,15 +60,12 @@ public class GameEngine extends Application {
         this.width = width;
         this.saveSlot = saveSlot;
         this.players = players;
-        this.objectives = new ArrayList<Objective>();
         this.soundEngine = SoundEngine.getInstance();
         this.launcher = launcher;
         turn = 0;
         currentState = null;
         playerTurn = 0; //first player will go first, which is stored in index 0
         winner = null;
-        attackerDice = 0;
-        defenderDice = 0;
     }
 
     public void incrementCurrentPlayer(){
@@ -109,6 +103,10 @@ public class GameEngine extends Application {
             instance = new GameEngine(saveSlot, width, height, launcher);
         }
         return instance;
+    }
+
+    public void loadGame(){
+        SaveManager.getInstance().loadGame(saveSlot);
     }
 
     // New Game init
@@ -174,17 +172,6 @@ public class GameEngine extends Application {
         return winner;
     }
 
-    public void removeObjective(String name){
-        int index = 0;
-        for (int i = 0; i < objectives.size(); i++) {
-            if(((objectives.get(i)).getName()).equals(name)){ //may be description?
-                index = i;
-                break;
-            }
-        }
-        objectives.remove(index);
-    }
-
     public boolean isEliminated(Player p){ //check if a player is eliminated
         for (int i = 0; i < map.getTerritories().length; i++) {
             if( (((map.getTerritories())[i]).getRuler()).getFaculty() == p.getFaculty()){
@@ -212,12 +199,12 @@ public class GameEngine extends Application {
         window.setResizable(false);
         window.setTitle("RISK 101");
         window.getIcons().add(new Image(Launcher.class.getResource("/img/logo.png").toURI().toString()));
-        this.setupMapScene();
-        if(turn == 0) {
+        if(load){
+            GameEngine.getInstance().switchState(ArmyPlacementState.getInstance());
+        }else{
             GameEngine.getInstance().switchState(InitialArmyPlacementState.getInstance());
         }
-        window.setScene(gameScene);
-        window.show();
+        this.setGameScene();
     }
 
     public void setupMapScene(){
@@ -246,6 +233,11 @@ public class GameEngine extends Application {
         } else {
             controller.setState(2);
         }
+    }
+
+    public void setGameScene(){
+        window.setScene(gameScene);
+        window.show();
         controller.update();
     }
 
@@ -328,4 +320,6 @@ public class GameEngine extends Application {
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
+
+    public void setCurrentPlayer(int currentPlayer){ this.playerTurn = currentPlayer; }
 }

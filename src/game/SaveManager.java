@@ -118,7 +118,6 @@ public class SaveManager {
             }
 
             boolean found = false;
-            System.out.println(objString[0] + "-" + placeName);
             // Check if place is a territory
             for(int i = 0; i < GameEngine.getInstance().getMap().getTerritories().length; i++){
                 if(GameEngine.getInstance().getMap().getTerritory(i).getName().equals(placeName)){
@@ -204,7 +203,7 @@ public class SaveManager {
             String[] objDesc = tmp[i].split("-");
 
             // Parse the full description of the objective
-            objectives.set(i, new int[]{Integer.parseInt(objDesc[0]),Integer.parseInt(objDesc[1]),
+            objectives.add(new int[]{Integer.parseInt(objDesc[0]),Integer.parseInt(objDesc[1]),
                     Integer.parseInt(objDesc[2]),Integer.parseInt(objDesc[3]),Integer.parseInt(objDesc[4])});
         }
 
@@ -222,6 +221,7 @@ public class SaveManager {
 
         GameEngine engine = GameEngine.getInstance();
 
+        // Create players
         ArrayList<Player> players = new ArrayList<Player>();
         for(int i = 0; i < playerFacultyIds.length; i++){
             switch(playerFacultyIds[i]){
@@ -260,5 +260,18 @@ public class SaveManager {
                     break;
             }
         }
+
+        engine.setPlayers(players);
+        engine.setupMapScene();
+
+        // Load objectives
+        for(int i = 0; i < players.size(); i++){
+            int[] obj = objectives.get(i);
+            Player p = players.get(i);
+            p.setObjective(Objective.generateObjective(obj[0],obj[1],obj[2],obj[3],obj[4],p));
+        }
+
+        GameMap.getInstance().init(territoryNums, territoryRulers);
+        engine.setCurrentPlayer(currentPlayer);
     }
 }
