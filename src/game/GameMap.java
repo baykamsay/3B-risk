@@ -65,10 +65,10 @@ public class GameMap {
     }
 
     private void initAreas(){
-        east = new Area("EASTCAMPUS");
-        island = new Area("BILKENTISLAND");
-        upperMain = new Area("UPPERMAINCAMPUS");
-        lowerMain = new Area("LOWERMAINCAMPUS");
+        east = new Area("East Campus");
+        island = new Area("Bilkent Island");
+        upperMain = new Area("Upper Main Campus");
+        lowerMain = new Area("Lower Main Campus");
     }
 
     private void initTerritories(){
