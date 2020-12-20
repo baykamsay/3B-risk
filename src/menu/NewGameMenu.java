@@ -1,5 +1,6 @@
 package menu;
 
+import game.SaveManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -19,7 +20,7 @@ public class NewGameMenu implements MenuState, EventHandler<ActionEvent> {
 
     private final int NO_OF_SLOTS = 8;
     private final Button[] slots = new Button[NO_OF_SLOTS];
-    private final boolean[] occupied = new boolean[NO_OF_SLOTS];
+    private boolean[] occupied;
     private Label title;
     private Button back;
     private final int width, height;
@@ -41,42 +42,16 @@ public class NewGameMenu implements MenuState, EventHandler<ActionEvent> {
     @Override
     public Scene createScene(GameMenuManager mgr) {
         try {
-            checkForSaves();
+            occupied = SaveManager.getInstance().checkForSaves(NO_OF_SLOTS);
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Save system may be corrupted.");
         }
 
         this.mgr = mgr;
         init(mgr.getMaximized());
         back.setOnAction(mgr);
         return scene;
-    }
-
-    public void checkForSaves(){
-        File[] files = new File(System.getenv("LOCALAPPDATA")+"\\RISK101").listFiles();
-        for(File f : files){
-            Scanner fScan = null;
-            try {
-                fScan = new Scanner(f);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            int saveNo = -1;
-            try{
-                saveNo = Integer.parseInt(fScan.nextLine());
-            }catch(NumberFormatException e){
-                System.out.println("Corrupted save file detected, deleting.");
-                fScan.close();
-                f.delete();
-            }
-            if(saveNo != -1) {
-                if (saveNo > NO_OF_SLOTS) {
-                    System.out.println("Invalid save file.");
-                }
-                occupied[saveNo] = true;
-                fScan.close();
-            }
-        }
     }
 
     public void init(boolean maximized){
@@ -129,7 +104,6 @@ public class NewGameMenu implements MenuState, EventHandler<ActionEvent> {
             overWrite();
         }
         else{
-            createSave(chosenSlot);
             mgr.facultySelection(chosenSlot);
         }
     }
@@ -141,22 +115,7 @@ public class NewGameMenu implements MenuState, EventHandler<ActionEvent> {
         overWrite.setContentText("This will irreversibly destroy the previous save.");
         overWrite.showAndWait();
         if(overWrite.getResult() == ButtonType.YES){
-            File file = new File(System.getenv("LOCALAPPDATA")+"\\RISK101" + "\\save" + chosenSlot + ".txt");
-            file.delete();
             mgr.facultySelection(chosenSlot);
-        }
-    }
-
-    public void createSave(int slot){
-        File file = new File(System.getenv("LOCALAPPDATA") + "\\RISK101" + "\\save" + slot + ".txt");
-        try {
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
-            writer.write(Integer.toString(slot));
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Couldn't create save file!");
-            e.printStackTrace();
         }
     }
 }

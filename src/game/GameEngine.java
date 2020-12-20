@@ -319,4 +319,6 @@ public class GameEngine extends Application {
             ((FortifyingState) currentState).back();
         }
     }
+
+    public int getSaveSlot(){ return saveSlot; }
 }
