@@ -29,7 +29,7 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
     private SoundEngine soundEngine;
     private Scene scene;
 
-    private final int NO_OF_PAGES = 12;
+    private final int NO_OF_PAGES = 11;
 
     public PauseHelpMenu(int width, int height, PauseMenu pauseMenu){
         pageNo = 1;
