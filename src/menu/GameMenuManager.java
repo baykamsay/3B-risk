@@ -3,7 +3,6 @@ package menu;
 import game.GameEngine;
 import game.SoundEngine;
 import game.player.Player;
-import game.state.InitialArmyPlacementState;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -28,8 +27,8 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     private boolean isMaximized;
     private SoundEngine soundEngine;
-    private static final int WINDOWED_WIDTH = 1024;
-    private static final int WINDOWED_HEIGHT = 1024;
+    private static final int WINDOWED_WIDTH = 800;
+    private static final int WINDOWED_HEIGHT = 800;
     private int width, height;
     private Scene scene;
     private MenuState menuState;

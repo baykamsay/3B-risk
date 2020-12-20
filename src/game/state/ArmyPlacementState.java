@@ -42,14 +42,17 @@ public class ArmyPlacementState implements GameState {
         if (addibleArmyNo <= 0) {
             engine.switchState(AttackingState.getInstance());
         }
+        GameEngine.getInstance().getController().deselect();
     }
 
     @Override
     public void mapSelect(int territory) {
+        GameEngine.getInstance().getController().setSourceTerritory(territory);
         Territory t = engine.getMap().getTerritory(territory);
         if (manAbilityCanUse && engine.getCurrentPlayer() != t.getRuler()) {
             Player p = t.getRuler();
             manAbilityCanUse = false;
+            GameEngine.getInstance().getController().deselect();
             t.setRuler(engine.getCurrentPlayer());
             p.setNumOfTerritory(p.getNumOfTerritory()-1);
             t.getRuler().increaseTerritory();

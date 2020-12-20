@@ -187,13 +187,16 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     private int curTurn;
     private int curState;
+    private int sourceTerritory;
+    private int destinationTerritory;
 
 
     public MapSceneController(){
     }
 
     public void init(){
-
+        destinationTerritory = -1;
+        sourceTerritory = -1;
         // Arrays for map info
         territories = new ImageView[]{dormsEast, sportsEast, libraryEast, prepEast, healthCenterEast, cafeteriaEast, atmEast,
                 coffeeBreakEast, mozartEast, entranceEast, bilkent12Island, sportsInternationalIsland, ankuvaIsland, centerIsland, hotelIsland,
@@ -312,7 +315,9 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             event.consume();
         });
         selectorCancel.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
+            deselect();
             selectionCancel();
+            update();
             event.consume();
         });
         selectorConfirm.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
@@ -398,6 +403,28 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             );
         }
 
+        if(sourceTerritory != -1){
+            ColorAdjust base = map.getTerritories()[sourceTerritory].getCa();
+            ColorAdjust selected = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + -0.5, base.getContrast());
+            territories[sourceTerritory].effectProperty().bind(
+                    Bindings
+                            .when(territories[sourceTerritory].hoverProperty())
+                            .then((Effect) selected)
+                            .otherwise(selected)
+            );
+        }
+
+        if(destinationTerritory != -1){
+            ColorAdjust base = map.getTerritories()[sourceTerritory].getCa();
+            ColorAdjust selected = new ColorAdjust(base.getHue(), base.getSaturation(), base.getBrightness() + -0.5, base.getContrast());
+            territories[sourceTerritory].effectProperty().bind(
+                    Bindings
+                            .when(territories[sourceTerritory].hoverProperty())
+                            .then((Effect) selected)
+                            .otherwise(selected)
+            );
+        }
+
         // Update player territory counts
         int i;
         for(i = 0; i < players.size(); i++){
@@ -427,25 +454,6 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
                 pInfoBgs[i].setLayoutX(DEFAULT_INFOBG_X);
             }
         }
-    }
-
-    public void test(){
-        Random rand = new Random();
-        for(Text t : troops){
-            t.setId("troop_counter");
-            t.setText(Integer.toString(rand.nextInt(100)));
-        }
-
-        for(Territory t : map.getTerritories()){
-            Player p = players.get(rand.nextInt(players.size()));
-            t.setRuler(p);
-            p.setNumOfTerritory(p.getNumOfTerritory() + 1);
-        }
-        setTurn(0);
-        setState(0);
-        displayTroopSelector(3, 10);
-        update();
-        gameEngine.test();
     }
 
     public void displayBattleResult(int[] attackerDice, int[] defenderDice, boolean[] attackerWon, Player attacker, Player defender){
@@ -534,15 +542,18 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     @Override
     public void handle(ActionEvent actionEvent) {
         if(actionEvent.getSource() == battleOKButton){
+            deselect();
             battleResultPane.setVisible(false);
             battleResultPane.setMouseTransparent(true);
             mapBlocker.setVisible(false);
             mapBlocker.setMouseTransparent(true);
             WarState.getInstance().terminating();
         } else if (actionEvent.getSource() == passButton){
+            deselect();
             gameEngine.pass();
         } else if (actionEvent.getSource() == abilityButton){
             GameEngine.getInstance().getCurrentPlayer().getFaculty().useAbility();
+            updateAbilityButton();
         }
     }
 
@@ -793,5 +804,22 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         fade.setToValue(0.0);
         fade.setNode(objectiveResult);
         fade.play();
+    }
+
+    public void setSourceTerritory(int i){
+        sourceTerritory = i;
+    }
+
+    public void setDestinationTerritory(int i){
+        destinationTerritory = i;
+    }
+
+    public void deselect(){
+        sourceTerritory = -1;
+        destinationTerritory = -1;
+    }
+
+    public void updateAbilityButton(){
+        abilityButton.setDisable(!GameEngine.getInstance().getCurrentPlayer().getFaculty().canUseAbility());
     }
 }

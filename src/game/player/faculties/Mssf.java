@@ -61,4 +61,5 @@ public class Mssf implements Faculty{
 
     public int abilityUsed() {return canUse ? 0 : 1;}
 
+    public void loadAbility(boolean canUse) { this.canUse = canUse; }
 }

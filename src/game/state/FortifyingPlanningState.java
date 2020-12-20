@@ -31,14 +31,17 @@ public class FortifyingPlanningState implements GameState {
         if (fortify.getSource() == null) { //make sure that the first selection will be source
             //check the territory name && if player is the ruler && has at least 2 armies
             if ((t.isRuler(engine.getCurrentPlayer())) && t.getNumOfArmies() >= 2) {
+                GameEngine.getInstance().getController().setSourceTerritory(territory);
                 fortify.setSource(t);
             }
         }
         else if (fortify.getSource() == t) {
+            GameEngine.getInstance().getController().deselect();
             fortify.setSource(null);
         }
         else {
             if(fortify.getSource().isAdjacent(t) && t.getRuler() == GameEngine.getInstance().getCurrentPlayer()) { //check if destination is adjacent to the source
+                GameEngine.getInstance().getController().setDestinationTerritory(territory);
                 fortify.setDestination(t);
                 fortify.switchState(FortifyingArmySelectionState.getInstance());
             }

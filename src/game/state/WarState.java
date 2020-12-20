@@ -124,6 +124,7 @@ public class WarState implements GameState{
         Territory attackingTerritory = attack.getSource();
 
         if (defendingTerritory.getNumOfArmies() == 0) {
+            GameEngine.getInstance().getController().deselect();
             Player pastRuler = defendingTerritory.getRuler();
             pastRuler.setNumOfTerritory(pastRuler.getNumOfTerritory() - 1);
             defendingTerritory.setRuler(engine.getCurrentPlayer());

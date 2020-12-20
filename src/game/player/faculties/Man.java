@@ -62,4 +62,6 @@ public class Man implements Faculty{
 
     @Override
     public void setCanUse(boolean b){}
+
+    public void loadAbility(boolean canUse) { this.canUse = canUse; }
 }
