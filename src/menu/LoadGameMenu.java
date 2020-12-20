@@ -1,5 +1,6 @@
 package menu;
 
+import game.SaveManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,7 +19,7 @@ public class LoadGameMenu implements MenuState{
 
     private final int NO_OF_SLOTS = 8;
     private final Button[] slots = new Button[NO_OF_SLOTS];
-    private final boolean[] occupied = new boolean[NO_OF_SLOTS];
+    private boolean[] occupied;
 
     private Label title;
     private Button back;
@@ -40,7 +41,7 @@ public class LoadGameMenu implements MenuState{
     @Override
     public Scene createScene(GameMenuManager mgr) {
         try {
-            checkForSaves();
+            occupied = SaveManager.getInstance().checkForSaves(NO_OF_SLOTS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,24 +49,6 @@ public class LoadGameMenu implements MenuState{
         this.mgr = mgr;
         init(mgr.getMaximized());
         return scene;
-    }
-
-    public void checkForSaves() throws Exception {
-        File[] files = new File(System.getenv("LOCALAPPDATA")+"\\RISK101").listFiles();
-        for(File f : files){
-            Scanner fScan = null;
-            try {
-                fScan = new Scanner(f);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            int saveNo = Integer.parseInt(fScan.nextLine());
-            if(saveNo > NO_OF_SLOTS){
-                throw new Exception("Corrupted/Tampered save file.");
-            }
-            occupied[saveNo] = true;
-            fScan.close();
-        }
     }
 
     public void init(boolean maximized){

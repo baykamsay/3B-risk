@@ -2,6 +2,7 @@ package game.state;
 
 import game.GameEngine;
 import game.GameMap;
+import game.SaveManager;
 import game.SoundEngine;
 import game.player.Objective;
 import game.player.Player;
@@ -66,6 +67,22 @@ public class ArmyPlacementState implements GameState {
 
     @Override
     public void start() {
+
+        // If players don't have objectives, generate
+        for(Player p: GameEngine.getInstance().getPlayers()) {
+            if (p.getObjective() == null) {
+                p.setObjective(Objective.generateObjective(p));
+            }
+        }
+
+        // Save the game
+        try {
+            SaveManager.getInstance().saveGame(GameEngine.getInstance().getSaveSlot());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Failed to save");
+        }
+
         manAbilityUsed = false;
         eduAbilityUsed = false;
         engine = GameEngine.getInstance();
@@ -74,14 +91,13 @@ public class ArmyPlacementState implements GameState {
     }
 
     public void calculateNumberOfArmies(Player p) {
-        if(p.getObjective() == null){
-            p.setObjective(Objective.generateObjective(p));
-        }
+
         if (p.getNumOfTerritory() <= 9) {
             addibleArmyNo = 3;
         } else {
             addibleArmyNo = p.getNumOfTerritory() / 3;
         }
+
         if( GameMap.getInstance().getAreas()[0].getRuler() != null){ //east campus area = +3
             if(p.equals(GameMap.getInstance().getAreas()[0].getRuler()))
                 addibleArmyNo += 3;
