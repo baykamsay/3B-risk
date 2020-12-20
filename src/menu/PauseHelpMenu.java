@@ -92,6 +92,7 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
         root.getChildren().addAll(menu, bottom);
         GridPane.setHalignment(menu,HPos.CENTER);
         root.setId("menu_bg");
+        previous.setDisable(true);
         scene = new Scene(root,width,height);
     }
 
@@ -129,7 +130,16 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
         }else if (actionEvent.getSource() == backButton){
             pauseMenu.back();
         }
-
+        if(pageNo == NO_OF_PAGES){
+            next.setDisable(true);
+            previous.setDisable(false);
+        }else if(pageNo == 1){
+            next.setDisable(false);
+            previous.setDisable(true);
+        } else {
+            next.setDisable(false);
+            previous.setDisable(false);
+        }
         this.update();
     }
 
