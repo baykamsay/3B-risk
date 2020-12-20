@@ -334,6 +334,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         objectiveDisplay.setVisible(false);
         objectiveResult.setOpacity(0.0);
         objectiveResult.setMouseTransparent(true);
+        abilityButton.setDisable(true);
+        abilityButton.setOnAction(this);
     }
 
     @Override
@@ -539,6 +541,8 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
             WarState.getInstance().terminating();
         } else if (actionEvent.getSource() == passButton){
             gameEngine.pass();
+        } else if (actionEvent.getSource() == abilityButton){
+            GameEngine.getInstance().getCurrentPlayer().getFaculty().useAbility();
         }
     }
 
@@ -687,6 +691,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
         curTurn = gameEngine.getPlayerTurn();
         setTurn(curTurn);
         Player current = players.get(curTurn);
+        abilityButton.setDisable(!current.getFaculty().canUseAbility());
         objectiveIcon.setVisible(true);
         if(state == -1){
             passButton.setDisable(true);

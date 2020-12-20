@@ -119,5 +119,9 @@ public class SaveManager {
                 }
             }
         }
+
+        troopNums = troopNums.strip();
+        rulers = rulers.strip();
+        fw.write(troopNums);
     }
 }
