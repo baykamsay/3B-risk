@@ -132,6 +132,9 @@ public class WarState implements GameState{
         }
         defendingTerritory.setNumOfArmies(defendingTerritory.getNumOfArmies() - defendingLostDice);
         maxMovingArmy = attackingTerritory.getNumOfArmies() - 1; //only used if the territory is captured
+        if(attack.getDestination().getNumOfArmies() == 0) {
+            SoundEngine.getInstance().playBattleVictory();
+        }
     }
 
     public void terminating() {
