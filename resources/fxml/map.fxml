@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../css/main_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1203.0" layoutY="986.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="207.0" />
+      <Label layoutX="1223.0" layoutY="995.0" mouseTransparent="true" styleClass="area_title" text="LOWER MAIN  +5" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1325.0" layoutY="75.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="207.0" />
+      <Label layoutX="1346.0" layoutY="84.0" mouseTransparent="true" styleClass="area_title" text="UPPER MAIN   +5" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="449.0" layoutY="993.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="149.0" />
+      <Label layoutX="467.0" layoutY="1002.0" mouseTransparent="true" styleClass="area_title" text="ISLAND   +2" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="169.0" layoutY="112.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="135.0" />
+      <Label layoutX="190.0" layoutY="121.0" mouseTransparent="true" styleClass="area_title" text="EAST   +3" />
+      <Pane layoutX="1550.0" layoutY="40.0" prefHeight="1000.0" prefWidth="370.0">
+         <children>
+            <Rectangle fx:id="p1Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p2Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="170.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p3Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p4Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="510.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p5Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="680.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Rectangle fx:id="p6Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" layoutY="850.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
+            <Circle fx:id="p1IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="75.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p2IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="245.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p3IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="415.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p4IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="585.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p5IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="755.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="p6IconBg" fill="DODGERBLUE" layoutX="295.0" layoutY="925.0" radius="70.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="p1Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p2Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p3Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p4Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p5Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="695.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p6Icon" fitHeight="120.0" fitWidth="120.0" layoutX="235.0" layoutY="865.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="54.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="p1TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p1TerritoryCount" layoutX="157.0" layoutY="46.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p2TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p2TerritoryCount" layoutX="157.0" layoutY="216.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p3TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p3TerritoryCount" layoutX="157.0" layoutY="386.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p4TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p4TerritoryCount" layoutX="157.0" layoutY="556.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p5TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="720.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p5TerritoryCount" layoutX="157.0" layoutY="726.0" styleClass="territory_number" text="1" />
+            <ImageView fx:id="p6TerritoryIcon" fitHeight="70.0" fitWidth="70.0" layoutX="65.0" layoutY="890.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="p6TerritoryCount" layoutX="157.0" layoutY="896.0" styleClass="territory_number" text="1" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="1046.0" fitWidth="1304.0" layoutX="218.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/complete_world_map_colored.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mayfestUpperMain" fitHeight="112.0" fitWidth="188.0" layoutX="904.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mayfest_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="mayfest" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="cafeteriaEast" fitHeight="157.0" fitWidth="212.0" layoutX="255.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/cafeteria_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="cafeteria" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="atmEast" fitHeight="198.0" fitWidth="212.0" layoutX="379.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/atm_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="atm" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="coffeeBreakEast" fitHeight="93.0" fitWidth="169.0" layoutX="286.0" layoutY="455.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/coffee_break_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="coffee_break" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="dormsEast" fitHeight="226.0" fitWidth="238.0" layoutX="395.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/dorms_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="dorms" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="entranceEast" fitHeight="150.0" fitWidth="200.0" layoutX="355.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/entrance_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="entrance" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="healthCenterEast" fitHeight="198.0" fitWidth="210.0" layoutX="440.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/health_center_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="health_center" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="libraryEast" fitHeight="225.0" fitWidth="143.0" layoutX="245.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/library_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="library" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mozartEast" fitHeight="131.0" fitWidth="169.0" layoutX="219.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mozart_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="mozart" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="sportsEast" fitHeight="106.0" fitWidth="182.0" layoutX="317.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/sports_center_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="sports" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="bBuildingLowerMain" fitHeight="121.0" fitWidth="249.0" layoutX="1100.0" layoutY="686.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/b_building_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="b_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="cafeInLowerMain" fitHeight="150.0" fitWidth="200.0" layoutX="936.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/cafe_in_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="cafe_in" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="cafeteriaLowerMain" fitHeight="180.0" fitWidth="151.0" layoutX="964.0" layoutY="785.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/cafeteria_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="cafeteria" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="coffeeBreakLowerMain" fitHeight="141.0" fitWidth="163.0" layoutX="1100.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/coffee_break_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="coffee_break" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="cyberParkLowerMain" fitHeight="99.0" fitWidth="160.0" layoutX="1361.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/cyberpark_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="cyber_park" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="eaBuildingLowerMain" fitHeight="150.0" fitWidth="200.0" layoutX="1048.0" layoutY="880.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/ea_building_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="ea_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="entranceLowerMain" fitHeight="69.0" fitWidth="135.0" layoutX="817.0" layoutY="993.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/entrance_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="entrance" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="gBuildingLowerMain" fitHeight="129.0" fitWidth="169.0" layoutX="956.0" layoutY="536.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/g_building_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="g_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="libraryLowerMain" fitHeight="263.0" fitWidth="284.0" layoutX="1023.0" layoutY="711.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/library_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="library" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="meteksanLowerMain" fitHeight="106.0" fitWidth="100.0" layoutX="847.0" layoutY="915.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/meteksan_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="meteksan" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mithatCoruhLowerMain" fitHeight="83.0" fitWidth="169.0" layoutX="986.0" layoutY="979.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mithat_coruh_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="mithat_coruh" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mozartLowerMain" fitHeight="129.0" fitWidth="151.0" layoutX="1211.0" layoutY="763.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mozart_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="mozart" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="odeonLowerMain" fitHeight="189.0" fitWidth="135.0" layoutX="862.0" layoutY="694.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/odeon_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="odeon" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="squareLowerMain" fitHeight="179.0" fitWidth="279.0" layoutX="1194.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/square_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="square" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="statueLowerMain" fitHeight="114.0" fitWidth="152.0" layoutX="1074.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/statue_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="statue" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="eeBuildingLowerMain" fitHeight="141.0" fitWidth="133.0" layoutX="927.0" layoutY="920.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/ee_building_lmain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="lower_main" />
+            <String fx:value="ee_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="ankuvaIsland" fitHeight="121.0" fitWidth="182.0" layoutX="491.0" layoutY="758.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/ankuva_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="ankuva" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="bilkent12Island" fitHeight="150.0" fitWidth="222.0" layoutX="547.0" layoutY="586.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/bilkent_1_2_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="bilkent_1_2" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="centerIsland" fitHeight="225.0" fitWidth="337.0" layoutX="445.0" layoutY="770.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/center_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="center" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="hotelIsland" fitHeight="217.0" fitWidth="159.0" layoutX="683.0" layoutY="632.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/hotel_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="hotel" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="sportsInternationalIsland" fitHeight="116.0" fitWidth="209.0" layoutX="437.0" layoutY="711.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/sports_int_island.png" />
+         </image>
+         <styleClass>
+            <String fx:value="island" />
+            <String fx:value="sports_international" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="vBuildingUpperMain" fitHeight="109.0" fitWidth="163.0" layoutX="970.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/v_building_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="v_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="aBuildingUpperMain" fitHeight="168.0" fitWidth="122.0" layoutX="1166.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/a_building_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="a_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="concertHallUpperMain" fitHeight="129.0" fitWidth="87.0" layoutX="855.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/concert_hall_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="concert_hall" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="dormsUpperMain" fitHeight="139.0" fitWidth="249.0" layoutX="1075.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/dorms_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="dorms" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="fBuildingsUpperMain" fitHeight="113.0" fitWidth="135.0" layoutX="1119.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/f_buildings_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="f_buildings" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mBuildingUpperMain" fitHeight="129.0" fitWidth="108.0" layoutX="1073.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/m_building_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="m_building" />
+            <String fx:value="upper_main" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="meteksanUpperMain" fitHeight="139.0" fitWidth="106.0" layoutX="1162.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/meteksan_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="meteksan" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mescitUpperMain" fitHeight="106.0" fitWidth="132.0" layoutX="913.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mescit_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="mescit" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="mssfUpperMain" fitHeight="121.0" fitWidth="115.0" layoutX="807.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/mssf_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="mssf" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="nanotamUpperMain" fitHeight="189.0" fitWidth="96.0" layoutX="1314.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/nanotam_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="nanotam" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="sBuildingUpperMain" fitHeight="198.0" fitWidth="114.0" layoutX="1238.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/s_buildings_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="s_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="sportsCenterUpperMain" fitHeight="179.0" fitWidth="132.0" layoutX="1213.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/sports_center_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="sports_center" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="starbucksUpperMain" fitHeight="112.0" fitWidth="133.0" layoutX="1013.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/starbucks_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="starbucks" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="tBuildingUpperMain" fitHeight="99.0" fitWidth="135.0" layoutX="1169.0" layoutY="456.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/t_building_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="upper_main" />
+            <String fx:value="t_building" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="prepEast" fitHeight="217.0" fitWidth="188.0" layoutX="357.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/prep_buildings_east.png" />
+         </image>
+         <styleClass>
+            <String fx:value="east" />
+            <String fx:value="prep" />
+         </styleClass>
+      </ImageView>
+      <ImageView fx:id="dorm76UpperMain" fitHeight="139.0" fitWidth="182.0" layoutX="1163.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/map/76_umain.png" />
+         </image>
+         <styleClass>
+            <String fx:value="dorm_76" />
+            <String fx:value="upper_main" />
+         </styleClass>
+      </ImageView>
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="445.0" layoutY="244.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="388.0" layoutY="140.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="529.0" layoutY="117.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="529.0" layoutY="328.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="327.0" layoutY="296.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="339.0" layoutY="444.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="474.0" layoutY="448.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="380.0" layoutY="502.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="304.0" layoutY="558.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="422.0" layoutY="585.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="862.0" layoutY="86.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="909.0" layoutY="144.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1187.0" layoutY="63.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1278.0" layoutY="172.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1169.0" layoutY="174.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1361.0" layoutY="252.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="975.0" layoutY="233.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1040.0" layoutY="188.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1092.0" layoutY="273.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1210.0" layoutY="273.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1288.0" layoutY="281.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="998.0" layoutY="314.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1142.0" layoutY="314.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1224.0" layoutY="424.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1295.0" layoutY="401.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1238.0" layoutY="500.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="621.0" layoutY="680.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="589.0" layoutY="739.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="604.0" layoutY="790.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="664.0" layoutY="830.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="738.0" layoutY="789.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="942.0" layoutY="830.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="904.0" layoutY="974.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="918.0" layoutY="1030.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="983.0" layoutY="995.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1045.0" layoutY="906.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1124.0" layoutY="951.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1073.0" layoutY="1011.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1163.0" layoutY="853.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1017.0" layoutY="705.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1052.0" layoutY="608.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1146.0" layoutY="685.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1226.0" layoutY="747.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1288.0" layoutY="812.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1428.0" layoutY="720.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1342.0" layoutY="629.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="troop_num_bg" fill="#ffffff8b" layoutX="1186.0" layoutY="601.0" mouseTransparent="true" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="troops1" layoutX="373.0" layoutY="145.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops0" layoutX="514.0" layoutY="122.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops2" layoutX="312.0" layoutY="301.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops3" layoutX="430.0" layoutY="249.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops4" layoutX="514.0" layoutY="333.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops5" layoutX="324.0" layoutY="449.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops6" layoutX="459.0" layoutY="453.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops7" layoutX="365.0" layoutY="507.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops8" layoutX="289.0" layoutY="563.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops9" layoutX="407.0" layoutY="591.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops10" layoutX="606.0" layoutY="687.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops11" layoutX="574.0" layoutY="744.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops12" layoutX="589.0" layoutY="795.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops13" layoutX="649.0" layoutY="835.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops14" layoutX="723.0" layoutY="795.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops15" layoutX="849.0" layoutY="91.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops16" layoutX="894.0" layoutY="149.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops17" layoutX="1172.0" layoutY="68.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops18" layoutX="1025.0" layoutY="193.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops19" layoutX="1154.0" layoutY="179.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops20" layoutX="1263.0" layoutY="179.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops21" layoutX="960.0" layoutY="238.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops22" layoutX="1077.0" layoutY="279.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops23" layoutX="1129.0" layoutY="320.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops24" layoutX="1196.0" layoutY="279.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops25" layoutX="1273.0" layoutY="286.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops26" layoutX="1346.0" layoutY="258.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops27" layoutX="983.0" layoutY="319.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops28" layoutX="1209.0" layoutY="429.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops29" layoutX="1280.0" layoutY="406.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops30" layoutX="1224.0" layoutY="506.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops31" layoutX="1037.0" layoutY="613.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops32" layoutX="1171.0" layoutY="605.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops33" layoutX="1327.0" layoutY="635.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops34" layoutX="1002.0" layoutY="710.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops35" layoutX="1135.0" layoutY="690.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops36" layoutX="1212.0" layoutY="753.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops37" layoutX="1413.0" layoutY="725.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops38" layoutX="928.0" layoutY="835.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops39" layoutX="1148.0" layoutY="858.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops40" layoutX="1273.0" layoutY="817.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops41" layoutX="1030.0" layoutY="911.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops42" layoutX="1109.0" layoutY="956.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops43" layoutX="889.0" layoutY="979.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops44" layoutX="968.0" layoutY="1002.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops45" layoutX="1058.0" layoutY="1016.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Text fx:id="troops46" layoutX="904.0" layoutY="1035.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="30.0" />
+      <Rectangle id="map_blocker" fx:id="mapBlocker" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" />
+      <Rectangle id="troop_selection_blocker" fx:id="troopBlocker" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="1080.0" stroke="BLACK" strokeType="INSIDE" width="1920.0" />
+      <Button fx:id="pauseButton" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="menu_button_back_max" />
+      <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="24.0" layoutY="22.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/pause_icon.png" />
+         </image>
+      </ImageView>
+      <Pane id="battle_result_pane" fx:id="battleResultPane" layoutX="592.0" layoutY="172.0" prefHeight="736.0" prefWidth="736.0">
+         <children>
+            <Circle fx:id="attackerCircle" fill="DODGERBLUE" layoutX="200.0" layoutY="162.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" style="-fx-opacity: 0.1;" />
+            <Circle fx:id="defenderCircle" fill="DODGERBLUE" layoutX="524.0" layoutY="162.0" radius="56.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="attackerIcon" fitHeight="100.0" fitWidth="100.0" layoutX="150.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/faculty_icon_placeholder.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="defenderIcon" fitHeight="100.0" fitWidth="100.0" layoutX="474.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/faculty_icon_placeholder.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="114.0" layoutY="52.0" styleClass="battle_label" text="ATTACKING" />
+            <Label layoutX="438.0" layoutY="52.0" styleClass="battle_label" text="DEFENDING" />
+            <ImageView fx:id="attackerDie1" fitHeight="100.0" fitWidth="100.0" layoutX="149.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="attackerDie2" fitHeight="100.0" fitWidth="100.0" layoutX="149.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="attackerDie3" fitHeight="100.0" fitWidth="100.0" layoutX="149.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="defenderDie1" fitHeight="100.0" fitWidth="100.0" layoutX="473.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="defenderDie2" fitHeight="100.0" fitWidth="100.0" layoutX="473.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_2.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="battleOKButton" layoutX="323.0" layoutY="618.0" mnemonicParsing="false" text="OK" />
+            <ImageView fx:id="defenderDie3" fitHeight="100.0" fitWidth="100.0" layoutX="473.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/die_2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane id="selector_pane" fx:id="selectorPane" layoutX="440.0" layoutY="820.0" prefHeight="200.0" prefWidth="1042.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" layoutX="35.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" style="-fx-opacity: 0.5; -fx-fill: black; -fx-arc-height: 100; -fx-arc-width: 100;" width="972.0" />
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="421.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/selector.png" />
+               </image>
+            </ImageView>
+            <ImageView id="selectore_confirm" fx:id="selectorConfirm" fitHeight="150.0" fitWidth="150.0" layoutX="890.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/selection_confirm.png" />
+               </image>
+            </ImageView>
+            <ImageView id="selector_cancel" fx:id="selectorCancel" fitHeight="150.0" fitWidth="150.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/selection_cancel.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="selector1" layoutX="246.0" layoutY="66.0" styleClass="selector_number" text="1" />
+            <Label fx:id="selector3" layoutX="765.0" layoutY="66.0" styleClass="selector_number" text="3" />
+            <ImageView fx:id="selectorLeft" fitHeight="81.0" fitWidth="94.0" layoutX="345.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/left_arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="selectorRight" fitHeight="81.0" fitWidth="94.0" layoutX="628.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/right_arrow.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="CENTER" layoutX="421.0" layoutY="41.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="selector2" styleClass="selector_number_center" text="2" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <Pane fx:id="statePane" layoutX="24.0" layoutY="773.0" prefHeight="198.0" prefWidth="398.0">
+         <children>
+            <Rectangle fx:id="stateBg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="120.0" layoutX="61.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px; -fx-opacity: 0.3;" width="299.0" />
+            <Button fx:id="passButton" layoutX="310.0" layoutY="108.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" styleClass="pass_button" />
+            <ImageView fitHeight="58.0" fitWidth="54.0" layoutX="323.0" layoutY="121.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pass_icon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="stateIcon" fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/icons/science_faculty_icon.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="stateLabel" layoutX="134.0" layoutY="82.0" prefWidth="187.0" styleClass="state_name" text="PLACEMENT" textAlignment="CENTER" />
+            <Rectangle fx:id="state0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="141.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
+            <Rectangle fx:id="state1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="195.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
+            <Rectangle fx:id="state2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="250.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px;" styleClass="state_indicator" width="46.0" />
+            <ImageView fx:id="objectiveIcon" fitHeight="45.0" fitWidth="45.0" layoutX="196.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/objective_icon.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="abilityTooltip" layoutX="306.0" layoutY="14.0" prefHeight="81.0" prefWidth="88.0">
+               <children>
+                  <Button fx:id="abilityButton" layoutX="4.0" layoutY="1.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="80.0" styleClass="ability_button" />
+                  <ImageView fitHeight="60.0" fitWidth="80.0" layoutX="14.0" layoutY="11.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/ability_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="objectiveDisplay" layoutX="34.0" layoutY="636.0" prefHeight="140.0" prefWidth="350.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px; -fx-opacity: 0.5; -fx-fill: black;" width="350.0" />
+            <VBox alignment="TOP_CENTER" layoutX="9.0" layoutY="5.0" prefHeight="127.0" prefWidth="335.0" style="-fx-padding: 20px;">
+               <children>
+                  <Label styleClass="objective_title" text="OBJECTIVE" />
+                  <Label fx:id="objectiveText" styleClass="objective_text" text="OBJECTIVE TEXT" />
+                  <Label fx:id="objectiveTurns" styleClass="objective_text" text="# TURNS REMAINING" />
+                  <Label fx:id="objectiveReward" styleClass="objective_text" text="REWARD: 1 TROOPS" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </Pane>
+      <Pane fx:id="troopNumberPane" layoutX="48.0" layoutY="975.0" prefHeight="92.0" prefWidth="335.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="92.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-arc-height: 30px; -fx-arc-width: 30px; -fx-fill: black; -fx-opacity: 0.7;" width="335.0" />
+            <HBox alignment="CENTER" prefHeight="92.0" prefWidth="335.0" style="-fx-padding: 0px 20px 0px 20px;">
+               <children>
+                  <Label prefHeight="36.0" prefWidth="198.0" styleClass="troop_text" text="Remaining Troops:" />
+                  <Label fx:id="troopNumberLabel" styleClass="troop_number" text="1" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <Pane fx:id="objectiveResult" layoutX="34.0" layoutY="488.0" prefHeight="140.0" prefWidth="350.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="140.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 50px; -fx-arc-width: 50px; -fx-opacity: 0.5; -fx-fill: black;" width="350.0" />
+            <VBox alignment="CENTER" layoutX="9.0" layoutY="5.0" prefHeight="127.0" prefWidth="335.0" style="-fx-padding: 20px;">
+               <children>
+                  <Label fx:id="objectiveResultLabel" styleClass="objective_result_title" text="OBJECTIVE COMPLETED!" />
+                  <Label fx:id="objectiveRewardLabel" styleClass="objective_text" text="Received 3 Troops!" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</Pane>
