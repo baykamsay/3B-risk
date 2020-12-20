@@ -20,7 +20,7 @@ public class Mssf implements Faculty{
 
     @Override
     public boolean canUseAbility() {
-        if(GameEngine.getInstance().getCurrentPlayer().getFaculty() instanceof  Mssf && canUse) {
+        if(GameEngine.getInstance().currentState instanceof FortifyingState && canUse) {
             return true;
         }
         return false;

@@ -6,6 +6,7 @@ import game.SoundEngine;
 import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
+import game.player.faculties.Fen;
 import game.scene.MapScene;
 import javafx.event.ActionEvent;
 
@@ -15,6 +16,7 @@ public class ArmyPlacementState implements GameState {
     private int addibleArmyNo;
     private int armyCount; //add amount per territory
     private Territory target;
+    private boolean manAbilityUsed, eduAbilityUsed;
     private ArmyPlacementState() {
 
     }
@@ -43,7 +45,19 @@ public class ArmyPlacementState implements GameState {
     @Override
     public void mapSelect(int territory) {
         Territory t = engine.getMap().getTerritory(territory);
-        if (engine.getCurrentPlayer() == t.getRuler()) {
+        if (manAbilityUsed && engine.getCurrentPlayer() != t.getRuler()) {
+            Player p = t.getRuler();
+            manAbilityUsed = false;
+            t.setRuler(engine.getCurrentPlayer());
+            p.setNumOfTerritory(p.getNumOfTerritory()-1);
+            t.getRuler().increaseTerritory();
+            if(engine.isEliminated(p)){
+                engine.removePlayer(p);
+            }
+            engine.isGameOver();
+            engine.switchState(AttackingState.getInstance());
+        }
+        else if (engine.getCurrentPlayer() == t.getRuler()) {
             // Call display troop selection, it will set the army no.
             engine.getController().displayTroopSelector(addibleArmyNo);
             target = t;
@@ -52,6 +66,8 @@ public class ArmyPlacementState implements GameState {
 
     @Override
     public void start() {
+        manAbilityUsed = false;
+        eduAbilityUsed = false;
         engine = GameEngine.getInstance();
         engine.getController().setState(0);
         calculateNumberOfArmies(engine.getCurrentPlayer());
@@ -88,10 +104,10 @@ public class ArmyPlacementState implements GameState {
             GameEngine.getInstance().getController().displayObjectiveFail();
             p.setObjective(Objective.generateObjective(p));
         } else if (objectiveResult == 1) {
-            SoundEngine.getInstance().objectiveCompleted();
-            addibleArmyNo += p.getObjective().getBonus(); //bonus army for a completed objective
-            GameEngine.getInstance().getController().displayObjectiveSuccess(p.getObjective().getBonus());
-            p.setObjective(Objective.generateObjective(p));
+                SoundEngine.getInstance().objectiveCompleted();
+                addibleArmyNo += p.getObjective().getBonus(); //bonus army for a completed objective
+                GameEngine.getInstance().getController().displayObjectiveSuccess(p.getObjective().getBonus());
+                p.setObjective(Objective.generateObjective(p));
         }
         GameEngine.getInstance().getController().updateTroopNumber(addibleArmyNo);
     }
@@ -99,4 +115,7 @@ public class ArmyPlacementState implements GameState {
     public int getAddibleArmyNo(){
         return addibleArmyNo;
     }
+
+    public void setManAbilityCanUseTrue() { manAbilityUsed = true; }
+    public void setEduAbilityCanUseTrue() { eduAbilityUsed = true; }
 }
