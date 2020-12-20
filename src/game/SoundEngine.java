@@ -15,7 +15,7 @@ public class SoundEngine {
     private MediaPlayer music;
     private boolean musicMuted, soundFXMuted;
     private double musicVolume, soundFXVolume;
-    private AudioClip buttonSound, winSound, territoryClick, diceRoll, objectiveCompleted, objectiveFailed;
+    private AudioClip buttonSound, winSound, territoryClick, diceRoll, objectiveCompleted, objectiveFailed, battleVictory;
 
     private SoundEngine(){
         musicMuted = false;
@@ -31,6 +31,7 @@ public class SoundEngine {
             diceRoll = new AudioClip(getClass().getResource("/sound/dice_roll.wav").toURI().toString());
             objectiveCompleted = new AudioClip(getClass().getResource("/sound/objective_completed.wav").toURI().toString());
             objectiveFailed = new AudioClip(getClass().getResource("/sound/objective_failed.wav").toURI().toString());
+            battleVictory = new AudioClip(getClass().getResource("/sound/battle_victory.wav").toURI().toString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -87,6 +88,7 @@ public class SoundEngine {
         diceRoll.setVolume(this.soundFXVolume);
         objectiveCompleted.setVolume(this.soundFXVolume);
         objectiveFailed.setVolume(this.soundFXVolume);
+        battleVictory.setVolume(this.soundFXVolume);
     }
 
     public void stopMusic(){
@@ -101,6 +103,10 @@ public class SoundEngine {
         if(!soundFXMuted){
             buttonSound.play();
         }
+    }
+
+    public void playBattleVictory(){
+        battleVictory.play();
     }
 
     public void changeToGameMusic(){

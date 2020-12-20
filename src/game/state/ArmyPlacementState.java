@@ -46,7 +46,6 @@ public class ArmyPlacementState implements GameState {
 
     @Override
     public void mapSelect(int territory) {
-        GameEngine.getInstance().getController().setSourceTerritory(territory);
         Territory t = engine.getMap().getTerritory(territory);
         if(maxPlaceableArmies > addibleArmyNo && engine.getCurrentPlayer().getFaculty().getSaveId() == 7){
             ((Man) engine.getCurrentPlayer().getFaculty()).setArmyPlaced(true);
@@ -65,6 +64,7 @@ public class ArmyPlacementState implements GameState {
             engine.switchState(AttackingState.getInstance());
         }
         else if (engine.getCurrentPlayer() == t.getRuler()) {
+            GameEngine.getInstance().getController().setSourceTerritory(territory);
             manAbilityCanUse = false;
             // Call display troop selection, it will set the army no.
             engine.getController().displayTroopSelector(addibleArmyNo);
