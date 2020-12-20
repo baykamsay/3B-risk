@@ -3,9 +3,7 @@ package game;
 import game.player.Objective;
 import game.player.Player;
 import game.player.Territory;
-import game.player.faculties.Law;
-import game.player.faculties.Man;
-import game.player.faculties.Mssf;
+import game.player.faculties.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -120,7 +118,6 @@ public class SaveManager {
             }
 
             boolean found = false;
-            System.out.println(objString[0] + "-" + placeName);
             // Check if place is a territory
             for(int i = 0; i < GameEngine.getInstance().getMap().getTerritories().length; i++){
                 if(GameEngine.getInstance().getMap().getTerritory(i).getName().equals(placeName)){
@@ -184,5 +181,97 @@ public class SaveManager {
             return;
         }
 
+        save.nextLine();
+        int turns = Integer.parseInt(save.nextLine());
+        int noOfPlayers = Integer.parseInt(save.nextLine());
+        int[] playerFacultyIds = new int[noOfPlayers];
+        boolean[] playerAbilityUsed = new boolean[noOfPlayers];
+        String[] tmp = save.nextLine().split(" ");
+        String[] tmp2 = save.nextLine().split(" ");
+        for(int i = 0; i < noOfPlayers; i++){
+            playerFacultyIds[i] = Integer.parseInt(tmp[i]);
+            int abilityUsed = Integer.parseInt(tmp2[i]);
+            if(abilityUsed == 1){
+                playerAbilityUsed[i] = true;
+            }
+        }
+
+        // Parse objective
+        ArrayList<int[]> objectives = new ArrayList<>();
+        tmp = save.nextLine().split(" ");
+        for(int i = 0; i < noOfPlayers; i++){
+            String[] objDesc = tmp[i].split("-");
+
+            // Parse the full description of the objective
+            objectives.add(new int[]{Integer.parseInt(objDesc[0]),Integer.parseInt(objDesc[1]),
+                    Integer.parseInt(objDesc[2]),Integer.parseInt(objDesc[3]),Integer.parseInt(objDesc[4])});
+        }
+
+        // Parse territory troop count and rulers
+        tmp = save.nextLine().split(" ");
+        tmp2 = save.nextLine().split(" ");
+        int[] territoryNums = new int[tmp.length];
+        int[] territoryRulers = new int[tmp.length];
+        for(int i = 0; i < tmp.length; i++){
+            territoryNums[i] = Integer.parseInt(tmp[i]);
+            territoryRulers[i] = Integer.parseInt(tmp2[i]);
+        }
+
+        int currentPlayer = Integer.parseInt(save.nextLine());
+
+        GameEngine engine = GameEngine.getInstance();
+
+        // Create players
+        ArrayList<Player> players = new ArrayList<Player>();
+        for(int i = 0; i < playerFacultyIds.length; i++){
+            switch(playerFacultyIds[i]){
+                case 0:
+                    players.add(new Player(new Art()));
+                    break;
+                case 1:
+                    players.add(new Player(new Fas()));
+                    break;
+                case 2:
+                    players.add(new Player(new Feass()));
+                    break;
+                case 3:
+                    players.add(new Player(new Fedu()));
+                    break;
+                case 4:
+                    players.add(new Player(new Fen()));
+                    break;
+                case 5:
+                    players.add(new Player(new Ibef()));
+                    break;
+                case 6:
+                    players.add(new Player(new Law()));
+                    players.get(i).getFaculty().setCanUse(!playerAbilityUsed[i]);
+                    break;
+                case 7:
+                    players.add(new Player(new Man()));
+                    players.get(i).getFaculty().setCanUse(!playerAbilityUsed[i]);
+                    break;
+                case 8:
+                    players.add(new Player(new Mf()));
+                    break;
+                case 9:
+                    players.add(new Player(new Mssf()));
+                    players.get(i).getFaculty().setCanUse(!playerAbilityUsed[i]);
+                    break;
+            }
+        }
+
+        engine.setPlayers(players);
+        engine.setupMapScene();
+
+        // Load objectives
+        for(int i = 0; i < players.size(); i++){
+            int[] obj = objectives.get(i);
+            Player p = players.get(i);
+            p.setObjective(Objective.generateObjective(obj[0],obj[1],obj[2],obj[3],obj[4],p));
+        }
+
+        GameMap.getInstance().init(territoryNums, territoryRulers);
+        engine.setCurrentPlayer(currentPlayer);
     }
 }

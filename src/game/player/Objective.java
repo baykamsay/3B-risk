@@ -134,4 +134,34 @@ public class Objective {
         }
         return objective;
     }
+
+    public static Objective generateObjective(int captureOrHold, int territoryOrArea, int placeId, int turnLimit, int bonus, Player p) {
+        Objective objective;
+        ObjectiveStrategy strategy;
+        ObjectiveStrategy decorator;
+        Place place;
+        String objectiveName; //create objective name by adding "capture" or "hold" to the target name
+
+        if (captureOrHold == 0) {
+            objectiveName = "Capture ";
+            strategy = new CaptureObjective();
+        } else {
+            objectiveName = "Hold ";
+            strategy = new HoldObjective();
+        }
+
+        if (territoryOrArea == 0) {
+            decorator = new TerritoryDecorator(strategy);
+            place = GameMap.getInstance().getTerritories()[placeId];
+        } else {
+            decorator = new AreaDecorator(strategy);
+            place = GameMap.getInstance().getAreas()[placeId];
+        }
+
+        objectiveName += place.getName();
+
+        objective = new Objective(decorator, place, turnLimit, objectiveName, p, bonus);
+
+        return objective;
+    }
 }
