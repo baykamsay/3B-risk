@@ -66,12 +66,6 @@ public class SoundEngine {
 
     public void setSoundFXMuted(boolean soundFXMuted) {
         this.soundFXMuted = soundFXMuted;
-        buttonSound.setVolume(0);
-        territoryClick.setVolume(0);
-        diceRoll.setVolume(0);
-        objectiveCompleted.setVolume(0);
-        objectiveFailed.setVolume(0);
-        battleVictory.setVolume(0);
     }
 
     public double getMusicVolume() {
@@ -112,7 +106,8 @@ public class SoundEngine {
     }
 
     public void playBattleVictory(){
-        battleVictory.play();
+        if(!soundFXMuted)
+            battleVictory.play();
     }
 
     public void changeToGameMusic(){
@@ -138,14 +133,23 @@ public class SoundEngine {
     }
 
     public void playWinSound(){
-        winSound.play();
+        if(!soundFXMuted)
+            winSound.play();
     }
 
-    public void clickTerritory() { territoryClick.play();}
+    public void clickTerritory() {
+        if(!soundFXMuted)
+            territoryClick.play();}
 
-    public void playDiceRoll() { diceRoll.play();}
+    public void playDiceRoll() {
+        if(!soundFXMuted)
+            diceRoll.play();}
 
-    public void objectiveCompleted() { objectiveCompleted.play(); }
+    public void objectiveCompleted() {
+        if(!soundFXMuted)
+            objectiveCompleted.play(); }
 
-    public void objectiveFailed() { objectiveFailed.play(); }
+    public void objectiveFailed() {
+        if(!soundFXMuted)
+            objectiveFailed.play(); }
 }

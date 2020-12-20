@@ -60,7 +60,7 @@
       </Pane>
       <ImageView fitHeight="1046.0" fitWidth="1304.0" layoutX="218.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/map/complete_world_map.png" />
+            <Image url="@../img/map/complete_world_map_colored.png" />
          </image>
       </ImageView>
       <ImageView fx:id="mayfestUpperMain" fitHeight="112.0" fitWidth="188.0" layoutX="904.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">

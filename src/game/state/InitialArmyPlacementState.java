@@ -57,12 +57,12 @@ public class InitialArmyPlacementState implements GameState {
     //initialize army counts for players
     public void calculateArmyCounts(){
         if(GameEngine.getInstance().getPlayers().size() == 2){
-            armyCounts.add(25);
-            armyCounts.add(25);
+            armyCounts.add(40);
+            armyCounts.add(40);
         }
         else if(GameEngine.getInstance().getPlayers().size() == 3){
             for(int i = 0; i < 3; i++){
-                armyCounts.add(16);
+                armyCounts.add(35);
             }
         }
         else if(GameEngine.getInstance().getPlayers().size() == 4){
