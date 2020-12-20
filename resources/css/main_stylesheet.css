@@ -265,6 +265,11 @@
     -fx-font-family: "Arial";
 }
 
+.area_title{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial";
+}
 
 .state_name{
     -fx-text-fill: white;

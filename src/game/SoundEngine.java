@@ -66,6 +66,12 @@ public class SoundEngine {
 
     public void setSoundFXMuted(boolean soundFXMuted) {
         this.soundFXMuted = soundFXMuted;
+        buttonSound.setVolume(0);
+        territoryClick.setVolume(0);
+        diceRoll.setVolume(0);
+        objectiveCompleted.setVolume(0);
+        objectiveFailed.setVolume(0);
+        battleVictory.setVolume(0);
     }
 
     public double getMusicVolume() {

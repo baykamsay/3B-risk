@@ -45,12 +45,11 @@ public class CreditsMenu implements MenuState{
 
         title = new Label("Team Members");
         title.getStyleClass().add(titleStyle);
-        members = new Label("""
-                Aleyna Sütbaş
-                Berk Takıt
-                Ramazan Melih Diksu
-                Baykam Say
-                Yiğit Erkal""");
+        members = new Label("Aleyna Sütbaş\n" +
+                            "Berk Takıt\n" +
+                            "Ramazan Melih Diksu\n" +
+                            "Baykam Say\n" +
+                            "Yiğit Erkal");
         members.getStyleClass().add(labelStyle);
         Image img = null;
         try {

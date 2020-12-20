@@ -15,6 +15,14 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../css/main_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1203.0" layoutY="986.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="207.0" />
+      <Label layoutX="1223.0" layoutY="995.0" mouseTransparent="true" styleClass="area_title" text="LOWER MAIN  +5" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1325.0" layoutY="75.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="207.0" />
+      <Label layoutX="1346.0" layoutY="84.0" mouseTransparent="true" styleClass="area_title" text="UPPER MAIN   +5" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="449.0" layoutY="993.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="149.0" />
+      <Label layoutX="467.0" layoutY="1002.0" mouseTransparent="true" styleClass="area_title" text="ISLAND   +2" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="169.0" layoutY="112.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="135.0" />
+      <Label layoutX="190.0" layoutY="121.0" mouseTransparent="true" styleClass="area_title" text="EAST   +3" />
       <Pane layoutX="1550.0" layoutY="40.0" prefHeight="1000.0" prefWidth="370.0">
          <children>
             <Rectangle fx:id="p1Bg" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="41.0" stroke="BLACK" strokeType="INSIDE" styleClass="player_bg" width="329.0" />
