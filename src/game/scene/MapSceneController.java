@@ -472,6 +472,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
 
     public void displayBattleResult(int[] attackerDice, int[] defenderDice, boolean[] attackerWon, Player attacker, Player defender){
         // Set all image views for the dice invisible, set dice effects to null
+        abilityButton.setDisable(true);
         for(ImageView iv : attackerDiceImages){
             iv.setVisible(false);
             iv.setEffect(null);
@@ -557,6 +558,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     public void handle(ActionEvent actionEvent) {
         if(actionEvent.getSource() == battleOKButton){
             deselect();
+            updateAbilityButton();
             battleResultPane.setVisible(false);
             battleResultPane.setMouseTransparent(true);
             mapBlocker.setVisible(false);
