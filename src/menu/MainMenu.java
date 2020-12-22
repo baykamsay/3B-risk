@@ -54,7 +54,7 @@ public class MainMenu implements MenuState {
         }
         //main menu logo
         try {
-            String logoPath = maximized ? "logo_600.png" : "logo_400.png";
+            String logoPath = "logo_400.png";
             Image img = new Image(Launcher.class.getResource("/img/" + logoPath).toURI().toString());
             logo = new ImageView(img);
             logo.setPreserveRatio(true);

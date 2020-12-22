@@ -4,8 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
+import javafx.scene.transform.Scale;
 import menu.Launcher;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class MapScene {
@@ -34,9 +36,13 @@ public class MapScene {
         VBox root = new VBox();
         root.setId("map_bg");
         Pane map = loader.load();
-        root.getChildren().addAll(map);
-        root.setAlignment(Pos.CENTER);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double w =  screenSize.getWidth() / 1920;
+        double h =  screenSize.getHeight() / 1080;
+        Scale scale = new Scale(w, h, 0, 0);
         this.controller = loader.getController();
+        map.getTransforms().add(scale);
+        root.getChildren().add(map);
         scene = new Scene(root,width,height);
     }
 

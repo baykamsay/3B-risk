@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -27,8 +28,8 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     private boolean isMaximized;
     private SoundEngine soundEngine;
-    private static final int WINDOWED_WIDTH = 850;
-    private static final int WINDOWED_HEIGHT = 800;
+    private int WINDOWED_WIDTH = 820;
+    private int WINDOWED_HEIGHT = 780;
     private int width, height;
     private Scene scene;
     private MenuState menuState;
@@ -46,8 +47,8 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
 
     @Override
     public void start(Stage primaryStage) {
-        width = WINDOWED_WIDTH;
         height = WINDOWED_HEIGHT;
+        width = WINDOWED_WIDTH;
         isMaximized = false;
         displayChanged = true;
         soundEngine.changeToMenuMusic();
@@ -127,8 +128,8 @@ public class GameMenuManager extends Application implements EventHandler<ActionE
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        window.setScene(scene);
         this.changeMaximized();
+        window.setScene(scene);
         window.show();
     }
 

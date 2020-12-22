@@ -6,13 +6,17 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.transform.Scale;
 
+import java.awt.*;
 import java.net.URISyntaxException;
 
 public class PauseHelpMenu implements EventHandler<ActionEvent> {
@@ -81,18 +85,27 @@ public class PauseHelpMenu implements EventHandler<ActionEvent> {
         HBox nav = new HBox(previous,next);
         nav.setAlignment(Pos.CENTER);
         nav.setSpacing(20);
-
+        VBox buttons = new VBox(nav, backButton);
+        buttons.setAlignment(Pos.TOP_CENTER);
         menu.setTop(title);
         menu.setCenter(helpPage);
-        menu.setBottom(nav);
+        menu.setBottom(buttons);
         BorderPane.setAlignment(title, Pos.CENTER);
-        BorderPane.setAlignment(nav, Pos.CENTER);
+        BorderPane.setAlignment(buttons, Pos.CENTER);
         BorderPane.setMargin(title, new Insets(10,10,10,10));
         BorderPane.setMargin(nav, new Insets(10,10,10,10));
-        root.getChildren().addAll(menu, bottom);
+        root.getChildren().addAll(menu);
         GridPane.setHalignment(menu,HPos.CENTER);
+        GridPane.setValignment(menu, VPos.CENTER);
         root.setId("menu_bg");
         previous.setDisable(true);
+        if(width < 1920 && height < 1080) {
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            double w = (screenSize.getWidth() < 1920) ? screenSize.getWidth() / 1920 : 1.0;
+            double h = (screenSize.getHeight() < 1080) ? screenSize.getHeight() / 1080 : 1.0;
+            Scale scale = new Scale(w, h);
+            menu.getTransforms().add(scale);
+        }
         scene = new Scene(root,width,height);
     }
 

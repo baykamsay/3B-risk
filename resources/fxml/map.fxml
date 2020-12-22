@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../css/main_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
+<Pane maxHeight="1080.0" maxWidth="1920.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgba(0,0,0,0);" stylesheets="@../css/main_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.scene.MapSceneController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="1203.0" layoutY="986.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 10px; -fx-arc-width: 10px; -fx-fill: black; -fx-opacity: 0.7;" width="207.0" />
       <Label layoutX="1223.0" layoutY="995.0" mouseTransparent="true" styleClass="area_title" text="LOWER MAIN  +5" />

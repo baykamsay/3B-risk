@@ -10,11 +10,13 @@ import game.state.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import menu.GameMenuManager;
 import menu.Launcher;
 import menu.PauseMenu;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -211,11 +213,6 @@ public class GameEngine extends Application {
         map = GameMap.getInstance();
         map.init();
         mapScene = new MapScene(width, height);
-        try {
-            mapScene.init();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         this.gameScene = mapScene.createScene();
         controller = mapScene.getController();
         controller.setMap(map);
@@ -264,6 +261,11 @@ public class GameEngine extends Application {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double w =  screenSize.getWidth() / width;
+        double h =  screenSize.getHeight() / height;
+        Scale scale = new Scale(w, h, 0, 0);
+        scene.getRoot().getTransforms().add(0, scale);
         window.setScene(scene);
     }
 
