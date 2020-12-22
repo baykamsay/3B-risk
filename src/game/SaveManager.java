@@ -274,4 +274,9 @@ public class SaveManager {
         GameMap.getInstance().init(territoryNums, territoryRulers);
         engine.setCurrentPlayer(currentPlayer);
     }
+
+    public void deleteSave(int saveSlot){
+        File saveFile = new File(System.getenv("LOCALAPPDATA")+"\\RISK101" + "\\save" + saveSlot + ".txt");
+        saveFile.delete();
+    }
 }

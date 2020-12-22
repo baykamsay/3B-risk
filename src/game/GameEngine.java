@@ -193,6 +193,9 @@ public class GameEngine extends Application {
             }
         }
         players.remove(index);
+        if(players.size() == 1){
+            displayGameOverScreen(players.get(0));
+        }
     }
 
     @Override
@@ -296,6 +299,7 @@ public class GameEngine extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        SaveManager.getInstance().deleteSave(saveSlot);
         this.setScene(gameOverScene.createScene());
         soundEngine.stopMusic();
         soundEngine.playWinSound();

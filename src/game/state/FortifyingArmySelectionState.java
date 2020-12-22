@@ -24,6 +24,7 @@ public class FortifyingArmySelectionState implements GameState{
     public void setNumOfArmies(int armies){
         fortify.getDestination().setNumOfArmies(fortify.getDestination().getNumOfArmies() + armies);
         fortify.getSource().setNumOfArmies(fortify.getSource().getNumOfArmies() - armies);
+        GameEngine.getInstance().getController().deselect();
         fortify.pass();
     }
 
