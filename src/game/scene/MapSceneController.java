@@ -393,7 +393,7 @@ public class MapSceneController implements Initializable, EventHandler<ActionEve
     }
 
     public void update(){
-
+        setPlayers(gameEngine.getPlayers());
         for(int i = 0; i < territories.length; i++){
             // Update territory colors
             ColorAdjust base;

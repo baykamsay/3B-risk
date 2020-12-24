@@ -185,14 +185,10 @@ public class GameEngine extends Application {
     }
 
     public void removePlayer(Player p){ //remove an eliminated player from player<>
-        int index = 0;
-        for (int i = 0; i < players.size(); i++) {
-            if((players.get(i)).getFaculty() == p.getFaculty()){
-                index = i;
-                break;
-            }
+        players.remove(p);
+        if (playerTurn >= players.size()) {
+            playerTurn = players.size() - 1;
         }
-        players.remove(index);
         if(players.size() == 1){
             displayGameOverScreen(players.get(0));
         }
